@@ -26,6 +26,10 @@ Options:
    --operations <operations>      Operations filter in form of comma-separated list of method/path, default empty
  ```
 
+Generated client depends on [`swaggest/rest-client`](https://github.com/swaggest/php-rest-client), `guzzlehttp/guzzle` 6, 
+and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
+
+
 [Examples](/examples/php-client).
 
 ### Go Client
