@@ -9,6 +9,7 @@ use Swac\Rest\Operation;
 use Swac\Rest\Parameter;
 use Swac\Rest\Renderer;
 use Swac\Rest\Response;
+use Swac\Skip;
 use Swaggest\CodeBuilder\PlaceholderString;
 use Swaggest\GoCodeBuilder\GoCodeBuilder;
 use Swaggest\GoCodeBuilder\JsonSchema\GoBuilder;
@@ -534,6 +535,79 @@ GO;
     }
 
     /**
+     * @param Parameter[] $parameters
+     * @param Imports $imports
+     * @param string $valuesVar
+     * @return string
+     * @throws Skip
+     * @throws \Swaggest\GoCodeBuilder\JsonSchema\Exception
+     * @throws \Swaggest\JsonSchema\Exception
+     * @throws \Swaggest\JsonSchema\InvalidValue
+     */
+    private function buildUrlValues($parameters, Imports $imports, $valuesVar)
+    {
+        $body = '';
+
+        if ($parameters) {
+            $queryCount = count($parameters);
+            $imports->addByName('net/url');
+            $body .= <<<GO
+$valuesVar := make(url.Values, $queryCount)
+
+GO;
+
+            foreach ($parameters as $name => $parameter) {
+                $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
+                $type = $this->schemaBuilder->getType($parameter->schema);
+                $isPointer = false;
+                $var = "request.$fieldName";
+                if ($type instanceof Pointer) {
+                    $isPointer = true;
+                    $var = '*' . $var;
+                    $type = $type->getType();
+                }
+
+                $toString = $this->toStringExpression($parameter, $type, $var, $imports);
+                $assign = false;
+                if ($toString !== false) {
+                    $assign = <<<GO
+$valuesVar.Set("$name", $toString)
+GO;
+                }
+                if ($assign === false) {
+                    $toStringSlice = $this->toStringSliceExpression($parameter, $type, $var, $imports);
+                    if ($toStringSlice !== false) {
+                        $assign = <<<GO
+{$valuesVar}["$name"] = $toStringSlice
+GO;
+                    }
+                }
+
+                if ($assign !== false) {
+                    if ($isPointer) {
+                        $body .= <<<GO
+if request.$fieldName != nil {
+	$assign
+}
+
+GO;
+                    } else {
+                        $body .= <<<GO
+$assign
+
+GO;
+                    }
+                    continue;
+                }
+
+                throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
+            }
+        }
+
+        return $body;
+    }
+
+    /**
      * @param string $method
      * @param string $path
      * @param Parameter[] $parameters
@@ -542,6 +616,7 @@ GO;
      * @throws \Swaggest\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\InvalidValue
      * @throws Exception
+     * @throws Skip
      */
     protected function makeReq($method, $path, $parameters)
     {
@@ -551,6 +626,8 @@ GO;
         $pathParameters = [];
         /** @var Parameter[] $queryParameters */
         $queryParameters = [];
+        /** @var Parameter[] $formDataParameters */
+        $formDataParameters = [];
         /** @var Parameter[] $bodyParameters */
         $bodyParameters = [];
         if (is_array($parameters)) {
@@ -559,8 +636,12 @@ GO;
                     $queryParameters[$parameter->name] = $parameter;
                 } elseif ($parameter->in === Parameter::PATH) {
                     $pathParameters[$parameter->name] = $parameter;
+                } elseif ($parameter->in === Parameter::FORM_DATA) {
+                    $formDataParameters[$parameter->name] = $parameter;
                 } elseif ($parameter->in === Parameter::BODY) {
                     $bodyParameters[$parameter->name] = $parameter;
+                } else {
+                    throw new Skip("Unsupported parameter location of parameter `$parameter->name`: $parameter->in");
                 }
             }
         }
@@ -583,69 +664,15 @@ GO;
 requestUri := baseURL + $path
 
 GO;
+
         if ($queryParameters) {
-            $queryCount = count($queryParameters);
-            $result->imports()->addByName('net/url');
-            $body .= <<<GO
-query := make(url.Values, $queryCount)
-
-GO;
-
-            foreach ($queryParameters as $name => $parameter) {
-                $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                $type = $this->schemaBuilder->getType($parameter->schema);
-                $isPointer = false;
-                $var = "request.$fieldName";
-                if ($type instanceof Pointer) {
-                    $isPointer = true;
-                    $var = '*' . $var;
-                    $type = $type->getType();
-                }
-
-                $toString = $this->toStringExpression($parameter, $type, $var, $result->imports());
-                $assign = false;
-                if ($toString !== false) {
-                    $assign = <<<GO
-query.Set("$name", $toString)
-GO;
-                }
-                if ($assign === false) {
-                    $toStringSlice = $this->toStringSliceExpression($parameter, $type, $var, $result->imports());
-                    if ($toStringSlice !== false) {
-                        $assign = <<<GO
-query["$name"] = $toStringSlice
-GO;
-                    }
-                }
-
-                if ($assign !== false) {
-                    if ($isPointer) {
-                        $body .= <<<GO
-if request.$fieldName != nil {
-	$assign
-}
-
-GO;
-                    } else {
-                        $body .= <<<GO
-$assign
-
-GO;
-                    }
-                    continue;
-                }
-
-                Log::getInstance()->warn("Could not stringify {$type->getTypeString()}");
-                $body .= "// TODO request.$fieldName {$type->getTypeString()}\n";
-            }
-
+            $body .= $this->buildUrlValues($queryParameters, $result->imports(), 'query');
             $body .= <<<'GO'
 if len(query) > 0 {
 	requestUri += "?" + query.Encode()
 }
 
 GO;
-
         }
 
         $reqBody = 'nil';
@@ -663,6 +690,21 @@ if err != nil {
 
 GO;
 
+        }
+
+        if (count($formDataParameters)) {
+            $body .= $this->buildUrlValues($formDataParameters, $result->imports(), 'formData');
+            $body .= <<<'GO'
+var body io.Reader
+if len(formData) > 0 {
+	body = strings.NewReader(formData.Encode())
+}
+
+GO;
+            $result->imports()
+                ->addByName('strings')
+                ->addByName('io');
+            $reqBody = 'body';
         }
 
         $method = ucfirst($method);
