@@ -2,50 +2,35 @@
 
 namespace Swac\Tests\PHPUnit\Swagger;
 
-use Swac\Go\Client\Client;
-use Swac\Log;
-use Swac\Rest\Rest;
-use Swac\Swagger\Reader;
+use Swac\Command\GoClient;
 
 class GenClientGoTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testUber()
     {
-        $rest = new Rest();
+        $cmd = new GoClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/uber.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/uber/';
+        $cmd->pkgName = 'uber';
 
-        $goClient = new Client();
-        $rest->addRenderer($goClient);
+        $cmd->performAction();
 
-        $reader = new Reader($rest);
-        $reader->setLog(Log::getInstance());
-        $reader->addSchemaJson(file_get_contents(__DIR__ . '/../../../resources/uber.json'));
-
-        $reader->process();
-
-        $srcPath = __DIR__ . '/../../../../examples/go-client/uber/';
-        $goClient->store($srcPath, 'uber');
-        exec('git diff ' . $srcPath, $out);
+        exec('git diff ' . $cmd->out, $out);
         $out = implode("\n", $out);
         $this->assertSame('', $out, "Generated files changed");
     }
 
     public function testPetstoreExpanded()
     {
-        $rest = new Rest();
+        $cmd = new GoClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/petstore/';
+        $cmd->pkgName = 'petstore';
 
-        $goClient = new Client();
-        $rest->addRenderer($goClient);
+        $cmd->performAction();
 
-        $reader = new Reader($rest);
-        $reader->setLog(Log::getInstance());
-        $reader->addSchemaJson(file_get_contents(__DIR__ . '/../../../resources/petstore-expanded.json'));
-
-        $reader->process();
-
-        $srcPath = __DIR__ . '/../../../../examples/go-client/petstore/';
-        $goClient->store($srcPath, 'petstore');
-        exec('git diff ' . $srcPath, $out);
+        exec('git diff ' . $cmd->out, $out);
         $out = implode("\n", $out);
         $this->assertSame('', $out, "Generated files changed");
     }

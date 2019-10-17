@@ -3,19 +3,14 @@
 namespace Swac\Command;
 
 use Swac\ExitCode;
-use Swac\Log;
 use Swac\Php\Client\Client;
-use Swac\Rest\Rest;
-use Swac\Swagger\Reader;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
-class PhpGuzzleClient extends Command
+class PhpGuzzleClient extends Base
 {
     public $namespace;
-    public $schemaPath;
     public $projectPath = './';
-    public $operations;
 
     /**
      * @param Definition $definition
@@ -23,14 +18,11 @@ class PhpGuzzleClient extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
-        $options->schemaPath = Command\Option::create()->setType()->setIsRequired()->setIsUnnamed()
-            ->setDescription('Path to swagger.json');
+        parent::setUpDefinition($definition, $options);
         $options->projectPath = Command\Option::create()->setType()
             ->setDescription('Path to project root, default ./');
         $options->namespace = Command\Option::create()->setType()->setIsRequired()
             ->setDescription('Project namespace');
-        $options->operations = Command\Option::create()->setType()
-            ->setDescription('Operations filter in form of comma-separated list of method/path, default empty');
     }
 
     public function performAction()
@@ -41,18 +33,8 @@ class PhpGuzzleClient extends Command
         }
         $projectPath .= '/';
 
-        $rest = new Rest();
-
         $phpClient = new Client($this->namespace, './');
-        $rest->addRenderer($phpClient);
-
-        $reader = new Reader($rest);
-        $reader->setLog(Log::getInstance());
-        $schemaJson = json_decode(file_get_contents($this->schemaPath));
-
-        $reader->addSchemaJson($schemaJson);
-        $reader->process();
-
+        $this->process($phpClient);
         $phpClient->store($projectPath);
     }
 }

@@ -1,4 +1,4 @@
-# Swagger 2.0 compiler
+# OpenAPI 3.0 / Swagger 2.0 compiler
 
 A tool to render API spec as code.
 
@@ -20,7 +20,7 @@ Download `swac` from [releases](https://github.com/swaggest/swac/releases) page.
 docker run swaggest/swac swac --help
 ```
 ```
-v0.0.2 swac
+v0.1.0 swac
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac <action>
@@ -50,22 +50,23 @@ composer global require swaggest/swac
 swac php-guzzle-client --help
 ```
 ```
-v0.0.1 swac php-guzzle-client
+v0.1.0 swac php-guzzle-client
+OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac php-guzzle-client <schemaPath> --namespace <namespace>
-   schemaPath   Path to swagger.json
+   schemaPath   Path/URL to OpenAPI/Swagger schema
    
 Options: 
-   --project-path <projectPath>   Path to project root, default ./                                               
-   --namespace <namespace>        Project namespace                                                              
    --operations <operations>      Operations filter in form of comma-separated list of method/path, default empty
- ```
+   --project-path <projectPath>   Path to project root, default ./                                               
+   --namespace <namespace>        Project namespace
+```
 
 Generated client depends on [`swaggest/rest-client`](https://github.com/swaggest/php-rest-client), `guzzlehttp/guzzle` 6, 
 and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 
 
-[Examples](/examples/php-client).
+[Examples](/examples/php-guzzle-client).
 
 ### Go Client
 
@@ -73,21 +74,18 @@ and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 swac go-client --help 
 ```
 ```
-v0.0.1 swac go-client
+v0.1.0 swac go-client
+OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac go-client <schemaPath>
-   schemaPath   Path to swagger.json
+   schemaPath   Path/URL to OpenAPI/Swagger schema
    
 Options: 
+   --operations <operations>   Operations filter in form of comma-separated list of method/path, default empty
    --out <out>                 Path to output package, default ./client                                       
    --pkg-name <pkgName>        Output package name, default "client"                                          
-   --operations <operations>   Operations filter in form of comma-separated list of method/path, default empty
 ```
 
 [Examples](/examples/go-client).
 
 Generated client is a single package without external dependencies.
-
-## Roadmap
-
-* OpenAPI 3.0 support

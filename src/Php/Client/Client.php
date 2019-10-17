@@ -129,7 +129,7 @@ class Client implements Renderer
                     $path [] = 'type' . $postfix;
                 }
                 foreach ($path as $k => $item) {
-                    if ($item[0] === '{') {
+                    if (!empty($item) && $item[0] === '{') {
                         unset($path[$k]);
                     }
                 }

@@ -2,50 +2,35 @@
 
 namespace Swac\Tests\PHPUnit\Swagger;
 
-use Swac\Log;
-use Swac\Php\Client\Client;
-use Swac\Rest\Rest;
-use Swac\Swagger\Reader;
+use Swac\Command\PhpGuzzleClient;
 
 class GenClientPhpTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testUber()
     {
-        $rest = new Rest();
+        $cmd = new PhpGuzzleClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/uber.json';
+        $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Uber/';
+        $cmd->namespace = 'Swac\Example\Uber';
 
-        $phpClient = new Client('Swac\Example\Uber', './');
-        $rest->addRenderer($phpClient);
+        $cmd->performAction();
 
-        $reader = new Reader($rest);
-        $reader->setLog(Log::getInstance());
-        $reader->addSchemaJson(file_get_contents(__DIR__ . '/../../../resources/uber.json'));
-
-        $reader->process();
-
-        $srcPath = __DIR__ . '/../../../../examples/php-client/Uber/';
-        $phpClient->store($srcPath);
-        exec('git diff ' . $srcPath, $out);
+        exec('git diff ' . $cmd->projectPath, $out);
         $out = implode("\n", $out);
         $this->assertSame('', $out, "Generated files changed");
     }
 
     public function testPetstoreExpanded()
     {
-        $rest = new Rest();
+        $cmd = new PhpGuzzleClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.json';
+        $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Petstore/';
+        $cmd->namespace = 'Swac\Example\Petstore';
 
-        $phpClient = new Client('Swac\Example\Petstore', './');
-        $rest->addRenderer($phpClient);
+        $cmd->performAction();
 
-        $reader = new Reader($rest);
-        $reader->setLog(Log::getInstance());
-        $reader->addSchemaJson(file_get_contents(__DIR__ . '/../../../resources/petstore-expanded.json'));
-
-        $reader->process();
-
-        $srcPath = __DIR__ . '/../../../../examples/php-client/Petstore/';
-        $phpClient->store($srcPath);
-        exec('git diff ' . $srcPath, $out);
+        exec('git diff ' . $cmd->projectPath, $out);
         $out = implode("\n", $out);
         $this->assertSame('', $out, "Generated files changed");
     }

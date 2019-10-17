@@ -2,10 +2,9 @@
 
 namespace Swac\Php\Client\Template\Request;
 
-use Swac\Log;
 use Swac\Rest\Parameter;
 use Swac\Php\Client\Template\Util;
-use Swaggest\JsonSchema\Schema;
+use Swac\Skip;
 use Swaggest\PhpCodeBuilder\PhpCode;
 use Swaggest\PhpCodeBuilder\PhpFlags;
 use Swaggest\PhpCodeBuilder\PhpFunction;
@@ -22,7 +21,7 @@ class MakeBodyFunc extends PhpFunction
     protected function prepareOnce()
     {
         $this->setVisibility(PhpFlags::VIS_PUBLIC);
-        $body = '';
+        $body = 'return null;';
 
         if (!empty($this->bodyParameters)) {
             foreach ($this->bodyParameters as $name => $parameter) {
@@ -35,32 +34,28 @@ PHP;
                 break;
             }
 
-        } elseif ($this->formDataParameters) {
-            $body .= <<<'PHP'
+        } elseif (!empty($this->formDataParameters)) {
+            $body = <<<'PHP'
 $queryString = '';
 
 PHP;
             foreach ($this->formDataParameters as $name => $parameter) {
                 // TODO add support for file uploads
                 if ($parameter->isFile) {
-                    Log::getInstance()->addWarning('Unsupported file parameter: ' . $name);
-                    continue;
-
+                    throw new Skip('Unsupported file parameter: ' . $name);
                 }
 
-                if ($parameter->schema->type === Schema::_ARRAY) {
-                    $body .= Util::genUrlEncode($parameter, $name);
-                }
+                $body .= Util::genUrlEncode($parameter, $name);
+            }
 
-                $body .= <<<'PHP'
-return substr($queryString, 1);
+            $body .= <<<'PHP'
+if ('' !== $queryString) {
+    return substr($queryString, 1);
+}
+return null;
 
 PHP;
-            }
-        } else {
-            $body = 'return null;';
         }
-
         $this->setBody($body);
     }
 
