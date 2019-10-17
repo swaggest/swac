@@ -3,6 +3,7 @@
 
 namespace Swac\Command;
 
+use Swac\ExitCode;
 use Swac\Go\Client\Client;
 use Swac\Log;
 use Swac\Rest\Rest;
@@ -56,14 +57,11 @@ class GoClient extends Command
 
         if ($rest->totalOperations > 0) {
             if (!is_dir($this->out)) {
-                $this->response->error('Directory ' . $this->out . ' not found. Please create it.');
-                die(1);
+                throw new ExitCode('Directory ' . $this->out . ' not found. Please create it.', 1);
             }
             $client->store($this->out, $this->pkgName);
         } else {
-            $this->response->error('No operations to store.');
-            die(1);
+            throw new ExitCode('No operations to store.', 1);
         }
     }
-
 }
