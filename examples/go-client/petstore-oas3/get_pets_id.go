@@ -5,22 +5,23 @@ package petstore
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/url"
 	"strconv"
 )
 
-// DeletePetsIDRequest is operation request value.
-type DeletePetsIDRequest struct {
+// GetPetsIDRequest is operation request value.
+type GetPetsIDRequest struct {
 	// ID is a required `id` parameter in path.
-	// ID of pet to delete
+	// ID of pet to fetch
 	ID int64
 }
 
 // encode creates *http.Request for request data.
-func (request *DeletePetsIDRequest) encode(ctx context.Context, baseURL string) (*http.Request, error) {
+func (request *GetPetsIDRequest) encode(ctx context.Context, baseURL string) (*http.Request, error) {
 	requestUri := baseURL + "/pets/" + url.PathEscape(strconv.FormatInt(request.ID, 10))
-	req, err := http.NewRequest(http.MethodDelete, requestUri, nil)
+	req, err := http.NewRequest(http.MethodGet, requestUri, nil)
 	if err != nil {
 	    return nil, err
 	}
@@ -28,35 +29,31 @@ func (request *DeletePetsIDRequest) encode(ctx context.Context, baseURL string) 
 	return req, err
 }
 
-// DeletePetsIDResponse is operation response value.
-type DeletePetsIDResponse struct {
+// GetPetsIDResponse is operation response value.
+type GetPetsIDResponse struct {
 	StatusCode int
-	NoContent  interface{}  // NoContent is a value of 204 No Content response.
-	Default    *Error       // Default is a default value of response.
+	OK         *ComponentsSchemasPet  // OK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.
-func (result *DeletePetsIDResponse) decode(resp *http.Response) error {
+func (result *GetPetsIDResponse) decode(resp *http.Response) error {
 	result.StatusCode = resp.StatusCode
 	switch resp.StatusCode {
-	case http.StatusNoContent:
-	    err := json.NewDecoder(resp.Body).Decode(&result.NoContent)
+	case http.StatusOK:
+	    err := json.NewDecoder(resp.Body).Decode(&result.OK)
 	    if err != nil {
 	        return err
 	    }
 	default:
-	    err := json.NewDecoder(resp.Body).Decode(&result.Default)
-	    if err != nil {
-	        return err
-	    }
+	    return errors.New("unexpected response status: " + resp.Status)
 	}
 	return nil
 
 }
 
-// DeletePetsID performs REST operation.
-func (c *Client) DeletePetsID(ctx context.Context, request DeletePetsIDRequest) (DeletePetsIDResponse, error) {
-	result := DeletePetsIDResponse{}
+// GetPetsID performs REST operation.
+func (c *Client) GetPetsID(ctx context.Context, request GetPetsIDRequest) (GetPetsIDResponse, error) {
+	result := GetPetsIDResponse{}
 	ctx = context.WithValue(ctx, "restOperationPath", "/pets/{id}")
 	if c.Timeout != 0 {
 		var cancel func()

@@ -9,18 +9,18 @@ import (
 	"strings"
 )
 
-// NewPet structure is generated from "#/definitions/NewPet".
-type NewPet struct {
+// ComponentsSchemasNewPet structure is generated from "#/components/schemas/NewPet".
+type ComponentsSchemasNewPet struct {
 	Name                 string                 `json:"name,omitempty"`
 	Tag                  string                 `json:"tag,omitempty"`
 	AdditionalProperties map[string]interface{} `json:"-"`              // All unmatched properties
 }
 
-type marshalNewPet NewPet
+type marshalComponentsSchemasNewPet ComponentsSchemasNewPet
 
 // UnmarshalJSON decodes JSON.
-func (i *NewPet) UnmarshalJSON(data []byte) error {
-	ii := marshalNewPet(*i)
+func (i *ComponentsSchemasNewPet) UnmarshalJSON(data []byte) error {
+	ii := marshalComponentsSchemasNewPet(*i)
 
 	err := unionMap{
 		mustUnmarshal: []interface{}{&ii},
@@ -34,26 +34,26 @@ func (i *NewPet) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	*i = NewPet(ii)
+	*i = ComponentsSchemasNewPet(ii)
 	return err
 }
 
 // MarshalJSON encodes JSON.
-func (i NewPet) MarshalJSON() ([]byte, error) {
-	return marshalUnion(marshalNewPet(i), i.AdditionalProperties)
+func (i ComponentsSchemasNewPet) MarshalJSON() ([]byte, error) {
+	return marshalUnion(marshalComponentsSchemasNewPet(i), i.AdditionalProperties)
 }
 
-// PetAllOf1 structure is generated from "#/definitions/Pet/allOf/1".
-type PetAllOf1 struct {
+// ComponentsSchemasPetAllOf1 structure is generated from "#/components/schemas/Pet/allOf/1".
+type ComponentsSchemasPetAllOf1 struct {
 	ID                   int64                  `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{} `json:"-"`            // All unmatched properties
 }
 
-type marshalPetAllOf1 PetAllOf1
+type marshalComponentsSchemasPetAllOf1 ComponentsSchemasPetAllOf1
 
 // UnmarshalJSON decodes JSON.
-func (i *PetAllOf1) UnmarshalJSON(data []byte) error {
-	ii := marshalPetAllOf1(*i)
+func (i *ComponentsSchemasPetAllOf1) UnmarshalJSON(data []byte) error {
+	ii := marshalComponentsSchemasPetAllOf1(*i)
 
 	err := unionMap{
 		mustUnmarshal: []interface{}{&ii},
@@ -66,28 +66,28 @@ func (i *PetAllOf1) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	*i = PetAllOf1(ii)
+	*i = ComponentsSchemasPetAllOf1(ii)
 	return err
 }
 
 // MarshalJSON encodes JSON.
-func (i PetAllOf1) MarshalJSON() ([]byte, error) {
-	return marshalUnion(marshalPetAllOf1(i), i.AdditionalProperties)
+func (i ComponentsSchemasPetAllOf1) MarshalJSON() ([]byte, error) {
+	return marshalUnion(marshalComponentsSchemasPetAllOf1(i), i.AdditionalProperties)
 }
 
-// Pet structure is generated from "#/definitions/Pet".
-type Pet struct {
-	NewPet *NewPet    `json:"-"`
-	AllOf1 *PetAllOf1 `json:"-"`
+// ComponentsSchemasPet structure is generated from "#/components/schemas/Pet".
+type ComponentsSchemasPet struct {
+	ComponentsSchemasNewPet *ComponentsSchemasNewPet    `json:"-"`
+	AllOf1                  *ComponentsSchemasPetAllOf1 `json:"-"`
 }
 
-type marshalPet Pet
+type marshalComponentsSchemasPet ComponentsSchemasPet
 
 // UnmarshalJSON decodes JSON.
-func (i *Pet) UnmarshalJSON(data []byte) error {
+func (i *ComponentsSchemasPet) UnmarshalJSON(data []byte) error {
 
 	err := unionMap{
-		mustUnmarshal: []interface{}{&i.NewPet, &i.AllOf1},
+		mustUnmarshal: []interface{}{&i.ComponentsSchemasNewPet, &i.AllOf1},
 		jsonData: data,
 	}.unmarshal()
 
@@ -95,42 +95,8 @@ func (i *Pet) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalJSON encodes JSON.
-func (i Pet) MarshalJSON() ([]byte, error) {
-	return marshalUnion(marshalPet(i), i.NewPet, i.AllOf1)
-}
-
-// Error structure is generated from "#/definitions/Error".
-type Error struct {
-	Code                 int64                  `json:"code,omitempty"`
-	Message              string                 `json:"message,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties
-}
-
-type marshalError Error
-
-// UnmarshalJSON decodes JSON.
-func (i *Error) UnmarshalJSON(data []byte) error {
-	ii := marshalError(*i)
-
-	err := unionMap{
-		mustUnmarshal: []interface{}{&ii},
-		ignoreKeys: []string{
-			"code",
-			"message",
-		},
-		additionalProperties: &ii.AdditionalProperties,
-		jsonData: data,
-	}.unmarshal()
-	if err != nil {
-		return err
-	}
-	*i = Error(ii)
-	return err
-}
-
-// MarshalJSON encodes JSON.
-func (i Error) MarshalJSON() ([]byte, error) {
-	return marshalUnion(marshalError(i), i.AdditionalProperties)
+func (i ComponentsSchemasPet) MarshalJSON() ([]byte, error) {
+	return marshalUnion(marshalComponentsSchemasPet(i), i.ComponentsSchemasNewPet, i.AllOf1)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {

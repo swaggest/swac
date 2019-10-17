@@ -5,6 +5,7 @@ package petstore
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -43,8 +44,7 @@ func (request *GetPetsRequest) encode(ctx context.Context, baseURL string) (*htt
 // GetPetsResponse is operation response value.
 type GetPetsResponse struct {
 	StatusCode int
-	OK         []Pet   // OK is a value of 200 OK response.
-	Default    *Error  // Default is a default value of response.
+	OK         []ComponentsSchemasPet  // OK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.
@@ -57,10 +57,7 @@ func (result *GetPetsResponse) decode(resp *http.Response) error {
 	        return err
 	    }
 	default:
-	    err := json.NewDecoder(resp.Body).Decode(&result.Default)
-	    if err != nil {
-	        return err
-	    }
+	    return errors.New("unexpected response status: " + resp.Status)
 	}
 	return nil
 

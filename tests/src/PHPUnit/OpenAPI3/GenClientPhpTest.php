@@ -12,7 +12,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     {
         $cmd = new PhpGuzzleClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/uspto.yaml';
-        $cmd->projectPath = __DIR__ . '/../../../../examples/go-client/uspto-oas3/';
+        $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/UsptoOAS3/';
         $cmd->namespace = 'Swac\Example\UsptoOAS3';
 
         $cmd->performAction();
@@ -26,7 +26,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     {
         $cmd = new PhpGuzzleClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.yaml';
-        $cmd->projectPath = __DIR__ . '/../../../../examples/go-client/petstore-oas3/';
+        $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/PetstoreOAS3/';
         $cmd->namespace = 'Swac\Example\PetstoreOAS3';
 
         $cmd->performAction();

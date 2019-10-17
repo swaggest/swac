@@ -6,20 +6,19 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
 // PostPetsRequest is operation request value.
 type PostPetsRequest struct {
-	// Pet is a JSON request body.
-	// Pet to add to the store
-	Pet *NewPet
+	Body *ComponentsSchemasNewPet  // Body is a JSON request body.
 }
 
 // encode creates *http.Request for request data.
 func (request *PostPetsRequest) encode(ctx context.Context, baseURL string) (*http.Request, error) {
 	requestUri := baseURL + "/pets"
-	body, err := json.Marshal(request.Pet)
+	body, err := json.Marshal(request.Body)
 	if err != nil {
 	    return nil, err
 	}
@@ -34,8 +33,7 @@ func (request *PostPetsRequest) encode(ctx context.Context, baseURL string) (*ht
 // PostPetsResponse is operation response value.
 type PostPetsResponse struct {
 	StatusCode int
-	OK         *Pet    // OK is a value of 200 OK response.
-	Default    *Error  // Default is a default value of response.
+	OK         *ComponentsSchemasPet  // OK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.
@@ -48,10 +46,7 @@ func (result *PostPetsResponse) decode(resp *http.Response) error {
 	        return err
 	    }
 	default:
-	    err := json.NewDecoder(resp.Body).Decode(&result.Default)
-	    if err != nil {
-	        return err
-	    }
+	    return errors.New("unexpected response status: " + resp.Status)
 	}
 	return nil
 
