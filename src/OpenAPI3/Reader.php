@@ -29,6 +29,7 @@ use Swaggest\RestClient\Http\Method;
 class Reader
 {
     const APPLICATION_JSON = 'application/json';
+    const APPLICATION_X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded';
 
     /** @var string[] */
     private $schemas; // Array of json_decoded schemas
@@ -208,7 +209,7 @@ class Reader
                     $this->rest->addOperation($handler);
                 } catch (Skip $skip) {
                     $this->log->warning($skip->getMessage());
-                    $this->log->warning($method . ' ' . $path . ' skipped');
+                    $this->log->error($method . ' ' . $path . ' skipped');
                 }
             }
         }
@@ -233,8 +234,26 @@ class Reader
 
         if ($operation->requestBody) {
             foreach ($operation->requestBody->content as $contentType => $body) {
-                if ($contentType == self::APPLICATION_JSON) {
+                if ($contentType === self::APPLICATION_JSON) {
                     $handler->parameters[Parameter::BODY . ':' . Parameter::BODY] = self::makeBodyParameter($body);
+                } elseif ($contentType === self::APPLICATION_X_WWW_FORM_URLENCODED) {
+                    if (null !== $body->encoding) {
+                        throw new Skip('Request body skipped, encoding not supported: ' . $contentType);
+                    }
+                    $bodySchema = $body->schema->exportSchema();
+                    $required = $bodySchema->required;
+                    if ($required === null) {
+                        $required = [];
+                    }
+                    foreach ($bodySchema->properties as $propertyName => $property) {
+                        $param = new Parameter();
+                        $param->in = Parameter::FORM_DATA;
+                        $param->name = $propertyName;
+                        $param->required = in_array($propertyName, $required);
+                        $param->schema = $property;
+                        $param->deprecated = $body->schema->deprecated;
+                        $handler->parameters[Parameter::FORM_DATA . ':' . $propertyName] = $param;
+                    }
                 } else {
                     throw new Skip('Request body skipped, unsupported content type: ' . $contentType);
                 }
@@ -262,7 +281,7 @@ class Reader
         if ($param->schema !== null) {
             $p->schema = $param->schema->exportSchema();
         } else {
-            throw new \Exception("AAAAA! No schema in parameter.");
+            throw new Skip("No schema for parameter $param->name in $param->in");
         }
 
         return $p;
