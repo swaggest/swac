@@ -8,6 +8,41 @@ A tool to render API spec as code.
 ![Code lines](https://sloc.xyz/github/swaggest/swac/?category=code)
 ![Comments](https://sloc.xyz/github/swaggest/swac/?category=comments)
 
+## Installation
+
+### Phar
+
+Download `swac` from [releases](https://github.com/swaggest/swac/releases) page.
+
+### Docker
+
+```bash
+docker run swaggest/swac swac --help
+```
+```
+v0.0.2 swac
+OpenAPI/Swagger compiler, https://github.com/swaggest/swac
+Usage: 
+   swac <action>
+   action   Action name                                 
+            Allowed values: php-guzzle-client, go-client
+...
+```
+
+Example
+```bash
+mkdir petstore && cd petstore
+docker run -v $(pwd):/code swaggest/swac swac php-guzzle-client https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore.json --namespace MyApp\\Petstore
+```
+
+### Composer
+
+[Install PHP Composer](https://getcomposer.org/doc/00-intro.md)
+
+```bash
+composer global require swaggest/swac
+```
+
 ## Usage
 
 ### PHP Client
@@ -50,6 +85,8 @@ Options:
 ```
 
 [Examples](/examples/go-client).
+
+Generated client is a single package without external dependencies.
 
 ## Roadmap
 

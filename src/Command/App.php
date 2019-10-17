@@ -22,6 +22,7 @@ class App extends Command\Application
         $commandDefinitions->goClient = GoClient::definition();
 
         $definition->name = 'swac';
+        $definition->description = 'OpenAPI/Swagger compiler, https://github.com/swaggest/swac';
         $definition->version = self::$ver;
     }
 
