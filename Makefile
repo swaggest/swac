@@ -23,4 +23,5 @@ test-coverage:
 	@php -derror_reporting="E_ALL & ~E_DEPRECATED" -dzend_extension=xdebug.so vendor/bin/phpunit --coverage-text
 
 lint-examples:
-	find ./examples/php-client -iname "*.php" -exec php -l {} \; | grep -i "Errors.parsing"
+	@find ./examples/php-guzzle-client -iname "*.php" -exec php -l {} \; | grep -v "No syntax errors"
+	@cd ./examples/go-client && golangci-lint run --enable-all ./...

@@ -24,6 +24,8 @@ subMap = append(subMap, '}')
 * [x] Add timeout configuration
 * [x] Add comments to status response properties
 * [ ] Split huge `Client.php`
-* [ ] Add support for parameters in `form-data` and `cookie`
+* [x] Add support for parameters in `form-data`
+* [ ] Add support for parameters in `cookie`
 * [ ] Add structured errors
 * [ ] Word wrap struct property comments in `go-code-builder`
+* [ ] Add generated README
