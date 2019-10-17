@@ -1,0 +1,30 @@
+language: php
+php:
+  - nightly
+  - 7.3
+  - 7.2
+  - 7.1
+  - 7.0
+  - 5.6
+
+sudo: false
+
+## Cache composer bits
+cache:
+  directories:
+    - $HOME/.cache/composer
+
+before_script:
+  - composer install --dev --no-interaction --prefer-dist
+  - if ! [[ $(phpenv version-name) =~ 7.3 ]] ; then phpenv config-rm xdebug.ini || true ; fi
+
+matrix:
+  allow_failures:
+    - php: nightly
+  fast_finish: true
+
+script:
+  - php -derror_reporting="E_ALL & ~E_DEPRECATED" ./vendor/bin/phpunit -v --configuration phpunit.xml --coverage-text --coverage-clover=coverage.xml
+
+after_script:
+  - if [[ $(phpenv version-name) =~ 7.3 ]] ; then bash <(curl -s https://codecov.io/bash); fi
