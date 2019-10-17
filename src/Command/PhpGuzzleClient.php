@@ -2,11 +2,11 @@
 
 namespace Swac\Command;
 
+use Swac\ExitCode;
 use Swac\Log;
 use Swac\Php\Client\Client;
 use Swac\Rest\Rest;
 use Swac\Swagger\Reader;
-use Symfony\Component\Yaml\Yaml;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -35,9 +35,15 @@ class PhpGuzzleClient extends Command
 
     public function performAction()
     {
+        $projectPath = realpath($this->projectPath);
+        if (false === $projectPath) {
+            throw new ExitCode('Could not resolve path: ' . $this->projectPath, 1);
+        }
+        $projectPath .= '/';
+
         $rest = new Rest();
 
-        $phpClient = new Client($this->namespace, $this->projectPath);
+        $phpClient = new Client($this->namespace, './');
         $rest->addRenderer($phpClient);
 
         $reader = new Reader($rest);
@@ -47,6 +53,6 @@ class PhpGuzzleClient extends Command
         $reader->addSchemaJson($schemaJson);
         $reader->process();
 
-        $phpClient->store($this->projectPath);
+        $phpClient->store($projectPath);
     }
 }

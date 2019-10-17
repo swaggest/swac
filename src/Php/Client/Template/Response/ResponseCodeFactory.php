@@ -183,15 +183,16 @@ PHP
                     $headersType = $this->builder->getType($headersSchema, $path . '/headers');
                     $headersClass->addMethod($headersRead->build());
 
+                    $binds[':type'] = new TypeOf($headersClass);
                     $headersResult->add($headersType);
                     $headersBody->addSnippet(new PlaceholderString(
                         $case . ': $result = :type::read($raw);break;' . "\n",
-                        [':type' => new TypeOf($headersClass)]
+                        $binds
                     ));
                 } else {
-                    $headersBody->addSnippet(
-                        $case . ': $result = null;break;' . "\n"
-                    );
+                    $headersBody->addSnippet(new PlaceholderString(
+                        $case . ': $result = null;break;' . "\n", $binds
+                    ));
                 }
 
                 $this->resultInfo[] = $resultInfo;

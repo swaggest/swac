@@ -2,8 +2,8 @@
 
 namespace Swac\Tests\PHPUnit\Swagger;
 
-use Swac\Go\Client\Client;
 use Swac\Log;
+use Swac\Php\Client\Client;
 use Swac\Rest\Rest;
 use Swac\Swagger\Reader;
 
@@ -14,7 +14,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     {
         $rest = new Rest();
 
-        $phpClient = new \Swac\Php\Client\Client('Swac\Example\Uber', './');
+        $phpClient = new Client('Swac\Example\Uber', './');
         $rest->addRenderer($phpClient);
 
         $reader = new Reader($rest);
@@ -34,7 +34,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     {
         $rest = new Rest();
 
-        $phpClient = new \Swac\Php\Client\Client('Swac\Example\Petstore', './');
+        $phpClient = new Client('Swac\Example\Petstore', './');
         $rest->addRenderer($phpClient);
 
         $reader = new Reader($rest);

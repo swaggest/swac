@@ -330,16 +330,16 @@ GO;
         $funcBody->addSnippet(<<<GO
 req, err := request.encode(ctx, c.BaseURL)
 if err != nil {
-    return result, err // add wrap with "failed to create request"
+    return result, err
 }
 $roundTripCall
 if err != nil {
-    return result, err // add wrap with "failed to send request"
+    return result, err
 }
 defer resp.Body.Close()
 err = result.decode(resp)
 if err != nil {
-    return result, err // add wrap with "failed to decode response"
+    return result, err
 }
 
 GO
@@ -658,7 +658,7 @@ GO;
             $body .= <<<GO
 body, err := json.Marshal(request.$fieldName)
 if err != nil {
-    return nil, err // add wrap with "failed to marshal"
+    return nil, err
 }
 
 GO;
@@ -669,7 +669,7 @@ GO;
         $body .= <<<GO
 req, err := http.NewRequest(http.Method$method, requestUri, $reqBody)
 if err != nil {
-    return nil, err // add wrap with "failed to create request
+    return nil, err
 }
 req = req.WithContext(ctx)
 return req, err
@@ -711,7 +711,7 @@ GO;
 case http.Status$propName:
     err := json.NewDecoder(resp.Body).Decode(&result.$propName)
     if err != nil {
-        return err // add wrap with "failed to decode response"
+        return err
     }
 
 GO;
@@ -723,7 +723,7 @@ GO;
 default:
     err := json.NewDecoder(resp.Body).Decode(&result.Default)
     if err != nil {
-        return err // add wrap with "failed to decode response"
+        return err
     }
 }
 

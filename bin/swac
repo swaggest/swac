@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+use Swac\Command\App;
+use Swac\ExitCode;
 use Yaoi\Cli\Command\Application\Runner;
 
 set_time_limit(20);
@@ -12,4 +14,10 @@ foreach (array(__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoloa
     }
 }
 
-Runner::create(new \Swac\Command\App())->run();
+
+try {
+    Runner::create(new App())->run();
+} catch (ExitCode $exception) {
+    echo $exception->getMessage() . "\n";
+    die($exception->getCode());
+}
