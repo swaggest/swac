@@ -10,8 +10,8 @@ use Swac\Rest\Operation as RestOperation;
 use Swac\Rest\Parameter;
 use Swac\Rest\Response;
 use Swac\Rest\Config;
-use Swac\Rest\Renderer;
 use Swac\Rest\Rest;
+use Swac\Skip;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\OpenAPI3Schema\APIKeySecurityScheme;
@@ -144,67 +144,72 @@ class Reader
         foreach ($this->schema->paths as $path => $pathItem) {
             $operations = $pathItem->getGetPutPostDeleteOptionsHeadPatchTraceValues();
             foreach ($operations as $method => $op) {
-                $handler = self::makeHandler($path, $method, $op);
+                try {
+                    $handler = self::makeHandler($path, $method, $op);
 
-                if (!isset($handler->security) && isset($defaultSecurity)) {
-                    $handler->security = $defaultSecurity;
-                }
-
-                if (isset($pathItem->parameters)) {
-                    foreach ($pathItem->parameters as $parameter) {
-                        $p = self::makeParameter($parameter);
-                        if (!isset($handler->parameters[$p->in . ':' . $p->name])) {
-                            $handler->parameters[$p->in . ':' . $p->name] = $p;
-                        }
-                    }
-                }
-
-                $responses = [];
-                foreach ($op->responses as $status => $openApiResponse) {
-                    $response = new Response();
-
-                    if ($status === 'default') {
-                        $response->isDefault = true;
-                    } else {
-                        $response->statusCode = (int)$status;
+                    if (!isset($handler->security) && isset($defaultSecurity)) {
+                        $handler->security = $defaultSecurity;
                     }
 
-                    if ($openApiResponse->content) {
-                        foreach ($openApiResponse->content as $contentType => $media) {
-                            if ($contentType === self::APPLICATION_JSON) {
-                                $response->schema = $media->schema->exportSchema();
-                            } else {
-                                Log::getInstance()->addWarning(
-                                    'Unsupported response content type',
-                                    ['Content-Type' => $contentType]
-                                );
+                    if (isset($pathItem->parameters)) {
+                        foreach ($pathItem->parameters as $parameter) {
+                            $p = self::makeParameter($parameter);
+                            if (!isset($handler->parameters[$p->in . ':' . $p->name])) {
+                                $handler->parameters[$p->in . ':' . $p->name] = $p;
                             }
                         }
                     }
 
+                    $responses = [];
+                    foreach ($op->responses as $status => $openApiResponse) {
+                        $response = new Response();
 
-                    if ($openApiResponse->schema !== null) {
-                        $response->schema = $openApiResponse->schema->exportSchema();
-                    }
-                    if ($openApiResponse->headers !== null) {
-                        foreach ($openApiResponse->headers as $headerName => $openApiHeader) {
-                            $headerSchema = $openApiHeader->schema->exportSchema();
-
-                            /**
-                             * @todo add support for string deserialization.
-                             */
-                            //$headerSchema->addMeta($openApiHeader->collectionFormat, Parameter::COLLECTION_FORMAT);
-
-                            $response->headers[$headerName] = $headerSchema;
+                        if ($status === 'default') {
+                            $response->isDefault = true;
+                        } else {
+                            $response->statusCode = (int)$status;
                         }
+
+                        if ($openApiResponse->content) {
+                            foreach ($openApiResponse->content as $contentType => $media) {
+                                if ($contentType === self::APPLICATION_JSON) {
+                                    $response->schema = $media->schema->exportSchema();
+                                } else {
+                                    Log::getInstance()->addWarning(
+                                        'Unsupported response content type',
+                                        ['Content-Type' => $contentType]
+                                    );
+                                }
+                            }
+                        }
+
+
+                        if ($openApiResponse->schema !== null) {
+                            $response->schema = $openApiResponse->schema->exportSchema();
+                        }
+                        if ($openApiResponse->headers !== null) {
+                            foreach ($openApiResponse->headers as $headerName => $openApiHeader) {
+                                $headerSchema = $openApiHeader->schema->exportSchema();
+
+                                /**
+                                 * @todo add support for string deserialization.
+                                 */
+                                //$headerSchema->addMeta($openApiHeader->collectionFormat, Parameter::COLLECTION_FORMAT);
+
+                                $response->headers[$headerName] = $headerSchema;
+                            }
+                        }
+                        $response->description = $openApiResponse->description;
+
+                        $responses[] = $response;
                     }
-                    $response->description = $openApiResponse->description;
+                    $handler->responses = $responses;
 
-                    $responses[] = $response;
+                    $this->rest->addOperation($handler);
+                } catch (Skip $skip) {
+                    $this->log->warning($skip->getMessage());
+                    $this->log->warning($method . ' ' . $path . ' skipped');
                 }
-                $handler->responses = $responses;
-
-                $this->rest->addOperation($handler);
             }
         }
     }
@@ -231,7 +236,7 @@ class Reader
                 if ($contentType == self::APPLICATION_JSON) {
                     $handler->parameters[Parameter::BODY . ':' . Parameter::BODY] = self::makeBodyParameter($body);
                 } else {
-                    Log::getInstance()->warning('Request body skipped, unsupported content type: ' . $contentType);
+                    throw new Skip('Request body skipped, unsupported content type: ' . $contentType);
                 }
             }
         }
