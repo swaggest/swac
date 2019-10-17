@@ -65,7 +65,7 @@ Generated client depends on [`swaggest/rest-client`](https://github.com/swaggest
 and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 
 
-[Examples](/examples/php-client).
+[Examples](/examples/php-guzzle-client).
 
 ### Go Client
 
