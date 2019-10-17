@@ -34,9 +34,6 @@ class Reader
     /** @var SwaggerSchema */
     private $schema;
 
-    /** @var Renderer[] */
-    private $renderers;
-
     /** @var Rest */
     private $rest;
 
@@ -68,22 +65,10 @@ class Reader
 
     public function addSchemaJson($schemaJson)
     {
-        // TODO remove.
         if (is_string($schemaJson)) {
             $schemaJson = json_decode($schemaJson);
         }
         $this->schemas[] = $schemaJson;
-        return $this;
-    }
-
-    /**
-     * @param Renderer $renderer
-     * @return Reader
-     * @deprecated use Rest::addRenderer
-     */
-    public function addRenderer(Renderer $renderer)
-    {
-        $this->renderers[] = $renderer;
         return $this;
     }
 

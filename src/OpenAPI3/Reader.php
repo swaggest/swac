@@ -11,6 +11,7 @@ use Swac\Rest\Parameter;
 use Swac\Rest\Response;
 use Swac\Rest\Config;
 use Swac\Rest\Renderer;
+use Swac\Rest\Rest;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\OpenAPI3Schema\APIKeySecurityScheme;
@@ -38,8 +39,8 @@ class Reader
     /** @var OpenAPI3Schema */
     private $schema;
 
-    /** @var Renderer[] */
-    private $renderers;
+    /** @var Rest */
+    private $rest;
 
     private static $methods = array(
         Method::GET,
@@ -52,9 +53,10 @@ class Reader
         Method::TRACE,
     );
 
-    public function __construct()
+    public function __construct(Rest $rest)
     {
         $this->log = new NullLogger();
+        $this->rest = $rest;
     }
 
     /**
@@ -70,16 +72,6 @@ class Reader
     public function addSchemaJson($schemaJson)
     {
         $this->schemas[] = $schemaJson;
-        return $this;
-    }
-
-    /**
-     * @param Renderer $renderer
-     * @return Reader
-     */
-    public function addRenderer(Renderer $renderer)
-    {
-        $this->renderers[] = $renderer;
         return $this;
     }
 
@@ -140,9 +132,7 @@ class Reader
                 }
             }
 
-            foreach ($this->renderers as $renderer) {
-                $renderer->setConfig($config);
-            }
+            $this->rest->setConfig($config);
             $this->processSchema();
         }
     }
@@ -193,7 +183,6 @@ class Reader
                     }
 
 
-
                     if ($openApiResponse->schema !== null) {
                         $response->schema = $openApiResponse->schema->exportSchema();
                     }
@@ -215,14 +204,7 @@ class Reader
                 }
                 $handler->responses = $responses;
 
-
-                try {
-                    foreach ($this->renderers as $renderer) {
-                        $renderer->addOperation($handler);
-                    }
-                } catch (\Exception $exception) {
-                    Log::getInstance()->warning('Operation skipped: ' . $exception->getMessage());
-                }
+                $this->rest->addOperation($handler);
             }
         }
     }

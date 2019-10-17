@@ -7,7 +7,7 @@ use Yaoi\Command\Definition;
 
 class App extends Command\Application
 {
-    static $ver = 'v0.0.2';
+    static $ver = 'v0.0.3';
 
     public $phpGuzzleClient;
     public $goClient;
@@ -25,5 +25,4 @@ class App extends Command\Application
         $definition->description = 'OpenAPI/Swagger compiler, https://github.com/swaggest/swac';
         $definition->version = self::$ver;
     }
-
 }
