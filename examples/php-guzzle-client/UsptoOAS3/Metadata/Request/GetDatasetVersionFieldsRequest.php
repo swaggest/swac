@@ -4,20 +4,20 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Request;
+namespace Swac\Example\UsptoOAS3\Metadata\Request;
 
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class DeletePetsRequest extends ClassStructure
+class GetDatasetVersionFieldsRequest extends ClassStructure
 {
-    /**
-     * @var int ID of pet to delete
-     * In: path, Name: id
-     */
-    public $id;
+    /** @var string In: path, Name: dataset */
+    public $dataset;
+
+    /** @var string In: path, Name: version */
+    public $version;
 
     /**
      * @param Properties|static $properties
@@ -25,17 +25,18 @@ class DeletePetsRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->id = Schema::integer();
-        $properties->id->format = "int64";
+        $properties->dataset = Schema::string();
+        $properties->version = Schema::string();
         $ownerSchema->type = Schema::OBJECT;
         $ownerSchema->required = array(
-            self::names()->id,
+            self::names()->dataset,
+            self::names()->version,
         );
     }
 
     public function makeUrl()
     {
-        $url = '/pets/' . urlencode($this->id);
+        $url = '/' . urlencode($this->dataset) . '/' . urlencode($this->version) . '/fields';
         return $url;
     }
 

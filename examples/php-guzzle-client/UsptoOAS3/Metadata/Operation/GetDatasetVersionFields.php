@@ -4,13 +4,15 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\PetstoreOAS3\Operation;
+namespace Swac\Example\UsptoOAS3\Metadata\Operation;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Swac\Example\PetstoreOAS3\Config;
-use Swac\Example\PetstoreOAS3\Request\DeletePetsRequest;
+use Swac\Example\UsptoOAS3\Config;
+use Swac\Example\UsptoOAS3\Metadata\Request\GetDatasetVersionFieldsRequest;
+use Swac\Example\UsptoOAS3\Metadata\Response\GetDatasetVersionFieldsNotFoundResponse;
+use Swac\Example\UsptoOAS3\Metadata\Response\GetDatasetVersionFieldsOKResponse;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -20,24 +22,27 @@ use Swaggest\RestClient\RestException;
 
 
 /**
- * deletes a single pet based on the ID supplied
- * HTTP: DELETE /pets/{id}
+ * This GET API returns the list of all the searchable field names that are in
+ * the oa_citations. Please see the 'fields' attribute which returns an array
+ * of field names. Each field or a combination of fields can be searched using
+ * the syntax options shown below.
+ * HTTP: GET /{dataset}/{version}/fields
  */
-class DeletePets extends AbstractOperation
+class GetDatasetVersionFields extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param DeletePetsRequest $request
+     * @param GetDatasetVersionFieldsRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, DeletePetsRequest $request, Config $config)
+    public function __construct(ClientInterface $client, GetDatasetVersionFieldsRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
         $this->rawRequest = new Request(
-            Method::DELETE,
+            Method::GET,
             rtrim($config->getBaseUrl(), '/') . $request->makeUrl(),
             $request->makeHeaders(),
             $request->makeBody()
@@ -45,7 +50,7 @@ class DeletePets extends AbstractOperation
     }
 
     /**
-     * @return mixed
+     * @return string
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -56,7 +61,8 @@ class DeletePets extends AbstractOperation
         $raw = $this->getRawResponse();
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
-            case StatusCode::NO_CONTENT: $result = null;break;
+            case StatusCode::OK: $result = GetDatasetVersionFieldsOKResponse::import($this->getJsonResponse());break;
+            case StatusCode::NOT_FOUND: $result = GetDatasetVersionFieldsNotFoundResponse::import($this->getJsonResponse());break;
             default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
         }
         return $result;

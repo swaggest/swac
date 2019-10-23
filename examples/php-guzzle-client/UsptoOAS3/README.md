@@ -3,11 +3,11 @@
 ### metadata
 
 * [`GET /`](#get) List available data sets
-* [`GET /{dataset}/{version}/fields`](#getfields) Provides the general information about the API and the list of fields that
+* [`GET /{dataset}/{version}/fields`](#getdatasetversionfields) Provides the general information about the API and the list of fields that
 
 ### search
 
-* [`POST /{dataset}/{version}/records`](#postrecords) Provides search capability for the data set with the given search criteria.
+* [`POST /{dataset}/{version}/records`](#postdatasetversionrecords) Provides search capability for the data set with the given search criteria.
 
 
 
@@ -34,7 +34,7 @@ Type: `Swac\Example\UsptoOAS3\Metadata\Request\GetRequest`
 |------|--------------------------------------------------------------------|---------------------------|
 |200 OK|[`DataSetList`](#swacexampleusptooas3metadatadefinitionsdatasetlist)|Returns a list of data sets|
 
-### `GetFields`
+### `GetDatasetVersionFields`
 
 This GET API returns the list of all the searchable field names that are in
 the oa_citations. Please see the 'fields' attribute which returns an array
@@ -46,7 +46,7 @@ _Endpoint_: `/{dataset}/{version}/fields`
 _Namespace_: `Swac\Example\UsptoOAS3\Metadata\Operation`
 
 #### Request
-Type: `Swac\Example\UsptoOAS3\Metadata\Request\GetFieldsRequest`
+Type: `Swac\Example\UsptoOAS3\Metadata\Request\GetDatasetVersionFieldsRequest`
 
 |Name     |Type    |In    |Description            |
 |---------|--------|------|-----------------------|
@@ -65,7 +65,7 @@ Type: `Swac\Example\UsptoOAS3\Metadata\Request\GetFieldsRequest`
 |200 OK       |[`GetDatasetVersionFieldsOKResponse`](#swacexampleusptooas3metadataresponsegetdatasetversionfieldsokresponse)            |The dataset API for the given version is found and it is accessible to consume.                                            |
 |404 Not Found|[`GetDatasetVersionFieldsNotFoundResponse`](#swacexampleusptooas3metadataresponsegetdatasetversionfieldsnotfoundresponse)|The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.|
 
-### `PostRecords`
+### `PostDatasetVersionRecords`
 
 This API is based on Solr/Lucense Search. The data is indexed using SOLR.
 This GET API returns the list of all the searchable field names that are in
@@ -81,7 +81,7 @@ _Endpoint_: `/{dataset}/{version}/records`
 _Namespace_: `Swac\Example\UsptoOAS3\Search\Operation`
 
 #### Request
-Type: `Swac\Example\UsptoOAS3\Search\Request\PostRecordsRequest`
+Type: `Swac\Example\UsptoOAS3\Search\Request\PostDatasetVersionRecordsRequest`
 
 |Name      |Type    |In        |Description                                                         |
 |----------|--------|----------|--------------------------------------------------------------------|

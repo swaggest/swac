@@ -2,8 +2,8 @@
 
 ### 
 
-* [`DELETE /pets/{id}`](#deletepets) deletes a single pet based on the ID supplied
-* [`GET /pets/{id}`](#getpetstype2) Returns a user based on a single ID, if the user does not have access to
+* [`DELETE /pets/{id}`](#deletepetsid) deletes a single pet based on the ID supplied
+* [`GET /pets/{id}`](#getpetsid) Returns a user based on a single ID, if the user does not have access to
 * [`GET /pets`](#getpets) Returns all pets from the system that the user has access to
 * [`POST /pets`](#postpets) Creates a new pet in the store.  Duplicates are allowed
 
@@ -92,7 +92,7 @@ Type: `Swac\Example\PetstoreOAS3\Request\PostPetsRequest`
 |------|-----------------------------------------------|------------|
 |200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)|pet response|
 
-### `GetPetsType2`
+### `GetPetsId`
 
 Returns a user based on a single ID, if the user does not have access to
 the pet
@@ -102,7 +102,7 @@ _Endpoint_: `/pets/{id}`
 _Namespace_: `Swac\Example\PetstoreOAS3\Operation`
 
 #### Request
-Type: `Swac\Example\PetstoreOAS3\Request\GetPetsType2Request`
+Type: `Swac\Example\PetstoreOAS3\Request\GetPetsIdRequest`
 
 |Name|Type |In    |Description       |
 |----|-----|------|------------------|
@@ -119,7 +119,7 @@ Type: `Swac\Example\PetstoreOAS3\Request\GetPetsType2Request`
 |------|-----------------------------------------------|------------|
 |200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)|pet response|
 
-### `DeletePets`
+### `DeletePetsId`
 
 deletes a single pet based on the ID supplied
 
@@ -128,7 +128,7 @@ _Endpoint_: `/pets/{id}`
 _Namespace_: `Swac\Example\PetstoreOAS3\Operation`
 
 #### Request
-Type: `Swac\Example\PetstoreOAS3\Request\DeletePetsRequest`
+Type: `Swac\Example\PetstoreOAS3\Request\DeletePetsIdRequest`
 
 |Name|Type |In    |Description        |
 |----|-----|------|-------------------|

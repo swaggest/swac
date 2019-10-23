@@ -44,7 +44,7 @@ class Client implements Renderer
 
     private $groupByTags = true;
 
-    public $skipPathParamsInHandlerName = true;
+    public $skipPathParamsInHandlerName = false;
 
     public function __construct($namespace, $srcPath = './src')
     {

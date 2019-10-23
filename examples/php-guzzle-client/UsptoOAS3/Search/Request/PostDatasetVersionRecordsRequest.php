@@ -11,7 +11,7 @@ use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class PostRecordsRequest extends ClassStructure
+class PostDatasetVersionRecordsRequest extends ClassStructure
 {
     /** @var string In: path, Name: version */
     public $version;

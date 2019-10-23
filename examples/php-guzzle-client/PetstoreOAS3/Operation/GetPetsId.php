@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7\Request;
 use Swac\Example\PetstoreOAS3\Config;
 use Swac\Example\PetstoreOAS3\Definitions\NewPet;
 use Swac\Example\PetstoreOAS3\Definitions\Pet;
-use Swac\Example\PetstoreOAS3\Request\GetPetsType2Request;
+use Swac\Example\PetstoreOAS3\Request\GetPetsIdRequest;
 use Swac\Example\PetstoreOAS3\Response\GetPetsOKResponseItemsAllOf1;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
@@ -27,16 +27,16 @@ use Swaggest\RestClient\RestException;
  * the pet
  * HTTP: GET /pets/{id}
  */
-class GetPetsType2 extends AbstractOperation
+class GetPetsId extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetPetsType2Request $request
+     * @param GetPetsIdRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetPetsType2Request $request, Config $config)
+    public function __construct(ClientInterface $client, GetPetsIdRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();

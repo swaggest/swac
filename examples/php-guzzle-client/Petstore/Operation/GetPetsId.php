@@ -13,7 +13,7 @@ use Swac\Example\Petstore\Config;
 use Swac\Example\Petstore\Definitions\Error;
 use Swac\Example\Petstore\Definitions\NewPet;
 use Swac\Example\Petstore\Definitions\Pet;
-use Swac\Example\Petstore\Request\GetPetsType2Request;
+use Swac\Example\Petstore\Request\GetPetsIdRequest;
 use Swac\Example\Petstore\Response\GetPetsOKResponseItemsAllOf1;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
@@ -28,16 +28,16 @@ use Swaggest\RestClient\RestException;
  * the pet
  * HTTP: GET /pets/{id}
  */
-class GetPetsType2 extends AbstractOperation
+class GetPetsId extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetPetsType2Request $request
+     * @param GetPetsIdRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetPetsType2Request $request, Config $config)
+    public function __construct(ClientInterface $client, GetPetsIdRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();

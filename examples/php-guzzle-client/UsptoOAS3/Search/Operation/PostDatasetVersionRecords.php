@@ -10,7 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\UsptoOAS3\Config;
-use Swac\Example\UsptoOAS3\Search\Request\PostRecordsRequest;
+use Swac\Example\UsptoOAS3\Search\Request\PostDatasetVersionRecordsRequest;
 use Swac\Example\UsptoOAS3\Search\Response\PostDatasetVersionRecordsOKResponse;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
@@ -31,16 +31,16 @@ use Swaggest\RestClient\RestException;
  * using above GET api.
  * HTTP: POST /{dataset}/{version}/records
  */
-class PostRecords extends AbstractOperation
+class PostDatasetVersionRecords extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param PostRecordsRequest $request
+     * @param PostDatasetVersionRecordsRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, PostRecordsRequest $request, Config $config)
+    public function __construct(ClientInterface $client, PostDatasetVersionRecordsRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
