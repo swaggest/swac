@@ -11,7 +11,7 @@ use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class DeletePetsRequest extends ClassStructure
+class GetPetsIdRequest extends ClassStructure
 {
     /** @var int In: path, Name: id */
     public $id;

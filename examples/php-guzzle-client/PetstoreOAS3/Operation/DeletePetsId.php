@@ -4,14 +4,13 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Operation;
+namespace Swac\Example\PetstoreOAS3\Operation;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Swac\Example\Petstore\Config;
-use Swac\Example\Petstore\Definitions\Error;
-use Swac\Example\Petstore\Request\DeletePetsRequest;
+use Swac\Example\PetstoreOAS3\Config;
+use Swac\Example\PetstoreOAS3\Request\DeletePetsIdRequest;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -24,16 +23,16 @@ use Swaggest\RestClient\RestException;
  * deletes a single pet based on the ID supplied
  * HTTP: DELETE /pets/{id}
  */
-class DeletePets extends AbstractOperation
+class DeletePetsId extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param DeletePetsRequest $request
+     * @param DeletePetsIdRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, DeletePetsRequest $request, Config $config)
+    public function __construct(ClientInterface $client, DeletePetsIdRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
@@ -46,7 +45,7 @@ class DeletePets extends AbstractOperation
     }
 
     /**
-     * @return Error
+     * @return mixed
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -58,7 +57,7 @@ class DeletePets extends AbstractOperation
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
             case StatusCode::NO_CONTENT: $result = null;break;
-            default: $result = Error::import($this->getJsonResponse());break;
+            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
         }
         return $result;
     }

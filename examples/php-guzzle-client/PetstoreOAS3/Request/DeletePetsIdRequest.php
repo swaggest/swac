@@ -4,19 +4,16 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Request;
+namespace Swac\Example\PetstoreOAS3\Request;
 
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class GetPetsType2Request extends ClassStructure
+class DeletePetsIdRequest extends ClassStructure
 {
-    /**
-     * @var int ID of pet to fetch
-     * In: path, Name: id
-     */
+    /** @var int In: path, Name: id */
     public $id;
 
     /**
