@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df76e5d057ac7889b522211bd2ebd840",
+    "content-hash": "2c62e3879e507a6e065c1f0289d22a2e",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -90,27 +90,28 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.3.3",
+            "version": "6.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
+                "reference": "0895c932405407fd3a7368b6910c09a24d26db11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0895c932405407fd3a7368b6910c09a24d26db11",
+                "reference": "0895c932405407fd3a7368b6910c09a24d26db11",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
+                "guzzlehttp/psr7": "^1.6.1",
                 "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
-                "psr/log": "^1.0"
+                "psr/log": "^1.1"
             },
             "suggest": {
                 "psr/log": "Required for using the Log middleware"
@@ -122,12 +123,12 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -151,7 +152,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-04-22T15:46:56+00:00"
+            "time": "2019-10-23T15:58:00+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -428,9 +429,9 @@
             "authors": [
                 {
                     "name": "Sara Golemon",
-                    "role": "Developer",
                     "email": "pollita@php.net",
-                    "homepage": "https://twitter.com/SaraMG"
+                    "homepage": "https://twitter.com/SaraMG",
+                    "role": "Developer"
                 }
             ],
             "description": "Emulation of SCOPE_EXIT construct from C++",
@@ -494,16 +495,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
+                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
+                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +513,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -537,7 +538,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2018-11-20T15:27:04+00:00"
+            "time": "2019-10-25T08:06:51+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -628,16 +629,16 @@
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.11",
+            "version": "v0.4.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "84a813177f1429836b753a6b9a5fa6881a237214"
+                "reference": "a7202b6c00d92df18d813279447056a97c5ba117"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/84a813177f1429836b753a6b9a5fa6881a237214",
-                "reference": "84a813177f1429836b753a6b9a5fa6881a237214",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/a7202b6c00d92df18d813279447056a97c5ba117",
+                "reference": "a7202b6c00d92df18d813279447056a97c5ba117",
                 "shasum": ""
             },
             "require": {
@@ -645,7 +646,8 @@
                 "php": ">=5.6.0",
                 "phplang/scope-exit": "^1.0",
                 "swaggest/code-builder": "^0.3.1|dev-master",
-                "swaggest/json-schema": "^0.12.4"
+                "swaggest/json-schema": "^0.12.4",
+                "swaggest/json-schema-maker": "^0.0.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5",
@@ -673,28 +675,26 @@
             "keywords": [
                 "library"
             ],
-            "time": "2019-10-15T19:34:08+00:00"
+            "time": "2019-10-25T08:16:07+00:00"
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.7.1",
+            "version": "v3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "203014d2d87a60b37dc8a985b71c866e83752f67"
+                "reference": "fb13f6f7b12b985e2b99877c3604ce904b4fdd7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/203014d2d87a60b37dc8a985b71c866e83752f67",
-                "reference": "203014d2d87a60b37dc8a985b71c866e83752f67",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/fb13f6f7b12b985e2b99877c3604ce904b4fdd7a",
+                "reference": "fb13f6f7b12b985e2b99877c3604ce904b4fdd7a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "^0.4.0",
-                "phpunit/php-code-coverage": "2.2.4",
                 "phpunit/phpunit": "^4.8.23"
             },
             "type": "library",
@@ -714,20 +714,20 @@
                 }
             ],
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
-            "time": "2019-09-26T11:36:16+00:00"
+            "time": "2019-10-23T09:36:24+00:00"
         },
         {
             "name": "swaggest/json-schema",
-            "version": "v0.12.21",
+            "version": "v0.12.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-json-schema.git",
-                "reference": "2b2e7c953e953ff2436f950908fe4ccf03125713"
+                "reference": "d6ed96bd74d404129d3c5548e416beab2f9b2435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/2b2e7c953e953ff2436f950908fe4ccf03125713",
-                "reference": "2b2e7c953e953ff2436f950908fe4ccf03125713",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/d6ed96bd74d404129d3c5548e416beab2f9b2435",
+                "reference": "d6ed96bd74d404129d3c5548e416beab2f9b2435",
                 "shasum": ""
             },
             "require": {
@@ -758,20 +758,66 @@
                 }
             ],
             "description": "High definition PHP structures with JSON-schema based validation",
-            "time": "2019-10-01T13:37:46+00:00"
+            "time": "2019-10-22T07:10:34+00:00"
         },
         {
-            "name": "swaggest/php-code-builder",
-            "version": "v0.2.20",
+            "name": "swaggest/json-schema-maker",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "989bc3a41d377d28c5d4f5ed45f27024f204c1c6"
+                "url": "https://github.com/swaggest/json-schema-maker.git",
+                "reference": "4336134bb9e8890d0b6eea5dab51660a82c2b142"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/989bc3a41d377d28c5d4f5ed45f27024f204c1c6",
-                "reference": "989bc3a41d377d28c5d4f5ed45f27024f204c1c6",
+                "url": "https://api.github.com/repos/swaggest/json-schema-maker/zipball/4336134bb9e8890d0b6eea5dab51660a82c2b142",
+                "reference": "4336134bb9e8890d0b6eea5dab51660a82c2b142",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.5.0",
+                "swaggest/json-schema": "^0.12.21"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Swaggest\\JsonSchemaMaker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Viacheslav Poturaev",
+                    "email": "vearutop@gmail.com",
+                    "homepage": "https://github.com/vearutop"
+                }
+            ],
+            "description": "Instance to JSON schema and back",
+            "homepage": "https://github.com/swaggest/json-schema-maker",
+            "keywords": [
+                "json-schema"
+            ],
+            "time": "2019-10-03T23:40:03+00:00"
+        },
+        {
+            "name": "swaggest/php-code-builder",
+            "version": "v0.2.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swaggest/php-code-builder.git",
+                "reference": "da76d16c944f9c9f882752529dd672da8ac7f87c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/da76d16c944f9c9f882752529dd672da8ac7f87c",
+                "reference": "da76d16c944f9c9f882752529dd672da8ac7f87c",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +851,7 @@
             "keywords": [
                 "library"
             ],
-            "time": "2019-10-02T21:08:31+00:00"
+            "time": "2019-10-24T23:23:17+00:00"
         },
         {
             "name": "swaggest/rest-client",
@@ -1307,8 +1353,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sb@sebastian-bergmann.de"
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -1349,8 +1395,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -1398,8 +1444,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sb@sebastian-bergmann.de"
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
