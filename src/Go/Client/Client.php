@@ -27,8 +27,8 @@ use Swaggest\GoCodeBuilder\Templates\Type\AnyType;
 use Swaggest\GoCodeBuilder\Templates\Type\FuncType;
 use Swaggest\GoCodeBuilder\Templates\Type\Pointer;
 use Swaggest\GoCodeBuilder\Templates\Type\TypeUtil;
-use Swaggest\JsonSchema\Schema;
 use Swaggest\PhpCodeBuilder\PhpCode;
+use Swaggest\SwaggerHttp\StatusCode;
 use Swaggest\SwaggerHttp\StatusCodes;
 
 class Client implements Renderer
@@ -421,6 +421,11 @@ GO
         return $requestStruct;
     }
 
+    private function responseStatusPropName(StatusCode $statusCode)
+    {
+        return $this->codeBuilder->exportableName('Value/' . $statusCode->phrase);
+    }
+
     /**
      * @param string $funcName
      * @param Response[] $responses
@@ -439,7 +444,7 @@ GO
                 $comment = 'Default is a default value of response.';
             } else {
                 $statusCode = StatusCodes::getInfoByCode((int)$response->statusCode);
-                $propName = $this->codeBuilder->exportableName($statusCode->phrase);
+                $propName = $this->responseStatusPropName($statusCode);
                 $comment = $propName . ' is a value of ' . $response->statusCode . ' ' . $statusCode->phrase . ' response.';
             }
 
@@ -552,6 +557,7 @@ GO;
             $queryCount = count($parameters);
             $imports->addByName('net/url');
             $body .= <<<GO
+
 $valuesVar := make(url.Values, $queryCount)
 
 GO;
@@ -586,6 +592,7 @@ GO;
                 if ($assign !== false) {
                     if ($isPointer) {
                         $body .= <<<GO
+
 if request.$fieldName != nil {
 	$assign
 }
@@ -661,15 +668,16 @@ GO;
         $path = str_replace(" + \"\"", '', $path);
 
         $body = <<<GO
-requestUri := baseURL + $path
+requestURI := baseURL + $path
 
 GO;
 
         if ($queryParameters) {
             $body .= $this->buildUrlValues($queryParameters, $result->imports(), 'query');
             $body .= <<<'GO'
+
 if len(query) > 0 {
-	requestUri += "?" + query.Encode()
+	requestURI += "?" + query.Encode()
 }
 
 GO;
@@ -683,6 +691,7 @@ GO;
 
             $reqBody = 'bytes.NewBuffer(body)';
             $body .= <<<GO
+
 body, err := json.Marshal(request.$fieldName)
 if err != nil {
     return nil, err
@@ -695,7 +704,9 @@ GO;
         if (count($formDataParameters)) {
             $body .= $this->buildUrlValues($formDataParameters, $result->imports(), 'formData');
             $body .= <<<'GO'
+
 var body io.Reader
+
 if len(formData) > 0 {
 	body = strings.NewReader(formData.Encode())
 }
@@ -709,11 +720,14 @@ GO;
 
         $method = ucfirst($method);
         $body .= <<<GO
-req, err := http.NewRequest(http.Method$method, requestUri, $reqBody)
+
+req, err := http.NewRequest(http.Method$method, requestURI, $reqBody)
 if err != nil {
     return nil, err
 }
+
 req = req.WithContext(ctx)
+
 return req, err
 GO;
         $result->imports()->addByName('net/http');
@@ -747,10 +761,11 @@ GO;
                 continue;
             }
             $statusCode = StatusCodes::getInfoByCode($response->statusCode);
-            $propName = $this->codeBuilder->exportableName($statusCode->phrase);
+            $status = $this->codeBuilder->exportableName($statusCode->phrase);
+            $propName = $this->responseStatusPropName($statusCode);
 
             $body .= <<<GO
-case http.Status$propName:
+case http.Status$status:
     err := json.NewDecoder(resp.Body).Decode(&result.$propName)
     if err != nil {
         return err
@@ -782,6 +797,7 @@ GO;
         }
 
         $body .= <<<'GO'
+
 return nil
 
 GO;
