@@ -95,6 +95,8 @@ class Client implements Renderer
 
         $constructor = new FuncDef('NewClient', 'NewClient creates client instance with default transport.');
         $constructor->setResult((new Result())->add(null, new Pointer($this->clientStruct->getType())));
+        $constructorArgs = new Arguments();
+        $constructor->setArguments($constructorArgs);
         $constructorBody = new Code();
         $constructorBody->addSnippet(<<<'GO'
 return &Client{
@@ -118,6 +120,7 @@ GO
 GO
             );
         } else {
+            $constructorArgs->add('baseURL', TypeUtil::fromString('string'));
             $constructorBody->addSnippet(<<<'GO'
     BaseURL: baseURL,
 
