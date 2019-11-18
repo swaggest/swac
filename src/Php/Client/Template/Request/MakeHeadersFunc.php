@@ -11,6 +11,12 @@ use Swaggest\PhpCodeBuilder\PhpFunction;
 
 class MakeHeadersFunc extends PhpFunction
 {
+    /** @var string */
+    public $bodyContentType = '';
+
+    /** @var bool */
+    public $acceptJson = false;
+
     /** @var Parameter[] */
     public $headerParameters = array();
 
@@ -21,7 +27,19 @@ class MakeHeadersFunc extends PhpFunction
 $headers = array();
 
 PHP;
+        if (!empty($this->bodyContentType)) {
+            $body .= <<<PHP
+\$headers['Content-Type'] = '{$this->bodyContentType}';
 
+PHP;
+        }
+
+        if ($this->acceptJson) {
+            $body .= <<<PHP
+\$headers['Accept'] = 'application/json';
+
+PHP;
+        }
 
         foreach ($this->headerParameters as $name => $parameter) {
             $phpName = PhpCode::makePhpName($name);

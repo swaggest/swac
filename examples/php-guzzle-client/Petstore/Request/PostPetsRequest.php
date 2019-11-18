@@ -36,6 +36,8 @@ class PostPetsRequest extends ClassStructure
     public function makeHeaders()
     {
         $headers = array();
+        $headers['Content-Type'] = 'application/json; charset=utf-8';
+        $headers['Accept'] = 'application/json';
         return $headers;
     }
 
