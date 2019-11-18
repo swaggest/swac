@@ -234,6 +234,14 @@ GO
         }
         $requestStruct = $this->makeRequestStruct($funcName, $operation->parameters);
 
+
+        $responseDecodeBody = $this->makeResp($operation->responses);
+        $acceptJson = false;
+        if (isset($responseDecodeBody->imports()->imports['encoding/json'])) {
+            $acceptJson = true;
+        }
+
+
         // TODO refactor away request setup.
         $requestEncode = new FuncDef('encode', 'encode creates *http.Request for request data.');
         $requestEncode->setSelf(new Argument('request', new Pointer($requestStruct->getType())));
@@ -247,7 +255,7 @@ GO
             ->add(null, TypeUtil::fromString('error'))
         );
 
-        $requestEncode->setBody($this->makeReq($operation->method, $operation->path, $operation->parameters));
+        $requestEncode->setBody($this->makeReq($operation->method, $operation->path, $operation->parameters, $acceptJson));
         $requestStruct->addFunc($requestEncode);
 
         $operationCode->addSnippet($requestStruct);
@@ -264,7 +272,7 @@ GO
         $responseDecode->setResult((new Result())
             ->add(null, TypeUtil::fromString('error'))
         );
-        $responseDecode->setBody(new Code($this->makeResp($operation->responses)));
+        $responseDecode->setBody($responseDecodeBody);
         $responseStruct->addFunc($responseDecode);
 
         $operationCode->addSnippet($responseStruct);
@@ -621,6 +629,7 @@ GO;
      * @param string $method
      * @param string $path
      * @param Parameter[] $parameters
+     * @param boolean $acceptJson
      * @return string
      * @throws \Swaggest\GoCodeBuilder\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\Exception
@@ -628,7 +637,7 @@ GO;
      * @throws Exception
      * @throws Skip
      */
-    protected function makeReq($method, $path, $parameters)
+    protected function makeReq($method, $path, $parameters, $acceptJson)
     {
         $result = new Code();
 
@@ -686,6 +695,8 @@ if len(query) > 0 {
 GO;
         }
 
+        $contentType = '';
+
         $reqBody = 'nil';
         foreach ($bodyParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
@@ -693,6 +704,7 @@ GO;
             $result->imports()->addByName('encoding/json');
 
             $reqBody = 'bytes.NewBuffer(body)';
+            $contentType = 'application/json; charset=utf-8';
             $body .= <<<GO
 
 body, err := json.Marshal(request.$fieldName)
@@ -719,16 +731,33 @@ GO;
                 ->addByName('strings')
                 ->addByName('io');
             $reqBody = 'body';
+            $contentType = 'application/x-www-form-urlencoded';
         }
 
         $method = ucfirst($method);
+
+        if ($contentType !== '') {
+            $contentType = <<<GO
+req.Header.Set("Content-Type", "$contentType")
+
+GO;
+        }
+        $reqAccept = '';
+        if ($acceptJson) {
+            $reqAccept = <<<GO
+req.Header.Set("Accept", "application/json")
+
+GO;
+
+        }
+
         $body .= <<<GO
 
 req, err := http.NewRequest(http.Method$method, requestURI, $reqBody)
 if err != nil {
     return nil, err
 }
-
+{$contentType}{$reqAccept}
 req = req.WithContext(ctx)
 
 return req, err
@@ -744,7 +773,7 @@ GO;
 
     /**
      * @param Response[] $responses
-     * @return string
+     * @return Code
      * @throws \Exception
      */
     public function makeResp($responses)
@@ -808,25 +837,6 @@ GO;
 
         $code->addSnippet($body);
         return $code;
-
-    }
-
-    public function debugRender()
-    {
-        $file = new GoFile('client');
-        $file->setCode($this->client);
-
-        foreach ($this->operationsCode as $funcName => $code) {
-            $file->getCode()->addSnippet($code);
-        }
-
-        foreach ($this->schemaBuilder->getGeneratedStructs() as $generatedStruct) {
-            $file->getCode()->addSnippet($generatedStruct->structDef);
-        }
-        $file->getCode()->addSnippet($this->schemaBuilder->getCode());
-
-
-        return (string)$file;
     }
 
     public function store($path, $packageName)

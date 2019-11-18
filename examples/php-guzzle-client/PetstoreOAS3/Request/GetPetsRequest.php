@@ -52,6 +52,7 @@ class GetPetsRequest extends ClassStructure
     public function makeHeaders()
     {
         $headers = array();
+        $headers['Accept'] = 'application/json';
         return $headers;
     }
 

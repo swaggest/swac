@@ -629,16 +629,16 @@
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.18",
+            "version": "v0.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "7eed3782d48e8691a3cf4b3dede47049014c5b19"
+                "reference": "590724e908738355f33f722abb09309bc3f832fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/7eed3782d48e8691a3cf4b3dede47049014c5b19",
-                "reference": "7eed3782d48e8691a3cf4b3dede47049014c5b19",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/590724e908738355f33f722abb09309bc3f832fc",
+                "reference": "590724e908738355f33f722abb09309bc3f832fc",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +675,7 @@
             "keywords": [
                 "library"
             ],
-            "time": "2019-11-16T08:24:14+00:00"
+            "time": "2019-11-18T21:06:11+00:00"
         },
         {
             "name": "swaggest/json-diff",

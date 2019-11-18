@@ -70,6 +70,8 @@ class PostDatasetVersionRecordsRequest extends ClassStructure
     public function makeHeaders()
     {
         $headers = array();
+        $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        $headers['Accept'] = 'application/json';
         return $headers;
     }
 
