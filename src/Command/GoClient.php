@@ -4,7 +4,7 @@ namespace Swac\Command;
 
 use Swac\ExitCode;
 use Swac\Go\Client\Client;
-use Swac\Go\Client\Config;
+use Swac\Go\Client\Settings;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -38,9 +38,9 @@ class GoClient extends Base
 
     public function performAction()
     {
-        $config = new Config();
-        $config->skipDefaultAdditionalProperties = $this->skipDefaultAdditionalProperties;
-        $client = new Client($config);
+        $settings = new Settings();
+        $settings->skipDefaultAdditionalProperties = $this->skipDefaultAdditionalProperties;
+        $client = new Client($settings);
 
         $this->process($client);
 

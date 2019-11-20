@@ -52,21 +52,21 @@ class Client implements Renderer
     /** @var GoBuilder */
     private $schemaBuilder;
 
-    /** @var Config */
+    /** @var Settings */
     private $config;
 
-    /** @var \Swac\Go\Client\Config */
-    private $clientConfig;
+    /** @var Settings */
+    private $settings;
 
     const PARAM_FIELD_NAME_META = 'goParamFieldName';
 
-    public function __construct(\Swac\Go\Client\Config $clientConfig = null)
+    public function __construct(Settings $settings = null)
     {
-        if ($clientConfig === null) {
-            $clientConfig = new \Swac\Go\Client\Config();
+        if ($settings === null) {
+            $settings = new Settings();
         }
 
-        $this->clientConfig = $clientConfig;
+        $this->settings = $settings;
 
         $this->client = new Code();
         $this->models = new Code();
@@ -84,14 +84,14 @@ InstrumentCtxFunc allows adding operation info to context.
 A pointer to request structure passed into the function.
 Nil value is ignored.
 COMMENT
-);
+        );
         $this->clientStruct->addProperty($instrumentCtxFuncProp);
 
         $this->clientStruct->addProperty(new StructProperty('transport', TypeUtil::fromString('net/http.RoundTripper')));
         $this->codeBuilder = new GoCodeBuilder();
 
         $this->schemaBuilder = new GoBuilder();
-        if ($this->clientConfig->skipDefaultAdditionalProperties) {
+        if ($this->settings->skipDefaultAdditionalProperties) {
             $this->schemaBuilder->options->defaultAdditionalProperties = false;
         }
         $this->schemaBuilder->options->enableXNullable = true;

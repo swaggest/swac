@@ -2,7 +2,7 @@
 
 namespace Swac\Go\Client;
 
-class Config
+class Settings
 {
     /**
      * @var boolean If schema is not defined fallback to create it from example.
