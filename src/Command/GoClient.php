@@ -1,13 +1,10 @@
 <?php
 
-
 namespace Swac\Command;
 
 use Swac\ExitCode;
 use Swac\Go\Client\Client;
-use Swac\Log;
-use Swac\Rest\Rest;
-use Swac\Swagger\Reader;
+use Swac\Go\Client\Settings;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -15,6 +12,8 @@ class GoClient extends Base
 {
     public $out = './client';
     public $pkgName = 'client';
+    public $skipDefaultAdditionalProperties = false;
+    public $skipDoNotEdit = false;
 
     /**
      * @param Definition $definition
@@ -29,17 +28,25 @@ class GoClient extends Base
 
         $options->pkgName = Command\Option::create()->setType()
             ->setDescription('Output package name, default "client"');
+
+        $options->skipDefaultAdditionalProperties = Command\Option::create()
+            ->setDescription('Do not add field property for undefined `additionalProperties`');
+
+        $options->skipDoNotEdit = Command\Option::create()
+            ->setDescription('Skip adding "DO NOT EDIT" comments');
     }
 
     public function performAction()
     {
-        $client = new Client();
+        $settings = new Settings();
+        $settings->skipDefaultAdditionalProperties = $this->skipDefaultAdditionalProperties;
+        $client = new Client($settings);
 
         $this->process($client);
 
         if (!is_dir($this->out)) {
             throw new ExitCode('Directory ' . $this->out . ' not found. Please create it.', 1);
         }
-        $client->store($this->out, $this->pkgName);
+        $client->store($this->out, $this->pkgName, $this->skipDoNotEdit);
     }
 }

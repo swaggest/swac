@@ -3,6 +3,7 @@
 namespace Swac\Go\Client;
 
 use Swac\Command\App;
+use Swac\Go\LiteralType;
 use Swac\Log;
 use Swac\Rest\Config;
 use Swac\Rest\Operation;
@@ -51,21 +52,21 @@ class Client implements Renderer
     /** @var GoBuilder */
     private $schemaBuilder;
 
-    /** @var Config */
+    /** @var Settings */
     private $config;
 
-    /** @var \Swac\Go\Client\Config */
-    private $clientConfig;
+    /** @var Settings */
+    private $settings;
 
     const PARAM_FIELD_NAME_META = 'goParamFieldName';
 
-    public function __construct(\Swac\Go\Client\Config $clientConfig = null)
+    public function __construct(Settings $settings = null)
     {
-        if ($clientConfig === null) {
-            $clientConfig = new \Swac\Go\Client\Config();
+        if ($settings === null) {
+            $settings = new Settings();
         }
 
-        $this->clientConfig = $clientConfig;
+        $this->settings = $settings;
 
         $this->client = new Code();
         $this->models = new Code();
@@ -73,10 +74,26 @@ class Client implements Renderer
         $this->clientStruct = new StructDef('Client');
         $this->clientStruct->addProperty(new StructProperty('BaseURL', TypeUtil::fromString('string')));
         $this->clientStruct->addProperty(new StructProperty('Timeout', TypeUtil::fromString('time.Duration')));
+
+        $instrumentCtxFuncType = new Code();
+        $instrumentCtxFuncType->addSnippet('func(ctx context.Context, method, pattern string, reqStruct interface{}) context.Context');
+        $instrumentCtxFuncType->imports()->addByName('context');
+        $instrumentCtxFuncProp = new StructProperty('InstrumentCtxFunc', new LiteralType($instrumentCtxFuncType));
+        $instrumentCtxFuncProp->setComment(<<<'COMMENT'
+InstrumentCtxFunc allows adding operation info to context.
+A pointer to request structure passed into the function.
+Nil value is ignored.
+COMMENT
+        );
+        $this->clientStruct->addProperty($instrumentCtxFuncProp);
+
         $this->clientStruct->addProperty(new StructProperty('transport', TypeUtil::fromString('net/http.RoundTripper')));
         $this->codeBuilder = new GoCodeBuilder();
 
         $this->schemaBuilder = new GoBuilder();
+        if ($this->settings->skipDefaultAdditionalProperties) {
+            $this->schemaBuilder->options->defaultAdditionalProperties = false;
+        }
         $this->schemaBuilder->options->enableXNullable = true;
         $this->schemaBuilder->options->ignoreNullable = true;
     }
@@ -121,8 +138,9 @@ GO
             );
         } else {
             $constructorArgs->add('baseURL', TypeUtil::fromString('string'));
+            $constructorBody->imports()->addByName('strings');
             $constructorBody->addSnippet(<<<'GO'
-    BaseURL: baseURL,
+    BaseURL: strings.TrimRight(baseURL, "/"),
 
 GO
             );
@@ -284,8 +302,8 @@ GO
 
 
         $funcResult = new Result();
-        $funcResult->add(null, $responseStruct->getType());
-        $funcResult->add(null, TypeUtil::fromString('error'));
+        $funcResult->add('result', $responseStruct->getType());
+        $funcResult->add('err', TypeUtil::fromString('error'));
 
 
         $opFunc = new FuncDef($funcName, $funcName . ' performs REST operation.');
@@ -295,16 +313,21 @@ GO
         $funcBody = new Code();
 
         $operationPathGoValue = $opFunc->escapeValue($operation->path);
+        $operationUcfirstMethod = ucfirst($operation->method);
 
         $funcBody->addSnippet(new PlaceholderString(
             <<<GO
-result := :result{}
-ctx = context.WithValue(ctx, "restOperationPath", {$operationPathGoValue})
+if c.InstrumentCtxFunc != nil {
+	ctx = c.InstrumentCtxFunc(ctx, http.Method{$operationUcfirstMethod}, {$operationPathGoValue}, &request)
+}
+
 if c.Timeout != 0 {
 	var cancel func()
 	ctx, cancel = context.WithTimeout(ctx, c.Timeout)
+	
 	defer cancel()
 }
+
 
 GO
             ,
@@ -329,6 +352,7 @@ if c.$secTransport != nil {
     transport = c.$secTransport
 }
 
+
 GO;
 
                 }
@@ -344,21 +368,23 @@ req, err := request.encode(ctx, c.BaseURL)
 if err != nil {
     return result, err
 }
+
 $roundTripCall
 if err != nil {
     return result, err
 }
-defer resp.Body.Close()
+
+defer func() {
+    closeErr := resp.Body.Close()
+    if closeErr != nil && err == nil {
+        err = closeErr
+    }
+}()
+
 err = result.decode(resp)
-if err != nil {
-    return result, err
-}
 
-GO
-        );
+return result, err
 
-        $funcBody->addSnippet(<<<'GO'
-return result, nil
 GO
         );
 
@@ -468,6 +494,8 @@ GO
             } else {
                 if ($response->statusCode !== StatusCodes::NO_CONTENT) {
                     Log::getInstance()->warn("No response schema for $response->statusCode at $funcName");
+                } else {
+                    continue;
                 }
             }
 
@@ -608,10 +636,12 @@ if request.$fieldName != nil {
 	$assign
 }
 
+
 GO;
                     } else {
                         $body .= <<<GO
 $assign
+
 
 GO;
                     }
@@ -682,15 +712,16 @@ GO;
         $body = <<<GO
 requestURI := baseURL + $path
 
+
 GO;
 
         if ($queryParameters) {
             $body .= $this->buildUrlValues($queryParameters, $result->imports(), 'query');
             $body .= <<<'GO'
-
 if len(query) > 0 {
 	requestURI += "?" + query.Encode()
 }
+
 
 GO;
         }
@@ -706,7 +737,6 @@ GO;
             $reqBody = 'bytes.NewBuffer(body)';
             $contentType = 'application/json; charset=utf-8';
             $body .= <<<GO
-
 body, err := json.Marshal(request.$fieldName)
 if err != nil {
     return nil, err
@@ -719,12 +749,12 @@ GO;
         if (count($formDataParameters)) {
             $body .= $this->buildUrlValues($formDataParameters, $result->imports(), 'formData');
             $body .= <<<'GO'
-
 var body io.Reader
 
 if len(formData) > 0 {
 	body = strings.NewReader(formData.Encode())
 }
+
 
 GO;
             $result->imports()
@@ -757,6 +787,7 @@ req, err := http.NewRequest(http.Method$method, requestURI, $reqBody)
 if err != nil {
     return nil, err
 }
+
 {$contentType}{$reqAccept}
 req = req.WithContext(ctx)
 
@@ -780,8 +811,18 @@ GO;
     {
         $code = new Code();
 
+        $code->imports()
+            ->addByName('io')
+            ->addByName('bytes');
+
         $body = <<<'GO'
+var err error
+
+dump := bytes.NewBuffer(nil)
+body := io.TeeReader(resp.Body, dump)
+
 result.StatusCode = resp.StatusCode
+
 switch resp.StatusCode {
 
 GO;
@@ -796,12 +837,18 @@ GO;
             $status = $this->codeBuilder->exportableName($statusCode->phrase);
             $propName = $this->responseStatusPropName($statusCode);
 
+            if ($response->schema === null && $response->statusCode === StatusCodes::NO_CONTENT) {
+                $body .= <<<GO
+case http.Status$status:
+    // No body to decode.
+
+GO;
+                continue;
+            }
+
             $body .= <<<GO
 case http.Status$status:
-    err := json.NewDecoder(resp.Body).Decode(&result.$propName)
-    if err != nil {
-        return err
-    }
+    err = json.NewDecoder(body).Decode(&result.$propName)
 
 GO;
             $code->imports()->addByName('encoding/json');
@@ -810,10 +857,7 @@ GO;
         if ($hasDefault) {
             $body .= <<<'GO'
 default:
-    err := json.NewDecoder(resp.Body).Decode(&result.Default)
-    if err != nil {
-        return err
-    }
+    err = json.NewDecoder(resp.Body).Decode(&result.Default)
 }
 
 GO;
@@ -821,14 +865,28 @@ GO;
         } else {
             $body .= <<<'GO'
 default:
-    return errors.New("unexpected response status: " + resp.Status)
+    _, readErr := ioutil.ReadAll(body)
+    if readErr != nil {
+        err = errors.New("unexpected response status: " + resp.Status +
+            ", could not read response body: " + readErr.Error())
+    } else {
+        err = errors.New("unexpected response status: " + resp.Status)
+    }
 }
 
 GO;
-            $code->imports()->addByName('errors');
+            $code->imports()->addByName('errors')->addByName('io/ioutil');
         }
 
         $body .= <<<'GO'
+
+if err != nil {
+    return responseError{
+        resp: resp,
+        body: dump.Bytes(),
+        err:  err,
+    }
+}
 
 return nil
 
@@ -839,25 +897,67 @@ GO;
         return $code;
     }
 
-    public function store($path, $packageName)
+    private function responseError()
     {
+        $c = new Code(<<<'GO'
+type responseError struct {
+	resp *http.Response
+	body []byte
+	err  error
+}
+
+func (re responseError) Unwrap() error {
+	return re.err
+}
+
+func (re responseError) Error() string {
+	return re.err.Error()
+}
+
+func (re responseError) ResponseBody() []byte {
+	return re.body
+}
+
+func (re responseError) Response() *http.Response {
+	return re.resp
+}
+
+GO
+        );
+        $c->imports()->addByName('net/http');
+        return $c;
+    }
+
+    public function store($path, $packageName, $skipDoNotEdit = false)
+    {
+        $fileComment = 'Code generated by github.com/swaggest/swac ' . App::$ver . ', DO NOT EDIT.';
+        if ($skipDoNotEdit) {
+            $fileComment = '';
+        }
+
         $file = new GoFile($packageName);
-        $file->fileComment = 'Code generated by github.com/swaggest/swac ' . App::$ver . ', DO NOT EDIT.';
+        $file->fileComment = $fileComment;
         $file->setCode($this->client);
         $file->setComment('Package ' . $packageName . ' contains autogenerated REST client.');
 
         file_put_contents($path . '/client.go', $file->render());
 
+        $file = new GoFile($packageName);
+        $file->fileComment = $fileComment;
+        $file->setCode($this->responseError());
+
+        file_put_contents($path . '/error.go', $file->render());
+
         foreach ($this->operationsCode as $funcName => $code) {
             $file = new GoFile($packageName);
-            $file->fileComment = 'Code generated by github.com/swaggest/swac ' . App::$ver . ', DO NOT EDIT.';
+            $file->fileComment = $fileComment;
             $file->getCode()->addSnippet($code);
             file_put_contents($path . "/$funcName.go", $file->render());
         }
 
 
         $file = new GoFile($packageName);
-        $file->fileComment = 'Code generated by github.com/swaggest/swac ' . App::$ver . ', DO NOT EDIT.';
+        $file->fileComment = $fileComment;
         foreach ($this->schemaBuilder->getGeneratedStructs() as $generatedStruct) {
             $file->getCode()->addSnippet($generatedStruct->structDef);
         }
