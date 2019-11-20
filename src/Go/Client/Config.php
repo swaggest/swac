@@ -9,4 +9,8 @@ class Config
      */
     public $schemaFromExamples = false;
 
+    /**
+     * @var boolean Do not add field property for undefined `additionalProperties`.
+     */
+    public $skipDefaultAdditionalProperties = false;
 }
