@@ -7,7 +7,7 @@ use Yaoi\Command\Definition;
 
 class App extends Command\Application
 {
-    static $ver = 'v0.1.5';
+    static $ver = 'v0.1.6';
 
     public $phpGuzzleClient;
     public $goClient;
