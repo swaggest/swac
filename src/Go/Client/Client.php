@@ -578,6 +578,70 @@ GO;
         }
     }
 
+    private function buildHeaderParameters($parameters, Imports $imports)
+    {
+        $body = '';
+
+        if ($parameters) {
+            $body .= <<<GO
+
+GO;
+
+            foreach ($parameters as $name => $parameter) {
+                $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
+                $type = $this->schemaBuilder->getType($parameter->schema);
+                $isPointer = false;
+                $var = "request.$fieldName";
+                if ($type instanceof Pointer) {
+                    $isPointer = true;
+                    $var = '*' . $var;
+                    $type = $type->getType();
+                }
+
+                $toString = $this->toStringExpression($parameter, $type, $var, $imports);
+                $assign = false;
+                if ($toString !== false) {
+                    $assign = <<<GO
+req.Headers.Set("$name", $toString)
+GO;
+                }
+                if ($assign === false) {
+                    throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
+//                    $toStringSlice = $this->toStringSliceExpression($parameter, $type, $var, $imports);
+//                    if ($toStringSlice !== false) {
+//                        $assign = <<<GO
+//{$valuesVar}["$name"] = $toStringSlice
+//GO;
+//                    }
+                }
+
+                if ($assign !== false) {
+                    if ($isPointer) {
+                        $body .= <<<GO
+
+if request.$fieldName != nil {
+	$assign
+}
+
+
+GO;
+                    } else {
+                        $body .= <<<GO
+$assign
+
+
+GO;
+                    }
+                    continue;
+                }
+
+                throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
+            }
+        }
+
+        return $body ? "\n\n" . $body : '';
+    }
+
     /**
      * @param Parameter[] $parameters
      * @param Imports $imports
@@ -675,6 +739,8 @@ GO;
         $pathParameters = [];
         /** @var Parameter[] $queryParameters */
         $queryParameters = [];
+        /** @var Parameter[] $headerParameters */
+        $headerParameters = [];
         /** @var Parameter[] $formDataParameters */
         $formDataParameters = [];
         /** @var Parameter[] $bodyParameters */
@@ -689,6 +755,8 @@ GO;
                     $formDataParameters[$parameter->name] = $parameter;
                 } elseif ($parameter->in === Parameter::BODY) {
                     $bodyParameters[$parameter->name] = $parameter;
+                } elseif ($parameter->in === Parameter::HEADER) {
+                    $headerParameters[$parameter->name] = $parameter;
                 } else {
                     throw new Skip("Unsupported parameter location of parameter `$parameter->name`: $parameter->in");
                 }
@@ -781,6 +849,10 @@ GO;
 
         }
 
+//        if ($headerParameters) {
+//            $body .= $this->buildHeaderParameters($headerParameters, $result->imports());
+//        }
+//
         $body .= <<<GO
 
 req, err := http.NewRequest(http.Method$method, requestURI, $reqBody)
@@ -788,11 +860,16 @@ if err != nil {
     return nil, err
 }
 
-{$contentType}{$reqAccept}
+{$contentType}{$reqAccept}{$this->buildHeaderParameters($headerParameters, $result->imports())}
 req = req.WithContext(ctx)
 
 return req, err
 GO;
+
+        $body .= <<<GO
+
+GO;
+
         $result->imports()->addByName('net/http');
 
 
