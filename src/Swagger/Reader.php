@@ -4,13 +4,12 @@ namespace Swac\Swagger;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Swac\Log;
 use Swac\Rest\Operation as RestOperation;
 use Swac\Rest\Parameter;
 use Swac\Rest\Response;
 use Swac\Rest\Config;
-use Swac\Rest\Renderer;
 use Swac\Rest\Rest;
+use Swac\Skip;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\RestClient\Http\Method;
@@ -154,53 +153,59 @@ class Reader
         foreach ($this->schema->paths as $path => $pathItem) {
             foreach (self::$methods as $method) {
                 if ($pathItem->$method) {
-                    /** @var Operation $op */
-                    $op = $pathItem->$method;
-                    $handler = self::makeHandler($path, $method, $op);
+                    try {
 
-                    if (!isset($handler->security) && isset($defaultSecurity)) {
-                        $handler->security = $defaultSecurity;
-                    }
+                        /** @var Operation $op */
+                        $op = $pathItem->$method;
+                        $handler = self::makeHandler($path, $method, $op);
 
-                    if (isset($pathItem->parameters)) {
-                        foreach ($pathItem->parameters as $parameter) {
-                            $p = self::makeParameter($parameter);
-                            if (!isset($handler->parameters[$p->in . ':' . $p->name])) {
-                                $handler->parameters[$p->in . ':' . $p->name] = $p;
+                        if (!isset($handler->security) && isset($defaultSecurity)) {
+                            $handler->security = $defaultSecurity;
+                        }
+
+                        if (isset($pathItem->parameters)) {
+                            foreach ($pathItem->parameters as $parameter) {
+                                $p = self::makeParameter($parameter);
+                                if (!isset($handler->parameters[$p->in . ':' . $p->name])) {
+                                    $handler->parameters[$p->in . ':' . $p->name] = $p;
+                                }
                             }
                         }
-                    }
 
-                    $responses = [];
-                    foreach ($op->responses as $status => $swaggerResponse) {
-                        $response = new Response();
-                        if ($status === 'default') {
-                            $response->isDefault = true;
-                        } else {
-                            $response->statusCode = (int)$status;
-                        }
-
-                        if ($swaggerResponse->schema !== null) {
-                            $response->schema = $swaggerResponse->schema->exportSchema();
-                        }
-                        if ($swaggerResponse->examples) {
-
-                        }
-                        if ($swaggerResponse->headers !== null) {
-                            foreach ($swaggerResponse->headers as $headerName => $swaggerHeader) {
-                                $headerSchema = $swaggerHeader->exportSchema();
-                                $headerSchema->addMeta($swaggerHeader->collectionFormat, Parameter::COLLECTION_FORMAT);
-
-                                $response->headers[$headerName] = $headerSchema;
+                        $responses = [];
+                        foreach ($op->responses as $status => $swaggerResponse) {
+                            $response = new Response();
+                            if ($status === 'default') {
+                                $response->isDefault = true;
+                            } else {
+                                $response->statusCode = (int)$status;
                             }
+
+                            if ($swaggerResponse->schema !== null) {
+                                $response->schema = $swaggerResponse->schema->exportSchema();
+                            }
+                            if ($swaggerResponse->examples) {
+
+                            }
+                            if ($swaggerResponse->headers !== null) {
+                                foreach ($swaggerResponse->headers as $headerName => $swaggerHeader) {
+                                    $headerSchema = $swaggerHeader->exportSchema();
+                                    $headerSchema->addMeta($swaggerHeader->collectionFormat, Parameter::COLLECTION_FORMAT);
+
+                                    $response->headers[$headerName] = $headerSchema;
+                                }
+                            }
+                            $response->description = $swaggerResponse->description;
+
+                            $responses[] = $response;
                         }
-                        $response->description = $swaggerResponse->description;
+                        $handler->responses = $responses;
 
-                        $responses[] = $response;
+                        $this->rest->addOperation($handler);
+                    } catch (Skip $skip) {
+                        $this->log->warning($skip->getMessage());
+                        $this->log->error($method . ' ' . $path . ' skipped');
                     }
-                    $handler->responses = $responses;
-
-                    $this->rest->addOperation($handler);
                 }
             }
         }
