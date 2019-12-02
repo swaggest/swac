@@ -607,12 +607,6 @@ GO;
                 }
                 if ($assign === false) {
                     throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
-//                    $toStringSlice = $this->toStringSliceExpression($parameter, $type, $var, $imports);
-//                    if ($toStringSlice !== false) {
-//                        $assign = <<<GO
-//{$valuesVar}["$name"] = $toStringSlice
-//GO;
-//                    }
                 }
 
                 if ($assign !== false) {
@@ -849,10 +843,6 @@ GO;
 
         }
 
-//        if ($headerParameters) {
-//            $body .= $this->buildHeaderParameters($headerParameters, $result->imports());
-//        }
-//
         $body .= <<<GO
 
 req, err := http.NewRequest(http.Method$method, requestURI, $reqBody)
