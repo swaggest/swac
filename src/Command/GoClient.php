@@ -14,6 +14,10 @@ class GoClient extends Base
     public $pkgName = 'client';
     public $skipDefaultAdditionalProperties = false;
     public $skipDoNotEdit = false;
+    /**
+     * @var boolean Add field tags with name and location to request structure properties, e.g. 'ID int `query:"id"`'.
+     */
+    public $addRequestTags = false;
 
     /**
      * @param Definition $definition
@@ -34,12 +38,16 @@ class GoClient extends Base
 
         $options->skipDoNotEdit = Command\Option::create()
             ->setDescription('Skip adding "DO NOT EDIT" comments');
+
+        $options->addRequestTags = Command\Option::create()
+            ->setDescription('Add field tags with name and location to request structure properties, e.g. \'ID int `query:"id"`\'');
     }
 
     public function performAction()
     {
         $settings = new Settings();
         $settings->skipDefaultAdditionalProperties = $this->skipDefaultAdditionalProperties;
+        $settings->addRequestTags = $this->addRequestTags;
         $client = new Client($settings);
 
         $this->process($client);
