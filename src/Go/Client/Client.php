@@ -24,6 +24,7 @@ use Swaggest\GoCodeBuilder\Templates\GoFile;
 use Swaggest\GoCodeBuilder\Templates\Imports;
 use Swaggest\GoCodeBuilder\Templates\Struct\StructDef;
 use Swaggest\GoCodeBuilder\Templates\Struct\StructProperty;
+use Swaggest\GoCodeBuilder\Templates\Struct\Tags;
 use Swaggest\GoCodeBuilder\Templates\Type\AnyType;
 use Swaggest\GoCodeBuilder\Templates\Type\FuncType;
 use Swaggest\GoCodeBuilder\Templates\Type\Pointer;
@@ -52,7 +53,7 @@ class Client implements Renderer
     /** @var GoBuilder */
     private $schemaBuilder;
 
-    /** @var Settings */
+    /** @var Config */
     private $config;
 
     /** @var Settings */
@@ -448,7 +449,12 @@ GO
 
             $parameter->meta[self::PARAM_FIELD_NAME_META] = $propName;
 
-            $paramProperty = new StructProperty($propName, $type);
+            $paramTags = null;
+            if ($this->settings->addRequestTags && $parameter->in !== Parameter::BODY) {
+                $paramTags = new Tags();
+                $paramTags->setTag($parameter->in, $parameter->name);
+            }
+            $paramProperty = new StructProperty($propName, $type, $paramTags);
             if (trim($comment)) {
                 $paramProperty->setComment($comment);
             }
@@ -602,7 +608,7 @@ GO;
                 $assign = false;
                 if ($toString !== false) {
                     $assign = <<<GO
-req.Headers.Set("$name", $toString)
+req.Header.Set("$name", $toString)
 GO;
                 }
                 if ($assign === false) {

@@ -13,4 +13,9 @@ class Settings
      * @var boolean Do not add field property for undefined `additionalProperties`.
      */
     public $skipDefaultAdditionalProperties = false;
+
+    /**
+     * @var boolean Add field tags with name and location to request structure properties, e.g. 'ID int `query:"id"`'.
+     */
+    public $addRequestTags = false;
 }
