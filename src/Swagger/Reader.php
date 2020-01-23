@@ -182,6 +182,10 @@ class Reader
                             }
 
                             if ($swaggerResponse->schema !== null) {
+                                if ($swaggerResponse->schema instanceof \stdClass) {
+                                    throw new Skip("Unprocessed response schema in " . $path . ': ' .
+                                        json_encode($swaggerResponse->schema, JSON_UNESCAPED_SLASHES));
+                                }
                                 $response->schema = $swaggerResponse->schema->exportSchema();
                             }
                             if ($swaggerResponse->examples) {
