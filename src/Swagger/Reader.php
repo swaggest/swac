@@ -12,6 +12,7 @@ use Swac\Rest\Rest;
 use Swac\Skip;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception;
+use Swaggest\JsonSchema\SchemaExporter;
 use Swaggest\RestClient\Http\Method;
 use Swaggest\SwaggerSchema\ApiKeySecurity;
 use Swaggest\SwaggerSchema\BodyParameter;
@@ -239,6 +240,7 @@ class Reader
      *
      * @param BodyParameter|HeaderParameterSubSchema|FormDataParameterSubSchema|QueryParameterSubSchema|PathParameterSubSchema $param
      * @return Parameter
+     * @throws Skip
      */
     private static function makeParameter($param)
     {
@@ -251,6 +253,9 @@ class Reader
         if ($param->schema !== null) {
             $p->schema = $param->schema->exportSchema();
         } else {
+            if (!$param instanceof SchemaExporter) {
+                throw new Skip('Parameter ' . $param->name . ' can not export schema: ' . json_encode($param));
+            }
             $p->schema = $param->exportSchema();
         }
         if (true === $param->{'x-deprecated'}) {
