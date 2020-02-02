@@ -12,7 +12,7 @@
   "require": {
     "swaggest/json-schema": "^0.12.19",
     "swaggest/php-code-builder": "^0.2.16",
-    "swaggest/go-code-builder": "^0.4.23",
+    "swaggest/go-code-builder": "^0.4.24",
     "php-yaoi/php-yaoi": "^1",
     "monolog/monolog": "^1.23",
     "bramus/monolog-colored-line-formatter": "^2.0",
