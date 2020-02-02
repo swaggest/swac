@@ -24,6 +24,7 @@ use Swaggest\GoCodeBuilder\Templates\GoFile;
 use Swaggest\GoCodeBuilder\Templates\Imports;
 use Swaggest\GoCodeBuilder\Templates\Struct\StructDef;
 use Swaggest\GoCodeBuilder\Templates\Struct\StructProperty;
+use Swaggest\GoCodeBuilder\Templates\Struct\StructType;
 use Swaggest\GoCodeBuilder\Templates\Struct\Tags;
 use Swaggest\GoCodeBuilder\Templates\Type\AnyType;
 use Swaggest\GoCodeBuilder\Templates\Type\FuncType;
@@ -431,6 +432,9 @@ GO
                     $paramPath = Parameter::BODY;
                 }
                 $type = $this->schemaBuilder->getType($parameter->schema, "$funcName/request/$paramPath");
+                if ($type instanceof StructType) {
+                    $type = new Pointer($type);
+                }
             } else {
                 Log::getInstance()->warn("No parameter schema $parameter->name in $parameter->in for $funcName");
             }
@@ -503,6 +507,10 @@ GO
                 } else {
                     continue;
                 }
+            }
+
+            if ($type instanceof StructType) {
+                $type = new Pointer($type);
             }
 
             $property = new StructProperty(

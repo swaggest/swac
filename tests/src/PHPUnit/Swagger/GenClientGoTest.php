@@ -2,6 +2,7 @@
 
 namespace Swac\Tests\PHPUnit\Swagger;
 
+use Swac\Command\App;
 use Swac\Command\GoClient;
 
 class GenClientGoTest extends \PHPUnit_Framework_TestCase
@@ -9,6 +10,8 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
 
     public function testUber()
     {
+        App::$ver = '<version>';
+
         $cmd = new GoClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/uber.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/uber/';
@@ -23,6 +26,8 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
 
     public function testPetstoreExpanded()
     {
+        App::$ver = '<version>';
+
         $cmd = new GoClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/petstore/';

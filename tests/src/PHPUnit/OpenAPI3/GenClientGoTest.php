@@ -2,6 +2,7 @@
 
 namespace Swac\Tests\PHPUnit\OpenAPI3;
 
+use Swac\Command\App;
 use Swac\Command\GoClient;
 
 class GenClientGoTest extends \PHPUnit_Framework_TestCase
@@ -9,6 +10,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
 
     public function testUspto()
     {
+        App::$ver = '<version>';
         $cmd = new GoClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/uspto.yaml';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/uspto-oas3/';
@@ -23,6 +25,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
 
     public function testPetstoreExpanded()
     {
+        App::$ver = '<version>';
         $cmd = new GoClient();
         $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.yaml';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/petstore-oas3/';
