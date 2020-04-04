@@ -98,6 +98,7 @@ COMMENT
         }
         $this->schemaBuilder->options->enableXNullable = true;
         $this->schemaBuilder->options->ignoreNullable = true;
+        $this->schemaBuilder->options->requireXGenerate = $settings->requireXGenerate;
     }
 
     public function setConfig(Config $config)

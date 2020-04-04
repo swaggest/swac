@@ -15,12 +15,12 @@ type Product struct {
 	DisplayName          string                 `json:"display_name,omitempty"` // Display name of product.
 	Capacity             string                 `json:"capacity,omitempty"`     // Capacity of product. For example, 4 people.
 	Image                string                 `json:"image,omitempty"`        // Image URL representing the product.
-	AdditionalProperties map[string]interface{} `json:"-"`                      // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`                      // All unmatched properties.
 }
 
 type marshalProduct Product
 
-var ignoreKeysProduct = []string{
+var knownKeysProduct = []string{
 	"product_id",
 	"description",
 	"display_name",
@@ -29,30 +29,30 @@ var ignoreKeysProduct = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Product) UnmarshalJSON(data []byte) error {
+func (p *Product) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalProduct(*i)
+	mp := marshalProduct(*p)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mp)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysProduct {
-		delete(m, key)
+	for _, key := range knownKeysProduct {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if mp.AdditionalProperties == nil {
+			mp.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -62,63 +62,64 @@ func (i *Product) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mp.AdditionalProperties[key] = val
 	}
 
-	*i = Product(ii)
+	*p = Product(mp)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Product) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalProduct(i))
+func (p Product) MarshalJSON() ([]byte, error) {
+	if len(p.AdditionalProperties) == 0 {
+		return json.Marshal(marshalProduct(p))
 	}
-	return marshalUnion(marshalProduct(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalProduct(p), p.AdditionalProperties)
 }
 
 // Error structure is generated from "#/definitions/Error".
 type Error struct {
-	Code                 int64                  `json:"code,omitempty"`
+	Code                 int64                  `json:"code,omitempty"`    // Format: int32.
 	Message              string                 `json:"message,omitempty"`
 	Fields               string                 `json:"fields,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties.
 }
 
 type marshalError Error
 
-var ignoreKeysError = []string{
+var knownKeysError = []string{
 	"code",
 	"message",
 	"fields",
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Error) UnmarshalJSON(data []byte) error {
+func (e *Error) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalError(*i)
+	me := marshalError(*e)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &me)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysError {
-		delete(m, key)
+	for _, key := range knownKeysError {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if me.AdditionalProperties == nil {
+			me.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -128,37 +129,38 @@ func (i *Error) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		me.AdditionalProperties[key] = val
 	}
 
-	*i = Error(ii)
+	*e = Error(me)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Error) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalError(i))
+func (e Error) MarshalJSON() ([]byte, error) {
+	if len(e.AdditionalProperties) == 0 {
+		return json.Marshal(marshalError(e))
 	}
-	return marshalUnion(marshalError(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalError(e), e.AdditionalProperties)
 }
 
 // PriceEstimate structure is generated from "#/definitions/PriceEstimate".
 type PriceEstimate struct {
-	ProductID            string                 `json:"product_id,omitempty"`       // Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles
+	ProductID            string                 `json:"product_id,omitempty"`       // Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
 	CurrencyCode         string                 `json:"currency_code,omitempty"`    // [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.
 	DisplayName          string                 `json:"display_name,omitempty"`     // Display name of product.
 	Estimate             string                 `json:"estimate,omitempty"`         // Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or "Metered" for TAXI.
 	LowEstimate          float64                `json:"low_estimate,omitempty"`     // Lower bound of the estimated price.
 	HighEstimate         float64                `json:"high_estimate,omitempty"`    // Upper bound of the estimated price.
 	SurgeMultiplier      float64                `json:"surge_multiplier,omitempty"` // Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.
-	AdditionalProperties map[string]interface{} `json:"-"`                          // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`                          // All unmatched properties.
 }
 
 type marshalPriceEstimate PriceEstimate
 
-var ignoreKeysPriceEstimate = []string{
+var knownKeysPriceEstimate = []string{
 	"product_id",
 	"currency_code",
 	"display_name",
@@ -169,30 +171,30 @@ var ignoreKeysPriceEstimate = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *PriceEstimate) UnmarshalJSON(data []byte) error {
+func (p *PriceEstimate) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalPriceEstimate(*i)
+	mp := marshalPriceEstimate(*p)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mp)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysPriceEstimate {
-		delete(m, key)
+	for _, key := range knownKeysPriceEstimate {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if mp.AdditionalProperties == nil {
+			mp.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -202,35 +204,36 @@ func (i *PriceEstimate) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mp.AdditionalProperties[key] = val
 	}
 
-	*i = PriceEstimate(ii)
+	*p = PriceEstimate(mp)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i PriceEstimate) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalPriceEstimate(i))
+func (p PriceEstimate) MarshalJSON() ([]byte, error) {
+	if len(p.AdditionalProperties) == 0 {
+		return json.Marshal(marshalPriceEstimate(p))
 	}
-	return marshalUnion(marshalPriceEstimate(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalPriceEstimate(p), p.AdditionalProperties)
 }
 
 // Profile structure is generated from "#/definitions/Profile".
 type Profile struct {
 	FirstName            string                 `json:"first_name,omitempty"` // First name of the Uber user.
 	LastName             string                 `json:"last_name,omitempty"`  // Last name of the Uber user.
-	Email                string                 `json:"email,omitempty"`      // Email address of the Uber user
+	Email                string                 `json:"email,omitempty"`      // Email address of the Uber user.
 	Picture              string                 `json:"picture,omitempty"`    // Image URL of the Uber user.
 	PromoCode            string                 `json:"promo_code,omitempty"` // Promo code of the Uber user.
-	AdditionalProperties map[string]interface{} `json:"-"`                    // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`                    // All unmatched properties.
 }
 
 type marshalProfile Profile
 
-var ignoreKeysProfile = []string{
+var knownKeysProfile = []string{
 	"first_name",
 	"last_name",
 	"email",
@@ -239,30 +242,30 @@ var ignoreKeysProfile = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Profile) UnmarshalJSON(data []byte) error {
+func (p *Profile) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalProfile(*i)
+	mp := marshalProfile(*p)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mp)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysProfile {
-		delete(m, key)
+	for _, key := range knownKeysProfile {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if mp.AdditionalProperties == nil {
+			mp.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -272,34 +275,41 @@ func (i *Profile) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mp.AdditionalProperties[key] = val
 	}
 
-	*i = Profile(ii)
+	*p = Profile(mp)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Profile) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalProfile(i))
+func (p Profile) MarshalJSON() ([]byte, error) {
+	if len(p.AdditionalProperties) == 0 {
+		return json.Marshal(marshalProfile(p))
 	}
-	return marshalUnion(marshalProfile(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalProfile(p), p.AdditionalProperties)
 }
 
 // Activities structure is generated from "#/definitions/Activities".
 type Activities struct {
-	Offset               int64                  `json:"offset,omitempty"`  // Position in pagination.
-	Limit                int64                  `json:"limit,omitempty"`   // Number of items to retrieve (100 max).
-	Count                int64                  `json:"count,omitempty"`   // Total number of items available.
+	// Position in pagination.
+	// Format: int32.
+	Offset               int64                  `json:"offset,omitempty"`
+	// Number of items to retrieve (100 max).
+	// Format: int32.
+	Limit                int64                  `json:"limit,omitempty"`
+	// Total number of items available.
+	// Format: int32.
+	Count                int64                  `json:"count,omitempty"`
 	History              []Activity             `json:"history,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties.
 }
 
 type marshalActivities Activities
 
-var ignoreKeysActivities = []string{
+var knownKeysActivities = []string{
 	"offset",
 	"limit",
 	"count",
@@ -307,30 +317,30 @@ var ignoreKeysActivities = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Activities) UnmarshalJSON(data []byte) error {
+func (a *Activities) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalActivities(*i)
+	ma := marshalActivities(*a)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &ma)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysActivities {
-		delete(m, key)
+	for _, key := range knownKeysActivities {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if ma.AdditionalProperties == nil {
+			ma.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -340,59 +350,60 @@ func (i *Activities) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		ma.AdditionalProperties[key] = val
 	}
 
-	*i = Activities(ii)
+	*a = Activities(ma)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Activities) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalActivities(i))
+func (a Activities) MarshalJSON() ([]byte, error) {
+	if len(a.AdditionalProperties) == 0 {
+		return json.Marshal(marshalActivities(a))
 	}
-	return marshalUnion(marshalActivities(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalActivities(a), a.AdditionalProperties)
 }
 
 // Activity structure is generated from "#/definitions/Activity".
 type Activity struct {
-	Uuid                 string                 `json:"uuid,omitempty"` // Unique identifier for the activity
-	AdditionalProperties map[string]interface{} `json:"-"`              // All unmatched properties
+	Uuid                 string                 `json:"uuid,omitempty"` // Unique identifier for the activity.
+	AdditionalProperties map[string]interface{} `json:"-"`              // All unmatched properties.
 }
 
 type marshalActivity Activity
 
-var ignoreKeysActivity = []string{
+var knownKeysActivity = []string{
 	"uuid",
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Activity) UnmarshalJSON(data []byte) error {
+func (a *Activity) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalActivity(*i)
+	ma := marshalActivity(*a)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &ma)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysActivity {
-		delete(m, key)
+	for _, key := range knownKeysActivity {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if ma.AdditionalProperties == nil {
+			ma.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -402,20 +413,21 @@ func (i *Activity) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		ma.AdditionalProperties[key] = val
 	}
 
-	*i = Activity(ii)
+	*a = Activity(ma)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Activity) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalActivity(i))
+func (a Activity) MarshalJSON() ([]byte, error) {
+	if len(a.AdditionalProperties) == 0 {
+		return json.Marshal(marshalActivity(a))
 	}
-	return marshalUnion(marshalActivity(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalActivity(a), a.AdditionalProperties)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {

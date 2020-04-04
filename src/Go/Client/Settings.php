@@ -18,4 +18,7 @@ class Settings
      * @var boolean Add field tags with name and location to request structure properties, e.g. 'ID int `query:"id"`'.
      */
     public $addRequestTags = false;
+
+    /** @var bool */
+    public $requireXGenerate = false;
 }

@@ -12,41 +12,41 @@ import (
 type ComponentsSchemasDataSetList struct {
 	Total                int64                                   `json:"total,omitempty"`
 	Apis                 []ComponentsSchemasDataSetListApisItems `json:"apis,omitempty"`
-	AdditionalProperties map[string]interface{}                  `json:"-"`               // All unmatched properties
+	AdditionalProperties map[string]interface{}                  `json:"-"`               // All unmatched properties.
 }
 
 type marshalComponentsSchemasDataSetList ComponentsSchemasDataSetList
 
-var ignoreKeysComponentsSchemasDataSetList = []string{
+var knownKeysComponentsSchemasDataSetList = []string{
 	"total",
 	"apis",
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *ComponentsSchemasDataSetList) UnmarshalJSON(data []byte) error {
+func (c *ComponentsSchemasDataSetList) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalComponentsSchemasDataSetList(*i)
+	mc := marshalComponentsSchemasDataSetList(*c)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mc)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysComponentsSchemasDataSetList {
-		delete(m, key)
+	for _, key := range knownKeysComponentsSchemasDataSetList {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if mc.AdditionalProperties == nil {
+			mc.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -56,34 +56,39 @@ func (i *ComponentsSchemasDataSetList) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mc.AdditionalProperties[key] = val
 	}
 
-	*i = ComponentsSchemasDataSetList(ii)
+	*c = ComponentsSchemasDataSetList(mc)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i ComponentsSchemasDataSetList) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalComponentsSchemasDataSetList(i))
+func (c ComponentsSchemasDataSetList) MarshalJSON() ([]byte, error) {
+	if len(c.AdditionalProperties) == 0 {
+		return json.Marshal(marshalComponentsSchemasDataSetList(c))
 	}
-	return marshalUnion(marshalComponentsSchemasDataSetList(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalComponentsSchemasDataSetList(c), c.AdditionalProperties)
 }
 
 // ComponentsSchemasDataSetListApisItems structure is generated from "#/components/schemas/dataSetList->apis->items".
 type ComponentsSchemasDataSetListApisItems struct {
-	APIKey               string                 `json:"apiKey,omitempty"`              // To be used as a dataset parameter value
-	APIVersionNumber     string                 `json:"apiVersionNumber,omitempty"`    // To be used as a version parameter value
-	APIURL               string                 `json:"apiUrl,omitempty"`              // The URL describing the dataset's fields
-	APIDocumentationURL  string                 `json:"apiDocumentationUrl,omitempty"` // A URL to the API console for each API
-	AdditionalProperties map[string]interface{} `json:"-"`                             // All unmatched properties
+	APIKey               string                 `json:"apiKey,omitempty"`              // To be used as a dataset parameter value.
+	APIVersionNumber     string                 `json:"apiVersionNumber,omitempty"`    // To be used as a version parameter value.
+	// The URL describing the dataset's fields.
+	// Format: uriref.
+	APIURL               string                 `json:"apiUrl,omitempty"`
+	// A URL to the API console for each API.
+	// Format: uriref.
+	APIDocumentationURL  string                 `json:"apiDocumentationUrl,omitempty"`
+	AdditionalProperties map[string]interface{} `json:"-"`                             // All unmatched properties.
 }
 
 type marshalComponentsSchemasDataSetListApisItems ComponentsSchemasDataSetListApisItems
 
-var ignoreKeysComponentsSchemasDataSetListApisItems = []string{
+var knownKeysComponentsSchemasDataSetListApisItems = []string{
 	"apiKey",
 	"apiVersionNumber",
 	"apiUrl",
@@ -91,30 +96,30 @@ var ignoreKeysComponentsSchemasDataSetListApisItems = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *ComponentsSchemasDataSetListApisItems) UnmarshalJSON(data []byte) error {
+func (c *ComponentsSchemasDataSetListApisItems) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalComponentsSchemasDataSetListApisItems(*i)
+	mc := marshalComponentsSchemasDataSetListApisItems(*c)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mc)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysComponentsSchemasDataSetListApisItems {
-		delete(m, key)
+	for _, key := range knownKeysComponentsSchemasDataSetListApisItems {
+		delete(rawMap, key)
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for key, rawValue := range rawMap {
+		if mc.AdditionalProperties == nil {
+			mc.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -124,20 +129,21 @@ func (i *ComponentsSchemasDataSetListApisItems) UnmarshalJSON(data []byte) error
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mc.AdditionalProperties[key] = val
 	}
 
-	*i = ComponentsSchemasDataSetListApisItems(ii)
+	*c = ComponentsSchemasDataSetListApisItems(mc)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i ComponentsSchemasDataSetListApisItems) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalComponentsSchemasDataSetListApisItems(i))
+func (c ComponentsSchemasDataSetListApisItems) MarshalJSON() ([]byte, error) {
+	if len(c.AdditionalProperties) == 0 {
+		return json.Marshal(marshalComponentsSchemasDataSetListApisItems(c))
 	}
-	return marshalUnion(marshalComponentsSchemasDataSetListApisItems(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalComponentsSchemasDataSetListApisItems(c), c.AdditionalProperties)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {

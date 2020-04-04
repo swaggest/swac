@@ -10,43 +10,53 @@ import (
 
 // NewPet structure is generated from "#/definitions/NewPet".
 type NewPet struct {
-	Name                 string                 `json:"name,omitempty"`
+	Name                 string                 `json:"name"`          // Required.
 	Tag                  string                 `json:"tag,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`              // All unmatched properties
+	AdditionalProperties map[string]interface{} `json:"-"`             // All unmatched properties.
 }
 
 type marshalNewPet NewPet
 
-var ignoreKeysNewPet = []string{
+var knownKeysNewPet = []string{
 	"name",
 	"tag",
 }
 
+var requireKeysNewPet = []string{
+	"name",
+}
+
 // UnmarshalJSON decodes JSON.
-func (i *NewPet) UnmarshalJSON(data []byte) error {
+func (n *NewPet) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalNewPet(*i)
+	mn := marshalNewPet(*n)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mn)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysNewPet {
-		delete(m, key)
+	for _, key := range requireKeysNewPet {
+		if _, found := rawMap[key]; !found {
+			return errors.New("required key missing: " + key)
+		}
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for _, key := range knownKeysNewPet {
+		delete(rawMap, key)
+	}
+
+	for key, rawValue := range rawMap {
+		if mn.AdditionalProperties == nil {
+			mn.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -56,59 +66,72 @@ func (i *NewPet) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mn.AdditionalProperties[key] = val
 	}
 
-	*i = NewPet(ii)
+	*n = NewPet(mn)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i NewPet) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalNewPet(i))
+func (n NewPet) MarshalJSON() ([]byte, error) {
+	if len(n.AdditionalProperties) == 0 {
+		return json.Marshal(marshalNewPet(n))
 	}
-	return marshalUnion(marshalNewPet(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalNewPet(n), n.AdditionalProperties)
 }
 
 // PetAllOf1 structure is generated from "#/definitions/Pet/allOf/1".
 type PetAllOf1 struct {
-	ID                   int64                  `json:"id,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`            // All unmatched properties
+	// Format: int64.
+	// Required.
+	ID                   int64                  `json:"id"`
+	AdditionalProperties map[string]interface{} `json:"-"`  // All unmatched properties.
 }
 
 type marshalPetAllOf1 PetAllOf1
 
-var ignoreKeysPetAllOf1 = []string{
+var knownKeysPetAllOf1 = []string{
+	"id",
+}
+
+var requireKeysPetAllOf1 = []string{
 	"id",
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *PetAllOf1) UnmarshalJSON(data []byte) error {
+func (p *PetAllOf1) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalPetAllOf1(*i)
+	mp := marshalPetAllOf1(*p)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &mp)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysPetAllOf1 {
-		delete(m, key)
+	for _, key := range requireKeysPetAllOf1 {
+		if _, found := rawMap[key]; !found {
+			return errors.New("required key missing: " + key)
+		}
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for _, key := range knownKeysPetAllOf1 {
+		delete(rawMap, key)
+	}
+
+	for key, rawValue := range rawMap {
+		if mp.AdditionalProperties == nil {
+			mp.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -118,20 +141,21 @@ func (i *PetAllOf1) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		mp.AdditionalProperties[key] = val
 	}
 
-	*i = PetAllOf1(ii)
+	*p = PetAllOf1(mp)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i PetAllOf1) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalPetAllOf1(i))
+func (p PetAllOf1) MarshalJSON() ([]byte, error) {
+	if len(p.AdditionalProperties) == 0 {
+		return json.Marshal(marshalPetAllOf1(p))
 	}
-	return marshalUnion(marshalPetAllOf1(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalPetAllOf1(p), p.AdditionalProperties)
 }
 
 // Pet structure is generated from "#/definitions/Pet".
@@ -141,15 +165,15 @@ type Pet struct {
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Pet) UnmarshalJSON(data []byte) error {
+func (p *Pet) UnmarshalJSON(data []byte) error {
 	var err error
 
-	err = json.Unmarshal(data, &i.NewPet)
+	err = json.Unmarshal(data, &p.NewPet)
 	if err != nil {
 		return err
 	}
 
-	err = json.Unmarshal(data, &i.AllOf1)
+	err = json.Unmarshal(data, &p.AllOf1)
 	if err != nil {
 		return err
 	}
@@ -158,49 +182,62 @@ func (i *Pet) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalJSON encodes JSON.
-func (i Pet) MarshalJSON() ([]byte, error) {
-	return marshalUnion(i.NewPet, i.AllOf1)
+func (p Pet) MarshalJSON() ([]byte, error) {
+	return marshalUnion(p.NewPet, p.AllOf1)
 }
 
 // Error structure is generated from "#/definitions/Error".
 type Error struct {
-	Code                 int64                  `json:"code,omitempty"`
-	Message              string                 `json:"message,omitempty"`
-	AdditionalProperties map[string]interface{} `json:"-"`                 // All unmatched properties
+	// Format: int32.
+	// Required.
+	Code                 int64                  `json:"code"`
+	Message              string                 `json:"message"` // Required.
+	AdditionalProperties map[string]interface{} `json:"-"`       // All unmatched properties.
 }
 
 type marshalError Error
 
-var ignoreKeysError = []string{
+var knownKeysError = []string{
+	"code",
+	"message",
+}
+
+var requireKeysError = []string{
 	"code",
 	"message",
 }
 
 // UnmarshalJSON decodes JSON.
-func (i *Error) UnmarshalJSON(data []byte) error {
+func (e *Error) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ii := marshalError(*i)
+	me := marshalError(*e)
 
-	err = json.Unmarshal(data, &ii)
+	err = json.Unmarshal(data, &me)
 	if err != nil {
 		return err
 	}
 
-	var m map[string]json.RawMessage
+	var rawMap map[string]json.RawMessage
 
-	err = json.Unmarshal(data, &m)
+	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
-		m = nil
+		rawMap = nil
 	}
 
-	for _, key := range ignoreKeysError {
-		delete(m, key)
+	for _, key := range requireKeysError {
+		if _, found := rawMap[key]; !found {
+			return errors.New("required key missing: " + key)
+		}
 	}
 
-	for key, rawValue := range m {
-		if ii.AdditionalProperties == nil {
-			ii.AdditionalProperties = make(map[string]interface{}, 1)
+	for _, key := range knownKeysError {
+		delete(rawMap, key)
+	}
+
+	for key, rawValue := range rawMap {
+		if me.AdditionalProperties == nil {
+			me.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -210,20 +247,21 @@ func (i *Error) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		ii.AdditionalProperties[key] = val
+		me.AdditionalProperties[key] = val
 	}
 
-	*i = Error(ii)
+	*e = Error(me)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (i Error) MarshalJSON() ([]byte, error) {
-	if len(i.AdditionalProperties) == 0 {
-		return json.Marshal(marshalError(i))
+func (e Error) MarshalJSON() ([]byte, error) {
+	if len(e.AdditionalProperties) == 0 {
+		return json.Marshal(marshalError(e))
 	}
-	return marshalUnion(marshalError(i), i.AdditionalProperties)
+
+	return marshalUnion(marshalError(e), e.AdditionalProperties)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {
