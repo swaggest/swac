@@ -14,6 +14,9 @@ class GoClient extends Base
     public $pkgName = 'client';
     public $skipDefaultAdditionalProperties = false;
     public $skipDoNotEdit = false;
+    /** @var bool */
+    public $requireXGenerate = false;
+
     /**
      * @var boolean Add field tags with name and location to request structure properties, e.g. 'ID int `query:"id"`'.
      */
@@ -41,6 +44,9 @@ class GoClient extends Base
 
         $options->addRequestTags = Command\Option::create()
             ->setDescription('Add field tags with name and location to request structure properties, e.g. \'ID int `query:"id"`\'');
+
+        $options->requireXGenerate = Command\Option::create()
+            ->setDescription('Generate properties with `x-generate: true` only');
     }
 
     public function performAction()
@@ -48,6 +54,7 @@ class GoClient extends Base
         $settings = new Settings();
         $settings->skipDefaultAdditionalProperties = $this->skipDefaultAdditionalProperties;
         $settings->addRequestTags = $this->addRequestTags;
+        $settings->requireXGenerate = $this->requireXGenerate;
         $client = new Client($settings);
 
         $this->process($client);
