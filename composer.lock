@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "672712a5c7414d216bca16194a00449c",
+    "content-hash": "7ea5e825207144d4b8c53eecadcdf964",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -630,16 +630,16 @@
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.32",
+            "version": "v0.4.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "70cf318726f0104a25b7bdcf4086d37749df624c"
+                "reference": "2531706220f39b615171cbdf6af67f3b5999c863"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/70cf318726f0104a25b7bdcf4086d37749df624c",
-                "reference": "70cf318726f0104a25b7bdcf4086d37749df624c",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/2531706220f39b615171cbdf6af67f3b5999c863",
+                "reference": "2531706220f39b615171cbdf6af67f3b5999c863",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
             "keywords": [
                 "library"
             ],
-            "time": "2020-04-04T22:23:27+00:00"
+            "time": "2020-04-12T20:33:51+00:00"
         },
         {
             "name": "swaggest/json-diff",
@@ -2339,5 +2339,6 @@
     },
     "platform-overrides": {
         "php": "5.6.0"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
