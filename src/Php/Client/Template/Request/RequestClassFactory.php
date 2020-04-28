@@ -30,6 +30,8 @@ class RequestClassFactory
 
         $requestSchema = new Schema();
 
+        $requestMakeHeaders->accept = $handler->accept;
+
         foreach ($handler->responses as $response) {
             if ($response->schema !== null) {
                 $requestMakeHeaders->acceptJson = true;
@@ -58,6 +60,9 @@ class RequestClassFactory
                     $requestMakeBody->formDataParameters[$parameterName] = $parameter;
                 } elseif ($parameter->in === Parameter::BODY) {
                     $requestMakeHeaders->bodyContentType = 'application/json; charset=utf-8';
+                    if (!empty($handler->contentType)) {
+                        $requestMakeHeaders->bodyContentType = $handler->contentType;
+                    }
                     $requestMakeBody->bodyParameters[$parameterName] = $parameter;
                 }
 

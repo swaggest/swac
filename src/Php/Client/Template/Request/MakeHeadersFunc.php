@@ -14,6 +14,9 @@ class MakeHeadersFunc extends PhpFunction
     /** @var string */
     public $bodyContentType = '';
 
+    /** @var string */
+    public $accept;
+
     /** @var bool */
     public $acceptJson = false;
 
@@ -35,8 +38,11 @@ PHP;
         }
 
         if ($this->acceptJson) {
+            if (empty($this->accept)) {
+                $this->accept = 'application/json';
+            }
             $body .= <<<PHP
-\$headers['Accept'] = 'application/json';
+\$headers['Accept'] = '$this->accept';
 
 PHP;
         }
