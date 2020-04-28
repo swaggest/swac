@@ -8,31 +8,31 @@ import (
 	"errors"
 )
 
-// ComponentsSchemasNewPet structure is generated from "#/components/schemas/NewPet".
-type ComponentsSchemasNewPet struct {
+// NewPet structure is generated from "#/components/schemas/NewPet".
+type NewPet struct {
 	Name                 string                 `json:"name"`          // Required.
 	Tag                  string                 `json:"tag,omitempty"`
 	AdditionalProperties map[string]interface{} `json:"-"`             // All unmatched properties.
 }
 
-type marshalComponentsSchemasNewPet ComponentsSchemasNewPet
+type marshalNewPet NewPet
 
-var knownKeysComponentsSchemasNewPet = []string{
+var knownKeysNewPet = []string{
 	"name",
 	"tag",
 }
 
-var requireKeysComponentsSchemasNewPet = []string{
+var requireKeysNewPet = []string{
 	"name",
 }
 
 // UnmarshalJSON decodes JSON.
-func (c *ComponentsSchemasNewPet) UnmarshalJSON(data []byte) error {
+func (n *NewPet) UnmarshalJSON(data []byte) error {
 	var err error
 
-	mc := marshalComponentsSchemasNewPet(*c)
+	mn := marshalNewPet(*n)
 
-	err = json.Unmarshal(data, &mc)
+	err = json.Unmarshal(data, &mn)
 	if err != nil {
 		return err
 	}
@@ -44,19 +44,19 @@ func (c *ComponentsSchemasNewPet) UnmarshalJSON(data []byte) error {
 		rawMap = nil
 	}
 
-	for _, key := range requireKeysComponentsSchemasNewPet {
+	for _, key := range requireKeysNewPet {
 		if _, found := rawMap[key]; !found {
 			return errors.New("required key missing: " + key)
 		}
 	}
 
-	for _, key := range knownKeysComponentsSchemasNewPet {
+	for _, key := range knownKeysNewPet {
 		delete(rawMap, key)
 	}
 
 	for key, rawValue := range rawMap {
-		if mc.AdditionalProperties == nil {
-			mc.AdditionalProperties = make(map[string]interface{}, 1)
+		if mn.AdditionalProperties == nil {
+			mn.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -66,48 +66,48 @@ func (c *ComponentsSchemasNewPet) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		mc.AdditionalProperties[key] = val
+		mn.AdditionalProperties[key] = val
 	}
 
-	*c = ComponentsSchemasNewPet(mc)
+	*n = NewPet(mn)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (c ComponentsSchemasNewPet) MarshalJSON() ([]byte, error) {
-	if len(c.AdditionalProperties) == 0 {
-		return json.Marshal(marshalComponentsSchemasNewPet(c))
+func (n NewPet) MarshalJSON() ([]byte, error) {
+	if len(n.AdditionalProperties) == 0 {
+		return json.Marshal(marshalNewPet(n))
 	}
 
-	return marshalUnion(marshalComponentsSchemasNewPet(c), c.AdditionalProperties)
+	return marshalUnion(marshalNewPet(n), n.AdditionalProperties)
 }
 
-// ComponentsSchemasPetAllOf1 structure is generated from "#/components/schemas/Pet/allOf/1".
-type ComponentsSchemasPetAllOf1 struct {
+// PetAllOf1 structure is generated from "#/components/schemas/Pet/allOf/1".
+type PetAllOf1 struct {
 	// Format: int64.
 	// Required.
 	ID                   int64                  `json:"id"`
 	AdditionalProperties map[string]interface{} `json:"-"`  // All unmatched properties.
 }
 
-type marshalComponentsSchemasPetAllOf1 ComponentsSchemasPetAllOf1
+type marshalPetAllOf1 PetAllOf1
 
-var knownKeysComponentsSchemasPetAllOf1 = []string{
+var knownKeysPetAllOf1 = []string{
 	"id",
 }
 
-var requireKeysComponentsSchemasPetAllOf1 = []string{
+var requireKeysPetAllOf1 = []string{
 	"id",
 }
 
 // UnmarshalJSON decodes JSON.
-func (c *ComponentsSchemasPetAllOf1) UnmarshalJSON(data []byte) error {
+func (p *PetAllOf1) UnmarshalJSON(data []byte) error {
 	var err error
 
-	mc := marshalComponentsSchemasPetAllOf1(*c)
+	mp := marshalPetAllOf1(*p)
 
-	err = json.Unmarshal(data, &mc)
+	err = json.Unmarshal(data, &mp)
 	if err != nil {
 		return err
 	}
@@ -119,19 +119,19 @@ func (c *ComponentsSchemasPetAllOf1) UnmarshalJSON(data []byte) error {
 		rawMap = nil
 	}
 
-	for _, key := range requireKeysComponentsSchemasPetAllOf1 {
+	for _, key := range requireKeysPetAllOf1 {
 		if _, found := rawMap[key]; !found {
 			return errors.New("required key missing: " + key)
 		}
 	}
 
-	for _, key := range knownKeysComponentsSchemasPetAllOf1 {
+	for _, key := range knownKeysPetAllOf1 {
 		delete(rawMap, key)
 	}
 
 	for key, rawValue := range rawMap {
-		if mc.AdditionalProperties == nil {
-			mc.AdditionalProperties = make(map[string]interface{}, 1)
+		if mp.AdditionalProperties == nil {
+			mp.AdditionalProperties = make(map[string]interface{}, 1)
 		}
 
 		var val interface{}
@@ -141,39 +141,39 @@ func (c *ComponentsSchemasPetAllOf1) UnmarshalJSON(data []byte) error {
 			return err
 		}
 
-		mc.AdditionalProperties[key] = val
+		mp.AdditionalProperties[key] = val
 	}
 
-	*c = ComponentsSchemasPetAllOf1(mc)
+	*p = PetAllOf1(mp)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (c ComponentsSchemasPetAllOf1) MarshalJSON() ([]byte, error) {
-	if len(c.AdditionalProperties) == 0 {
-		return json.Marshal(marshalComponentsSchemasPetAllOf1(c))
+func (p PetAllOf1) MarshalJSON() ([]byte, error) {
+	if len(p.AdditionalProperties) == 0 {
+		return json.Marshal(marshalPetAllOf1(p))
 	}
 
-	return marshalUnion(marshalComponentsSchemasPetAllOf1(c), c.AdditionalProperties)
+	return marshalUnion(marshalPetAllOf1(p), p.AdditionalProperties)
 }
 
-// ComponentsSchemasPet structure is generated from "#/components/schemas/Pet".
-type ComponentsSchemasPet struct {
-	ComponentsSchemasNewPet *ComponentsSchemasNewPet    `json:"-"`
-	AllOf1                  *ComponentsSchemasPetAllOf1 `json:"-"`
+// Pet structure is generated from "#/components/schemas/Pet".
+type Pet struct {
+	NewPet *NewPet    `json:"-"`
+	AllOf1 *PetAllOf1 `json:"-"`
 }
 
 // UnmarshalJSON decodes JSON.
-func (c *ComponentsSchemasPet) UnmarshalJSON(data []byte) error {
+func (p *Pet) UnmarshalJSON(data []byte) error {
 	var err error
 
-	err = json.Unmarshal(data, &c.ComponentsSchemasNewPet)
+	err = json.Unmarshal(data, &p.NewPet)
 	if err != nil {
 		return err
 	}
 
-	err = json.Unmarshal(data, &c.AllOf1)
+	err = json.Unmarshal(data, &p.AllOf1)
 	if err != nil {
 		return err
 	}
@@ -182,8 +182,8 @@ func (c *ComponentsSchemasPet) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalJSON encodes JSON.
-func (c ComponentsSchemasPet) MarshalJSON() ([]byte, error) {
-	return marshalUnion(c.ComponentsSchemasNewPet, c.AllOf1)
+func (p Pet) MarshalJSON() ([]byte, error) {
+	return marshalUnion(p.NewPet, p.AllOf1)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {

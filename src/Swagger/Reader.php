@@ -189,9 +189,6 @@ class Reader
                                 }
                                 $response->schema = $swaggerResponse->schema->exportSchema();
                             }
-                            if ($swaggerResponse->examples) {
-
-                            }
                             if ($swaggerResponse->headers !== null) {
                                 foreach ($swaggerResponse->headers as $headerName => $swaggerHeader) {
                                     $headerSchema = $swaggerHeader->exportSchema();
@@ -205,6 +202,36 @@ class Reader
                             $responses[] = $response;
                         }
                         $handler->responses = $responses;
+
+                        $produces = $op->produces;
+                        if (empty($produces)) {
+                            $produces = $this->schema->produces;
+                        }
+
+                        $consumes = $op->consumes;
+                        if (empty($consumes)) {
+                            $consumes = $this->schema->consumes;
+                        }
+
+                        if (!empty($produces)) {
+                            foreach ($produces as $produce) {
+                                if (strpos($produce, 'json') !== false) {
+                                    $handler->accept = $produce;
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!empty($consumes)) {
+                            foreach ($consumes as $consume) {
+                                if (strpos($consume, 'json') !== false) {
+                                    $handler->contentType = $consume;
+
+                                    break;
+                                }
+                            }
+                        }
 
                         $this->rest->addOperation($handler);
                     } catch (Skip $skip) {

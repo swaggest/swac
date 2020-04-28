@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Some Service",
+    "version": "v1"
+  },
+  "x-basePath": "some-service.{environment}.acme.io",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/vnd.acme.v1+json"
+  ],
+  "definitions": {
+    "Foo": {
+      "title": "Foo",
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Foo Code",
+          "pattern": "^[A-Z0-9]{2,3}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    }
+  },
+  "paths": {
+    "/Foos": {
+      "get": {
+        "description": "Get Foo for specified filters. Either activity_day or activity_option has to be provided.",
+        "operationId": "GET_Foos",
+        "responses": {
+          "200": {
+            "description": "",
+            "examples": {
+              "application/json": {
+                "code": "TX"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Foo"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "description": "Filter Foos by postcode",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "name": "postcode"
+          },
+          {
+            "description": "Filter Foos by activity option",
+            "in": "query",
+            "type": "string",
+            "name": "activity_option"
+          },
+          {
+            "description": "Filter Foos by activity day (priority over activity_option)",
+            "in": "query",
+            "type": "integer",
+            "name": "activity_day"
+          },
+          {
+            "description": "Which project is the request coming from",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "name": "project"
+          },
+          {
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "name": "country"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -40,7 +40,7 @@ func (request *GetPetsIDRequest) encode(ctx context.Context, baseURL string) (*h
 // GetPetsIDResponse is operation response value.
 type GetPetsIDResponse struct {
 	StatusCode int
-	ValueOK    *ComponentsSchemasPet  // ValueOK is a value of 200 OK response.
+	ValueOK    *Pet  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

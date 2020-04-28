@@ -36,7 +36,7 @@ func (request *GetRequest) encode(ctx context.Context, baseURL string) (*http.Re
 // GetResponse is operation response value.
 type GetResponse struct {
 	StatusCode int
-	ValueOK    *ComponentsSchemasDataSetList  // ValueOK is a value of 200 OK response.
+	ValueOK    *DataSetList  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

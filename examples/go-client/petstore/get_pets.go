@@ -28,7 +28,10 @@ func (request *GetPetsRequest) encode(ctx context.Context, baseURL string) (*htt
 	requestURI := baseURL + "/pets"
 
 	query := make(url.Values, 2)
-	query.Set("tags", strings.Join(request.Tags, ","))
+
+	if request.Tags != nil {
+		query.Set("tags", strings.Join(request.Tags, ","))
+	}
 
 	if request.Limit != nil {
 		query.Set("limit", strconv.FormatInt(*request.Limit, 10))

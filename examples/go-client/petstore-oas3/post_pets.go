@@ -14,7 +14,7 @@ import (
 
 // PostPetsRequest is operation request value.
 type PostPetsRequest struct {
-	Body *ComponentsSchemasNewPet  // Body is a JSON request body.
+	Body *NewPet  // Body is a JSON request body.
 }
 
 // encode creates *http.Request for request data.
@@ -42,7 +42,7 @@ func (request *PostPetsRequest) encode(ctx context.Context, baseURL string) (*ht
 // PostPetsResponse is operation response value.
 type PostPetsResponse struct {
 	StatusCode int
-	ValueOK    *ComponentsSchemasPet  // ValueOK is a value of 200 OK response.
+	ValueOK    *Pet  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

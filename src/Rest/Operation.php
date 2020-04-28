@@ -39,4 +39,10 @@ class Operation
 
     /** @var Response[] */
     public $responses;
+
+    /** @var string request content type add to Content-Type header */
+    public $contentType;
+
+    /** @var string response type to add to Accept header */
+    public $accept;
 }
