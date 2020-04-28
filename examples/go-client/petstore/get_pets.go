@@ -46,6 +46,7 @@ func (request *GetPetsRequest) encode(ctx context.Context, baseURL string) (*htt
 		return nil, err
 	}
 
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)

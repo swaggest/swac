@@ -28,6 +28,7 @@ func (request *GetPetsIDRequest) encode(ctx context.Context, baseURL string) (*h
 		return nil, err
 	}
 
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
