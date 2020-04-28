@@ -173,7 +173,8 @@ class Reader
 
                         if ($openApiResponse->content) {
                             foreach ($openApiResponse->content as $contentType => $media) {
-                                if ($contentType === self::APPLICATION_JSON) {
+                                if ($contentType === self::APPLICATION_JSON || (false !== strpos($contentType, '+json'))) {
+                                    $handler->accept = $contentType;
                                     $response->schema = $media->schema->exportSchema();
                                 } else {
                                     Log::getInstance()->addWarning(

@@ -14,6 +14,7 @@ use Swac\Skip;
 use Swaggest\CodeBuilder\PlaceholderString;
 use Swaggest\GoCodeBuilder\GoCodeBuilder;
 use Swaggest\GoCodeBuilder\JsonSchema\GoBuilder;
+use Swaggest\GoCodeBuilder\JsonSchema\StripPrefixPathToNameHook;
 use Swaggest\GoCodeBuilder\JsonSchema\TypeBuilder;
 use Swaggest\GoCodeBuilder\Templates\Code;
 use Swaggest\GoCodeBuilder\Templates\Func\Argument;
@@ -28,7 +29,9 @@ use Swaggest\GoCodeBuilder\Templates\Struct\StructType;
 use Swaggest\GoCodeBuilder\Templates\Struct\Tags;
 use Swaggest\GoCodeBuilder\Templates\Type\AnyType;
 use Swaggest\GoCodeBuilder\Templates\Type\FuncType;
+use Swaggest\GoCodeBuilder\Templates\Type\Map;
 use Swaggest\GoCodeBuilder\Templates\Type\Pointer;
+use Swaggest\GoCodeBuilder\Templates\Type\Slice;
 use Swaggest\GoCodeBuilder\Templates\Type\TypeUtil;
 use Swaggest\PhpCodeBuilder\PhpCode;
 use Swaggest\SwaggerHttp\StatusCode;
@@ -95,6 +98,9 @@ COMMENT
         $this->schemaBuilder = new GoBuilder();
         if ($this->settings->skipDefaultAdditionalProperties) {
             $this->schemaBuilder->options->defaultAdditionalProperties = false;
+        }
+        if ($this->schemaBuilder->pathToNameHook instanceof StripPrefixPathToNameHook) {
+            $this->schemaBuilder->pathToNameHook->prefixes [] = '#/components/schemas';
         }
         $this->schemaBuilder->options->enableXNullable = true;
         $this->schemaBuilder->options->ignoreNullable = true;
@@ -276,7 +282,8 @@ GO
             ->add(null, TypeUtil::fromString('error'))
         );
 
-        $requestEncode->setBody($this->makeReq($operation->method, $operation->path, $operation->parameters, $acceptJson));
+        $requestEncode->setBody($this->makeReq($operation->method, $operation->path, $operation->parameters, $acceptJson,
+            $operation->accept, $operation->contentType));
         $requestStruct->addFunc($requestEncode);
 
         $operationCode->addSnippet($requestStruct);
@@ -613,6 +620,10 @@ GO;
                     $type = $type->getType();
                 }
 
+                if ($type instanceof Slice || $type instanceof Map) {
+                    $isPointer = true;
+                }
+
                 $toString = $this->toStringExpression($parameter, $type, $var, $imports);
                 $assign = false;
                 if ($toString !== false) {
@@ -685,6 +696,10 @@ GO;
                     $type = $type->getType();
                 }
 
+                if ($type instanceof Slice || $type instanceof Map) {
+                    $isPointer = true;
+                }
+
                 $toString = $this->toStringExpression($parameter, $type, $var, $imports);
                 $assign = false;
                 if ($toString !== false) {
@@ -733,14 +748,16 @@ GO;
      * @param string $path
      * @param Parameter[] $parameters
      * @param boolean $acceptJson
+     * @param string $accept
+     * @param string $contentType
      * @return string
+     * @throws Exception
+     * @throws Skip
      * @throws \Swaggest\GoCodeBuilder\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\InvalidValue
-     * @throws Exception
-     * @throws Skip
      */
-    protected function makeReq($method, $path, $parameters, $acceptJson)
+    protected function makeReq($method, $path, $parameters, $acceptJson, $accept, $contentType)
     {
         $result = new Code();
 
@@ -803,8 +820,6 @@ if len(query) > 0 {
 GO;
         }
 
-        $contentType = '';
-
         $reqBody = 'nil';
         foreach ($bodyParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
@@ -812,7 +827,9 @@ GO;
             $result->imports()->addByName('encoding/json');
 
             $reqBody = 'bytes.NewBuffer(body)';
-            $contentType = 'application/json; charset=utf-8';
+            if (empty($contentType)) {
+                $contentType = 'application/json; charset=utf-8';
+            }
             $body .= <<<GO
 body, err := json.Marshal(request.$fieldName)
 if err != nil {
@@ -843,7 +860,7 @@ GO;
 
         $method = ucfirst($method);
 
-        if ($contentType !== '') {
+        if (!empty($contentType)) {
             $contentType = <<<GO
 req.Header.Set("Content-Type", "$contentType")
 
@@ -851,8 +868,12 @@ GO;
         }
         $reqAccept = '';
         if ($acceptJson) {
+            if (empty($accept)) {
+                $accept = 'application/json';
+            }
+
             $reqAccept = <<<GO
-req.Header.Set("Accept", "application/json")
+req.Header.Set("Accept", "$accept")
 
 GO;
 

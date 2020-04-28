@@ -40,5 +40,20 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+    public function testAcme()
+    {
+        App::$ver = '<version>';
+
+        $cmd = new GoClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/acme.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/acme/';
+        $cmd->pkgName = 'acme';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
 
 }

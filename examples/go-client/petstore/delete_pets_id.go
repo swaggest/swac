@@ -28,6 +28,7 @@ func (request *DeletePetsIDRequest) encode(ctx context.Context, baseURL string) 
 		return nil, err
 	}
 
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)

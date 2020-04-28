@@ -30,7 +30,10 @@ func (request *GetPetsRequest) encode(ctx context.Context, baseURL string) (*htt
 	requestURI := baseURL + "/pets"
 
 	query := make(url.Values, 2)
-	query.Set("tags", strings.Join(request.Tags, ","))
+
+	if request.Tags != nil {
+		query.Set("tags", strings.Join(request.Tags, ","))
+	}
 
 	if request.Limit != nil {
 		query.Set("limit", strconv.FormatInt(*request.Limit, 10))
@@ -55,7 +58,7 @@ func (request *GetPetsRequest) encode(ctx context.Context, baseURL string) (*htt
 // GetPetsResponse is operation response value.
 type GetPetsResponse struct {
 	StatusCode int
-	ValueOK    []ComponentsSchemasPet  // ValueOK is a value of 200 OK response.
+	ValueOK    []Pet  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

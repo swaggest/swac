@@ -31,7 +31,7 @@ func (request *PostPetsRequest) encode(ctx context.Context, baseURL string) (*ht
 		return nil, err
 	}
 
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
