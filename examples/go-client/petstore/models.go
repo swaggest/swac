@@ -22,10 +22,6 @@ var knownKeysNewPet = []string{
 	"tag",
 }
 
-var requireKeysNewPet = []string{
-	"name",
-}
-
 // UnmarshalJSON decodes JSON.
 func (n *NewPet) UnmarshalJSON(data []byte) error {
 	var err error
@@ -42,12 +38,6 @@ func (n *NewPet) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
 		rawMap = nil
-	}
-
-	for _, key := range requireKeysNewPet {
-		if _, found := rawMap[key]; !found {
-			return errors.New("required key missing: " + key)
-		}
 	}
 
 	for _, key := range knownKeysNewPet {
@@ -97,10 +87,6 @@ var knownKeysPetAllOf1 = []string{
 	"id",
 }
 
-var requireKeysPetAllOf1 = []string{
-	"id",
-}
-
 // UnmarshalJSON decodes JSON.
 func (p *PetAllOf1) UnmarshalJSON(data []byte) error {
 	var err error
@@ -117,12 +103,6 @@ func (p *PetAllOf1) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
 		rawMap = nil
-	}
-
-	for _, key := range requireKeysPetAllOf1 {
-		if _, found := rawMap[key]; !found {
-			return errors.New("required key missing: " + key)
-		}
 	}
 
 	for _, key := range knownKeysPetAllOf1 {
@@ -202,11 +182,6 @@ var knownKeysError = []string{
 	"message",
 }
 
-var requireKeysError = []string{
-	"code",
-	"message",
-}
-
 // UnmarshalJSON decodes JSON.
 func (e *Error) UnmarshalJSON(data []byte) error {
 	var err error
@@ -223,12 +198,6 @@ func (e *Error) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
 		rawMap = nil
-	}
-
-	for _, key := range requireKeysError {
-		if _, found := rawMap[key]; !found {
-			return errors.New("required key missing: " + key)
-		}
 	}
 
 	for _, key := range knownKeysError {

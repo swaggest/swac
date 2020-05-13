@@ -25,10 +25,6 @@ var knownKeysFoo = []string{
 	"code",
 }
 
-var requireKeysFoo = []string{
-	"code",
-}
-
 // UnmarshalJSON decodes JSON.
 func (f *Foo) UnmarshalJSON(data []byte) error {
 	var err error
@@ -45,12 +41,6 @@ func (f *Foo) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &rawMap)
 	if err != nil {
 		rawMap = nil
-	}
-
-	for _, key := range requireKeysFoo {
-		if _, found := rawMap[key]; !found {
-			return errors.New("required key missing: " + key)
-		}
 	}
 
 	for _, key := range knownKeysFoo {

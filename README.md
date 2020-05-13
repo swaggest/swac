@@ -74,16 +74,30 @@ and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 swac go-client --help 
 ```
 ```
-v0.1.0 swac go-client
+v0.1.14 swac go-client
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac go-client <schemaPath>
    schemaPath   Path/URL to OpenAPI/Swagger schema
    
 Options: 
-   --operations <operations>   Operations filter in form of comma-separated list of method/path, default empty
-   --out <out>                 Path to output package, default ./client                                       
-   --pkg-name <pkgName>        Output package name, default "client"                                          
+   --operations <operations>               Operations filter in form of comma-separated list of method/path, default empty                  
+   --out <out>                             Path to output package, default ./client                                                         
+   --pkg-name <pkgName>                    Output package name, default "client"                                                            
+   --skip-default-additional-properties    Do not add field property for undefined `additionalProperties`                                   
+   --skip-do-not-edit                      Skip adding "DO NOT EDIT" comments                                                               
+   --add-request-tags                      Add field tags with name and location to request structure properties, e.g. 'ID int `query:"id"`'
+   --show-const-properties                 Show properties with constant values, hidden by default                                          
+   --keep-parent-in-property-names         Keep parent prefix in property name, removed by default                                          
+   --ignore-nullable                       Add `omitempty` to nullable properties, removed by default                                       
+   --ignore-xgo-type                       Ignore `x-go-type` in schema to skip generation                                                  
+   --with-zero-values                      Use pointer types to avoid zero value ambiguity                                                  
+   --fluent-setters                        Add fluent setters to struct fields                                                              
+   --ignore-required                       Ignore if property is required when deciding on pointer type or omitempty                        
+   --renames <renames...>                  Map of exported symbol renames, example From:To                                                  
+   --with-tests                            Generate (un)marshaling tests for entities (experimental feature)                                
+   --require-xgenerate                     Generate properties with `x-generate: true` only                                                 
+   --validate-required                     Generate validation code to check required properties during unmarshal                           
 ```
 
 [Examples](/examples/go-client).
