@@ -96,15 +96,11 @@ COMMENT
         $this->codeBuilder = new GoCodeBuilder();
 
         $this->schemaBuilder = new GoBuilder();
-        if ($this->settings->skipDefaultAdditionalProperties) {
-            $this->schemaBuilder->options->defaultAdditionalProperties = false;
-        }
+        $this->schemaBuilder->options = $this->settings->builderOptions;
         if ($this->schemaBuilder->pathToNameHook instanceof StripPrefixPathToNameHook) {
             $this->schemaBuilder->pathToNameHook->prefixes [] = '#/components/schemas';
         }
         $this->schemaBuilder->options->enableXNullable = true;
-        $this->schemaBuilder->options->ignoreNullable = true;
-        $this->schemaBuilder->options->requireXGenerate = $settings->requireXGenerate;
     }
 
     public function setConfig(Config $config)
@@ -439,7 +435,7 @@ GO
                 if ($parameter->in === Parameter::BODY) {
                     $paramPath = Parameter::BODY;
                 }
-                $type = $this->schemaBuilder->getType($parameter->schema, "$funcName/request/$paramPath");
+                $type = $this->getParamType($parameter->schema, "$funcName/request/$paramPath");
                 if ($type instanceof StructType) {
                     $type = new Pointer($type);
                 }
@@ -611,7 +607,7 @@ GO;
 
             foreach ($parameters as $name => $parameter) {
                 $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                $type = $this->schemaBuilder->getType($parameter->schema);
+                $type = $this->getParamType($parameter->schema);
                 $isPointer = false;
                 $var = "request.$fieldName";
                 if ($type instanceof Pointer) {
@@ -687,7 +683,8 @@ GO;
 
             foreach ($parameters as $name => $parameter) {
                 $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                $type = $this->schemaBuilder->getType($parameter->schema);
+                $type = $this->getParamType($parameter->schema);
+
                 $isPointer = false;
                 $var = "request.$fieldName";
                 if ($type instanceof Pointer) {
@@ -793,7 +790,7 @@ GO;
         foreach ($pathParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
             $var = "request.$fieldName";
-            $type = $this->schemaBuilder->getType($parameter->schema);
+            $type = $this->getParamType($parameter->schema);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
             if ($value === false) {
                 throw new Exception('Could not stringify path parameter with type: ' . $type->getTypeString());
@@ -1075,5 +1072,18 @@ GO
         Parameter::SSV => '" "',
         Parameter::PIPES => '"|"',
     );
+
+    /**
+     * @param $schema
+     */
+    private function getParamType($schema, $path = '#') {
+        $type = $this->schemaBuilder->getType($schema);
+        if ($type instanceof Pointer) {
+            if ($type->getType() instanceof Slice || $type->getType() instanceof Map) {
+                $type = $type->getType();
+            }
+        }
+        return $type;
+    }
 
 }
