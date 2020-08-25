@@ -20,7 +20,7 @@ class ReadmeMd extends AbstractTemplate
     /** @var OperationClass[] */
     private $operationClasses = [];
 
-    private $classes;
+    private $classes = [];
 
     public function addHandler(OperationClass $handlerClass)
     {
@@ -82,7 +82,15 @@ class ReadmeMd extends AbstractTemplate
 
     private function addRenderClass(PhpClass $class)
     {
-        $this->classes[$class->getFullyQualifiedName()] = $this->renderClass($class);
+        $fqn = $class->getFullyQualifiedName();
+
+        if (array_key_exists($fqn, $this->classes)) {
+            return;
+        }
+
+        $this->classes[$fqn] = null;
+
+        $this->classes[$fqn] = $this->renderClass($class);
     }
 
     private function renderRequest(PhpAnyType $request)

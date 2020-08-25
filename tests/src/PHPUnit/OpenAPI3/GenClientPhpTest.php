@@ -36,4 +36,18 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+    public function testFooBar()
+    {
+        $cmd = new PhpGuzzleClient();
+        $cmd->schemaPath = __DIR__ . '/../../../resources/foobar.json';
+        $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/FooBarOAS3/';
+        $cmd->namespace = 'Swac\Example\FooBarOAS3';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->projectPath, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
 }

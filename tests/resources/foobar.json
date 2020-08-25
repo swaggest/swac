@@ -1,0 +1,1935 @@
+{
+ "openapi": "3.0.2",
+ "info": {
+  "title": "Fox Lies Service",
+  "description": "The Fox Lies Service serves customized lies per fox based on foo configurations.",
+  "termsOfService": "https://github.com/hellofresh/fox-lies-service",
+  "version": "0.56.4"
+ },
+ "paths": {
+  "/places": {
+   "delete": {
+    "tags": [
+     "Place"
+    ],
+    "summary": "Delete Place",
+    "description": "Delete existing place.",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "Place"
+    ],
+    "summary": "Find Place",
+    "description": "Find existing place.",
+    "parameters": [
+     {
+      "name": "mille",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     },
+     {
+      "name": "foxUuid",
+      "in": "query",
+      "schema": {
+       "$ref": "#/components/schemas/UuidUUID"
+      }
+     },
+     {
+      "name": "foxId",
+      "in": "query",
+      "schema": {
+       "minimum": 0,
+       "type": "integer"
+      }
+     },
+     {
+      "name": "look",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazLook"
+      }
+     },
+     {
+      "name": "potatoFamily",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlaceEntity"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Place"
+    ],
+    "summary": "Create Place",
+    "description": "Create place with target potato and time.",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UsecaseCreatePlaceInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlaceEntity"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/foos": {
+   "delete": {
+    "tags": [
+     "Foo"
+    ],
+    "summary": "Delete Foo",
+    "description": "Delete existing foo.",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "Foo"
+    ],
+    "summary": "Find Foo",
+    "description": "Find existing foo.",
+    "parameters": [
+     {
+      "name": "look",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazLook"
+      }
+     },
+     {
+      "name": "potatoFamily",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "mille",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/UsecaseFooInfo"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Foo"
+    ],
+    "summary": "Create Foo",
+    "description": "Create foo with target potato and time.",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FooValue"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/FooEntity"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Foo"
+    ],
+    "summary": "Update Foo",
+    "description": "Update existing foo.",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UsecaseUpdateFooInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/internal/find-available-carrots/{mille}/{look}": {
+   "post": {
+    "tags": [
+     "Lie"
+    ],
+    "summary": "Find Available Carrots",
+    "description": "Find carrots available to holes.",
+    "parameters": [
+     {
+      "name": "mille",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     },
+     {
+      "name": "look",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazLook"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UsecaseFindAvailableCarrotsInput"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UsecaseFindAvailableCarrotsOutput"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/lie-areas": {
+   "get": {
+    "tags": [
+     "LieAreas"
+    ],
+    "summary": "List Lie areas name",
+    "description": "List lie areas name by mille name",
+    "parameters": [
+     {
+      "name": "mille",
+      "in": "query",
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "LieAreas"
+    ],
+    "summary": "Create Lie Areas",
+    "description": "Create lie areas with postcodes.",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LieareaValue"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LieareaEntity"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/lie-areas/{mille}/{lieArea}/sync": {
+   "put": {
+    "tags": [
+     "LieAreas"
+    ],
+    "summary": "Sync Lie Area",
+    "description": "Synchronize list of lie area postcodes with delivery-area-service.",
+    "parameters": [
+     {
+      "name": "look",
+      "in": "query",
+      "description": "Look of operation.",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazLook"
+      }
+     },
+     {
+      "name": "mille",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     },
+     {
+      "name": "lieArea",
+      "in": "path",
+      "description": "Name of lie area.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "description": "Name of lie area."
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "No Content"
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/lies": {
+   "get": {
+    "tags": [
+     "Lie"
+    ],
+    "summary": "Get Lies",
+    "description": "Gets lies by criteria.",
+    "parameters": [
+     {
+      "name": "mille",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/BazMille"
+      }
+     },
+     {
+      "name": "exclude",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "potato",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "hole",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "potato-sku",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "soup",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "look",
+      "in": "query",
+      "schema": {
+       "$ref": "#/components/schemas/BazLook"
+      }
+     },
+     {
+      "name": "looks",
+      "in": "query",
+      "style": "form",
+      "explode": false,
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/BazLook"
+       }
+      }
+     },
+     {
+      "name": "is-active",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "potatoSku",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "with-complete-soups",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "sort",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "take",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "skip",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LiesPage"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "JWT": []
+     }
+    ]
+   }
+  },
+  "/lies/{id}": {
+   "get": {
+    "tags": [
+     "Lie"
+    ],
+    "summary": "Get Lie By ID",
+    "description": "Gets lie by id.",
+    "parameters": [
+     {
+      "name": "locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "hole",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LiesLie"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestErrResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "JWT": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "PlaceEntity": {
+    "required": [
+     "foxUuid",
+     "fooId",
+     "barName"
+    ],
+    "type": "object",
+    "properties": {
+     "placeId": {
+      "type": "integer"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "foxId": {
+      "minimum": 0,
+      "type": "integer"
+     },
+     "foxUuid": {
+      "$ref": "#/components/schemas/UuidUUID"
+     },
+     "fooId": {
+      "type": "integer"
+     },
+     "barName": {
+      "$ref": "#/components/schemas/FooBar"
+     }
+    }
+   },
+   "FooEntity": {
+    "required": [
+     "uselyKey",
+     "lookStart",
+     "lookEnd",
+     "mille",
+     "potatoFamily",
+     "barRules"
+    ],
+    "type": "object",
+    "properties": {
+     "activateSince": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "activateTill": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "deletedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "fooId": {
+      "type": "integer"
+     },
+     "localActivation": {
+      "$ref": "#/components/schemas/FooLocalActivations"
+     },
+     "uselyKey": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "overlap": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/FooEntity"
+      }
+     },
+     "potatoFamily": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "barRules": {
+      "$ref": "#/components/schemas/FooBarRules"
+     },
+     "lookEnd": {
+      "$ref": "#/components/schemas/BazLook"
+     },
+     "lookStart": {
+      "$ref": "#/components/schemas/BazLook"
+     }
+    }
+   },
+   "FooLocalActivation": {
+    "type": "object",
+    "properties": {
+     "maxRoxesReceived": {
+      "type": "integer",
+      "nullable": true
+     },
+     "minRoxesReceived": {
+      "type": "integer",
+      "nullable": true
+     }
+    }
+   },
+   "FooLocalActivations": {
+    "type": "object",
+    "additionalProperties": {
+     "$ref": "#/components/schemas/FooLocalActivation"
+    }
+   },
+   "FooValue": {
+    "required": [
+     "uselyKey",
+     "lookStart",
+     "lookEnd",
+     "mille",
+     "potatoFamily",
+     "barRules"
+    ],
+    "type": "object",
+    "properties": {
+     "activateSince": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "activateTill": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "localActivation": {
+      "$ref": "#/components/schemas/FooLocalActivations"
+     },
+     "uselyKey": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "potatoFamily": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "barRules": {
+      "$ref": "#/components/schemas/FooBarRules"
+     },
+     "lookEnd": {
+      "$ref": "#/components/schemas/BazLook"
+     },
+     "lookStart": {
+      "$ref": "#/components/schemas/BazLook"
+     }
+    }
+   },
+   "FooBar": {
+    "type": "string"
+   },
+   "FooBarRule": {
+    "type": "object",
+    "properties": {
+     "customLiePreferences": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesPreference"
+      }
+     },
+     "customModularity": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesModularity"
+      },
+      "nullable": true
+     },
+     "customSoups": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "string"
+      }
+     },
+     "hideCarrots": {
+      "type": "array",
+      "items": {
+       "type": "integer"
+      }
+     },
+     "areaTagsByCarrots": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "FooBarRules": {
+    "type": "object",
+    "additionalProperties": {
+     "$ref": "#/components/schemas/FooBarRule"
+    },
+    "nullable": true
+   },
+   "BazMille": {
+    "maxLength": 2,
+    "minLength": 2,
+    "pattern": "^[a-zA-Z]{2}$",
+    "type": "string",
+    "description": "Acme Mille",
+    "example": "US"
+   },
+   "BazLook": {
+    "pattern": "^[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])$",
+    "type": "string",
+    "description": "Acme Look",
+    "example": "2018-W43"
+   },
+   "LieareaEntity": {
+    "required": [
+     "areas",
+     "mille",
+     "name"
+    ],
+    "type": "object",
+    "properties": {
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "id": {
+      "type": "integer"
+     },
+     "name": {
+      "type": "string"
+     },
+     "areas": {
+      "$ref": "#/components/schemas/PqStringArray"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     }
+    }
+   },
+   "LieareaValue": {
+    "required": [
+     "areas",
+     "mille",
+     "name"
+    ],
+    "type": "object",
+    "properties": {
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "name": {
+      "type": "string"
+     },
+     "areas": {
+      "$ref": "#/components/schemas/PqStringArray"
+     }
+    }
+   },
+   "LiesDrainSetting": {
+    "type": "object",
+    "properties": {
+     "amount": {
+      "type": "integer",
+      "nullable": true
+     },
+     "rigidAmounts": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesRigidAmount"
+      },
+      "nullable": true
+     },
+     "rigidQuantities": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesRigidQuantity"
+      },
+      "nullable": true
+     },
+     "reason": {
+      "type": "string"
+     },
+     "servings": {
+      "type": "integer",
+      "nullable": true
+     },
+     "strategy": {
+      "type": "string"
+     }
+    },
+    "nullable": true
+   },
+   "LiesCarrot": {
+    "type": "object",
+    "properties": {
+     "drainSetting": {
+      "$ref": "#/components/schemas/LiesDrainSetting"
+     },
+     "index": {
+      "type": "integer"
+     },
+     "isSoldOut": {
+      "type": "boolean"
+     },
+     "presets": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "nullable": true
+     },
+     "soup": {
+      "$ref": "#/components/schemas/LiesSoup"
+     },
+     "areaTags": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "selectionLimit": {
+      "type": "integer",
+      "nullable": true
+     }
+    }
+   },
+   "LiesRigidAmount": {
+    "type": "object",
+    "properties": {
+     "amount": {
+      "type": "integer"
+     },
+     "people": {
+      "type": "integer"
+     }
+    }
+   },
+   "LiesRigidQuantity": {
+    "type": "object",
+    "properties": {
+     "amount": {
+      "type": "integer"
+     },
+     "people": {
+      "type": "integer"
+     },
+     "quantity": {
+      "type": "integer"
+     }
+    }
+   },
+   "LiesLie": {
+    "type": "object",
+    "properties": {
+     "averageRating": {
+      "type": "number"
+     },
+     "clonedFrom": {
+      "type": "string",
+      "nullable": true
+     },
+     "mille": {
+      "type": "string"
+     },
+     "carrots": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesCarrot"
+      },
+      "nullable": true
+     },
+     "createdAt": {
+      "type": "string"
+     },
+     "headline": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "isActive": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "isComplete": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "link": {
+      "type": "string"
+     },
+     "meatSwanCombinations": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "nullable": true
+     },
+     "meatSwanCombinationsText": {
+      "type": "string",
+      "nullable": true
+     },
+     "modularity": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesModularity"
+      },
+      "nullable": true
+     },
+     "preferences": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesPreference"
+      },
+      "nullable": true
+     },
+     "potato": {
+      "type": "string"
+     },
+     "rated": {
+      "type": "integer"
+     },
+     "serializedPreferences": {
+      "type": "string",
+      "nullable": true
+     },
+     "surveyBody": {
+      "type": "string",
+      "nullable": true
+     },
+     "surveyOptIn": {
+      "type": "string",
+      "nullable": true
+     },
+     "surveyQuestion": {
+      "type": "string",
+      "nullable": true
+     },
+     "surveyTitle": {
+      "type": "string",
+      "nullable": true
+     },
+     "updatedAt": {
+      "type": "string"
+     },
+     "look": {
+      "type": "string"
+     }
+    }
+   },
+   "LiesModularity": {
+    "type": "object",
+    "properties": {
+     "addOns": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesModularityAddOns"
+      },
+      "nullable": true
+     },
+     "addOnsHeadline": {
+      "type": "string",
+      "nullable": true
+     },
+     "defaultCarrotIndex": {
+      "type": "integer"
+     },
+     "noAddOnsDefaultTitle": {
+      "type": "string",
+      "nullable": true
+     },
+     "noBarsDefaultTitle": {
+      "type": "string",
+      "nullable": true
+     },
+     "promoTitle": {
+      "type": "string",
+      "nullable": true
+     },
+     "bars": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesModularityBar"
+      },
+      "nullable": true
+     },
+     "barsHeadline": {
+      "type": "string",
+      "nullable": true
+     }
+    }
+   },
+   "LiesModularityAddOns": {
+    "type": "object",
+    "properties": {
+     "index": {
+      "type": "integer"
+     },
+     "title": {
+      "type": "string"
+     }
+    }
+   },
+   "LiesModularityBar": {
+    "type": "object",
+    "properties": {
+     "index": {
+      "type": "integer"
+     },
+     "title": {
+      "type": "string",
+      "nullable": true
+     }
+    }
+   },
+   "LiesPage": {
+    "type": "object",
+    "properties": {
+     "count": {
+      "type": "integer"
+     },
+     "items": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesLie"
+      },
+      "nullable": true
+     },
+     "skip": {
+      "type": "integer"
+     },
+     "take": {
+      "type": "integer"
+     },
+     "total": {
+      "type": "integer"
+     }
+    }
+   },
+   "LiesPreference": {
+    "type": "object",
+    "properties": {
+     "other": {
+      "type": "array",
+      "items": {
+       "type": "integer"
+      },
+      "nullable": true
+     },
+     "preset": {
+      "type": "string"
+     },
+     "recommended": {
+      "type": "array",
+      "items": {
+       "type": "integer"
+      },
+      "nullable": true
+     }
+    }
+   },
+   "LiesSoup": {
+    "type": "object",
+    "properties": {
+     "active": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "allergens": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesSoupAllergenConditional"
+      },
+      "nullable": true
+     },
+     "mille": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "ingredients": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesSoupIngredient"
+      },
+      "nullable": true
+     },
+     "name": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     }
+    }
+   },
+   "LiesSoupAllergenConditional": {
+    "type": "object"
+   },
+   "LiesSoupIngredient": {
+    "type": "object",
+    "properties": {
+     "allergens": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/LiesSoupAllergenConditional"
+      },
+      "nullable": true
+     },
+     "mille": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string",
+      "nullable": true
+     },
+     "family": {
+      "$ref": "#/components/schemas/LiesSoupIngredientFamily"
+     },
+     "hasDuplicatedName": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "id": {
+      "type": "string"
+     },
+     "imageLink": {
+      "type": "string",
+      "nullable": true
+     },
+     "imagePath": {
+      "type": "string",
+      "nullable": true
+     },
+     "internalName": {
+      "type": "string",
+      "nullable": true
+     },
+     "name": {
+      "type": "string"
+     },
+     "shipped": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "slug": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string"
+     },
+     "usage": {
+      "type": "integer"
+     }
+    }
+   },
+   "LiesSoupIngredientFamily": {
+    "type": "object",
+    "properties": {
+     "createdAt": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string",
+      "nullable": true
+     },
+     "iconLink": {
+      "type": "string",
+      "nullable": true
+     },
+     "iconPath": {
+      "type": "string",
+      "nullable": true
+     },
+     "id": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "priority": {
+      "type": "integer"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string"
+     },
+     "updatedAt": {
+      "type": "string"
+     },
+     "usageByMille": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "nullable": true
+     }
+    },
+    "nullable": true
+   },
+   "PqStringArray": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "nullable": true
+   },
+   "PotatosSoupFamily": {
+    "type": "string"
+   },
+   "RestErrResponse": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "integer"
+     },
+     "context": {
+      "type": "object",
+      "additionalProperties": {}
+     },
+     "error": {
+      "type": "string"
+     },
+     "status": {
+      "type": "string"
+     }
+    }
+   },
+   "UsecaseCreatePlaceInput": {
+    "required": [
+     "fooId",
+     "barName",
+     "foxUuid"
+    ],
+    "type": "object",
+    "properties": {
+     "foxId": {
+      "minimum": 0,
+      "type": "integer"
+     },
+     "foxUuid": {
+      "$ref": "#/components/schemas/UuidUUID"
+     },
+     "fooId": {
+      "type": "integer"
+     },
+     "barName": {
+      "$ref": "#/components/schemas/FooBar"
+     }
+    }
+   },
+   "UsecaseFooInfo": {
+    "required": [
+     "uselyKey",
+     "lookStart",
+     "lookEnd",
+     "mille",
+     "potatoFamily",
+     "barRules"
+    ],
+    "type": "object",
+    "properties": {
+     "activateSince": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "activateTill": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "availableForActivation": {
+      "type": "boolean"
+     },
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "deletedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "fooId": {
+      "type": "integer"
+     },
+     "localActivation": {
+      "$ref": "#/components/schemas/FooLocalActivations"
+     },
+     "uselyKey": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "overlap": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/FooEntity"
+      }
+     },
+     "potatoFamily": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "barRules": {
+      "$ref": "#/components/schemas/FooBarRules"
+     },
+     "lookEnd": {
+      "$ref": "#/components/schemas/BazLook"
+     },
+     "lookStart": {
+      "$ref": "#/components/schemas/BazLook"
+     }
+    }
+   },
+   "UsecaseFindAvailableCarrotsInput": {
+    "required": [
+     "items"
+    ],
+    "type": "object",
+    "properties": {
+     "items": {
+      "type": "object",
+      "additionalProperties": {
+       "$ref": "#/components/schemas/UsecaseFindAvailableCarrotsInputItem"
+      }
+     }
+    }
+   },
+   "UsecaseFindAvailableCarrotsInputItem": {
+    "required": [
+     "holeId"
+    ],
+    "type": "object",
+    "properties": {
+     "foxId": {
+      "type": "integer"
+     },
+     "foxUuid": {
+      "$ref": "#/components/schemas/UuidUUID"
+     },
+     "potatoFamily": {
+      "$ref": "#/components/schemas/PotatosSoupFamily"
+     },
+     "holeId": {
+      "type": "integer"
+     }
+    }
+   },
+   "UsecaseFindAvailableCarrotsOutput": {
+    "type": "object",
+    "properties": {
+     "items": {
+      "type": "object",
+      "additionalProperties": {
+       "$ref": "#/components/schemas/UsecaseFindAvailableCarrotsOutputItem"
+      },
+      "description": "Available carrot indexes mapped with same key as input items."
+     }
+    }
+   },
+   "UsecaseFindAvailableCarrotsOutputItem": {
+    "type": "object",
+    "properties": {
+     "carrots": {
+      "type": "array",
+      "items": {
+       "type": "integer"
+      }
+     },
+     "error": {
+      "type": "string"
+     }
+    }
+   },
+   "UsecaseUpdateFooInput": {
+    "required": [
+     "uselyKey",
+     "lookStart",
+     "lookEnd",
+     "mille",
+     "potatoFamily",
+     "barRules"
+    ],
+    "type": "object",
+    "properties": {
+     "activateSince": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "activateTill": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+     },
+     "mille": {
+      "$ref": "#/components/schemas/BazMille"
+     },
+     "localActivation": {
+      "$ref": "#/components/schemas/FooLocalActivations"
+     },
+     "uselyKey": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "potatoFamily": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "barRules": {
+      "$ref": "#/components/schemas/FooBarRules"
+     },
+     "lookEnd": {
+      "$ref": "#/components/schemas/BazLook"
+     },
+     "lookStart": {
+      "$ref": "#/components/schemas/BazLook"
+     }
+    }
+   },
+   "UuidUUID": {
+    "type": "string",
+    "format": "uuid",
+    "example": "248df4b7-aa70-47b8-a036-33ac447e668d"
+   }
+  },
+  "securitySchemes": {
+   "JWT": {
+    "type": "apiKey",
+    "name": "Authorization",
+    "in": "header",
+    "description": "Should be in form: 'Bearer \u003ctoken_value\u003e'"
+   }
+  }
+ }
+}
