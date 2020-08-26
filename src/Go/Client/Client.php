@@ -251,6 +251,7 @@ GO
         if (is_array($operation->parameters)) {
             foreach ($operation->parameters as $parameter) {
                 if (!$parameter->required) {
+                    $parameter->schema = clone $parameter->schema;
                     $parameter->schema->{TypeBuilder::NULLABLE} = true;
                 }
             }
@@ -555,6 +556,8 @@ GO;
     private function toStringExpression(Parameter $parameter, AnyType $type, $var, Imports $imports)
     {
         switch ($type->getTypeString()) {
+//            case '*string':
+//                return '*' . $var;
             case 'string':
                 return $var;
             case 'bool':
@@ -790,6 +793,10 @@ GO;
         foreach ($pathParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
             $var = "request.$fieldName";
+            if ($fieldName == 'Mille') {
+                echo 'a';
+            }
+
             $type = $this->getParamType($parameter->schema);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
             if ($value === false) {
