@@ -19,6 +19,7 @@
     "psr/http-message": "^1.0",
     "swaggest/swagger2-schema": "^0.2.3",
     "swaggest/rest-client": "^0.1",
+    "symfony/yaml": "^3",
     "ext-json": "*"
   },
   "autoload": {
