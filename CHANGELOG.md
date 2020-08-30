@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.16] - 2020-08-30
+
+### Fixed
+- Missing YAML lib in phar.
+
 ## [0.1.15] - 2020-08-25
 
 ### Added
@@ -107,6 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Keep path parameters in operation name of PHP client.
 
+[0.1.16]: https://github.com/swaggest/swac/compare/v0.1.15...v0.1.16
 [0.1.15]: https://github.com/swaggest/swac/compare/v0.1.14...v0.1.15
 [0.1.14]: https://github.com/swaggest/swac/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/swaggest/swac/compare/v0.1.12...v0.1.13
