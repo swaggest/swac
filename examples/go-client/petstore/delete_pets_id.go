@@ -55,7 +55,7 @@ func (result *DeletePetsIDResponse) decode(resp *http.Response) error {
 	case http.StatusNoContent:
 		// No body to decode.
 	default:
-		err = json.NewDecoder(resp.Body).Decode(&result.Default)
+		err = json.NewDecoder(body).Decode(&result.Default)
 	}
 
 	if err != nil {

@@ -964,7 +964,7 @@ GO;
         if ($hasDefault) {
             $body .= <<<'GO'
 default:
-    err = json.NewDecoder(resp.Body).Decode(&result.Default)
+    err = json.NewDecoder(body).Decode(&result.Default)
 }
 
 GO;

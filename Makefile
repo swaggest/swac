@@ -1,4 +1,4 @@
-PHPSTAN_VERSION ?= 0.11.19
+PHPSTAN_VERSION ?= 0.12.60
 
 phar:
 	@test -f $$HOME/.cache/composer/phar-composer.phar || (mkdir -p $$HOME/.cache/composer/ && wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O $$HOME/.cache/composer/phar-composer.phar)
@@ -22,8 +22,11 @@ docker-lint:
 test:
 	@php -derror_reporting="E_ALL & ~E_DEPRECATED" vendor/bin/phpunit
 
+test-go:
+	@cd ./examples/go-client && go test ./...
+
 test-coverage:
-	@php -derror_reporting="E_ALL & ~E_DEPRECATED" -dzend_extension=xdebug.so vendor/bin/phpunit --coverage-text
+	@php -derror_reporting="E_ALL & ~E_DEPRECATED" -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit --coverage-text
 
 lint-examples:
 	@find ./examples/php-guzzle-client -iname "*.php" -exec php -l {} \; | grep -v "No syntax errors"

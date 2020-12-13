@@ -19,7 +19,7 @@ type PutLieAreasMilleLieAreaSyncRequest struct {
 	// Look of operation.
 	Look    string
 	Mille   string  // Mille is a required `mille` parameter in path.
-	// LieArea is a required `lieArea` parameter in path.
+	// LieArea is a required `LieArea` parameter in path.
 	// Name of lie area.
 	LieArea string
 }
@@ -97,7 +97,7 @@ func (result *PutLieAreasMilleLieAreaSyncResponse) decode(resp *http.Response) e
 // PutLieAreasMilleLieAreaSync performs REST operation.
 func (c *Client) PutLieAreasMilleLieAreaSync(ctx context.Context, request PutLieAreasMilleLieAreaSyncRequest) (result PutLieAreasMilleLieAreaSyncResponse, err error) {
 	if c.InstrumentCtxFunc != nil {
-		ctx = c.InstrumentCtxFunc(ctx, http.MethodPut, "/lie-areas/{mille}/{lieArea}/sync", &request)
+		ctx = c.InstrumentCtxFunc(ctx, http.MethodPut, "/lie-areas/{mille}/{LieArea}/sync", &request)
 	}
 
 	if c.Timeout != 0 {

@@ -10,7 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\FooBarOAS3\Config;
-use Swac\Example\FooBarOAS3\LieAreas\Definitions\LieareaEntity;
+use Swac\Example\FooBarOAS3\LieAreas\Definitions\LieAreaEntity;
 use Swac\Example\FooBarOAS3\LieAreas\Request\PostLieAreasRequest;
 use Swac\Example\FooBarOAS3\Place\Definitions\RestErrResponse;
 use Swaggest\JsonSchema\Exception;
@@ -47,7 +47,7 @@ class PostLieAreas extends AbstractOperation
     }
 
     /**
-     * @return LieareaEntity|RestErrResponse
+     * @return LieAreaEntity|RestErrResponse
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -58,7 +58,7 @@ class PostLieAreas extends AbstractOperation
         $raw = $this->getRawResponse();
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
-            case StatusCode::OK: $result = LieareaEntity::import($this->getJsonResponse());break;
+            case StatusCode::OK: $result = LieAreaEntity::import($this->getJsonResponse());break;
             case StatusCode::BAD_REQUEST: $result = RestErrResponse::import($this->getJsonResponse());break;
             case StatusCode::CONFLICT: $result = RestErrResponse::import($this->getJsonResponse());break;
             case StatusCode::INTERNAL_SERVER_ERROR: $result = RestErrResponse::import($this->getJsonResponse());break;

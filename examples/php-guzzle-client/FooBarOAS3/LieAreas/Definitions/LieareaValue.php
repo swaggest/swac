@@ -13,10 +13,10 @@ use Swaggest\JsonSchema\Structure\ClassStructure;
 
 /**
  * In: body, Name: body
- * Built from #/components/schemas/LieareaValue
+ * Built from #/components/schemas/LieAreaValue
  * @property string[]|null|array $areas
  */
-class LieareaValue extends ClassStructure
+class LieAreaValue extends ClassStructure
 {
     /**
      * @var string Acme Mille
@@ -49,6 +49,6 @@ class LieareaValue extends ClassStructure
             self::names()->mille,
             self::names()->name,
         );
-        $ownerSchema->setFromRef('#/components/schemas/LieareaValue');
+        $ownerSchema->setFromRef('#/components/schemas/LieAreaValue');
     }
 }

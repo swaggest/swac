@@ -12,11 +12,11 @@ use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
 /**
- * Built from #/components/schemas/LieareaEntity
+ * Built from #/components/schemas/LieAreaEntity
  * @property string[]|null|array $areas
  * @property null|string $updatedAt
  */
-class LieareaEntity extends ClassStructure
+class LieAreaEntity extends ClassStructure
 {
     /**
      * @var string Acme Mille
@@ -60,6 +60,6 @@ class LieareaEntity extends ClassStructure
             self::names()->mille,
             self::names()->name,
         );
-        $ownerSchema->setFromRef('#/components/schemas/LieareaEntity');
+        $ownerSchema->setFromRef('#/components/schemas/LieAreaEntity');
     }
 }

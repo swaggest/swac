@@ -14,7 +14,7 @@ import (
 
 // PostLieAreasRequest is operation request value.
 type PostLieAreasRequest struct {
-	Body *LieareaValue  // Body is a JSON request body.
+	Body *LieAreaValue  // Body is a JSON request body.
 }
 
 // encode creates *http.Request for request data.
@@ -42,7 +42,7 @@ func (request *PostLieAreasRequest) encode(ctx context.Context, baseURL string) 
 // PostLieAreasResponse is operation response value.
 type PostLieAreasResponse struct {
 	StatusCode               int
-	ValueOK                  *LieareaEntity    // ValueOK is a value of 200 OK response.
+	ValueOK                  *LieAreaEntity    // ValueOK is a value of 200 OK response.
 	ValueBadRequest          *RestErrResponse  // ValueBadRequest is a value of 400 Bad Request response.
 	ValueConflict            *RestErrResponse  // ValueConflict is a value of 409 Conflict response.
 	ValueInternalServerError *RestErrResponse  // ValueInternalServerError is a value of 500 Internal Server Error response.
