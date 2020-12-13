@@ -31,7 +31,7 @@ class Client implements Renderer
     private $readMe;
 
     /** @var PhpBuilder */
-    private $builder;
+    public $builder;
 
     /** @var PhpCode */
     private $code;

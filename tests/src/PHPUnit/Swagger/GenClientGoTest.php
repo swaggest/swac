@@ -13,7 +13,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         App::$ver = '<version>';
 
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/uber.json';
+        $cmd->schema = __DIR__ . '/../../../resources/uber.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/uber/';
         $cmd->pkgName = 'uber';
 
@@ -29,7 +29,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         App::$ver = '<version>';
 
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.json';
+        $cmd->schema = __DIR__ . '/../../../resources/petstore-expanded.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/petstore/';
         $cmd->pkgName = 'petstore';
 
@@ -45,7 +45,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         App::$ver = '<version>';
 
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/acme.json';
+        $cmd->schema = __DIR__ . '/../../../resources/acme.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/acme/';
         $cmd->pkgName = 'acme';
 

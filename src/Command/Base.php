@@ -7,6 +7,7 @@ use Swac\Log;
 use Swac\Rest\Renderer;
 use Swac\Rest\Rest;
 use Swac\Swagger\Reader;
+use Swaggest\JsonCli\Json\LoadFile;
 use Symfony\Component\Yaml\Yaml;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -14,7 +15,9 @@ use Yaoi\Io\Response;
 
 abstract class Base extends Command
 {
-    public $schemaPath;
+    use LoadFile;
+
+    public $schema;
     public $operations;
 
     /**
@@ -23,7 +26,7 @@ abstract class Base extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
-        $options->schemaPath = Command\Option::create()->setType()->setIsRequired()->setIsUnnamed()
+        $options->schema = Command\Option::create()->setType()->setIsRequired()->setIsUnnamed()
             ->setDescription('Path/URL to OpenAPI/Swagger schema');
 
         $options->operations = Command\Option::create()->setType()
@@ -43,8 +46,7 @@ abstract class Base extends Command
             $rest->operationsFilter = explode(',', $this->operations);
         }
         $rest->addRenderer($client);
-
-        $schemaJson = self::readJsonOrYaml($this->schemaPath, $this->response);
+        $schemaJson = $this->loadFile();
 
         if (isset($schemaJson->swagger)) {
             $reader = new Reader($rest);
@@ -60,29 +62,4 @@ abstract class Base extends Command
             throw new ExitCode('No operations to store.', 1);
         }
     }
-
-    /**
-     * @param string $path
-     * @param Response $response
-     * @return mixed
-     * @throws ExitCode
-     */
-    public static function readJsonOrYaml($path, $response)
-    {
-        $fileData = file_get_contents($path);
-        if (!$fileData) {
-            $response->error('Unable to read ' . $path);
-            throw new ExitCode('', 1);
-        }
-        if (substr($path, -5) === '.yaml' || substr($path, -4) === '.yml') {
-            $jsonData = Yaml::parse($fileData, Yaml::PARSE_OBJECT + Yaml::PARSE_OBJECT_FOR_MAP);
-        } elseif (substr($path, -11) === '.serialized') {
-            $jsonData = unserialize($fileData);
-        } else {
-            $jsonData = json_decode($fileData);
-        }
-
-        return $jsonData;
-    }
-
 }

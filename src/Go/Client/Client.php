@@ -14,6 +14,7 @@ use Swac\Skip;
 use Swaggest\CodeBuilder\PlaceholderString;
 use Swaggest\GoCodeBuilder\GoCodeBuilder;
 use Swaggest\GoCodeBuilder\JsonSchema\GoBuilder;
+use Swaggest\GoCodeBuilder\JsonSchema\MarshalingTestFunc;
 use Swaggest\GoCodeBuilder\JsonSchema\StripPrefixPathToNameHook;
 use Swaggest\GoCodeBuilder\JsonSchema\TypeBuilder;
 use Swaggest\GoCodeBuilder\Templates\Code;
@@ -1062,11 +1063,27 @@ GO
 
         $file = new GoFile($packageName);
         $file->fileComment = $fileComment;
+
+        $goTestFile = new GoFile($packageName . '_test');
+        $goTestFile->setPackage($packageName);
+        $goTestFile->fileComment = $fileComment;
+
+        mt_srand(1);
+
         foreach ($this->schemaBuilder->getGeneratedStructs() as $generatedStruct) {
             $file->getCode()->addSnippet($generatedStruct->structDef);
+
+            if ($this->settings->withTests) {
+                $goTestFile->getCode()->addSnippet(MarshalingTestFunc::make($generatedStruct, $this->settings->builderOptions));
+            }
         }
+
         $file->getCode()->addSnippet($this->schemaBuilder->getCode());
         file_put_contents($path . '/models.go', $file->render());
+
+        if ($this->settings->withTests) {
+            file_put_contents($path . '/models_test.go', $goTestFile->render());
+        }
     }
 
     public static $arraySeparators = array(
@@ -1080,7 +1097,8 @@ GO
     /**
      * @param $schema
      */
-    private function getParamType($schema, $path = '#') {
+    private function getParamType($schema, $path = '#')
+    {
         $type = $this->schemaBuilder->getType($schema);
         if ($type instanceof Pointer) {
             if ($type->getType() instanceof Slice || $type->getType() instanceof Map) {

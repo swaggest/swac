@@ -11,7 +11,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testUspto()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/uspto.yaml';
+        $cmd->schema = __DIR__ . '/../../../resources/uspto.yaml';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/UsptoOAS3/';
         $cmd->namespace = 'Swac\Example\UsptoOAS3';
 
@@ -25,7 +25,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testPetstoreExpanded()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.yaml';
+        $cmd->schema = __DIR__ . '/../../../resources/petstore-expanded.yaml';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/PetstoreOAS3/';
         $cmd->namespace = 'Swac\Example\PetstoreOAS3';
 
@@ -39,7 +39,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testFooBar()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/foobar.json';
+        $cmd->schema = __DIR__ . '/../../../resources/foobar.json';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/FooBarOAS3/';
         $cmd->namespace = 'Swac\Example\FooBarOAS3';
 

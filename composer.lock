@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f512e20121fde99e9684f81d7a2f2c4",
+    "content-hash": "e67ba848dc8bbc5c882bdf2bc5f7160f",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -687,6 +687,67 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
+            "name": "salsify/json-streaming-parser",
+            "version": "v7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/salsify/jsonstreamingparser.git",
+                "reference": "a4d8d651f01864ac539b6a05c3c781906a56bd2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/salsify/jsonstreamingparser/zipball/a4d8d651f01864ac539b6a05c3c781906a56bd2e",
+                "reference": "a4d8d651f01864ac539b6a05c3c781906a56bd2e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonStreamingParser\\": "src",
+                    "JsonStreamingParser\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxim Gnatenko",
+                    "email": "mgnatenko@gmail.com"
+                },
+                {
+                    "name": "Rob Gonzalez",
+                    "email": "rob@salsify.com",
+                    "homepage": "http://salsify.com/"
+                },
+                {
+                    "name": "Max Grigorian",
+                    "email": "maxakawizard@gmail.com",
+                    "homepage": "http://wizardcat.com/"
+                }
+            ],
+            "description": "A streaming parser for JSON in PHP.",
+            "homepage": "https://github.com/salsify/jsonstreamingparser",
+            "keywords": [
+                "json",
+                "parser",
+                "streaming"
+            ],
+            "support": {
+                "issues": "https://github.com/salsify/jsonstreamingparser/issues",
+                "source": "https://github.com/salsify/jsonstreamingparser/tree/master"
+            },
+            "time": "2018-03-29T00:35:18+00:00"
+        },
+        {
             "name": "swaggest/code-builder",
             "version": "v0.3.3",
             "source": {
@@ -790,6 +851,61 @@
                 "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.42"
             },
             "time": "2020-12-13T10:52:17+00:00"
+        },
+        {
+            "name": "swaggest/json-cli",
+            "version": "v1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swaggest/json-cli.git",
+                "reference": "fc711faf9ebc87437d05520f2972824bf8e76210"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/fc711faf9ebc87437d05520f2972824bf8e76210",
+                "reference": "fc711faf9ebc87437d05520f2972824bf8e76210",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php-yaoi/php-yaoi": "^1",
+                "salsify/json-streaming-parser": "^7.0",
+                "swaggest/code-builder": "^0.3.2",
+                "swaggest/go-code-builder": "^0.4.42",
+                "swaggest/json-diff": "^3.8.1",
+                "swaggest/json-schema": "^0.12.21",
+                "swaggest/json-schema-maker": "^0.3.4",
+                "swaggest/php-code-builder": "^0.2.8",
+                "symfony/yaml": "^3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5"
+            },
+            "bin": [
+                "bin/json-cli"
+            ],
+            "type": "tool",
+            "autoload": {
+                "psr-4": {
+                    "Swaggest\\JsonCli\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Viacheslav Poturaev",
+                    "email": "vearutop@gmail.com"
+                }
+            ],
+            "description": "JSON CLI tool (diff, rearrange, pretty print, minify, yaml convert, etc...)",
+            "support": {
+                "issues": "https://github.com/swaggest/json-cli/issues",
+                "source": "https://github.com/swaggest/json-cli/tree/v1.8.2"
+            },
+            "time": "2020-12-13T15:17:53+00:00"
         },
         {
             "name": "swaggest/json-diff",
