@@ -793,9 +793,6 @@ GO;
         foreach ($pathParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
             $var = "request.$fieldName";
-            if ($fieldName == 'Mille') {
-                echo 'a';
-            }
 
             $type = $this->getParamType($parameter->schema);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
