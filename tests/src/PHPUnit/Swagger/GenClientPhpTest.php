@@ -10,7 +10,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testUber()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/uber.json';
+        $cmd->schema = __DIR__ . '/../../../resources/uber.json';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Uber/';
         $cmd->namespace = 'Swac\Example\Uber';
 
@@ -24,7 +24,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testPetstoreExpanded()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.json';
+        $cmd->schema = __DIR__ . '/../../../resources/petstore-expanded.json';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Petstore/';
         $cmd->namespace = 'Swac\Example\Petstore';
 
@@ -38,7 +38,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
     public function testAcme()
     {
         $cmd = new PhpGuzzleClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/acme.json';
+        $cmd->schema = __DIR__ . '/../../../resources/acme.json';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Acme/';
         $cmd->namespace = 'Swac\Example\Acme';
 

@@ -4,11 +4,14 @@ namespace Swac\Command;
 
 use Swac\ExitCode;
 use Swac\Php\Client\Client;
+use Swaggest\JsonCli\GenPhp\BuilderOptions;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
 class PhpGuzzleClient extends Base
 {
+    use BuilderOptions;
+
     public $namespace;
     public $projectPath = './';
 
@@ -23,6 +26,8 @@ class PhpGuzzleClient extends Base
             ->setDescription('Path to project root, default ./');
         $options->namespace = Command\Option::create()->setType()->setIsRequired()
             ->setDescription('Project namespace');
+
+        static::setupBuilderOptions($options);
     }
 
     public function performAction()
@@ -34,6 +39,8 @@ class PhpGuzzleClient extends Base
         $projectPath .= '/';
 
         $phpClient = new Client($this->namespace, './');
+        $this->setupBuilder($phpClient->builder);
+
         $this->process($phpClient);
         $phpClient->store($projectPath);
     }

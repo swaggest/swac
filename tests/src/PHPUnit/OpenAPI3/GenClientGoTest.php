@@ -12,7 +12,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
     {
         App::$ver = '<version>';
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/uspto.yaml';
+        $cmd->schema = __DIR__ . '/../../../resources/uspto.yaml';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/uspto-oas3/';
         $cmd->pkgName = 'uspto';
 
@@ -27,7 +27,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
     {
         App::$ver = '<version>';
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/petstore-expanded.yaml';
+        $cmd->schema = __DIR__ . '/../../../resources/petstore-expanded.yaml';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/petstore-oas3/';
         $cmd->pkgName = 'petstore';
 
@@ -42,7 +42,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
     {
         App::$ver = '<version>';
         $cmd = new GoClient();
-        $cmd->schemaPath = __DIR__ . '/../../../resources/foobar.json';
+        $cmd->schema = __DIR__ . '/../../../resources/foobar.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/foobar-oas3/';
         $cmd->pkgName = 'foobar';
 
