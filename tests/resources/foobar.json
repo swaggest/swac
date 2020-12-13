@@ -590,7 +590,7 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/LieareaValue"
+        "$ref": "#/components/schemas/LieAreaValue"
        }
       }
      }
@@ -601,7 +601,7 @@
       "content": {
        "application/json": {
         "schema": {
-         "$ref": "#/components/schemas/LieareaEntity"
+         "$ref": "#/components/schemas/LieAreaEntity"
         }
        }
       }
@@ -639,7 +639,7 @@
     }
    }
   },
-  "/lie-areas/{mille}/{lieArea}/sync": {
+  "/lie-areas/{mille}/{LieArea}/sync": {
    "put": {
     "tags": [
      "LieAreas"
@@ -665,7 +665,7 @@
       }
      },
      {
-      "name": "lieArea",
+      "name": "LieArea",
       "in": "path",
       "description": "Name of lie area.",
       "required": true,
@@ -1191,7 +1191,7 @@
     "description": "Acme Look",
     "example": "2018-W43"
    },
-   "LieareaEntity": {
+   "LieAreaEntity": {
     "required": [
      "areas",
      "mille",
@@ -1222,7 +1222,7 @@
      }
     }
    },
-   "LieareaValue": {
+   "LieAreaValue": {
     "required": [
      "areas",
      "mille",

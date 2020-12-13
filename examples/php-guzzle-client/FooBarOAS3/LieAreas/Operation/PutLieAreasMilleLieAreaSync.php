@@ -22,7 +22,7 @@ use Swaggest\RestClient\RestException;
 
 /**
  * Synchronize list of lie area postcodes with delivery-area-service.
- * HTTP: PUT /lie-areas/{mille}/{lieArea}/sync
+ * HTTP: PUT /lie-areas/{mille}/{LieArea}/sync
  */
 class PutLieAreasMilleLieAreaSync extends AbstractOperation
 {

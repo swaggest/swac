@@ -8,6 +8,12 @@ import (
 	"errors"
 )
 
+// Pet structure is generated from "#/components/schemas/Pet".
+type Pet struct {
+	NewPet
+	PetAllOf1
+}
+
 // NewPet structure is generated from "#/components/schemas/NewPet".
 type NewPet struct {
 	Name                 string                 `json:"name"`          // Required.
@@ -136,34 +142,6 @@ func (p PetAllOf1) MarshalJSON() ([]byte, error) {
 	}
 
 	return marshalUnion(marshalPetAllOf1(p), p.AdditionalProperties)
-}
-
-// Pet structure is generated from "#/components/schemas/Pet".
-type Pet struct {
-	NewPet *NewPet    `json:"-"`
-	AllOf1 *PetAllOf1 `json:"-"`
-}
-
-// UnmarshalJSON decodes JSON.
-func (p *Pet) UnmarshalJSON(data []byte) error {
-	var err error
-
-	err = json.Unmarshal(data, &p.NewPet)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(data, &p.AllOf1)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalJSON encodes JSON.
-func (p Pet) MarshalJSON() ([]byte, error) {
-	return marshalUnion(p.NewPet, p.AllOf1)
 }
 
 func marshalUnion(maps ...interface{}) ([]byte, error) {

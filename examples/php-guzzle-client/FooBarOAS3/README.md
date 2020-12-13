@@ -17,7 +17,7 @@
 
 * [`GET /lie-areas`](#getlieareas) List Lie areas name
 * [`POST /lie-areas`](#postlieareas) Create Lie Areas
-* [`PUT /lie-areas/{mille}/{lieArea}/sync`](#putlieareasmillelieareasync) Sync Lie Area
+* [`PUT /lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) Sync Lie Area
 
 ### Place
 
@@ -345,10 +345,10 @@ Type: `Swac\Example\FooBarOAS3\LieAreas\Request\PostLieAreasRequest`
 
 |Name  |Type                                                                   |In    |Description|
 |------|-----------------------------------------------------------------------|------|-----------|
-|`body`|[`LieareaValue`](#swacexamplefoobaroas3lieareasdefinitionslieareavalue)|`body`|           |
+|`body`|[`LieAreaValue`](#swacexamplefoobaroas3lieareasdefinitionslieareavalue)|`body`|           |
 
 
-#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieareaValue
+#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieAreaValue
 |Name   |Type                               |Description                                                  |
 |-------|-----------------------------------|-------------------------------------------------------------|
 |`mille`|`string`                           |Acme Mille<br>In: query, Name: mille<br>In: path, Name: mille|
@@ -362,7 +362,7 @@ Type: `Swac\Example\FooBarOAS3\LieAreas\Request\PostLieAreasRequest`
 
 |Status                   |Type                                                                      |Description          |
 |-------------------------|--------------------------------------------------------------------------|---------------------|
-|200 OK                   |[`LieareaEntity`](#swacexamplefoobaroas3lieareasdefinitionslieareaentity) |OK                   |
+|200 OK                   |[`LieAreaEntity`](#swacexamplefoobaroas3lieareasdefinitionslieareaentity) |OK                   |
 |400 Bad Request          |[`RestErrResponse`](#swacexamplefoobaroas3placedefinitionsresterrresponse)|Bad Request          |
 |409 Conflict             |[`RestErrResponse`](#swacexamplefoobaroas3placedefinitionsresterrresponse)|Conflict             |
 |500 Internal Server Error|[`RestErrResponse`](#swacexamplefoobaroas3placedefinitionsresterrresponse)|Internal Server Error|
@@ -371,7 +371,7 @@ Type: `Swac\Example\FooBarOAS3\LieAreas\Request\PostLieAreasRequest`
 
 Synchronize list of lie area postcodes with delivery-area-service.
 
-_Endpoint_: `/lie-areas/{mille}/{lieArea}/sync`
+_Endpoint_: `/lie-areas/{mille}/{LieArea}/sync`
 
 _Namespace_: `Swac\Example\FooBarOAS3\LieAreas\Operation`
 
@@ -587,7 +587,7 @@ Type: `Swac\Example\FooBarOAS3\Lie\Request\GetLiesIdRequest`
 
 #### Swac\Example\FooBarOAS3\Foo\Response\GetFoosOKResponse
 [`UsecaseFooInfo`](#swacexamplefoobaroas3foodefinitionsusecasefooinfo)[]&#124;`array`
-#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieareaEntity
+#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieAreaEntity
 |Name       |Type                               |Description                                                  |
 |-----------|-----------------------------------|-------------------------------------------------------------|
 |`mille`    |`string`                           |Acme Mille<br>In: query, Name: mille<br>In: path, Name: mille|
@@ -597,7 +597,7 @@ Type: `Swac\Example\FooBarOAS3\Lie\Request\GetLiesIdRequest`
 |`areas`    |`string`[]&#124;`null`&#124;`array`|                                                             |
 |`updatedAt`|`null`&#124;`string`               |                                                             |
 
-#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieareaValue
+#### Swac\Example\FooBarOAS3\LieAreas\Definitions\LieAreaValue
 |Name   |Type                               |Description                                                  |
 |-------|-----------------------------------|-------------------------------------------------------------|
 |`mille`|`string`                           |Acme Mille<br>In: query, Name: mille<br>In: path, Name: mille|

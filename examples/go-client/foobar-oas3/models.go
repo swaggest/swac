@@ -1268,8 +1268,8 @@ func (u UsecaseFindAvailableCarrotsOutputItem) MarshalJSON() ([]byte, error) {
 	return marshalUnion(marshalUsecaseFindAvailableCarrotsOutputItem(u), u.AdditionalProperties)
 }
 
-// LieareaValue structure is generated from "#/components/schemas/LieareaValue".
-type LieareaValue struct {
+// LieAreaValue structure is generated from "#/components/schemas/LieAreaValue".
+type LieAreaValue struct {
 	// Acme Mille.
 	// Value must match pattern: `^[a-zA-Z]{2}$`.
 	// Required.
@@ -1279,19 +1279,19 @@ type LieareaValue struct {
 	AdditionalProperties map[string]interface{} `json:"-"`     // All unmatched properties.
 }
 
-type marshalLieareaValue LieareaValue
+type marshalLieAreaValue LieAreaValue
 
-var knownKeysLieareaValue = []string{
+var knownKeysLieAreaValue = []string{
 	"mille",
 	"name",
 	"areas",
 }
 
 // UnmarshalJSON decodes JSON.
-func (l *LieareaValue) UnmarshalJSON(data []byte) error {
+func (l *LieAreaValue) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ml := marshalLieareaValue(*l)
+	ml := marshalLieAreaValue(*l)
 
 	err = json.Unmarshal(data, &ml)
 	if err != nil {
@@ -1305,7 +1305,7 @@ func (l *LieareaValue) UnmarshalJSON(data []byte) error {
 		rawMap = nil
 	}
 
-	for _, key := range knownKeysLieareaValue {
+	for _, key := range knownKeysLieAreaValue {
 		delete(rawMap, key)
 	}
 
@@ -1324,22 +1324,22 @@ func (l *LieareaValue) UnmarshalJSON(data []byte) error {
 		ml.AdditionalProperties[key] = val
 	}
 
-	*l = LieareaValue(ml)
+	*l = LieAreaValue(ml)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (l LieareaValue) MarshalJSON() ([]byte, error) {
+func (l LieAreaValue) MarshalJSON() ([]byte, error) {
 	if len(l.AdditionalProperties) == 0 {
-		return json.Marshal(marshalLieareaValue(l))
+		return json.Marshal(marshalLieAreaValue(l))
 	}
 
-	return marshalUnion(marshalLieareaValue(l), l.AdditionalProperties)
+	return marshalUnion(marshalLieAreaValue(l), l.AdditionalProperties)
 }
 
-// LieareaEntity structure is generated from "#/components/schemas/LieareaEntity".
-type LieareaEntity struct {
+// LieAreaEntity structure is generated from "#/components/schemas/LieAreaEntity".
+type LieAreaEntity struct {
 	// Acme Mille.
 	// Value must match pattern: `^[a-zA-Z]{2}$`.
 	// Required.
@@ -1352,9 +1352,9 @@ type LieareaEntity struct {
 	AdditionalProperties map[string]interface{} `json:"-"`                   // All unmatched properties.
 }
 
-type marshalLieareaEntity LieareaEntity
+type marshalLieAreaEntity LieAreaEntity
 
-var knownKeysLieareaEntity = []string{
+var knownKeysLieAreaEntity = []string{
 	"mille",
 	"createdAt",
 	"id",
@@ -1364,10 +1364,10 @@ var knownKeysLieareaEntity = []string{
 }
 
 // UnmarshalJSON decodes JSON.
-func (l *LieareaEntity) UnmarshalJSON(data []byte) error {
+func (l *LieAreaEntity) UnmarshalJSON(data []byte) error {
 	var err error
 
-	ml := marshalLieareaEntity(*l)
+	ml := marshalLieAreaEntity(*l)
 
 	err = json.Unmarshal(data, &ml)
 	if err != nil {
@@ -1381,7 +1381,7 @@ func (l *LieareaEntity) UnmarshalJSON(data []byte) error {
 		rawMap = nil
 	}
 
-	for _, key := range knownKeysLieareaEntity {
+	for _, key := range knownKeysLieAreaEntity {
 		delete(rawMap, key)
 	}
 
@@ -1400,18 +1400,18 @@ func (l *LieareaEntity) UnmarshalJSON(data []byte) error {
 		ml.AdditionalProperties[key] = val
 	}
 
-	*l = LieareaEntity(ml)
+	*l = LieAreaEntity(ml)
 
 	return nil
 }
 
 // MarshalJSON encodes JSON.
-func (l LieareaEntity) MarshalJSON() ([]byte, error) {
+func (l LieAreaEntity) MarshalJSON() ([]byte, error) {
 	if len(l.AdditionalProperties) == 0 {
-		return json.Marshal(marshalLieareaEntity(l))
+		return json.Marshal(marshalLieAreaEntity(l))
 	}
 
-	return marshalUnion(marshalLieareaEntity(l), l.AdditionalProperties)
+	return marshalUnion(marshalLieAreaEntity(l), l.AdditionalProperties)
 }
 
 // LiesPage structure is generated from "#/components/schemas/LiesPage".

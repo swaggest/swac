@@ -6,7 +6,7 @@
 
 namespace Swac\Example\FooBarOAS3\LieAreas\Request;
 
-use Swac\Example\FooBarOAS3\LieAreas\Definitions\LieareaValue;
+use Swac\Example\FooBarOAS3\LieAreas\Definitions\LieAreaValue;
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
@@ -14,7 +14,7 @@ use Swaggest\JsonSchema\Structure\ClassStructure;
 
 class PostLieAreasRequest extends ClassStructure
 {
-    /** @var LieareaValue In: body, Name: body */
+    /** @var LieAreaValue In: body, Name: body */
     public $body;
 
     /**
@@ -23,7 +23,7 @@ class PostLieAreasRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->body = LieareaValue::schema();
+        $properties->body = LieAreaValue::schema();
         $ownerSchema->type = Schema::OBJECT;
     }
 

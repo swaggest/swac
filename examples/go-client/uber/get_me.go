@@ -51,7 +51,7 @@ func (result *GetMeResponse) decode(resp *http.Response) error {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
 	default:
-		err = json.NewDecoder(resp.Body).Decode(&result.Default)
+		err = json.NewDecoder(body).Decode(&result.Default)
 	}
 
 	if err != nil {

@@ -29,7 +29,7 @@ class PutLieAreasMilleLieAreaSyncRequest extends ClassStructure
 
     /**
      * @var string Name of lie area.
-     * In: path, Name: lieArea
+     * In: path, Name: LieArea
      */
     public $lieArea;
 
@@ -48,11 +48,12 @@ class PutLieAreasMilleLieAreaSyncRequest extends ClassStructure
         $properties->mille->pattern = "^[a-zA-Z]{2}$";
         $properties->mille->setFromRef('#/components/schemas/BazMille');
         $properties->lieArea = Schema::string();
+        $ownerSchema->addPropertyMapping('LieArea', self::names()->lieArea);
         $ownerSchema->type = Schema::OBJECT;
         $ownerSchema->required = array(
             self::names()->look,
             self::names()->mille,
-            self::names()->lieArea,
+            'LieArea',
         );
     }
 

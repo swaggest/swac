@@ -793,9 +793,6 @@ GO;
         foreach ($pathParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
             $var = "request.$fieldName";
-            if ($fieldName == 'Mille') {
-                echo 'a';
-            }
 
             $type = $this->getParamType($parameter->schema);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
@@ -964,7 +961,7 @@ GO;
         if ($hasDefault) {
             $body .= <<<'GO'
 default:
-    err = json.NewDecoder(resp.Body).Decode(&result.Default)
+    err = json.NewDecoder(body).Decode(&result.Default)
 }
 
 GO;
