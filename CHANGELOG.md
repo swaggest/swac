@@ -127,6 +127,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Keep path parameters in operation name of PHP client.
 
+[0.1.19]: https://github.com/swaggest/swac/compare/v0.1.18...v0.1.19
+[0.1.18]: https://github.com/swaggest/swac/compare/v0.1.17...v0.1.18
 [0.1.17]: https://github.com/swaggest/swac/compare/v0.1.16...v0.1.17
 [0.1.16]: https://github.com/swaggest/swac/compare/v0.1.15...v0.1.16
 [0.1.15]: https://github.com/swaggest/swac/compare/v0.1.14...v0.1.15
