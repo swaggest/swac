@@ -11,6 +11,9 @@ class Operation
     public $method;
 
     /** @var string */
+    public $operationId;
+
+    /** @var string */
     public $summary;
 
     /** @var string */

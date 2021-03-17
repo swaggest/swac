@@ -4,20 +4,20 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\PetstoreOAS3\Request;
+namespace Swac\Example\UsptoOAS3\Metadata\Request;
 
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class GetPetsRequest extends ClassStructure
+class ListSearchableFieldsRequest extends ClassStructure
 {
-    /** @var string[]|array In: query, Name: tags */
-    public $tags;
+    /** @var string In: path, Name: dataset */
+    public $dataset;
 
-    /** @var int In: query, Name: limit */
-    public $limit;
+    /** @var string In: path, Name: version */
+    public $version;
 
     /**
      * @param Properties|static $properties
@@ -25,27 +25,18 @@ class GetPetsRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->tags = Schema::arr();
-        $properties->tags->items = Schema::string();
-        $properties->limit = Schema::integer();
-        $properties->limit->format = "int32";
+        $properties->dataset = Schema::string();
+        $properties->version = Schema::string();
         $ownerSchema->type = Schema::OBJECT;
+        $ownerSchema->required = array(
+            self::names()->dataset,
+            self::names()->version,
+        );
     }
 
     public function makeUrl()
     {
-        $url = '/pets';
-        $queryString = '';
-        if (!empty($this->tags)) {
-            $queryString .= '&tags=' . urlencode(implode(',', $this->tags));
-        }
-        if (null !== $this->limit) {
-            $queryString .= '&limit=' . $this->limit;
-        }
-        if ('' !== $queryString) {
-            $queryString[0] = '?';
-            $url .= $queryString;
-        }
+        $url = '/' . urlencode($this->dataset) . '/' . urlencode($this->version) . '/fields';
         return $url;
     }
 

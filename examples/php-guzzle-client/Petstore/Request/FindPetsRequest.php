@@ -11,13 +11,19 @@ use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class GetPetsIdRequest extends ClassStructure
+class FindPetsRequest extends ClassStructure
 {
     /**
-     * @var int ID of pet to fetch
-     * In: path, Name: id
+     * @var string[]|array tags to filter by
+     * In: query, Name: tags
      */
-    public $id;
+    public $tags;
+
+    /**
+     * @var int maximum number of results to return
+     * In: query, Name: limit
+     */
+    public $limit;
 
     /**
      * @param Properties|static $properties
@@ -25,17 +31,27 @@ class GetPetsIdRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->id = Schema::integer();
-        $properties->id->format = "int64";
+        $properties->tags = Schema::arr();
+        $properties->tags->items = Schema::string();
+        $properties->limit = Schema::integer();
+        $properties->limit->format = "int32";
         $ownerSchema->type = Schema::OBJECT;
-        $ownerSchema->required = array(
-            self::names()->id,
-        );
     }
 
     public function makeUrl()
     {
-        $url = '/pets/' . urlencode($this->id);
+        $url = '/pets';
+        $queryString = '';
+        if (!empty($this->tags)) {
+            $queryString .= '&tags=' . urlencode(implode(',', $this->tags));
+        }
+        if (null !== $this->limit) {
+            $queryString .= '&limit=' . $this->limit;
+        }
+        if ('' !== $queryString) {
+            $queryString[0] = '?';
+            $url .= $queryString;
+        }
         return $url;
     }
 

@@ -4,30 +4,35 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\UsptoOAS3\Metadata\Request;
+namespace Swac\Example\PetstoreOAS3\Request;
 
 use Swaggest\JsonSchema\Constraint\Properties;
-use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-/**
- * @method static mixed import($data, Context $options = null)
- */
-class GetRequest extends ClassStructure
+class FindPetByIdRequest extends ClassStructure
 {
+    /** @var int In: path, Name: id */
+    public $id;
+
     /**
      * @param Properties|static $properties
      * @param Schema $ownerSchema
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
+        $properties->id = Schema::integer();
+        $properties->id->format = "int64";
+        $ownerSchema->type = Schema::OBJECT;
+        $ownerSchema->required = array(
+            self::names()->id,
+        );
     }
 
     public function makeUrl()
     {
-        $url = '/';
+        $url = '/pets/' . urlencode($this->id);
         return $url;
     }
 

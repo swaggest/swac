@@ -4,18 +4,20 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Request;
+namespace Swac\Example\PetstoreOAS3\Request;
 
-use Swac\Example\Petstore\Definitions\NewPet;
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class PostPetsRequest extends ClassStructure
+class FindPetsRequest extends ClassStructure
 {
-    /** @var NewPet In: body, Name: pet */
-    public $pet;
+    /** @var string[]|array In: query, Name: tags */
+    public $tags;
+
+    /** @var int In: query, Name: limit */
+    public $limit;
 
     /**
      * @param Properties|static $properties
@@ -23,26 +25,39 @@ class PostPetsRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->pet = NewPet::schema();
+        $properties->tags = Schema::arr();
+        $properties->tags->items = Schema::string();
+        $properties->limit = Schema::integer();
+        $properties->limit->format = "int32";
         $ownerSchema->type = Schema::OBJECT;
     }
 
     public function makeUrl()
     {
         $url = '/pets';
+        $queryString = '';
+        if (!empty($this->tags)) {
+            $queryString .= '&tags=' . urlencode(implode(',', $this->tags));
+        }
+        if (null !== $this->limit) {
+            $queryString .= '&limit=' . $this->limit;
+        }
+        if ('' !== $queryString) {
+            $queryString[0] = '?';
+            $url .= $queryString;
+        }
         return $url;
     }
 
     public function makeHeaders()
     {
         $headers = array();
-        $headers['Content-Type'] = 'application/json';
         $headers['Accept'] = 'application/json';
         return $headers;
     }
 
     public function makeBody()
     {
-        return json_encode($this->pet);
+        return null;
     }
 }

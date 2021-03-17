@@ -241,11 +241,16 @@ GO
 
     public function addOperation(Operation $operation)
     {
-        $funcName = $this->codeBuilder->exportableName($operation->method . '_' . $operation->path);
+        if ($operation->operationId !== null && !isset($this->operationsCode[$this->codeBuilder->exportableName($operation->operationId)])) {
+            $funcName = $this->codeBuilder->exportableName($operation->operationId);
+            $underScoredName = strtolower(PhpCode::makePhpConstantName($operation->operationId));
+        } else {
+            $funcName = $this->codeBuilder->exportableName($operation->method . '_' . $operation->path);
+            $underScoredName = strtolower(PhpCode::makePhpConstantName($operation->method . '_' . $operation->path));
+        }
 
         $operationCode = new Code();
 
-        $underScoredName = strtolower(PhpCode::makePhpConstantName($operation->method . '_' . $operation->path));
         $this->operationsCode[$underScoredName] = $operationCode;
 
         // Request.

@@ -4,17 +4,18 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\PetstoreOAS3\Request;
+namespace Swac\Example\Petstore\Request;
 
+use Swac\Example\Petstore\Definitions\NewPet;
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class DeletePetsIdRequest extends ClassStructure
+class AddPetRequest extends ClassStructure
 {
-    /** @var int In: path, Name: id */
-    public $id;
+    /** @var NewPet In: body, Name: pet */
+    public $pet;
 
     /**
      * @param Properties|static $properties
@@ -22,28 +23,26 @@ class DeletePetsIdRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->id = Schema::integer();
-        $properties->id->format = "int64";
+        $properties->pet = NewPet::schema();
         $ownerSchema->type = Schema::OBJECT;
-        $ownerSchema->required = array(
-            self::names()->id,
-        );
     }
 
     public function makeUrl()
     {
-        $url = '/pets/' . urlencode($this->id);
+        $url = '/pets';
         return $url;
     }
 
     public function makeHeaders()
     {
         $headers = array();
+        $headers['Content-Type'] = 'application/json';
+        $headers['Accept'] = 'application/json';
         return $headers;
     }
 
     public function makeBody()
     {
-        return null;
+        return json_encode($this->pet);
     }
 }

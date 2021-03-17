@@ -19,6 +19,7 @@ abstract class Base extends Command
 
     public $schema;
     public $operations;
+    public $ignoreOperationId;
 
     /**
      * @param Definition $definition
@@ -31,6 +32,9 @@ abstract class Base extends Command
 
         $options->operations = Command\Option::create()->setType()
             ->setDescription('Operations filter in form of comma-separated list of method/path, default empty');
+
+        $options->ignoreOperationId = Command\Option::create()
+            ->setDescription('Ignore operationId and always name operations using method and path');
     }
 
     /**
@@ -42,6 +46,7 @@ abstract class Base extends Command
     protected function process(Renderer $client)
     {
         $rest = new Rest();
+        $rest->ignoreOperationId = $this->ignoreOperationId;
         if ($this->operations) {
             $rest->operationsFilter = explode(',', $this->operations);
         }

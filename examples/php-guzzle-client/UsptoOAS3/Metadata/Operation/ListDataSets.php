@@ -4,17 +4,14 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Operation;
+namespace Swac\Example\UsptoOAS3\Metadata\Operation;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Swac\Example\Petstore\Config;
-use Swac\Example\Petstore\Definitions\Error;
-use Swac\Example\Petstore\Definitions\NewPet;
-use Swac\Example\Petstore\Definitions\Pet;
-use Swac\Example\Petstore\Request\GetPetsIdRequest;
-use Swac\Example\Petstore\Response\GetPetsOKResponseItemsAllOf1;
+use Swac\Example\UsptoOAS3\Config;
+use Swac\Example\UsptoOAS3\Metadata\Definitions\DataSetList;
+use Swac\Example\UsptoOAS3\Metadata\Request\ListDataSetsRequest;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -24,20 +21,19 @@ use Swaggest\RestClient\RestException;
 
 
 /**
- * Returns a user based on a single ID, if the user does not have access to
- * the pet
- * HTTP: GET /pets/{id}
+ * 
+ * HTTP: GET /
  */
-class GetPetsId extends AbstractOperation
+class ListDataSets extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetPetsIdRequest $request
+     * @param ListDataSetsRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetPetsIdRequest $request, Config $config)
+    public function __construct(ClientInterface $client, ListDataSetsRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
@@ -50,7 +46,7 @@ class GetPetsId extends AbstractOperation
     }
 
     /**
-     * @return NewPet|GetPetsOKResponseItemsAllOf1|Error
+     * @return DataSetList
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -61,8 +57,8 @@ class GetPetsId extends AbstractOperation
         $raw = $this->getRawResponse();
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
-            case StatusCode::OK: $result = Pet::import($this->getJsonResponse());break;
-            default: $result = Error::import($this->getJsonResponse());break;
+            case StatusCode::OK: $result = DataSetList::import($this->getJsonResponse());break;
+            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
         }
         return $result;
     }

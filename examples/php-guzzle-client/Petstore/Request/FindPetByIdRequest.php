@@ -11,10 +11,10 @@ use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class DeletePetsIdRequest extends ClassStructure
+class FindPetByIdRequest extends ClassStructure
 {
     /**
-     * @var int ID of pet to delete
+     * @var int ID of pet to fetch
      * In: path, Name: id
      */
     public $id;

@@ -41,6 +41,7 @@ class GenClientPhpTest extends \PHPUnit_Framework_TestCase
         $cmd->schema = __DIR__ . '/../../../resources/acme.json';
         $cmd->projectPath = __DIR__ . '/../../../../examples/php-guzzle-client/Acme/';
         $cmd->namespace = 'Swac\Example\Acme';
+        $cmd->ignoreOperationId = true;
 
         $cmd->performAction();
 

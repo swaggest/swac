@@ -158,7 +158,7 @@ class Reader
 
                         /** @var Operation $op */
                         $op = $pathItem->$method;
-                        $handler = self::makeHandler($path, $method, $op);
+                        $handler = $this->makeHandler($path, $method, $op);
 
                         if (!isset($handler->security) && isset($defaultSecurity)) {
                             $handler->security = $defaultSecurity;
@@ -243,11 +243,14 @@ class Reader
         }
     }
 
-    private static function makeHandler($path, $method, Operation $operation)
+    private function makeHandler($path, $method, Operation $operation)
     {
         $handler = new RestOperation();
         $handler->path = $path;
         $handler->method = $method;
+        if (!$this->rest->ignoreOperationId) {
+            $handler->operationId = $operation->operationId;
+        }
         $handler->description = $operation->description;
         $handler->summary = $operation->summary;
         $handler->tags = $operation->tags;

@@ -11,7 +11,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\Petstore\Config;
 use Swac\Example\Petstore\Definitions\Error;
-use Swac\Example\Petstore\Request\DeletePetsIdRequest;
+use Swac\Example\Petstore\Request\DeletePetRequest;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -24,16 +24,16 @@ use Swaggest\RestClient\RestException;
  * deletes a single pet based on the ID supplied
  * HTTP: DELETE /pets/{id}
  */
-class DeletePetsId extends AbstractOperation
+class DeletePet extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param DeletePetsIdRequest $request
+     * @param DeletePetRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, DeletePetsIdRequest $request, Config $config)
+    public function __construct(ClientInterface $client, DeletePetRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
