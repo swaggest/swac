@@ -48,6 +48,7 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         $cmd->schema = __DIR__ . '/../../../resources/acme.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/acme/';
         $cmd->pkgName = 'acme';
+        $cmd->ignoreOperationId = true;
 
         $cmd->performAction();
 

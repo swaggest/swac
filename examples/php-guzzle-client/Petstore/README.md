@@ -2,16 +2,16 @@
 
 ### 
 
-* [`DELETE /pets/{id}`](#deletepetsid) deletes a single pet based on the ID supplied
-* [`GET /pets/{id}`](#getpetsid) Returns a user based on a single ID, if the user does not have access to
-* [`GET /pets`](#getpets) Returns all pets from the system that the user has access to
-* [`POST /pets`](#postpets) Creates a new pet in the store.  Duplicates are allowed
+* [`DELETE /pets/{id}`](#deletepet) deletes a single pet based on the ID supplied
+* [`GET /pets/{id}`](#findpetbyid) Returns a user based on a single ID, if the user does not have access to
+* [`GET /pets`](#findpets) Returns all pets from the system that the user has access to
+* [`POST /pets`](#addpet) Creates a new pet in the store.  Duplicates are allowed
 
 
 
 ## Operations
 
-### `GetPets`
+### `FindPets`
 
 Returns all pets from the system that the user has access to
 Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem
@@ -43,7 +43,7 @@ _Endpoint_: `/pets`
 _Namespace_: `Swac\Example\Petstore\Operation`
 
 #### Request
-Type: `Swac\Example\Petstore\Request\GetPetsRequest`
+Type: `Swac\Example\Petstore\Request\FindPetsRequest`
 
 |Name   |Type                   |In     |Description                        |
 |-------|-----------------------|-------|-----------------------------------|
@@ -62,7 +62,7 @@ Type: `Swac\Example\Petstore\Request\GetPetsRequest`
 |200 OK|[`GetPetsOKResponse`](#swacexamplepetstoreresponsegetpetsokresponse)|pet response    |
 |      |[`Error`](#swacexamplepetstoredefinitionserror)                     |unexpected error|
 
-### `PostPets`
+### `AddPet`
 
 Creates a new pet in the store.  Duplicates are allowed
 
@@ -71,7 +71,7 @@ _Endpoint_: `/pets`
 _Namespace_: `Swac\Example\Petstore\Operation`
 
 #### Request
-Type: `Swac\Example\Petstore\Request\PostPetsRequest`
+Type: `Swac\Example\Petstore\Request\AddPetRequest`
 
 |Name |Type                                             |In    |Description            |
 |-----|-------------------------------------------------|------|-----------------------|
@@ -94,7 +94,7 @@ Type: `Swac\Example\Petstore\Request\PostPetsRequest`
 |200 OK|[`Pet`](#swacexamplepetstoredefinitionspet)    |pet response    |
 |      |[`Error`](#swacexamplepetstoredefinitionserror)|unexpected error|
 
-### `GetPetsId`
+### `FindPetById`
 
 Returns a user based on a single ID, if the user does not have access to
 the pet
@@ -104,7 +104,7 @@ _Endpoint_: `/pets/{id}`
 _Namespace_: `Swac\Example\Petstore\Operation`
 
 #### Request
-Type: `Swac\Example\Petstore\Request\GetPetsIdRequest`
+Type: `Swac\Example\Petstore\Request\FindPetByIdRequest`
 
 |Name|Type |In    |Description       |
 |----|-----|------|------------------|
@@ -122,7 +122,7 @@ Type: `Swac\Example\Petstore\Request\GetPetsIdRequest`
 |200 OK|[`Pet`](#swacexamplepetstoredefinitionspet)    |pet response    |
 |      |[`Error`](#swacexamplepetstoredefinitionserror)|unexpected error|
 
-### `DeletePetsId`
+### `DeletePet`
 
 deletes a single pet based on the ID supplied
 
@@ -131,7 +131,7 @@ _Endpoint_: `/pets/{id}`
 _Namespace_: `Swac\Example\Petstore\Operation`
 
 #### Request
-Type: `Swac\Example\Petstore\Request\DeletePetsIdRequest`
+Type: `Swac\Example\Petstore\Request\DeletePetRequest`
 
 |Name|Type |In    |Description        |
 |----|-----|------|-------------------|

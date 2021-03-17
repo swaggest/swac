@@ -10,10 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\PetstoreOAS3\Config;
-use Swac\Example\PetstoreOAS3\Definitions\NewPet;
-use Swac\Example\PetstoreOAS3\Definitions\Pet;
-use Swac\Example\PetstoreOAS3\Request\GetPetsIdRequest;
-use Swac\Example\PetstoreOAS3\Response\GetPetsOKResponseItemsAllOf1;
+use Swac\Example\PetstoreOAS3\Request\DeletePetRequest;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -23,25 +20,24 @@ use Swaggest\RestClient\RestException;
 
 
 /**
- * Returns a user based on a single ID, if the user does not have access to
- * the pet
- * HTTP: GET /pets/{id}
+ * deletes a single pet based on the ID supplied
+ * HTTP: DELETE /pets/{id}
  */
-class GetPetsId extends AbstractOperation
+class DeletePet extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetPetsIdRequest $request
+     * @param DeletePetRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetPetsIdRequest $request, Config $config)
+    public function __construct(ClientInterface $client, DeletePetRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
         $this->rawRequest = new Request(
-            Method::GET,
+            Method::DELETE,
             rtrim($config->getBaseUrl(), '/') . $request->makeUrl(),
             $request->makeHeaders(),
             $request->makeBody()
@@ -49,7 +45,7 @@ class GetPetsId extends AbstractOperation
     }
 
     /**
-     * @return NewPet|GetPetsOKResponseItemsAllOf1
+     * @return mixed
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -60,7 +56,7 @@ class GetPetsId extends AbstractOperation
         $raw = $this->getRawResponse();
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
-            case StatusCode::OK: $result = Pet::import($this->getJsonResponse());break;
+            case StatusCode::NO_CONTENT: $result = null;break;
             default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
         }
         return $result;

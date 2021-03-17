@@ -8,6 +8,8 @@ class Rest implements Renderer
 {
     public $operationsFilter = [];
 
+    public $ignoreOperationId = false;
+
     public $totalOperations = 0;
 
     /** @var Renderer[] */

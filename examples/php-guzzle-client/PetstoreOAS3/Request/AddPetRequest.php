@@ -6,15 +6,16 @@
 
 namespace Swac\Example\PetstoreOAS3\Request;
 
+use Swac\Example\PetstoreOAS3\Definitions\NewPet;
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class GetPetsIdRequest extends ClassStructure
+class AddPetRequest extends ClassStructure
 {
-    /** @var int In: path, Name: id */
-    public $id;
+    /** @var NewPet In: body, Name: body */
+    public $body;
 
     /**
      * @param Properties|static $properties
@@ -22,29 +23,26 @@ class GetPetsIdRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->id = Schema::integer();
-        $properties->id->format = "int64";
+        $properties->body = NewPet::schema();
         $ownerSchema->type = Schema::OBJECT;
-        $ownerSchema->required = array(
-            self::names()->id,
-        );
     }
 
     public function makeUrl()
     {
-        $url = '/pets/' . urlencode($this->id);
+        $url = '/pets';
         return $url;
     }
 
     public function makeHeaders()
     {
         $headers = array();
+        $headers['Content-Type'] = 'application/json; charset=utf-8';
         $headers['Accept'] = 'application/json';
         return $headers;
     }
 
     public function makeBody()
     {
-        return null;
+        return json_encode($this->body);
     }
 }

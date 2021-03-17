@@ -119,23 +119,27 @@ class Client implements Renderer
 
     private $handlerNames = [];
 
-    private function getOperationName($method, $path)
+    private function getOperationName($method, $path, $operationId)
     {
         $postfix = 1;
         do {
-            if ($this->skipPathParamsInHandlerName) {
-                $path = explode('/', trim($path, '/'));
-                if ($postfix !== 1) {
-                    $path [] = 'type' . $postfix;
-                }
-                foreach ($path as $k => $item) {
-                    if (!empty($item) && $item[0] === '{') {
-                        unset($path[$k]);
+            if ($operationId !== null) {
+                $handlerName = PhpCode::makePhpName($operationId);
+            } else {
+                if ($this->skipPathParamsInHandlerName) {
+                    $path = explode('/', trim($path, '/'));
+                    if ($postfix !== 1) {
+                        $path [] = 'type' . $postfix;
                     }
+                    foreach ($path as $k => $item) {
+                        if (!empty($item) && $item[0] === '{') {
+                            unset($path[$k]);
+                        }
+                    }
+                    $path = implode('/', $path);
                 }
-                $path = implode('/', $path);
+                $handlerName = PhpCode::makePhpName($method . '_' . $path);
             }
-            $handlerName = PhpCode::makePhpName($method . '_' . $path);
             $postfix += 1;
         } while (isset($this->handlerNames[$handlerName]));
 
@@ -172,7 +176,7 @@ class Client implements Renderer
     {
         Log::getInstance()->info('Processing operation', ['method' => $operation->method, 'path' => $operation->path]);
 
-        $operationName = $this->getOperationName($operation->method, $operation->path);
+        $operationName = $this->getOperationName($operation->method, $operation->path, $operation->operationId);
 
         $operationClass = new OperationClass($operation, $this->builder, $this->configClass);
         $operationClass->setName(ucfirst($operationName));

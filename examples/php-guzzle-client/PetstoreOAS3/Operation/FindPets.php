@@ -4,17 +4,16 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\Petstore\Operation;
+namespace Swac\Example\PetstoreOAS3\Operation;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Swac\Example\Petstore\Config;
-use Swac\Example\Petstore\Definitions\Error;
-use Swac\Example\Petstore\Definitions\NewPet;
-use Swac\Example\Petstore\Request\GetPetsRequest;
-use Swac\Example\Petstore\Response\GetPetsOKResponse;
-use Swac\Example\Petstore\Response\GetPetsOKResponseItemsAllOf1;
+use Swac\Example\PetstoreOAS3\Config;
+use Swac\Example\PetstoreOAS3\Definitions\NewPet;
+use Swac\Example\PetstoreOAS3\Request\FindPetsRequest;
+use Swac\Example\PetstoreOAS3\Response\GetPetsOKResponse;
+use Swac\Example\PetstoreOAS3\Response\GetPetsOKResponseItemsAllOf1;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -49,16 +48,16 @@ use Swaggest\RestClient\RestException;
  * Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
  * HTTP: GET /pets
  */
-class GetPets extends AbstractOperation
+class FindPets extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetPetsRequest $request
+     * @param FindPetsRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetPetsRequest $request, Config $config)
+    public function __construct(ClientInterface $client, FindPetsRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
@@ -71,7 +70,7 @@ class GetPets extends AbstractOperation
     }
 
     /**
-     * @return NewPet[]|GetPetsOKResponseItemsAllOf1[]|array|Error
+     * @return NewPet[]|GetPetsOKResponseItemsAllOf1[]|array
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -83,7 +82,7 @@ class GetPets extends AbstractOperation
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
             case StatusCode::OK: $result = GetPetsOKResponse::import($this->getJsonResponse());break;
-            default: $result = Error::import($this->getJsonResponse());break;
+            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
         }
         return $result;
     }

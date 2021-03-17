@@ -7,36 +7,27 @@
 namespace Swac\Example\UsptoOAS3\Metadata\Request;
 
 use Swaggest\JsonSchema\Constraint\Properties;
+use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class GetDatasetVersionFieldsRequest extends ClassStructure
+/**
+ * @method static mixed import($data, Context $options = null)
+ */
+class ListDataSetsRequest extends ClassStructure
 {
-    /** @var string In: path, Name: dataset */
-    public $dataset;
-
-    /** @var string In: path, Name: version */
-    public $version;
-
     /**
      * @param Properties|static $properties
      * @param Schema $ownerSchema
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->dataset = Schema::string();
-        $properties->version = Schema::string();
-        $ownerSchema->type = Schema::OBJECT;
-        $ownerSchema->required = array(
-            self::names()->dataset,
-            self::names()->version,
-        );
     }
 
     public function makeUrl()
     {
-        $url = '/' . urlencode($this->dataset) . '/' . urlencode($this->version) . '/fields';
+        $url = '/';
         return $url;
     }
 

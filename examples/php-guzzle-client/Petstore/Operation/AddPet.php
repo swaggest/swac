@@ -4,15 +4,17 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\UsptoOAS3\Metadata\Operation;
+namespace Swac\Example\Petstore\Operation;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Swac\Example\UsptoOAS3\Config;
-use Swac\Example\UsptoOAS3\Metadata\Request\GetDatasetVersionFieldsRequest;
-use Swac\Example\UsptoOAS3\Metadata\Response\GetDatasetVersionFieldsNotFoundResponse;
-use Swac\Example\UsptoOAS3\Metadata\Response\GetDatasetVersionFieldsOKResponse;
+use Swac\Example\Petstore\Config;
+use Swac\Example\Petstore\Definitions\Error;
+use Swac\Example\Petstore\Definitions\NewPet;
+use Swac\Example\Petstore\Definitions\Pet;
+use Swac\Example\Petstore\Request\AddPetRequest;
+use Swac\Example\Petstore\Response\GetPetsOKResponseItemsAllOf1;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\RestClient\AbstractOperation;
@@ -22,27 +24,24 @@ use Swaggest\RestClient\RestException;
 
 
 /**
- * This GET API returns the list of all the searchable field names that are in
- * the oa_citations. Please see the 'fields' attribute which returns an array
- * of field names. Each field or a combination of fields can be searched using
- * the syntax options shown below.
- * HTTP: GET /{dataset}/{version}/fields
+ * Creates a new pet in the store.  Duplicates are allowed
+ * HTTP: POST /pets
  */
-class GetDatasetVersionFields extends AbstractOperation
+class AddPet extends AbstractOperation
 {
     /**
      * @param ClientInterface $client
-     * @param GetDatasetVersionFieldsRequest $request
+     * @param AddPetRequest $request
      * @param Config $config
      * @throws InvalidValue
      * @throws RestException
      */
-    public function __construct(ClientInterface $client, GetDatasetVersionFieldsRequest $request, Config $config)
+    public function __construct(ClientInterface $client, AddPetRequest $request, Config $config)
     {
         $this->client = $client;
         $request->validate();
         $this->rawRequest = new Request(
-            Method::GET,
+            Method::POST,
             rtrim($config->getBaseUrl(), '/') . $request->makeUrl(),
             $request->makeHeaders(),
             $request->makeBody()
@@ -50,7 +49,7 @@ class GetDatasetVersionFields extends AbstractOperation
     }
 
     /**
-     * @return string
+     * @return NewPet|GetPetsOKResponseItemsAllOf1|Error
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -61,9 +60,8 @@ class GetDatasetVersionFields extends AbstractOperation
         $raw = $this->getRawResponse();
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
-            case StatusCode::OK: $result = GetDatasetVersionFieldsOKResponse::import($this->getJsonResponse());break;
-            case StatusCode::NOT_FOUND: $result = GetDatasetVersionFieldsNotFoundResponse::import($this->getJsonResponse());break;
-            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
+            case StatusCode::OK: $result = Pet::import($this->getJsonResponse());break;
+            default: $result = Error::import($this->getJsonResponse());break;
         }
         return $result;
     }
