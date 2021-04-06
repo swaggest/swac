@@ -52,6 +52,7 @@ func (request *PutFoosRequest) encode(ctx context.Context, baseURL string) (*htt
 // PutFoosResponse is operation response value.
 type PutFoosResponse struct {
 	StatusCode               int
+	RawBody                  []byte            // RawBody contains read bytes of response body.
 	ValueBadRequest          *RestErrResponse  // ValueBadRequest is a value of 400 Bad Request response.
 	ValueNotFound            *RestErrResponse  // ValueNotFound is a value of 404 Not Found response.
 	ValueConflict            *RestErrResponse  // ValueConflict is a value of 409 Conflict response.
@@ -87,6 +88,8 @@ func (result *PutFoosResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

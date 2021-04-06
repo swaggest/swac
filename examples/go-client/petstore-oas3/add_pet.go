@@ -42,7 +42,8 @@ func (request *AddPetRequest) encode(ctx context.Context, baseURL string) (*http
 // AddPetResponse is operation response value.
 type AddPetResponse struct {
 	StatusCode int
-	ValueOK    *Pet  // ValueOK is a value of 200 OK response.
+	RawBody    []byte  // RawBody contains read bytes of response body.
+	ValueOK    *Pet    // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.
@@ -66,6 +67,8 @@ func (result *AddPetResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

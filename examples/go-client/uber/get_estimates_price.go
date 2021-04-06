@@ -60,6 +60,7 @@ func (request *GetEstimatesPriceRequest) encode(ctx context.Context, baseURL str
 // GetEstimatesPriceResponse is operation response value.
 type GetEstimatesPriceResponse struct {
 	StatusCode int
+	RawBody    []byte           // RawBody contains read bytes of response body.
 	ValueOK    []PriceEstimate  // ValueOK is a value of 200 OK response.
 	Default    *Error           // Default is a default value of response.
 }
@@ -79,6 +80,8 @@ func (result *GetEstimatesPriceResponse) decode(resp *http.Response) error {
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

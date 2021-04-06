@@ -37,6 +37,7 @@ func (request *DeletePetRequest) encode(ctx context.Context, baseURL string) (*h
 // DeletePetResponse is operation response value.
 type DeletePetResponse struct {
 	StatusCode int
+	RawBody    []byte  // RawBody contains read bytes of response body.
 }
 
 // decode loads data from *http.Response.
@@ -60,6 +61,8 @@ func (result *DeletePetResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

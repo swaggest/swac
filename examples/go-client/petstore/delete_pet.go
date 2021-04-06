@@ -39,6 +39,7 @@ func (request *DeletePetRequest) encode(ctx context.Context, baseURL string) (*h
 // DeletePetResponse is operation response value.
 type DeletePetResponse struct {
 	StatusCode int
+	RawBody    []byte  // RawBody contains read bytes of response body.
 	Default    *Error  // Default is a default value of response.
 }
 
@@ -57,6 +58,8 @@ func (result *DeletePetResponse) decode(resp *http.Response) error {
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

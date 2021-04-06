@@ -42,6 +42,7 @@ func (request *AddPetRequest) encode(ctx context.Context, baseURL string) (*http
 // AddPetResponse is operation response value.
 type AddPetResponse struct {
 	StatusCode int
+	RawBody    []byte  // RawBody contains read bytes of response body.
 	ValueOK    *Pet    // ValueOK is a value of 200 OK response.
 	Default    *Error  // Default is a default value of response.
 }
@@ -61,6 +62,8 @@ func (result *AddPetResponse) decode(resp *http.Response) error {
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

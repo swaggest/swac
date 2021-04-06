@@ -69,7 +69,8 @@ func (request *GetFoosRequest) encode(ctx context.Context, baseURL string) (*htt
 // GetFoosResponse is operation response value.
 type GetFoosResponse struct {
 	StatusCode int
-	ValueOK    *Foo  // ValueOK is a value of 200 OK response.
+	RawBody    []byte  // RawBody contains read bytes of response body.
+	ValueOK    *Foo    // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.
@@ -93,6 +94,8 @@ func (result *GetFoosResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{
