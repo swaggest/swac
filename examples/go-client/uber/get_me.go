@@ -34,6 +34,7 @@ func (request *GetMeRequest) encode(ctx context.Context, baseURL string) (*http.
 // GetMeResponse is operation response value.
 type GetMeResponse struct {
 	StatusCode int
+	RawBody    []byte    // RawBody contains read bytes of response body.
 	ValueOK    *Profile  // ValueOK is a value of 200 OK response.
 	Default    *Error    // Default is a default value of response.
 }
@@ -53,6 +54,8 @@ func (result *GetMeResponse) decode(resp *http.Response) error {
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

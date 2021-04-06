@@ -65,6 +65,7 @@ func (request *PerformSearchRequest) encode(ctx context.Context, baseURL string)
 // PerformSearchResponse is operation response value.
 type PerformSearchResponse struct {
 	StatusCode    int
+	RawBody       []byte                               // RawBody contains read bytes of response body.
 	ValueOK       []map[string]map[string]interface{}  // ValueOK is a value of 200 OK response.
 	ValueNotFound interface{}                          // ValueNotFound is a value of 404 Not Found response.
 }
@@ -92,6 +93,8 @@ func (result *PerformSearchResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

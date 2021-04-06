@@ -55,6 +55,7 @@ func (request *GetHistoryRequest) encode(ctx context.Context, baseURL string) (*
 // GetHistoryResponse is operation response value.
 type GetHistoryResponse struct {
 	StatusCode int
+	RawBody    []byte       // RawBody contains read bytes of response body.
 	ValueOK    *Activities  // ValueOK is a value of 200 OK response.
 	Default    *Error       // Default is a default value of response.
 }
@@ -74,6 +75,8 @@ func (result *GetHistoryResponse) decode(resp *http.Response) error {
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

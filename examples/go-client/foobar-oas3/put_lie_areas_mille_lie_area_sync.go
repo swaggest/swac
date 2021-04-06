@@ -50,6 +50,7 @@ func (request *PutLieAreasMilleLieAreaSyncRequest) encode(ctx context.Context, b
 // PutLieAreasMilleLieAreaSyncResponse is operation response value.
 type PutLieAreasMilleLieAreaSyncResponse struct {
 	StatusCode               int
+	RawBody                  []byte            // RawBody contains read bytes of response body.
 	ValueBadRequest          *RestErrResponse  // ValueBadRequest is a value of 400 Bad Request response.
 	ValueNotFound            *RestErrResponse  // ValueNotFound is a value of 404 Not Found response.
 	ValueInternalServerError *RestErrResponse  // ValueInternalServerError is a value of 500 Internal Server Error response.
@@ -82,6 +83,8 @@ func (result *PutLieAreasMilleLieAreaSyncResponse) decode(resp *http.Response) e
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

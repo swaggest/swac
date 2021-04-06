@@ -36,6 +36,7 @@ func (request *ListDataSetsRequest) encode(ctx context.Context, baseURL string) 
 // ListDataSetsResponse is operation response value.
 type ListDataSetsResponse struct {
 	StatusCode int
+	RawBody    []byte        // RawBody contains read bytes of response body.
 	ValueOK    *DataSetList  // ValueOK is a value of 200 OK response.
 }
 
@@ -60,6 +61,8 @@ func (result *ListDataSetsResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

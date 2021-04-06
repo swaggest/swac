@@ -496,6 +496,9 @@ GO
     {
         $responseStruct = new StructDef($funcName . 'Response', $funcName . 'Response is operation response value.');
         $responseStruct->addProperty(new StructProperty('StatusCode', TypeUtil::fromString('int')));
+        $rawBody = new StructProperty('RawBody', TypeUtil::fromString('[]byte'));
+        $rawBody->setComment('RawBody contains read bytes of response body.');
+        $responseStruct->addProperty($rawBody);
         foreach ($responses as $response) {
             if ($response->isDefault) {
                 $propName = 'Default';
@@ -989,6 +992,8 @@ GO;
         }
 
         $body .= <<<'GO'
+
+result.RawBody = dump.Bytes()
 
 if err != nil {
     return responseError{

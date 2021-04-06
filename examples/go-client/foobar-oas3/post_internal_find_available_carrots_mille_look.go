@@ -45,6 +45,7 @@ func (request *PostInternalFindAvailableCarrotsMilleLookRequest) encode(ctx cont
 // PostInternalFindAvailableCarrotsMilleLookResponse is operation response value.
 type PostInternalFindAvailableCarrotsMilleLookResponse struct {
 	StatusCode               int
+	RawBody                  []byte                              // RawBody contains read bytes of response body.
 	ValueOK                  *UsecaseFindAvailableCarrotsOutput  // ValueOK is a value of 200 OK response.
 	ValueBadRequest          *RestErrResponse                    // ValueBadRequest is a value of 400 Bad Request response.
 	ValueInternalServerError *RestErrResponse                    // ValueInternalServerError is a value of 500 Internal Server Error response.
@@ -75,6 +76,8 @@ func (result *PostInternalFindAvailableCarrotsMilleLookResponse) decode(resp *ht
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

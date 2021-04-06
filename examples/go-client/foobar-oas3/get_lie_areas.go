@@ -47,6 +47,7 @@ func (request *GetLieAreasRequest) encode(ctx context.Context, baseURL string) (
 // GetLieAreasResponse is operation response value.
 type GetLieAreasResponse struct {
 	StatusCode               int
+	RawBody                  []byte            // RawBody contains read bytes of response body.
 	ValueOK                  []string          // ValueOK is a value of 200 OK response.
 	ValueInternalServerError *RestErrResponse  // ValueInternalServerError is a value of 500 Internal Server Error response.
 }
@@ -74,6 +75,8 @@ func (result *GetLieAreasResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

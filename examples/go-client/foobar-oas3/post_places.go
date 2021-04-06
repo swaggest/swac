@@ -42,6 +42,7 @@ func (request *PostPlacesRequest) encode(ctx context.Context, baseURL string) (*
 // PostPlacesResponse is operation response value.
 type PostPlacesResponse struct {
 	StatusCode               int
+	RawBody                  []byte            // RawBody contains read bytes of response body.
 	ValueOK                  *PlaceEntity      // ValueOK is a value of 200 OK response.
 	ValueBadRequest          *RestErrResponse  // ValueBadRequest is a value of 400 Bad Request response.
 	ValueConflict            *RestErrResponse  // ValueConflict is a value of 409 Conflict response.
@@ -75,6 +76,8 @@ func (result *PostPlacesResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{

@@ -42,6 +42,7 @@ func (request *ListSearchableFieldsRequest) encode(ctx context.Context, baseURL 
 // ListSearchableFieldsResponse is operation response value.
 type ListSearchableFieldsResponse struct {
 	StatusCode    int
+	RawBody       []byte  // RawBody contains read bytes of response body.
 	ValueOK       string  // ValueOK is a value of 200 OK response.
 	ValueNotFound string  // ValueNotFound is a value of 404 Not Found response.
 }
@@ -69,6 +70,8 @@ func (result *ListSearchableFieldsResponse) decode(resp *http.Response) error {
 			err = errors.New("unexpected response status: " + resp.Status)
 		}
 	}
+
+	result.RawBody = dump.Bytes()
 
 	if err != nil {
 		return responseError{
