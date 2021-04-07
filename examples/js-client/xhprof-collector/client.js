@@ -10,7 +10,7 @@ function APIClient(baseURL) {
 }
 
 /**
- * @param {object} req
+ * @param {object} req - request parameters.
  * @param {XhUsecaseProfilesCallback} onOK
  */
 APIClient.prototype.getProfile = function (req, onOK) {
@@ -40,7 +40,9 @@ APIClient.prototype.getProfile = function (req, onOK) {
 }
 
 /**
- * @param {XhPostProfileRequest} req
+ * Collect Profile
+ * Collects XHPROF-compatible PHP profile.
+ * @param {XhPostProfileRequest} req - request parameters.
  * @param {RawCallback} onAccepted
  */
 APIClient.prototype.postProfile = function (req, onAccepted) {
@@ -81,7 +83,7 @@ APIClient.prototype.postProfile = function (req, onAccepted) {
 }
 
 /**
- * @param {XhGetProfileDotRequest} req
+ * @param {XhGetProfileDotRequest} req - request parameters.
  * @param {RawCallback} onOK
  * @param {XhRestErrResponseCallback} onNotFound
  */
@@ -129,7 +131,7 @@ APIClient.prototype.getProfileDot = function (req, onOK, onNotFound) {
 }
 
 /**
- * @param {XhGetProfileFindSymbolRequest} req
+ * @param {XhGetProfileFindSymbolRequest} req - request parameters.
  * @param {XhUsecaseSearchOutputCallback} onOK
  * @param {XhRestErrResponseCallback} onNotFound
  */
@@ -174,7 +176,7 @@ APIClient.prototype.getProfileFindSymbol = function (req, onOK, onNotFound) {
 }
 
 /**
- * @param {XhGetProfileSymbolRequest} req
+ * @param {XhGetProfileSymbolRequest} req - request parameters.
  * @param {XhUsecaseSymbolStatOutputCallback} onOK
  * @param {XhRestErrResponseCallback} onNotFound
  */
@@ -216,7 +218,9 @@ APIClient.prototype.getProfileSymbol = function (req, onOK, onNotFound) {
 }
 
 /**
- * @param {XhGetTopTracesRequest} req
+ * Top Traces
+ * Get traces that occupy most of resource.
+ * @param {XhGetTopTracesRequest} req - request parameters.
  * @param {ArrayXhUsecaseTraceInfoCallback} onOK
  * @param {XhRestErrResponseCallback} onNotFound
  */

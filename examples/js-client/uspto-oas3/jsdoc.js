@@ -24,8 +24,8 @@
 /**
  * @typedef GetDatasetVersionFieldsRequest
  * @type {object}
- * @property {string} dataset.
- * @property {string} version.
+ * @property {string} dataset - Name of the dataset.
+ * @property {string} version - Version of the dataset.
  */
 
 /**
@@ -36,8 +36,8 @@
 /**
  * @typedef PostDatasetVersionRecordsRequest
  * @type {object}
- * @property {string} version.
- * @property {string} dataset.
+ * @property {string} version - Version of the dataset.
+ * @property {string} dataset - Name of the dataset. In this case, the default value is oa_citations.
  * @property {string} criteria - Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.
  * @property {number} start - Starting record number. Default value is 0.
  * @property {number} rows - Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.

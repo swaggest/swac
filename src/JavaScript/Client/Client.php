@@ -293,9 +293,18 @@ CODE
         $args = join(', ', $args);
         $method = strtoupper($o->method);
 
+        $headComment = '';
+        if (!empty(trim($o->summary))) {
+            $headComment .= trim($o->summary) . "\n";
+        }
+        if (!empty(trim($o->description))) {
+            $headComment .= trim($o->description) . "\n";
+        }
+
+
         $code = <<<JS
 /**
- * @param {{$reqType}} req
+{$this->padLines(' * ', $headComment, false)} * @param {{$reqType}} req - request parameters.
 {$responseArguments} */
 {$this->clientName}.prototype.{$funcName} = function ($args) {
     var x = new XMLHttpRequest();
@@ -390,6 +399,10 @@ JSDOC;
 
                 $paramNames[$name] = true;
                 $parameter->meta[self::PARAM_FIELD_NAME_META] = $name;
+
+                if (!empty($parameter->description) && empty($parameter->schema->description)) {
+                    $parameter->schema->description = $parameter->description;
+                }
 
                 $reqSchema->setProperty($name, $parameter->schema);
             }

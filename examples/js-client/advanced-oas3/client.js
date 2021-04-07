@@ -10,7 +10,8 @@ function APIClient(baseURL) {
 }
 
 /**
- * @param {ExamplesAdvancedDirectGzipRequest} req
+ * direct Gzip
+ * @param {ExamplesAdvancedDirectGzipRequest} req - request parameters.
  * @param {AdvancedGzipPassThroughStructCallback} onOK
  */
 APIClient.prototype.examplesAdvancedDirectGzip = function (req, onOK) {
@@ -46,7 +47,8 @@ APIClient.prototype.examplesAdvancedDirectGzip = function (req, onOK) {
 }
 
 /**
- * @param {HeadGzipPassThroughRequest} req
+ * direct Gzip
+ * @param {HeadGzipPassThroughRequest} req - request parameters.
  * @param {RawCallback} onOK
  */
 APIClient.prototype.headGzipPassThrough = function (req, onOK) {
@@ -82,7 +84,9 @@ APIClient.prototype.headGzipPassThrough = function (req, onOK) {
 }
 
 /**
- * @param {PostJsonBodyValidationInPathRequest} req
+ * Request With JSON Body and non-trivial validation
+ * Request with JSON body and query/header/path params, response with JSON body and data from request.
+ * @param {PostJsonBodyValidationInPathRequest} req - request parameters.
  * @param {AdvancedOutputWithJSONType3Callback} onOK
  */
 APIClient.prototype.postJsonBodyValidationInPath = function (req, onOK) {
@@ -124,7 +128,9 @@ APIClient.prototype.postJsonBodyValidationInPath = function (req, onOK) {
 }
 
 /**
- * @param {PostJsonBodyInPathRequest} req
+ * Request With JSON Body
+ * Request with JSON body and query/header/path params, response with JSON body and data from request.
+ * @param {PostJsonBodyInPathRequest} req - request parameters.
  * @param {AdvancedOutputWithJSONType2Callback} onCreated
  */
 APIClient.prototype.postJsonBodyInPath = function (req, onCreated) {
@@ -166,7 +172,9 @@ APIClient.prototype.postJsonBodyInPath = function (req, onCreated) {
 }
 
 /**
- * @param {PostJsonMapBodyRequest} req
+ * Request With JSON Map In Body
+ * Request with JSON object (map) body.
+ * @param {PostJsonMapBodyRequest} req - request parameters.
  * @param {AdvancedJsonOutputType2Callback} onOK
  */
 APIClient.prototype.postJsonMapBody = function (req, onOK) {
@@ -207,7 +215,9 @@ APIClient.prototype.postJsonMapBody = function (req, onOK) {
 }
 
 /**
- * @param {GetJsonParamInPathRequest} req
+ * Request With JSON Query Parameter
+ * Request with JSON body and query/header/path params, response with JSON body and data from request.
+ * @param {GetJsonParamInPathRequest} req - request parameters.
  * @param {AdvancedOutputWithJSONCallback} onOK
  */
 APIClient.prototype.getJsonParamInPath = function (req, onOK) {
@@ -247,7 +257,8 @@ APIClient.prototype.getJsonParamInPath = function (req, onOK) {
 }
 
 /**
- * @param {PostJsonSliceBodyRequest} req
+ * Request With JSON Array In Body
+ * @param {PostJsonSliceBodyRequest} req - request parameters.
  * @param {AdvancedJsonOutputCallback} onOK
  */
 APIClient.prototype.postJsonSliceBody = function (req, onOK) {
@@ -288,7 +299,9 @@ APIClient.prototype.postJsonSliceBody = function (req, onOK) {
 }
 
 /**
- * @param {object} req
+ * Output With Stream Writer
+ * Output with stream writer.
+ * @param {object} req - request parameters.
  * @param {RawCallback} onOK
  * @param {RestErrResponseCallback} onInternalServerError
  */
@@ -324,7 +337,9 @@ APIClient.prototype.getOutputCsvWriter = function (req, onOK, onInternalServerEr
 }
 
 /**
- * @param {object} req
+ * Output With Headers
+ * Output with headers.
+ * @param {object} req - request parameters.
  * @param {AdvancedHeaderOutputCallback} onOK
  */
 APIClient.prototype.getOutputHeaders = function (req, onOK) {
@@ -354,7 +369,9 @@ APIClient.prototype.getOutputHeaders = function (req, onOK) {
 }
 
 /**
- * @param {object} req
+ * Output With Headers
+ * Output with headers.
+ * @param {object} req - request parameters.
  * @param {RawCallback} onOK
  */
 APIClient.prototype.headOutputHeaders = function (req, onOK) {
@@ -384,7 +401,8 @@ APIClient.prototype.headOutputHeaders = function (req, onOK) {
 }
 
 /**
- * @param {GetQueryObjectRequest} req
+ * Request With Object As Query Parameter
+ * @param {GetQueryObjectRequest} req - request parameters.
  * @param {AdvancedOutputQueryObjectCallback} onOK
  */
 APIClient.prototype.getQueryObject = function (req, onOK) {
@@ -417,7 +435,9 @@ APIClient.prototype.getQueryObject = function (req, onOK) {
 }
 
 /**
- * @param {PostReqRespMappingRequest} req
+ * Request Response Mapping
+ * This use case has transport concerns fully decoupled with external req/resp mapping.
+ * @param {PostReqRespMappingRequest} req - request parameters.
  * @param {RawCallback} onNoContent
  */
 APIClient.prototype.postReqRespMapping = function (req, onNoContent) {
@@ -460,7 +480,9 @@ APIClient.prototype.postReqRespMapping = function (req, onNoContent) {
 }
 
 /**
- * @param {PostValidationRequest} req
+ * Validation
+ * Input/Output with validation. Custom annotation.
+ * @param {PostValidationRequest} req - request parameters.
  * @param {AdvancedOutputPortType2Callback} onOK
  */
 APIClient.prototype.postValidation = function (req, onOK) {

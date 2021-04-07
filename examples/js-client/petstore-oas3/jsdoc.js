@@ -3,8 +3,8 @@
 /**
  * @typedef FindPetsRequest
  * @type {object}
- * @property {array<string>} tags.
- * @property {number} limit.
+ * @property {array<string>} tags - tags to filter by.
+ * @property {number} limit - maximum number of results to return.
  */
 
 /**
@@ -39,13 +39,13 @@
 /**
  * @typedef GetPetsIdRequest
  * @type {object}
- * @property {number} id.
+ * @property {number} id - ID of pet to fetch.
  */
 
 /**
  * @typedef DeletePetsIdRequest
  * @type {object}
- * @property {number} id.
+ * @property {number} id - ID of pet to delete.
  */
 
 /**

@@ -10,7 +10,9 @@ function APIClient(baseURL) {
 }
 
 /**
- * @param {DeletePlacesRequest} req
+ * Delete Place
+ * Delete existing place.
+ * @param {DeletePlacesRequest} req - request parameters.
  * @param {RawCallback} onNoContent
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -61,7 +63,9 @@ APIClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onN
 }
 
 /**
- * @param {GetPlacesRequest} req
+ * Find Place
+ * Find existing place.
+ * @param {GetPlacesRequest} req - request parameters.
  * @param {PlaceEntityCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -124,7 +128,9 @@ APIClient.prototype.getPlaces = function (req, onOK, onBadRequest, onNotFound, o
 }
 
 /**
- * @param {PostPlacesRequest} req
+ * Create Place
+ * Create place with target potato and time.
+ * @param {PostPlacesRequest} req - request parameters.
  * @param {PlaceEntityCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onConflict
@@ -177,7 +183,9 @@ APIClient.prototype.postPlaces = function (req, onOK, onBadRequest, onConflict, 
 }
 
 /**
- * @param {DeleteFoosRequest} req
+ * Delete Foo
+ * Delete existing foo.
+ * @param {DeleteFoosRequest} req - request parameters.
  * @param {RawCallback} onNoContent
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -228,7 +236,9 @@ APIClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNot
 }
 
 /**
- * @param {GetFoosRequest} req
+ * Find Foo
+ * Find existing foo.
+ * @param {GetFoosRequest} req - request parameters.
  * @param {ArrayUsecaseFooInfoCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -285,7 +295,9 @@ APIClient.prototype.getFoos = function (req, onOK, onBadRequest, onNotFound, onI
 }
 
 /**
- * @param {PostFoosRequest} req
+ * Create Foo
+ * Create foo with target potato and time.
+ * @param {PostFoosRequest} req - request parameters.
  * @param {FooEntityCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onConflict
@@ -338,7 +350,9 @@ APIClient.prototype.postFoos = function (req, onOK, onBadRequest, onConflict, on
 }
 
 /**
- * @param {PutFoosRequest} req
+ * Update Foo
+ * Update existing foo.
+ * @param {PutFoosRequest} req - request parameters.
  * @param {RawCallback} onNoContent
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -400,7 +414,9 @@ APIClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFou
 }
 
 /**
- * @param {PostInternalFindAvailableCarrotsMilleLookRequest} req
+ * Find Available Carrots
+ * Find carrots available to holes.
+ * @param {PostInternalFindAvailableCarrotsMilleLookRequest} req - request parameters.
  * @param {UsecaseFindAvailableCarrotsOutputCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onInternalServerError
@@ -449,7 +465,9 @@ APIClient.prototype.postInternalFindAvailableCarrotsMilleLook = function (req, o
 }
 
 /**
- * @param {GetLieAreasRequest} req
+ * List Lie areas name
+ * List lie areas name by mille name
+ * @param {GetLieAreasRequest} req - request parameters.
  * @param {ArrayStringCallback} onOK
  * @param {RestErrResponseCallback} onInternalServerError
  */
@@ -488,7 +506,9 @@ APIClient.prototype.getLieAreas = function (req, onOK, onInternalServerError) {
 }
 
 /**
- * @param {PostLieAreasRequest} req
+ * Create Lie Areas
+ * Create lie areas with postcodes.
+ * @param {PostLieAreasRequest} req - request parameters.
  * @param {LieAreaEntityCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onConflict
@@ -541,7 +561,9 @@ APIClient.prototype.postLieAreas = function (req, onOK, onBadRequest, onConflict
 }
 
 /**
- * @param {PutLieAreasMilleLieAreaSyncRequest} req
+ * Sync Lie Area
+ * Synchronize list of lie area postcodes with delivery-area-service.
+ * @param {PutLieAreasMilleLieAreaSyncRequest} req - request parameters.
  * @param {RawCallback} onNoContent
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -594,7 +616,9 @@ APIClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, on
 }
 
 /**
- * @param {GetLiesRequest} req
+ * Get Lies
+ * Gets lies by criteria.
+ * @param {GetLiesRequest} req - request parameters.
  * @param {LiesPageCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound
@@ -687,7 +711,9 @@ APIClient.prototype.getLies = function (req, onOK, onBadRequest, onNotFound, onI
 }
 
 /**
- * @param {GetLiesIdRequest} req
+ * Get Lie By ID
+ * Gets lie by id.
+ * @param {GetLiesIdRequest} req - request parameters.
  * @param {LiesLieCallback} onOK
  * @param {RestErrResponseCallback} onBadRequest
  * @param {RestErrResponseCallback} onNotFound

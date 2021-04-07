@@ -115,6 +115,7 @@
  */
 
 /**
+ * JSON value in query
  * @typedef AdvancedJSONPayload
  * @type {object}
  * @property {number} id.
@@ -125,7 +126,7 @@
  * @typedef GetJsonParamInPathRequest
  * @type {object}
  * @property {number} inQuery - Simple scalar value in query.
- * @property {AdvancedJSONPayload} identity.
+ * @property {AdvancedJSONPayload} identity - JSON value in query.
  * @property {string} inPath - Simple scalar value in path.
  * @property {string} xHeader - Simple scalar value in header.
  */
