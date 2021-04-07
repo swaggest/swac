@@ -17,19 +17,21 @@ Download `swac` from [releases](https://github.com/swaggest/swac/releases) page.
 ### Docker
 
 ```bash
-docker run swaggest/swac swac --help
+docker run --rm swaggest/swac swac --help
 ```
+
 ```
-v0.1.0 swac
+v0.1.21 swac
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac <action>
-   action   Action name                                 
-            Allowed values: php-guzzle-client, go-client
+   action   Action name                                            
+            Allowed values: php-guzzle-client, go-client, js-client
 ...
 ```
 
 Example
+
 ```bash
 mkdir petstore && cd petstore
 docker run -v $(pwd):/code swaggest/swac swac php-guzzle-client https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore.json --namespace MyApp\\Petstore
@@ -46,9 +48,11 @@ composer global require swaggest/swac
 ## Usage
 
 ### PHP Client
+
 ```
 swac php-guzzle-client --help
 ```
+
 ```
 v0.1.0 swac php-guzzle-client
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
@@ -62,9 +66,8 @@ Options:
    --namespace <namespace>        Project namespace
 ```
 
-Generated client depends on [`swaggest/rest-client`](https://github.com/swaggest/php-rest-client), `guzzlehttp/guzzle` 6, 
-and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
-
+The generated client depends on [`swaggest/rest-client`](https://github.com/swaggest/php-rest-client),
+`guzzlehttp/guzzle` 6, and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 
 [Examples](/examples/php-guzzle-client).
 
@@ -73,6 +76,7 @@ and [`swaggest/json-schema`](https://github.com/swaggest/php-json-schema).
 ```
 swac go-client --help 
 ```
+
 ```
 v0.1.14 swac go-client
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
@@ -102,4 +106,35 @@ Options:
 
 [Examples](/examples/go-client).
 
-Generated client is a single package without external dependencies.
+The generated client is a single package without external dependencies.
+
+### JavaScript Client
+
+```
+swac js-client --help 
+```
+
+```
+v0.1.21 swac js-client
+OpenAPI/Swagger compiler, https://github.com/swaggest/swac
+Usage: 
+   swac js-client <schema>
+   schema   Path/URL to OpenAPI/Swagger schema
+   
+Options: 
+   --operations <operations>      Operations filter in form of comma-separated list of method/path, default empty         
+   --ignore-operation-id          Ignore operationId and always name operations using method and path                     
+   --client-name <clientName>     Name of generated client class, default APIClient                                       
+   --types-prefix <typesPrefix>   Prefix generated jsdoc class names                                                      
+   --out <out>                    Path to output files, default ./client                                                  
+   --patches <patches...>         JSON patches to apply to schema file before processing, merge patches are also supported
+```
+
+[Examples](/examples/js-client).
+
+```
+swac js-client openapi.json --out ./ --client-name Backend --types-prefix xh
+```
+
+The generated client is a ES5 class using `XMLHttpRequest` and `jsdoc` type definitions without external dependencies
+suitable for direct usage in browsers.

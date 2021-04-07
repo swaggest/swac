@@ -17,6 +17,8 @@ func (rt roundTripperFunc) RoundTrip(req *http.Request) (*http.Response, error) 
 }
 
 // Client is a REST service HTTP client.
+// Fox Lies Service.
+// The Fox Lies Service serves customized lies per fox based on foo configurations.
 type Client struct {
 	BaseURL              string
 	Timeout              time.Duration

@@ -48,4 +48,7 @@ class Parameter
 
     /** @var mixed[] map of blackboxed context data */
     public $meta = [];
+
+    /** @var bool indicates if parameter value is JSON encoded */
+    public $isJson = false;
 }
