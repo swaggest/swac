@@ -42,7 +42,6 @@ APIClient.prototype.findPets = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -78,7 +77,6 @@ APIClient.prototype.postPets = function (req, onOK) {
         return
     }
 
-    
     x.send();
 }
 
@@ -110,7 +108,6 @@ APIClient.prototype.getPetsId = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -141,7 +138,6 @@ APIClient.prototype.deletePetsId = function (req, onNoContent) {
     url = url.slice(0, -1)
 
     x.open("DELETE", url, true);
-    
     
     x.send();
 }

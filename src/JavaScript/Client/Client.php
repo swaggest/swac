@@ -129,10 +129,13 @@ JS;
      * @param Parameter[] $parameters
      * @return string
      */
-    private function makeRequestHeaders($parameters) {
+    private function makeRequestHeaders($parameters)
+    {
         if (empty($parameters)) {
             return '';
         }
+
+        $res = '';
 
         foreach ($parameters as $parameter) {
             if ($parameter->in === Parameter::HEADER) {
@@ -307,8 +310,10 @@ CODE
     
     {$this->padLines('    ', $this->makeURL($o->parameters, $o->path))}
     x.open("{$method}", url, true);
-    {$this->padLines('    ', $this->makeRequestJSONBody($o->parameters))}
-    {$this->padLines('    ', $this->makeRequestFormData($o->parameters))}
+    {$this->padLines('    ',
+            $this->makeRequestHeaders($o->parameters) .
+            $this->makeRequestJSONBody($o->parameters) .
+            $this->makeRequestFormData($o->parameters))}
     x.send();
 }
 

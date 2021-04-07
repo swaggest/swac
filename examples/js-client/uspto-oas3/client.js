@@ -36,7 +36,6 @@ APIClient.prototype.listDataSets = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -75,7 +74,6 @@ APIClient.prototype.getDatasetVersionFields = function (req, onOK, onNotFound) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -113,7 +111,6 @@ APIClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound)
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     var formData = ''
     if (typeof req.criteria !== 'undefined') {
         formData += 'criteria=' + encodeURIComponent(req.criteria) + '&'

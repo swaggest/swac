@@ -42,7 +42,6 @@ APIClient.prototype.examplesAdvancedDirectGzip = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -79,7 +78,6 @@ APIClient.prototype.headGzipPassThrough = function (req, onOK) {
 
     x.open("HEAD", url, true);
     
-    
     x.send();
 }
 
@@ -113,13 +111,15 @@ APIClient.prototype.postJsonBodyValidationInPath = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
-    
     x.send();
 }
 
@@ -153,13 +153,15 @@ APIClient.prototype.postJsonBodyInPath = function (req, onCreated) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
-    
     x.send();
 }
 
@@ -192,13 +194,15 @@ APIClient.prototype.postJsonMapBody = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
-    
     x.send();
 }
 
@@ -235,8 +239,10 @@ APIClient.prototype.getJsonParamInPath = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("GET", url, true);
-    
-    
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
+
     x.send();
 }
 
@@ -269,13 +275,15 @@ APIClient.prototype.postJsonSliceBody = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
-    
     x.send();
 }
 
@@ -312,7 +320,6 @@ APIClient.prototype.getOutputCsvWriter = function (req, onOK, onInternalServerEr
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -343,7 +350,6 @@ APIClient.prototype.getOutputHeaders = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -373,7 +379,6 @@ APIClient.prototype.headOutputHeaders = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("HEAD", url, true);
-    
     
     x.send();
 }
@@ -408,7 +413,6 @@ APIClient.prototype.getQueryObject = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -438,7 +442,9 @@ APIClient.prototype.postReqRespMapping = function (req, onNoContent) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
+    if (typeof req.xHeader !== 'undefined') {
+        x.setRequestHeader('X-Header', req.xHeader);
+    }
     var formData = ''
     if (typeof req.val2 !== 'undefined') {
         formData += 'val2=' + encodeURIComponent(req.val2) + '&'
@@ -482,13 +488,15 @@ APIClient.prototype.postValidation = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
+    if (typeof req.xInput !== 'undefined') {
+        x.setRequestHeader('X-Input', req.xInput);
+    }
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
-    
     x.send();
 }
 

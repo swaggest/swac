@@ -57,7 +57,6 @@ APIClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onN
 
     x.open("DELETE", url, true);
     
-    
     x.send();
 }
 
@@ -121,7 +120,6 @@ APIClient.prototype.getPlaces = function (req, onOK, onBadRequest, onNotFound, o
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -175,7 +173,6 @@ APIClient.prototype.postPlaces = function (req, onOK, onBadRequest, onConflict, 
         return
     }
 
-    
     x.send();
 }
 
@@ -226,7 +223,6 @@ APIClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNot
     url = url.slice(0, -1)
 
     x.open("DELETE", url, true);
-    
     
     x.send();
 }
@@ -285,7 +281,6 @@ APIClient.prototype.getFoos = function (req, onOK, onBadRequest, onNotFound, onI
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -339,7 +334,6 @@ APIClient.prototype.postFoos = function (req, onOK, onBadRequest, onConflict, on
         return
     }
 
-    
     x.send();
 }
 
@@ -402,7 +396,6 @@ APIClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFou
         return
     }
 
-    
     x.send();
 }
 
@@ -452,7 +445,6 @@ APIClient.prototype.postInternalFindAvailableCarrotsMilleLook = function (req, o
         return
     }
 
-    
     x.send();
 }
 
@@ -491,7 +483,6 @@ APIClient.prototype.getLieAreas = function (req, onOK, onInternalServerError) {
     url = url.slice(0, -1)
 
     x.open("GET", url, true);
-    
     
     x.send();
 }
@@ -546,7 +537,6 @@ APIClient.prototype.postLieAreas = function (req, onOK, onBadRequest, onConflict
         return
     }
 
-    
     x.send();
 }
 
@@ -599,7 +589,6 @@ APIClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, on
     url = url.slice(0, -1)
 
     x.open("PUT", url, true);
-    
     
     x.send();
 }
@@ -694,7 +683,6 @@ APIClient.prototype.getLies = function (req, onOK, onBadRequest, onNotFound, onI
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -749,7 +737,6 @@ APIClient.prototype.getLiesId = function (req, onOK, onBadRequest, onNotFound, o
     url = url.slice(0, -1)
 
     x.open("GET", url, true);
-    
     
     x.send();
 }

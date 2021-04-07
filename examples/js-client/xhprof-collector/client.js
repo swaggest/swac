@@ -36,7 +36,6 @@ APIClient.prototype.getProfile = function (req, onOK) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -78,7 +77,6 @@ APIClient.prototype.postProfile = function (req, onAccepted) {
         return
     }
 
-    
     x.send();
 }
 
@@ -127,7 +125,6 @@ APIClient.prototype.getProfileDot = function (req, onOK, onNotFound) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -173,7 +170,6 @@ APIClient.prototype.getProfileFindSymbol = function (req, onOK, onNotFound) {
 
     x.open("GET", url, true);
     
-    
     x.send();
 }
 
@@ -215,7 +211,6 @@ APIClient.prototype.getProfileSymbol = function (req, onOK, onNotFound) {
     url = url.slice(0, -1)
 
     x.open("GET", url, true);
-    
     
     x.send();
 }
@@ -264,7 +259,6 @@ APIClient.prototype.getTopTraces = function (req, onOK, onNotFound) {
     url = url.slice(0, -1)
 
     x.open("GET", url, true);
-    
     
     x.send();
 }
