@@ -13,6 +13,8 @@ import (
 const DefaultBaseURL = "http://petstore.swagger.io/api"
 
 // Client is a REST service HTTP client.
+// Swagger Petstore.
+// A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification.
 type Client struct {
 	BaseURL           string
 	Timeout           time.Duration
