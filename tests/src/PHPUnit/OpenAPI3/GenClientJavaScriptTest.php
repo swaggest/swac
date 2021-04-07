@@ -58,6 +58,7 @@ class GenClientJavaScriptTest extends \PHPUnit_Framework_TestCase
         $cmd->schema = __DIR__ . '/../../../resources/xhprof-collector.json';
         $cmd->out = __DIR__ . '/../../../../examples/js-client/xhprof-collector/';
         $cmd->typesPrefix = 'xh';
+        $cmd->clientName = 'Backend';
 
         $cmd->performAction();
 

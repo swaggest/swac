@@ -104,6 +104,10 @@ class Reader
             }
 
             $config = new Config();
+            $config->title = $this->schema->info->title;
+            $config->description = $this->schema->info->description;
+            $config->version = $this->schema->info->version;
+
             /**
              * @todo properly process variables
              * @see https://swagger.io/docs/specification/api-host-and-base-path/
