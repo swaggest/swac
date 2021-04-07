@@ -13,7 +13,7 @@
     "swaggest/json-schema": "^0.12.19",
     "swaggest/php-code-builder": "^0.2.16",
     "swaggest/go-code-builder": "^0.4.34",
-    "swaggest/json-cli": "^1.8.2",
+    "swaggest/json-cli": "^v1.8.4",
     "php-yaoi/php-yaoi": "^1",
     "monolog/monolog": "^1.23",
     "bramus/monolog-colored-line-formatter": "^2.0",
