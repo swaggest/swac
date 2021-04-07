@@ -17,7 +17,7 @@
  */
 
 /**
- * @callback cbDataSetList
+ * @callback DataSetListCallback
  * @param {DataSetList} value
  */
 
@@ -29,7 +29,7 @@
  */
 
 /**
- * @callback cbString
+ * @callback StringCallback
  * @param {string} value
  */
 
@@ -44,11 +44,12 @@
  */
 
 /**
- * @callback cbArrayObjectStringObject
+ * @callback ArrayObjectStringObjectCallback
  * @param {array<object<string, object>>} value
  */
 
 /**
- * @callback cbEmpty
+ * @callback RawCallback
+ * @param {XMLHttpRequest} value
  */
 

@@ -4,16 +4,16 @@
  * @constructor
  * @param {string} baseURL - Base URL.
  */
-function FooClient(baseURL) {
+function APIClient(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
 }
 
 /**
  * @param {object} req
- * @param {cbDataSetList} onOK
+ * @param {DataSetListCallback} onOK
  */
-FooClient.prototype.listDataSets = function (req, onOK) {
+APIClient.prototype.listDataSets = function (req, onOK) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -42,10 +42,10 @@ FooClient.prototype.listDataSets = function (req, onOK) {
 
 /**
  * @param {GetDatasetVersionFieldsRequest} req
- * @param {cbString} onOK
- * @param {cbString} onNotFound
+ * @param {StringCallback} onOK
+ * @param {StringCallback} onNotFound
  */
-FooClient.prototype.getDatasetVersionFields = function (req, onOK, onNotFound) {
+APIClient.prototype.getDatasetVersionFields = function (req, onOK, onNotFound) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -81,10 +81,10 @@ FooClient.prototype.getDatasetVersionFields = function (req, onOK, onNotFound) {
 
 /**
  * @param {PostDatasetVersionRecordsRequest} req
- * @param {cbArrayObjectStringObject} onOK
- * @param {cbEmpty} onNotFound
+ * @param {ArrayObjectStringObjectCallback} onOK
+ * @param {RawCallback} onNotFound
  */
-FooClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound) {
+APIClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -99,7 +99,7 @@ FooClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound)
                 break;
             case 404:
                 if (typeof(onNotFound) == 'function') {
-                    onNotFound(JSON.parse(x.responseText));
+                    onNotFound(x);
                 }
                 break;
             default:
@@ -114,7 +114,23 @@ FooClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound)
 
     x.open("POST", url, true);
     
-    
+    var formData = ''
+    if (typeof req.criteria !== 'undefined') {
+        formData += 'criteria=' + encodeURIComponent(req.criteria) + '&'
+    }
+    if (typeof req.start !== 'undefined') {
+        formData += 'start=' + encodeURIComponent(req.start) + '&'
+    }
+    if (typeof req.rows !== 'undefined') {
+        formData += 'rows=' + encodeURIComponent(req.rows) + '&'
+    }
+
+    if (formData !== '') {
+        x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        x.send(formData.slice(0, -1))
+        return  
+    }
+
     x.send();
 }
 

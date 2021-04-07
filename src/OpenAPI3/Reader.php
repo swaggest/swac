@@ -175,7 +175,9 @@ class Reader
                             foreach ($openApiResponse->content as $contentType => $media) {
                                 if ($contentType === self::APPLICATION_JSON || (false !== strpos($contentType, '+json'))) {
                                     $handler->accept = $contentType;
-                                    $response->schema = $media->schema->exportSchema();
+                                    if ($media->schema !== null) {
+                                        $response->schema = $media->schema->exportSchema();
+                                    }
                                 } else {
                                     Log::getInstance()->addWarning(
                                         'Unsupported response content type',
@@ -284,6 +286,9 @@ class Reader
 
         if ($param->schema !== null) {
             $p->schema = $param->schema->exportSchema();
+        } elseif (isset($param->content['application/json']->schema)) {
+            $p->schema = $param->content['application/json']->schema->exportSchema();
+            $p->isJson = true;
         } else {
             throw new Skip("No schema for parameter $param->name in $param->in");
         }

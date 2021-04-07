@@ -7,7 +7,8 @@
  */
 
 /**
- * @callback cbEmpty
+ * @callback RawCallback
+ * @param {XMLHttpRequest} value
  */
 
 /**
@@ -20,7 +21,7 @@
  */
 
 /**
- * @callback cbRestErrResponse
+ * @callback RestErrResponseCallback
  * @param {RestErrResponse} value
  */
 
@@ -46,7 +47,7 @@
  */
 
 /**
- * @callback cbPlaceEntity
+ * @callback PlaceEntityCallback
  * @param {PlaceEntity} value
  */
 
@@ -171,7 +172,7 @@
  */
 
 /**
- * @callback cbArrayUsecaseFooInfo
+ * @callback ArrayUsecaseFooInfoCallback
  * @param {array<UsecaseFooInfo>} value
  */
 
@@ -196,7 +197,7 @@
  */
 
 /**
- * @callback cbFooEntity
+ * @callback FooEntityCallback
  * @param {FooEntity} value
  */
 
@@ -258,7 +259,7 @@
  */
 
 /**
- * @callback cbUsecaseFindAvailableCarrotsOutput
+ * @callback UsecaseFindAvailableCarrotsOutputCallback
  * @param {UsecaseFindAvailableCarrotsOutput} value
  */
 
@@ -269,7 +270,7 @@
  */
 
 /**
- * @callback cbArrayString
+ * @callback ArrayStringCallback
  * @param {array<string>} value
  */
 
@@ -299,7 +300,7 @@
  */
 
 /**
- * @callback cbLieAreaEntity
+ * @callback LieAreaEntityCallback
  * @param {LieAreaEntity} value
  */
 
@@ -455,7 +456,7 @@
  */
 
 /**
- * @callback cbLiesPage
+ * @callback LiesPageCallback
  * @param {LiesPage} value
  */
 
@@ -468,7 +469,7 @@
  */
 
 /**
- * @callback cbLiesLie
+ * @callback LiesLieCallback
  * @param {LiesLie} value
  */
 

@@ -4,16 +4,16 @@
  * @constructor
  * @param {string} baseURL - Base URL.
  */
-function FooClient(baseURL) {
+function APIClient(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
 }
 
 /**
  * @param {FindPetsRequest} req
- * @param {cbArrayNewPetPetAllOf1} onOK
+ * @param {ArrayNewPetPetAllOf1Callback} onOK
  */
-FooClient.prototype.findPets = function (req, onOK) {
+APIClient.prototype.findPets = function (req, onOK) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -48,9 +48,9 @@ FooClient.prototype.findPets = function (req, onOK) {
 
 /**
  * @param {PostPetsRequest} req
- * @param {cbNewPetPetAllOf1} onOK
+ * @param {NewPetPetAllOf1Callback} onOK
  */
-FooClient.prototype.postPets = function (req, onOK) {
+APIClient.prototype.postPets = function (req, onOK) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -72,21 +72,21 @@ FooClient.prototype.postPets = function (req, onOK) {
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {GetPetsIdRequest} req
- * @param {cbNewPetPetAllOf1} onOK
+ * @param {NewPetPetAllOf1Callback} onOK
  */
-FooClient.prototype.getPetsId = function (req, onOK) {
+APIClient.prototype.getPetsId = function (req, onOK) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -116,9 +116,9 @@ FooClient.prototype.getPetsId = function (req, onOK) {
 
 /**
  * @param {DeletePetsIdRequest} req
- * @param {cbEmpty} onNoContent
+ * @param {RawCallback} onNoContent
  */
-FooClient.prototype.deletePetsId = function (req, onNoContent) {
+APIClient.prototype.deletePetsId = function (req, onNoContent) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -128,7 +128,7 @@ FooClient.prototype.deletePetsId = function (req, onNoContent) {
         switch (x.status) {
             case 204:
                 if (typeof(onNoContent) == 'function') {
-                    onNoContent(JSON.parse(x.responseText));
+                    onNoContent(x);
                 }
                 break;
             default:

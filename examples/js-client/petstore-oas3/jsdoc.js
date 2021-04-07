@@ -21,7 +21,7 @@
  */
 
 /**
- * @callback cbArrayNewPetPetAllOf1
+ * @callback ArrayNewPetPetAllOf1Callback
  * @param {array<NewPet|PetAllOf1>} value
  */
 
@@ -32,7 +32,7 @@
  */
 
 /**
- * @callback cbNewPetPetAllOf1
+ * @callback NewPetPetAllOf1Callback
  * @param {NewPet|PetAllOf1} value
  */
 
@@ -49,6 +49,7 @@
  */
 
 /**
- * @callback cbEmpty
+ * @callback RawCallback
+ * @param {XMLHttpRequest} value
  */
 

@@ -4,19 +4,19 @@
  * @constructor
  * @param {string} baseURL - Base URL.
  */
-function FooClient(baseURL) {
+function APIClient(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
 }
 
 /**
  * @param {DeletePlacesRequest} req
- * @param {cbEmpty} onNoContent
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {RawCallback} onNoContent
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -26,7 +26,7 @@ FooClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onN
         switch (x.status) {
             case 204:
                 if (typeof(onNoContent) == 'function') {
-                    onNoContent(JSON.parse(x.responseText));
+                    onNoContent(x);
                 }
                 break;
             case 400:
@@ -63,12 +63,12 @@ FooClient.prototype.deletePlaces = function (req, onNoContent, onBadRequest, onN
 
 /**
  * @param {GetPlacesRequest} req
- * @param {cbPlaceEntity} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {PlaceEntityCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.getPlaces = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.getPlaces = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -127,12 +127,12 @@ FooClient.prototype.getPlaces = function (req, onOK, onBadRequest, onNotFound, o
 
 /**
  * @param {PostPlacesRequest} req
- * @param {cbPlaceEntity} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onConflict
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {PlaceEntityCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onConflict
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.postPlaces = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
+APIClient.prototype.postPlaces = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -169,24 +169,24 @@ FooClient.prototype.postPlaces = function (req, onOK, onBadRequest, onConflict, 
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {DeleteFoosRequest} req
- * @param {cbEmpty} onNoContent
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {RawCallback} onNoContent
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -196,7 +196,7 @@ FooClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNot
         switch (x.status) {
             case 204:
                 if (typeof(onNoContent) == 'function') {
-                    onNoContent(JSON.parse(x.responseText));
+                    onNoContent(x);
                 }
                 break;
             case 400:
@@ -233,12 +233,12 @@ FooClient.prototype.deleteFoos = function (req, onNoContent, onBadRequest, onNot
 
 /**
  * @param {GetFoosRequest} req
- * @param {cbArrayUsecaseFooInfo} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {ArrayUsecaseFooInfoCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.getFoos = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.getFoos = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -291,12 +291,12 @@ FooClient.prototype.getFoos = function (req, onOK, onBadRequest, onNotFound, onI
 
 /**
  * @param {PostFoosRequest} req
- * @param {cbFooEntity} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onConflict
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {FooEntityCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onConflict
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.postFoos = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
+APIClient.prototype.postFoos = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -333,25 +333,25 @@ FooClient.prototype.postFoos = function (req, onOK, onBadRequest, onConflict, on
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {PutFoosRequest} req
- * @param {cbEmpty} onNoContent
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onConflict
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {RawCallback} onNoContent
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onConflict
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFound, onConflict, onInternalServerError) {
+APIClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFound, onConflict, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -361,7 +361,7 @@ FooClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFou
         switch (x.status) {
             case 204:
                 if (typeof(onNoContent) == 'function') {
-                    onNoContent(JSON.parse(x.responseText));
+                    onNoContent(x);
                 }
                 break;
             case 400:
@@ -396,23 +396,23 @@ FooClient.prototype.putFoos = function (req, onNoContent, onBadRequest, onNotFou
     url = url.slice(0, -1)
 
     x.open("PUT", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {PostInternalFindAvailableCarrotsMilleLookRequest} req
- * @param {cbUsecaseFindAvailableCarrotsOutput} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {UsecaseFindAvailableCarrotsOutputCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.postInternalFindAvailableCarrotsMilleLook = function (req, onOK, onBadRequest, onInternalServerError) {
+APIClient.prototype.postInternalFindAvailableCarrotsMilleLook = function (req, onOK, onBadRequest, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -446,22 +446,22 @@ FooClient.prototype.postInternalFindAvailableCarrotsMilleLook = function (req, o
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {GetLieAreasRequest} req
- * @param {cbArrayString} onOK
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {ArrayStringCallback} onOK
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.getLieAreas = function (req, onOK, onInternalServerError) {
+APIClient.prototype.getLieAreas = function (req, onOK, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -498,12 +498,12 @@ FooClient.prototype.getLieAreas = function (req, onOK, onInternalServerError) {
 
 /**
  * @param {PostLieAreasRequest} req
- * @param {cbLieAreaEntity} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onConflict
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {LieAreaEntityCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onConflict
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.postLieAreas = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
+APIClient.prototype.postLieAreas = function (req, onOK, onBadRequest, onConflict, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -540,24 +540,24 @@ FooClient.prototype.postLieAreas = function (req, onOK, onBadRequest, onConflict
     url = url.slice(0, -1)
 
     x.open("POST", url, true);
-    
     if (typeof req.body !== 'undefined') {
         x.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         x.send(JSON.stringify(req.body))
         return
     }
 
+    
     x.send();
 }
 
 /**
  * @param {PutLieAreasMilleLieAreaSyncRequest} req
- * @param {cbEmpty} onNoContent
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {RawCallback} onNoContent
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -567,7 +567,7 @@ FooClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, on
         switch (x.status) {
             case 204:
                 if (typeof(onNoContent) == 'function') {
-                    onNoContent(JSON.parse(x.responseText));
+                    onNoContent(x);
                 }
                 break;
             case 400:
@@ -606,12 +606,12 @@ FooClient.prototype.putLieAreasMilleLieAreaSync = function (req, onNoContent, on
 
 /**
  * @param {GetLiesRequest} req
- * @param {cbLiesPage} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {LiesPageCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.getLies = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.getLies = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -700,12 +700,12 @@ FooClient.prototype.getLies = function (req, onOK, onBadRequest, onNotFound, onI
 
 /**
  * @param {GetLiesIdRequest} req
- * @param {cbLiesLie} onOK
- * @param {cbRestErrResponse} onBadRequest
- * @param {cbRestErrResponse} onNotFound
- * @param {cbRestErrResponse} onInternalServerError
+ * @param {LiesLieCallback} onOK
+ * @param {RestErrResponseCallback} onBadRequest
+ * @param {RestErrResponseCallback} onNotFound
+ * @param {RestErrResponseCallback} onInternalServerError
  */
-FooClient.prototype.getLiesId = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
+APIClient.prototype.getLiesId = function (req, onOK, onBadRequest, onNotFound, onInternalServerError) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {

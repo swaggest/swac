@@ -18,17 +18,18 @@ use Swaggest\SwaggerHttp\StatusCodes;
 class Client extends AbstractTemplate implements Renderer
 {
     const PARAM_FIELD_NAME_META = 'jsDocFieldName';
+    const RAW_CALLBACK = 'RawCallback';
 
     /**
      * @var TypeBuilder
      */
-    private $jsDocTypes;
+    public $jsDocTypes;
 
     /** @var string[] */
     private $operationNames;
 
     /** @var string */
-    private $clientName = 'FooClient';
+    public $clientName = 'APIClient';
 
     /** @var string[] */
     private $responseCallbacks = [];
@@ -98,16 +99,20 @@ JS
         $res = "var url = this.baseURL + '$pattern?';\n";
         if (!empty($parameters)) {
             foreach ($parameters as $parameter) {
+                $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
+                $encodedValue = "encodeURIComponent(req.$field)";
+                if ($parameter->isJson) {
+                    $encodedValue = "encodeURIComponent(JSON.stringify(req.$field))";
+                }
+
                 if ($parameter->in === Parameter::PATH) {
-                    $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                    $res = str_replace("{{$parameter->name}}", "' + encodeURIComponent(req.$field) +\n'", $res);
+                    $res = str_replace("{{$parameter->name}}", "' + {$encodedValue} +\n'", $res);
                 }
 
                 if ($parameter->in === Parameter::QUERY) {
-                    $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
                     $res .= <<<JS
 if (req.$field != null) {
-    url += '{$field}=' + encodeURIComponent(req.$field) + '&'
+    url += '{$field}=' + {$encodedValue} + '&'
 }
 
 JS;
@@ -116,6 +121,30 @@ JS;
         }
 
         $res .= "url = url.slice(0, -1)\n";
+
+        return $res;
+    }
+
+    /**
+     * @param Parameter[] $parameters
+     * @return string
+     */
+    private function makeRequestHeaders($parameters) {
+        if (empty($parameters)) {
+            return '';
+        }
+
+        foreach ($parameters as $parameter) {
+            if ($parameter->in === Parameter::HEADER) {
+                $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
+                $res .= <<<JS
+if (typeof req.$field !== 'undefined') {
+    x.setRequestHeader('{$parameter->name}', req.$field);
+}
+
+JS;
+            }
+        }
 
         return $res;
     }
@@ -150,7 +179,8 @@ JS;
     /**
      * @param Parameter[] $parameters
      */
-    private function makeRequestFormData($parameters) {
+    private function makeRequestFormData($parameters)
+    {
         if (empty($parameters)) {
             return '';
         }
@@ -160,12 +190,9 @@ JS;
         foreach ($parameters as $parameter) {
             if ($parameter->in === Parameter::FORM_DATA) {
                 $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                return <<<JS
+                $res .= <<<JS
 if (typeof req.$field !== 'undefined') {
     formData += '{$field}=' + encodeURIComponent(req.$field) + '&'
-    x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    x.send(JSON.stringify(req.$field))
-    return
 }
 
 JS;
@@ -174,9 +201,9 @@ JS;
 
         if ($res != '') {
             $res = <<<JS
-var formData = ""
+var formData = ''
 $res
-if (formData !== "") {
+if (formData !== '') {
     x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     x.send(formData.slice(0, -1))
     return  
@@ -201,12 +228,34 @@ JS;
         $responseSwitch = new Code();
         $hasDefault = false;
         foreach ($o->responses as $response) {
+            $cbType = $this->makeResponseType($response);
+            $responseArg = 'JSON.parse(x.responseText)';
+            if ($cbType === self::RAW_CALLBACK) {
+                $responseArg = 'x';
+            }
+
             if ($response->isDefault) {
+                $cbName = 'onDefault';
+                $responseArguments->addSnippet(<<<JSDOC
+ * @param {{$cbType}} {$cbName}
+
+JSDOC
+                );
+                $args[] = $cbName;
+
+                $responseSwitch->addSnippet(<<<CODE
+            default:
+                if (typeof({$cbName}) == 'function') {
+                    {$cbName}($responseArg);
+                }
+                break;
+
+CODE
+                );
+
                 $hasDefault = true;
                 continue;
             }
-
-            $cbType = $this->makeResponseType($response);
 
             $status = StatusCodes::getInfoByCode($response->statusCode);
             $cbName = 'on' . $this->makeName($status->phrase, false);
@@ -221,7 +270,7 @@ JSDOC
             $responseSwitch->addSnippet(<<<CODE
             case {$response->statusCode}:
                 if (typeof({$cbName}) == 'function') {
-                    {$cbName}(JSON.parse(x.responseText));
+                    {$cbName}($responseArg);
                 }
                 break;
 
@@ -245,7 +294,7 @@ CODE
 /**
  * @param {{$reqType}} req
 {$responseArguments} */
-FooClient.prototype.{$funcName} = function ($args) {
+{$this->clientName}.prototype.{$funcName} = function ($args) {
     var x = new XMLHttpRequest();
     x.onreadystatechange = function () {
         if (x.readyState !== XMLHttpRequest.DONE) {
@@ -258,8 +307,8 @@ FooClient.prototype.{$funcName} = function ($args) {
     
     {$this->padLines('    ', $this->makeURL($o->parameters, $o->path))}
     x.open("{$method}", url, true);
-    
     {$this->padLines('    ', $this->makeRequestJSONBody($o->parameters))}
+    {$this->padLines('    ', $this->makeRequestFormData($o->parameters))}
     x.send();
 }
 
@@ -278,12 +327,13 @@ JS;
     private function makeResponseType($response)
     {
         if ($response->schema === null) {
-            $type = '___empty';
-            $cbType = 'cbEmpty';
+            $type = '___raw';
+            $cbType = self::RAW_CALLBACK;
             if (!isset($this->responseCallbacks[$type])) {
                 $cb = <<<JSDOC
 /**
  * @callback {$cbType}
+ * @param {XMLHttpRequest} value
  */
 
 
@@ -296,7 +346,7 @@ JSDOC;
         }
 
         $type = $this->jsDocTypes->getTypeString($response->schema);
-        $cbType = $this->makeName('cb_' . $type);
+        $cbType = $this->makeName($type . '_callback', false);
         if (!isset($this->responseCallbacks[$type])) {
             $cb = <<<JSDOC
 /**
@@ -350,12 +400,11 @@ JSDOC;
 
     public function store($path)
     {
-        file_put_contents($path . '/models.js', $this->jsDocTypes->file);
+        file_put_contents($path . '/jsdoc.js', $this->jsDocTypes->file);
         file_put_contents($path . '/client.js', $this->clientCode->render());
     }
 
     protected function toString()
     {
-
     }
 }

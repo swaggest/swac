@@ -4,15 +4,17 @@ namespace Swac\Command;
 
 use Swac\ExitCode;
 use Swac\JavaScript\Client\Client;
-use Swaggest\JsonCli\GenGo\BuilderOptions;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
 class JavaScriptClient extends Base
 {
-    use BuilderOptions;
-
     public $out = './client';
+
+    public $clientName = 'APIClient';
+
+    public $typesPrefix = '';
+
 
     /**
      * @param Definition $definition
@@ -22,8 +24,14 @@ class JavaScriptClient extends Base
     {
         parent::setUpDefinition($definition, $options);
 
+        $options->clientName = Command\Option::create()->setType()
+            ->setDescription('Name of generated client class, default APIClient');
+
+        $options->typesPrefix = Command\Option::create()->setType()
+            ->setDescription('Prefix generated jsdoc class names');
+
         $options->out = Command\Option::create()->setType()
-            ->setDescription('Path to output package, default ./client');
+            ->setDescription('Path to output files, default ./client');
 
         static::setupLoadFileOptions($options);
     }
@@ -31,6 +39,8 @@ class JavaScriptClient extends Base
     public function performAction()
     {
         $client = new Client();
+        $client->clientName = $this->clientName;
+        $client->jsDocTypes->addNamePrefix = $this->typesPrefix;
 
         $this->process($client);
 
