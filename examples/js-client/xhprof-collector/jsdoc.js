@@ -4,30 +4,30 @@
 
 /**
  * @typedef XhAggregatorAddress
- * @type {object}
- * @property {number} end - Interval end UTC unix timestamp. .
- * @property {string} id - Profile ID.
- * @property {object<string, string>} labels.
- * @property {number} start - Interval start UTC unix timestamp.
+ * @type {Object}
+ * @property {Number} end - Interval end UTC unix timestamp. .
+ * @property {String} id - Profile ID.
+ * @property {?Object.<String,String>} labels
+ * @property {Number} start - Interval start UTC unix timestamp.
  */
 
 /**
  * @typedef XhUsecaseProfileInfo
- * @type {object}
- * @property {XhAggregatorAddress} addr.
- * @property {string} cpu.
- * @property {number} edges.
- * @property {string} io.
- * @property {string} peakMem.
- * @property {number} profiles.
- * @property {string} wt.
+ * @type {Object}
+ * @property {XhAggregatorAddress} addr
+ * @property {String} cpu
+ * @property {Number} edges
+ * @property {String} io
+ * @property {String} peakMem
+ * @property {Number} profiles
+ * @property {String} wt
  */
 
 /**
  * @typedef XhUsecaseProfiles
- * @type {object}
- * @property {array<XhUsecaseProfileInfo>} activeAggregates.
- * @property {array<XhUsecaseProfileInfo>} recent.
+ * @type {Object}
+ * @property {?Array<XhUsecaseProfileInfo>} activeAggregates
+ * @property {?Array<XhUsecaseProfileInfo>} recent
  */
 
 /**
@@ -37,34 +37,34 @@
 
 /**
  * @typedef XhProfileValue
- * @type {object}
- * @property {number} as - Aggregation size, count of parent profiles.
- * @property {number} cpu - CPU time in microseconds.
- * @property {number} ct - Count of calls.
- * @property {number} io - IO time in microseconds.
- * @property {number} mem.aa - The amount of allocated memory.
- * @property {number} mem.na - The sum of the number of all allocations in this function.
- * @property {number} mem.nf - The sum of the number of all frees in this function.
- * @property {number} mu - Memory usage in bytes.
- * @property {number} pmu - Peak memory usage in bytes.
- * @property {number} wt - Wall time in microseconds.
+ * @type {Object}
+ * @property {Number} as - Aggregation size, count of parent profiles.
+ * @property {Number} cpu - CPU time in microseconds.
+ * @property {Number} ct - Count of calls.
+ * @property {Number} io - IO time in microseconds.
+ * @property {Number} mem.aa - The amount of allocated memory.
+ * @property {Number} mem.na - The sum of the number of all allocations in this function.
+ * @property {Number} mem.nf - The sum of the number of all frees in this function.
+ * @property {Number} mu - Memory usage in bytes.
+ * @property {Number} pmu - Peak memory usage in bytes.
+ * @property {Number} wt - Wall time in microseconds.
  */
 
 /**
  * @typedef XhUsecaseCollectProfileInput
- * @type {object}
- * @property {string} id - Random string created by client to identify profile.
- * @property {object<string, string>} labels.
- * @property {object<string, *>} meta - Additional context.
- * @property {object<string, XhProfileValue>} profile.
+ * @type {Object}
+ * @property {String} id - Random string created by client to identify profile.
+ * @property {?Object.<String,String>} labels
+ * @property {?Object.<String,*>} meta - Additional context.
+ * @property {?Object.<String,XhProfileValue>} profile
  */
 
 /**
  * @typedef XhPostProfileRequest
- * @type {object}
- * @property {number} probability - Probability that was asserted to collect this profile, used to estimate total multiplication.
- * @property {string} tz - Timezone location for daily aggregations, default: UTC.
- * @property {XhUsecaseCollectProfileInput} body.
+ * @type {Object}
+ * @property {Number} probability - Probability that was asserted to collect this profile, used to estimate total multiplication.
+ * @property {String} tz - Timezone location for daily aggregations, default: UTC.
+ * @property {XhUsecaseCollectProfileInput} body
  */
 
 /**
@@ -74,20 +74,20 @@
 
 /**
  * @typedef XhGetProfileDotRequest
- * @type {object}
- * @property {string} rootSymbol.
- * @property {number} graphLimit - Maximum number of nodes (symbols) in graph.
+ * @type {Object}
+ * @property {String} rootSymbol
+ * @property {Number} graphLimit - Maximum number of nodes (symbols) in graph.
  * @property {('wt'|'cpu'|'io')} graphPriority - Graph resource determines nodes selection to expose strongest contributors.
- * @property {XhAggregatorAddress} aggregate.
+ * @property {XhAggregatorAddress} aggregate
  */
 
 /**
  * @typedef XhRestErrResponse
- * @type {object}
- * @property {number} code - Application-specific error code.
- * @property {object<string, *>} context - Application context.
- * @property {string} error - Error message.
- * @property {string} status - Status text.
+ * @type {Object}
+ * @property {Number} code - Application-specific error code.
+ * @property {Object.<String,*>} context - Application context.
+ * @property {String} error - Error message.
+ * @property {String} status - Status text.
  */
 
 /**
@@ -97,16 +97,16 @@
 
 /**
  * @typedef XhGetProfileFindSymbolRequest
- * @type {object}
- * @property {XhAggregatorAddress} aggregate.
- * @property {string} match - Substring to match in symbol.
- * @property {number} limit - Limit number of results.
+ * @type {Object}
+ * @property {XhAggregatorAddress} aggregate
+ * @property {String} match - Substring to match in symbol.
+ * @property {Number} limit - Limit number of results.
  */
 
 /**
  * @typedef XhUsecaseSearchOutput
- * @type {object}
- * @property {array<string>} symbols.
+ * @type {Object}
+ * @property {?Array<String>} symbols
  */
 
 /**
@@ -116,37 +116,37 @@
 
 /**
  * @typedef XhGetProfileSymbolRequest
- * @type {object}
- * @property {XhAggregatorAddress} aggregate.
- * @property {string} symbol.
+ * @type {Object}
+ * @property {XhAggregatorAddress} aggregate
+ * @property {String} symbol
  */
 
 /**
  * @typedef XhRenderValueStat
- * @type {object}
- * @property {string} as.
- * @property {string} cpu.
- * @property {string} cpuf.
- * @property {string} ct.
- * @property {string} ctf.
- * @property {string} io.
- * @property {string} iof.
- * @property {string} ma.
- * @property {string} mac.
- * @property {string} mf.
- * @property {string} mu.
- * @property {string} pmu.
- * @property {string} wt.
- * @property {string} wtf.
+ * @type {Object}
+ * @property {String} as
+ * @property {String} cpu
+ * @property {String} cpuf
+ * @property {String} ct
+ * @property {String} ctf
+ * @property {String} io
+ * @property {String} iof
+ * @property {String} ma
+ * @property {String} mac
+ * @property {String} mf
+ * @property {String} mu
+ * @property {String} pmu
+ * @property {String} wt
+ * @property {String} wtf
  */
 
 /**
  * @typedef XhUsecaseSymbolStatOutput
- * @type {object}
- * @property {object<string, XhRenderValueStat>} callees - Callees stat.
- * @property {object<string, XhRenderValueStat>} callers - Callers stat.
- * @property {XhRenderValueStat} exclusive.
- * @property {XhRenderValueStat} inclusive.
+ * @type {Object}
+ * @property {Object.<String,XhRenderValueStat>} callees - Callees stat.
+ * @property {Object.<String,XhRenderValueStat>} callers - Callers stat.
+ * @property {XhRenderValueStat} exclusive
+ * @property {XhRenderValueStat} inclusive
  */
 
 /**
@@ -156,24 +156,24 @@
 
 /**
  * @typedef XhGetTopTracesRequest
- * @type {object}
- * @property {string} rootSymbol.
- * @property {XhAggregatorAddress} aggregate.
+ * @type {Object}
+ * @property {String} rootSymbol
+ * @property {XhAggregatorAddress} aggregate
  * @property {('wt'|'cpu'|'io')} resource - Graph resource determines nodes selection to expose strongest contributors.
- * @property {number} limit.
+ * @property {Number} limit
  */
 
 /**
  * @typedef XhUsecaseTraceInfo
- * @type {object}
- * @property {string} hash.
- * @property {XhRenderValueStat} stat.
- * @property {string} symbol.
- * @property {array<string>} trace.
+ * @type {Object}
+ * @property {String} hash
+ * @property {XhRenderValueStat} stat
+ * @property {String} symbol
+ * @property {?Array<String>} trace
  */
 
 /**
  * @callback ArrayXhUsecaseTraceInfoCallback
- * @param {array<XhUsecaseTraceInfo>} value
+ * @param {Array<XhUsecaseTraceInfo>} value
  */
 

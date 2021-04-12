@@ -4,8 +4,8 @@
 
 /**
  * @typedef DeletePlacesRequest
- * @type {object}
- * @property {number} id.
+ * @type {Object}
+ * @property {Number} id
  */
 
 /**
@@ -15,11 +15,11 @@
 
 /**
  * @typedef RestErrResponse
- * @type {object}
- * @property {number} code.
- * @property {object<string, *>} context.
- * @property {string} error.
- * @property {string} status.
+ * @type {Object}
+ * @property {Number} code
+ * @property {Object.<String,*>} context
+ * @property {String} error
+ * @property {String} status
  */
 
 /**
@@ -29,23 +29,23 @@
 
 /**
  * @typedef GetPlacesRequest
- * @type {object}
- * @property {string} mille - Acme Mille.
- * @property {string} foxUuid.
- * @property {number} foxId.
- * @property {string} look - Acme Look.
- * @property {string} potatoFamily.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
+ * @property {String} foxUuid
+ * @property {Number} foxId
+ * @property {String} look - Acme Look.
+ * @property {String} potatoFamily
  */
 
 /**
  * @typedef PlaceEntity
- * @type {object}
- * @property {number} placeId.
- * @property {string} createdAt.
- * @property {number} foxId.
- * @property {string} foxUuid.
- * @property {number} fooId.
- * @property {string} barName.
+ * @type {Object}
+ * @property {Number} placeId
+ * @property {String} createdAt
+ * @property {Number} foxId
+ * @property {String} foxUuid
+ * @property {Number} fooId
+ * @property {String} barName
  */
 
 /**
@@ -55,147 +55,147 @@
 
 /**
  * @typedef UsecaseCreatePlaceInput
- * @type {object}
- * @property {number} foxId.
- * @property {string} foxUuid.
- * @property {number} fooId.
- * @property {string} barName.
+ * @type {Object}
+ * @property {Number} foxId
+ * @property {String} foxUuid
+ * @property {Number} fooId
+ * @property {String} barName
  */
 
 /**
  * @typedef PostPlacesRequest
- * @type {object}
- * @property {UsecaseCreatePlaceInput} body.
+ * @type {Object}
+ * @property {UsecaseCreatePlaceInput} body
  */
 
 /**
  * @typedef DeleteFoosRequest
- * @type {object}
- * @property {number} id.
+ * @type {Object}
+ * @property {Number} id
  */
 
 /**
  * @typedef GetFoosRequest
- * @type {object}
- * @property {string} look - Acme Look.
- * @property {string} potatoFamily.
- * @property {string} mille - Acme Mille.
+ * @type {Object}
+ * @property {String} look - Acme Look.
+ * @property {String} potatoFamily
+ * @property {String} mille - Acme Mille.
  */
 
 /**
  * @typedef FooLocalActivation
- * @type {object}
- * @property {number} maxRoxesReceived.
- * @property {number} minRoxesReceived.
+ * @type {Object}
+ * @property {?Number} maxRoxesReceived
+ * @property {?Number} minRoxesReceived
  */
 
 /**
  * @typedef LiesPreference
- * @type {object}
- * @property {array<number>} other.
- * @property {string} preset.
- * @property {array<number>} recommended.
+ * @type {Object}
+ * @property {?Array<Number>} other
+ * @property {String} preset
+ * @property {?Array<Number>} recommended
  */
 
 /**
  * @typedef LiesModularityAddOns
- * @type {object}
- * @property {number} index.
- * @property {string} title.
+ * @type {Object}
+ * @property {Number} index
+ * @property {String} title
  */
 
 /**
  * @typedef LiesModularityBar
- * @type {object}
- * @property {number} index.
- * @property {string} title.
+ * @type {Object}
+ * @property {Number} index
+ * @property {?String} title
  */
 
 /**
  * @typedef LiesModularity
- * @type {object}
- * @property {array<LiesModularityAddOns>} addOns.
- * @property {string} addOnsHeadline.
- * @property {number} defaultCarrotIndex.
- * @property {string} noAddOnsDefaultTitle.
- * @property {string} noBarsDefaultTitle.
- * @property {string} promoTitle.
- * @property {array<LiesModularityBar>} bars.
- * @property {string} barsHeadline.
+ * @type {Object}
+ * @property {?Array<LiesModularityAddOns>} addOns
+ * @property {?String} addOnsHeadline
+ * @property {Number} defaultCarrotIndex
+ * @property {?String} noAddOnsDefaultTitle
+ * @property {?String} noBarsDefaultTitle
+ * @property {?String} promoTitle
+ * @property {?Array<LiesModularityBar>} bars
+ * @property {?String} barsHeadline
  */
 
 /**
  * @typedef FooBarRule
- * @type {object}
- * @property {array<LiesPreference>} customLiePreferences.
- * @property {array<LiesModularity>} customModularity.
- * @property {object<string, string>} customSoups.
- * @property {array<number>} hideCarrots.
- * @property {object<string, array<string>>} areaTagsByCarrots.
+ * @type {Object}
+ * @property {Array<LiesPreference>} customLiePreferences
+ * @property {?Array<LiesModularity>} customModularity
+ * @property {Object.<String,String>} customSoups
+ * @property {Array<Number>} hideCarrots
+ * @property {Object.<String,Array<String>>} areaTagsByCarrots
  */
 
 /**
  * @typedef FooEntity
- * @type {object}
- * @property {string} activateSince.
- * @property {string} activateTill.
- * @property {string} mille - Acme Mille.
- * @property {string} createdAt.
- * @property {string} deletedAt.
- * @property {number} fooId.
- * @property {object<string, FooLocalActivation>} localActivation.
- * @property {string} uselyKey.
- * @property {array<FooEntity>} overlap.
- * @property {string} potatoFamily.
- * @property {string} updatedAt.
- * @property {object<string, FooBarRule>} barRules.
- * @property {string} lookEnd - Acme Look.
- * @property {string} lookStart - Acme Look.
+ * @type {Object}
+ * @property {?String} activateSince
+ * @property {?String} activateTill
+ * @property {String} mille - Acme Mille.
+ * @property {String} createdAt
+ * @property {?String} deletedAt
+ * @property {Number} fooId
+ * @property {Object.<String,FooLocalActivation>} localActivation
+ * @property {String} uselyKey
+ * @property {Array<FooEntity>} overlap
+ * @property {String} potatoFamily
+ * @property {?String} updatedAt
+ * @property {?Object.<String,FooBarRule>} barRules
+ * @property {String} lookEnd - Acme Look.
+ * @property {String} lookStart - Acme Look.
  */
 
 /**
  * @typedef UsecaseFooInfo
- * @type {object}
- * @property {string} activateSince.
- * @property {string} activateTill.
- * @property {boolean} availableForActivation.
- * @property {string} mille - Acme Mille.
- * @property {string} createdAt.
- * @property {string} deletedAt.
- * @property {number} fooId.
- * @property {object<string, FooLocalActivation>} localActivation.
- * @property {string} uselyKey.
- * @property {array<FooEntity>} overlap.
- * @property {string} potatoFamily.
- * @property {string} updatedAt.
- * @property {object<string, FooBarRule>} barRules.
- * @property {string} lookEnd - Acme Look.
- * @property {string} lookStart - Acme Look.
+ * @type {Object}
+ * @property {?String} activateSince
+ * @property {?String} activateTill
+ * @property {Boolean} availableForActivation
+ * @property {String} mille - Acme Mille.
+ * @property {String} createdAt
+ * @property {?String} deletedAt
+ * @property {Number} fooId
+ * @property {Object.<String,FooLocalActivation>} localActivation
+ * @property {String} uselyKey
+ * @property {Array<FooEntity>} overlap
+ * @property {String} potatoFamily
+ * @property {?String} updatedAt
+ * @property {?Object.<String,FooBarRule>} barRules
+ * @property {String} lookEnd - Acme Look.
+ * @property {String} lookStart - Acme Look.
  */
 
 /**
  * @callback ArrayUsecaseFooInfoCallback
- * @param {array<UsecaseFooInfo>} value
+ * @param {Array<UsecaseFooInfo>} value
  */
 
 /**
  * @typedef FooValue
- * @type {object}
- * @property {string} activateSince.
- * @property {string} activateTill.
- * @property {string} mille - Acme Mille.
- * @property {object<string, FooLocalActivation>} localActivation.
- * @property {string} uselyKey.
- * @property {string} potatoFamily.
- * @property {object<string, FooBarRule>} barRules.
- * @property {string} lookEnd - Acme Look.
- * @property {string} lookStart - Acme Look.
+ * @type {Object}
+ * @property {?String} activateSince
+ * @property {?String} activateTill
+ * @property {String} mille - Acme Mille.
+ * @property {Object.<String,FooLocalActivation>} localActivation
+ * @property {String} uselyKey
+ * @property {String} potatoFamily
+ * @property {?Object.<String,FooBarRule>} barRules
+ * @property {String} lookEnd - Acme Look.
+ * @property {String} lookStart - Acme Look.
  */
 
 /**
  * @typedef PostFoosRequest
- * @type {object}
- * @property {FooValue} body.
+ * @type {Object}
+ * @property {FooValue} body
  */
 
 /**
@@ -205,59 +205,59 @@
 
 /**
  * @typedef UsecaseUpdateFooInput
- * @type {object}
- * @property {string} activateSince.
- * @property {string} activateTill.
- * @property {string} mille - Acme Mille.
- * @property {object<string, FooLocalActivation>} localActivation.
- * @property {string} uselyKey.
- * @property {string} potatoFamily.
- * @property {object<string, FooBarRule>} barRules.
- * @property {string} lookEnd - Acme Look.
- * @property {string} lookStart - Acme Look.
+ * @type {Object}
+ * @property {?String} activateSince
+ * @property {?String} activateTill
+ * @property {String} mille - Acme Mille.
+ * @property {Object.<String,FooLocalActivation>} localActivation
+ * @property {String} uselyKey
+ * @property {String} potatoFamily
+ * @property {?Object.<String,FooBarRule>} barRules
+ * @property {String} lookEnd - Acme Look.
+ * @property {String} lookStart - Acme Look.
  */
 
 /**
  * @typedef PutFoosRequest
- * @type {object}
- * @property {number} id.
- * @property {UsecaseUpdateFooInput} body.
+ * @type {Object}
+ * @property {Number} id
+ * @property {UsecaseUpdateFooInput} body
  */
 
 /**
  * @typedef UsecaseFindAvailableCarrotsInputItem
- * @type {object}
- * @property {number} foxId.
- * @property {string} foxUuid.
- * @property {string} potatoFamily.
- * @property {number} holeId.
+ * @type {Object}
+ * @property {Number} foxId
+ * @property {String} foxUuid
+ * @property {String} potatoFamily
+ * @property {Number} holeId
  */
 
 /**
  * @typedef UsecaseFindAvailableCarrotsInput
- * @type {object}
- * @property {object<string, UsecaseFindAvailableCarrotsInputItem>} items.
+ * @type {Object}
+ * @property {Object.<String,UsecaseFindAvailableCarrotsInputItem>} items
  */
 
 /**
  * @typedef PostInternalFindAvailableCarrotsMilleLookRequest
- * @type {object}
- * @property {string} mille - Acme Mille.
- * @property {string} look - Acme Look.
- * @property {UsecaseFindAvailableCarrotsInput} body.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
+ * @property {String} look - Acme Look.
+ * @property {UsecaseFindAvailableCarrotsInput} body
  */
 
 /**
  * @typedef UsecaseFindAvailableCarrotsOutputItem
- * @type {object}
- * @property {array<number>} carrots.
- * @property {string} error.
+ * @type {Object}
+ * @property {Array<Number>} carrots
+ * @property {String} error
  */
 
 /**
  * @typedef UsecaseFindAvailableCarrotsOutput
- * @type {object}
- * @property {object<string, UsecaseFindAvailableCarrotsOutputItem>} items - Available carrot indexes mapped with same key as input items.
+ * @type {Object}
+ * @property {Object.<String,UsecaseFindAvailableCarrotsOutputItem>} items - Available carrot indexes mapped with same key as input items.
  */
 
 /**
@@ -267,38 +267,38 @@
 
 /**
  * @typedef GetLieAreasRequest
- * @type {object}
- * @property {string} mille - Acme Mille.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
  */
 
 /**
  * @callback ArrayStringCallback
- * @param {array<string>} value
+ * @param {Array<String>} value
  */
 
 /**
  * @typedef LieAreaValue
- * @type {object}
- * @property {string} mille - Acme Mille.
- * @property {string} name.
- * @property {array<string>} areas.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
+ * @property {String} name
+ * @property {?Array<String>} areas
  */
 
 /**
  * @typedef PostLieAreasRequest
- * @type {object}
- * @property {LieAreaValue} body.
+ * @type {Object}
+ * @property {LieAreaValue} body
  */
 
 /**
  * @typedef LieAreaEntity
- * @type {object}
- * @property {string} mille - Acme Mille.
- * @property {string} createdAt.
- * @property {number} id.
- * @property {string} name.
- * @property {array<string>} areas.
- * @property {string} updatedAt.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
+ * @property {String} createdAt
+ * @property {Number} id
+ * @property {String} name
+ * @property {?Array<String>} areas
+ * @property {?String} updatedAt
  */
 
 /**
@@ -308,153 +308,153 @@
 
 /**
  * @typedef PutLieAreasMilleLieAreaSyncRequest
- * @type {object}
- * @property {string} look - Acme Look.
- * @property {string} mille - Acme Mille.
- * @property {string} lieArea - Name of lie area.
+ * @type {Object}
+ * @property {String} look - Acme Look.
+ * @property {String} mille - Acme Mille.
+ * @property {String} lieArea - Name of lie area.
  */
 
 /**
  * @typedef GetLiesRequest
- * @type {object}
- * @property {string} mille - Acme Mille.
- * @property {string} exclude.
- * @property {string} locale.
- * @property {string} potato.
- * @property {number} hole.
- * @property {string} potatoSku.
- * @property {string} soup.
- * @property {string} look - Acme Look.
- * @property {array<string>} looks.
- * @property {boolean} isActive.
- * @property {string} potatoSkuQuery.
- * @property {boolean} withCompleteSoups.
- * @property {string} sort.
- * @property {number} take.
- * @property {number} skip.
+ * @type {Object}
+ * @property {String} mille - Acme Mille.
+ * @property {String} exclude
+ * @property {String} locale
+ * @property {String} potato
+ * @property {Number} hole
+ * @property {String} potatoSku
+ * @property {String} soup
+ * @property {String} look - Acme Look.
+ * @property {Array<String>} looks
+ * @property {Boolean} isActive
+ * @property {String} potatoSkuQuery
+ * @property {Boolean} withCompleteSoups
+ * @property {String} sort
+ * @property {Number} take
+ * @property {Number} skip
  */
 
 /**
  * @typedef LiesRigidAmount
- * @type {object}
- * @property {number} amount.
- * @property {number} people.
+ * @type {Object}
+ * @property {Number} amount
+ * @property {Number} people
  */
 
 /**
  * @typedef LiesRigidQuantity
- * @type {object}
- * @property {number} amount.
- * @property {number} people.
- * @property {number} quantity.
+ * @type {Object}
+ * @property {Number} amount
+ * @property {Number} people
+ * @property {Number} quantity
  */
 
 /**
  * @typedef LiesDrainSetting
- * @type {object}
- * @property {number} amount.
- * @property {array<LiesRigidAmount>} rigidAmounts.
- * @property {array<LiesRigidQuantity>} rigidQuantities.
- * @property {string} reason.
- * @property {number} servings.
- * @property {string} strategy.
+ * @type {Object}
+ * @property {?Number} amount
+ * @property {?Array<LiesRigidAmount>} rigidAmounts
+ * @property {?Array<LiesRigidQuantity>} rigidQuantities
+ * @property {String} reason
+ * @property {?Number} servings
+ * @property {String} strategy
  */
 
 /**
  * @typedef LiesSoupIngredientFamily
- * @type {object}
- * @property {string} createdAt.
- * @property {string} description.
- * @property {string} iconLink.
- * @property {string} iconPath.
- * @property {string} id.
- * @property {string} name.
- * @property {number} priority.
- * @property {string} slug.
- * @property {string} type.
- * @property {string} updatedAt.
- * @property {object<string, number>} usageByMille.
+ * @type {Object}
+ * @property {String} createdAt
+ * @property {?String} description
+ * @property {?String} iconLink
+ * @property {?String} iconPath
+ * @property {String} id
+ * @property {String} name
+ * @property {Number} priority
+ * @property {String} slug
+ * @property {String} type
+ * @property {String} updatedAt
+ * @property {?Object.<String,Number>} usageByMille
  */
 
 /**
  * @typedef LiesSoupIngredient
- * @type {object}
- * @property {array<object>} allergens.
- * @property {string} mille.
- * @property {string} description.
- * @property {LiesSoupIngredientFamily} family.
- * @property {boolean} hasDuplicatedName.
- * @property {string} id.
- * @property {string} imageLink.
- * @property {string} imagePath.
- * @property {string} internalName.
- * @property {string} name.
- * @property {boolean} shipped.
- * @property {string} slug.
- * @property {string} type.
- * @property {number} usage.
+ * @type {Object}
+ * @property {?Array<Object>} allergens
+ * @property {String} mille
+ * @property {?String} description
+ * @property {?LiesSoupIngredientFamily} family
+ * @property {?Boolean} hasDuplicatedName
+ * @property {String} id
+ * @property {?String} imageLink
+ * @property {?String} imagePath
+ * @property {?String} internalName
+ * @property {String} name
+ * @property {?Boolean} shipped
+ * @property {String} slug
+ * @property {String} type
+ * @property {Number} usage
  */
 
 /**
  * @typedef LiesSoup
- * @type {object}
- * @property {boolean} active.
- * @property {array<object>} allergens.
- * @property {string} mille.
- * @property {string} id.
- * @property {array<LiesSoupIngredient>} ingredients.
- * @property {string} name.
- * @property {string} slug.
+ * @type {Object}
+ * @property {?Boolean} active
+ * @property {?Array<Object>} allergens
+ * @property {String} mille
+ * @property {String} id
+ * @property {?Array<LiesSoupIngredient>} ingredients
+ * @property {String} name
+ * @property {String} slug
  */
 
 /**
  * @typedef LiesCarrot
- * @type {object}
- * @property {LiesDrainSetting} drainSetting.
- * @property {number} index.
- * @property {boolean} isSoldOut.
- * @property {array<string>} presets.
- * @property {LiesSoup} soup.
- * @property {array<string>} areaTags.
- * @property {number} selectionLimit.
+ * @type {Object}
+ * @property {?LiesDrainSetting} drainSetting
+ * @property {Number} index
+ * @property {Boolean} isSoldOut
+ * @property {?Array<String>} presets
+ * @property {LiesSoup} soup
+ * @property {Array<String>} areaTags
+ * @property {?Number} selectionLimit
  */
 
 /**
  * @typedef LiesLie
- * @type {object}
- * @property {number} averageRating.
- * @property {string} clonedFrom.
- * @property {string} mille.
- * @property {array<LiesCarrot>} carrots.
- * @property {string} createdAt.
- * @property {string} headline.
- * @property {string} id.
- * @property {boolean} isActive.
- * @property {boolean} isComplete.
- * @property {string} link.
- * @property {array<array<string>>} meatSwanCombinations.
- * @property {string} meatSwanCombinationsText.
- * @property {array<LiesModularity>} modularity.
- * @property {array<LiesPreference>} preferences.
- * @property {string} potato.
- * @property {number} rated.
- * @property {string} serializedPreferences.
- * @property {string} surveyBody.
- * @property {string} surveyOptIn.
- * @property {string} surveyQuestion.
- * @property {string} surveyTitle.
- * @property {string} updatedAt.
- * @property {string} look.
+ * @type {Object}
+ * @property {Number} averageRating
+ * @property {?String} clonedFrom
+ * @property {String} mille
+ * @property {?Array<LiesCarrot>} carrots
+ * @property {String} createdAt
+ * @property {String} headline
+ * @property {String} id
+ * @property {?Boolean} isActive
+ * @property {?Boolean} isComplete
+ * @property {String} link
+ * @property {?Array<Array<String>>} meatSwanCombinations
+ * @property {?String} meatSwanCombinationsText
+ * @property {?Array<LiesModularity>} modularity
+ * @property {?Array<LiesPreference>} preferences
+ * @property {String} potato
+ * @property {Number} rated
+ * @property {?String} serializedPreferences
+ * @property {?String} surveyBody
+ * @property {?String} surveyOptIn
+ * @property {?String} surveyQuestion
+ * @property {?String} surveyTitle
+ * @property {String} updatedAt
+ * @property {String} look
  */
 
 /**
  * @typedef LiesPage
- * @type {object}
- * @property {number} count.
- * @property {array<LiesLie>} items.
- * @property {number} skip.
- * @property {number} take.
- * @property {number} total.
+ * @type {Object}
+ * @property {Number} count
+ * @property {?Array<LiesLie>} items
+ * @property {Number} skip
+ * @property {Number} take
+ * @property {Number} total
  */
 
 /**
@@ -464,10 +464,10 @@
 
 /**
  * @typedef GetLiesIdRequest
- * @type {object}
- * @property {string} locale.
- * @property {number} hole.
- * @property {string} id.
+ * @type {Object}
+ * @property {String} locale
+ * @property {Number} hole
+ * @property {String} id
  */
 
 /**

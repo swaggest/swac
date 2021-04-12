@@ -9,11 +9,12 @@
  * the OpenAPI 3.0 specification
  * @constructor
  * @param {string} baseURL - Base URL.
- * @property {PrepareRequest} prepareRequest - Callback to prepare request before sending.
  */
 function APIClient(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
+    /** @type {?PrepareRequest} - Callback to prepare request before sending. */
+    this.prepareRequest = null;
 }
 
 /**
