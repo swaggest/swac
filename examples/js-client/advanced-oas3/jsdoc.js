@@ -4,16 +4,16 @@
 
 /**
  * @typedef ExamplesAdvancedDirectGzipRequest
- * @type {object}
- * @property {boolean} plainStruct - Output plain structure instead of gzip container.
- * @property {boolean} countItems - Invokes internal decoding of compressed data.
+ * @type {Object}
+ * @property {Boolean} plainStruct - Output plain structure instead of gzip container.
+ * @property {Boolean} countItems - Invokes internal decoding of compressed data.
  */
 
 /**
  * @typedef AdvancedGzipPassThroughStruct
- * @type {object}
- * @property {number} id.
- * @property {array<string>} text.
+ * @type {Object}
+ * @property {Number} id
+ * @property {?Array<String>} text
  */
 
 /**
@@ -23,9 +23,9 @@
 
 /**
  * @typedef HeadGzipPassThroughRequest
- * @type {object}
- * @property {boolean} plainStruct - Output plain structure instead of gzip container.
- * @property {boolean} countItems - Invokes internal decoding of compressed data.
+ * @type {Object}
+ * @property {Boolean} plainStruct - Output plain structure instead of gzip container.
+ * @property {Boolean} countItems - Invokes internal decoding of compressed data.
  */
 
 /**
@@ -35,28 +35,28 @@
 
 /**
  * @typedef AdvancedInputWithJSONType3
- * @type {object}
- * @property {number} id.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} name
  */
 
 /**
  * @typedef PostJsonBodyValidationInPathRequest
- * @type {object}
- * @property {number} inQuery - Simple scalar value in query.
- * @property {string} inPath - Simple scalar value in path.
- * @property {string} xHeader - Simple scalar value in header.
- * @property {AdvancedInputWithJSONType3} body.
+ * @type {Object}
+ * @property {Number} inQuery - Simple scalar value in query.
+ * @property {String} inPath - Simple scalar value in path.
+ * @property {String} xHeader - Simple scalar value in header.
+ * @property {AdvancedInputWithJSONType3} body
  */
 
 /**
  * @typedef AdvancedOutputWithJSONType3
- * @type {object}
- * @property {number} id.
- * @property {string} inHeader.
- * @property {string} inPath.
- * @property {number} inQuery.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} inHeader
+ * @property {String} inPath
+ * @property {Number} inQuery
+ * @property {String} name
  */
 
 /**
@@ -66,28 +66,28 @@
 
 /**
  * @typedef AdvancedInputWithJSONType2
- * @type {object}
- * @property {number} id.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} name
  */
 
 /**
  * @typedef PostJsonBodyInPathRequest
- * @type {object}
- * @property {string} inQuery - Simple scalar value in query.
- * @property {string} inPath - Simple scalar value in path.
- * @property {string} xHeader - Simple scalar value in header.
- * @property {AdvancedInputWithJSONType2} body.
+ * @type {Object}
+ * @property {String} inQuery - Simple scalar value in query.
+ * @property {String} inPath - Simple scalar value in path.
+ * @property {String} xHeader - Simple scalar value in header.
+ * @property {AdvancedInputWithJSONType2} body
  */
 
 /**
  * @typedef AdvancedOutputWithJSONType2
- * @type {object}
- * @property {number} id.
- * @property {string} inHeader.
- * @property {string} inPath.
- * @property {string} inQuery.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} inHeader
+ * @property {String} inPath
+ * @property {String} inQuery
+ * @property {String} name
  */
 
 /**
@@ -97,18 +97,18 @@
 
 /**
  * @typedef PostJsonMapBodyRequest
- * @type {object}
- * @property {number} inQuery - Simple scalar value in query.
- * @property {string} xHeader - Simple scalar value in header.
- * @property {object<string, number>} body.
+ * @type {Object}
+ * @property {Number} inQuery - Simple scalar value in query.
+ * @property {String} xHeader - Simple scalar value in header.
+ * @property {?Object.<String,Number>} body
  */
 
 /**
  * @typedef AdvancedJsonOutputType2
- * @type {object}
- * @property {object<string, number>} data.
- * @property {string} inHeader.
- * @property {number} inQuery.
+ * @type {Object}
+ * @property {?Object.<String,Number>} data
+ * @property {String} inHeader
+ * @property {Number} inQuery
  */
 
 /**
@@ -119,28 +119,28 @@
 /**
  * JSON value in query
  * @typedef AdvancedJSONPayload
- * @type {object}
- * @property {number} id.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} name
  */
 
 /**
  * @typedef GetJsonParamInPathRequest
- * @type {object}
- * @property {number} inQuery - Simple scalar value in query.
+ * @type {Object}
+ * @property {Number} inQuery - Simple scalar value in query.
  * @property {AdvancedJSONPayload} identity - JSON value in query.
- * @property {string} inPath - Simple scalar value in path.
- * @property {string} xHeader - Simple scalar value in header.
+ * @property {String} inPath - Simple scalar value in path.
+ * @property {String} xHeader - Simple scalar value in header.
  */
 
 /**
  * @typedef AdvancedOutputWithJSON
- * @type {object}
- * @property {number} id.
- * @property {string} inHeader.
- * @property {string} inPath.
- * @property {number} inQuery.
- * @property {string} name.
+ * @type {Object}
+ * @property {Number} id
+ * @property {String} inHeader
+ * @property {String} inPath
+ * @property {Number} inQuery
+ * @property {String} name
  */
 
 /**
@@ -150,18 +150,18 @@
 
 /**
  * @typedef PostJsonSliceBodyRequest
- * @type {object}
- * @property {number} inQuery - Simple scalar value in query.
- * @property {string} xHeader - Simple scalar value in header.
- * @property {array<number>} body.
+ * @type {Object}
+ * @property {Number} inQuery - Simple scalar value in query.
+ * @property {String} xHeader - Simple scalar value in header.
+ * @property {?Array<Number>} body
  */
 
 /**
  * @typedef AdvancedJsonOutput
- * @type {object}
- * @property {array<number>} data.
- * @property {string} inHeader.
- * @property {number} inQuery.
+ * @type {Object}
+ * @property {?Array<Number>} data
+ * @property {String} inHeader
+ * @property {Number} inQuery
  */
 
 /**
@@ -171,11 +171,11 @@
 
 /**
  * @typedef RestErrResponse
- * @type {object}
- * @property {number} code - Application-specific error code.
- * @property {object<string, *>} context - Application context.
- * @property {string} error - Error message.
- * @property {string} status - Status text.
+ * @type {Object}
+ * @property {Number} code - Application-specific error code.
+ * @property {Object.<String,*>} context - Application context.
+ * @property {String} error - Error message.
+ * @property {String} status - Status text.
  */
 
 /**
@@ -185,8 +185,8 @@
 
 /**
  * @typedef AdvancedHeaderOutput
- * @type {object}
- * @property {string} inBody.
+ * @type {Object}
+ * @property {String} inBody
  */
 
 /**
@@ -196,14 +196,14 @@
 
 /**
  * @typedef GetQueryObjectRequest
- * @type {object}
- * @property {object<string, number>} inQuery - Object value in query.
+ * @type {Object}
+ * @property {Object.<String,Number>} inQuery - Object value in query.
  */
 
 /**
  * @typedef AdvancedOutputQueryObject
- * @type {object}
- * @property {object<string, number>} inQuery.
+ * @type {Object}
+ * @property {?Object.<String,Number>} inQuery
  */
 
 /**
@@ -213,41 +213,41 @@
 
 /**
  * @typedef PostReqRespMappingRequest
- * @type {object}
- * @property {string} xHeader - Simple scalar value.
- * @property {number} val2 - Simple scalar value.
+ * @type {Object}
+ * @property {String} xHeader - Simple scalar value.
+ * @property {Number} val2 - Simple scalar value.
  */
 
 /**
  * @typedef AdvancedInputPortType2Data
- * @type {object}
- * @property {string} value - Request minLength: 3, response maxLength: 7.
+ * @type {Object}
+ * @property {String} value - Request minLength: 3, response maxLength: 7.
  */
 
 /**
  * @typedef AdvancedInputPortType2
- * @type {object}
- * @property {AdvancedInputPortType2Data} data.
+ * @type {Object}
+ * @property {AdvancedInputPortType2Data} data
  */
 
 /**
  * @typedef PostValidationRequest
- * @type {object}
- * @property {boolean} q - This parameter will bypass explicit validation as it does not have constraints.
- * @property {number} xInput - Request minimum: 10, response maximum: 20.
- * @property {AdvancedInputPortType2} body.
+ * @type {Object}
+ * @property {Boolean} q - This parameter will bypass explicit validation as it does not have constraints.
+ * @property {Number} xInput - Request minimum: 10, response maximum: 20.
+ * @property {AdvancedInputPortType2} body
  */
 
 /**
  * @typedef AdvancedOutputPortType2Data
- * @type {object}
- * @property {string} value.
+ * @type {Object}
+ * @property {String} value
  */
 
 /**
  * @typedef AdvancedOutputPortType2
- * @type {object}
- * @property {AdvancedOutputPortType2Data} data.
+ * @type {Object}
+ * @property {AdvancedOutputPortType2Data} data
  */
 
 /**

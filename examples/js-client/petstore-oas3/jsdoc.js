@@ -4,33 +4,33 @@
 
 /**
  * @typedef FindPetsRequest
- * @type {object}
- * @property {array<string>} tags - tags to filter by.
- * @property {number} limit - maximum number of results to return.
+ * @type {Object}
+ * @property {Array<String>} tags - tags to filter by.
+ * @property {Number} limit - maximum number of results to return.
  */
 
 /**
  * @typedef NewPet
- * @type {object}
- * @property {string} name.
- * @property {string} tag.
+ * @type {Object}
+ * @property {String} name
+ * @property {String} tag
  */
 
 /**
  * @typedef PetAllOf1
- * @type {object}
- * @property {number} id.
+ * @type {Object}
+ * @property {Number} id
  */
 
 /**
  * @callback ArrayNewPetPetAllOf1Callback
- * @param {array<NewPet|PetAllOf1>} value
+ * @param {Array<NewPet|PetAllOf1>} value
  */
 
 /**
  * @typedef PostPetsRequest
- * @type {object}
- * @property {NewPet} body.
+ * @type {Object}
+ * @property {NewPet} body
  */
 
 /**
@@ -40,14 +40,14 @@
 
 /**
  * @typedef GetPetsIdRequest
- * @type {object}
- * @property {number} id - ID of pet to fetch.
+ * @type {Object}
+ * @property {Number} id - ID of pet to fetch.
  */
 
 /**
  * @typedef DeletePetsIdRequest
- * @type {object}
- * @property {number} id - ID of pet to delete.
+ * @type {Object}
+ * @property {Number} id - ID of pet to delete.
  */
 
 /**

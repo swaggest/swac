@@ -76,11 +76,12 @@ JS;
 /**
 {$this->padLines(' * ', $headComment, false)} * @constructor
  * @param {string} baseURL - Base URL.
- * @property {PrepareRequest} prepareRequest - Callback to prepare request before sending.
  */
 function {$this->clientName}(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
+    /** @type {?PrepareRequest} - Callback to prepare request before sending. */
+    this.prepareRequest = null;
 }
 
 /**
@@ -120,6 +121,7 @@ JS
         if (!empty($parameters)) {
             foreach ($parameters as $parameter) {
                 $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
+
                 $encodedValue = "encodeURIComponent(req.$field)";
                 if ($parameter->isJson) {
                     $encodedValue = "encodeURIComponent(JSON.stringify(req.$field))";

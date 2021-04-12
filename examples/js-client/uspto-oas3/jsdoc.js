@@ -4,18 +4,18 @@
 
 /**
  * @typedef DataSetListApisItems
- * @type {object}
- * @property {string} apiKey - To be used as a dataset parameter value.
- * @property {string} apiVersionNumber - To be used as a version parameter value.
- * @property {string} apiUrl - The URL describing the dataset's fields.
- * @property {string} apiDocumentationUrl - A URL to the API console for each API.
+ * @type {Object}
+ * @property {String} apiKey - To be used as a dataset parameter value.
+ * @property {String} apiVersionNumber - To be used as a version parameter value.
+ * @property {String} apiUrl - The URL describing the dataset's fields.
+ * @property {String} apiDocumentationUrl - A URL to the API console for each API.
  */
 
 /**
  * @typedef DataSetList
- * @type {object}
- * @property {number} total.
- * @property {array<DataSetListApisItems>} apis.
+ * @type {Object}
+ * @property {Number} total
+ * @property {Array<DataSetListApisItems>} apis
  */
 
 /**
@@ -25,29 +25,29 @@
 
 /**
  * @typedef GetDatasetVersionFieldsRequest
- * @type {object}
- * @property {string} dataset - Name of the dataset.
- * @property {string} version - Version of the dataset.
+ * @type {Object}
+ * @property {String} dataset - Name of the dataset.
+ * @property {String} version - Version of the dataset.
  */
 
 /**
  * @callback StringCallback
- * @param {string} value
+ * @param {String} value
  */
 
 /**
  * @typedef PostDatasetVersionRecordsRequest
- * @type {object}
- * @property {string} version - Version of the dataset.
- * @property {string} dataset - Name of the dataset. In this case, the default value is oa_citations.
- * @property {string} criteria - Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.
- * @property {number} start - Starting record number. Default value is 0.
- * @property {number} rows - Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.
+ * @type {Object}
+ * @property {String} version - Version of the dataset.
+ * @property {String} dataset - Name of the dataset. In this case, the default value is oa_citations.
+ * @property {String} criteria - Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.
+ * @property {Number} start - Starting record number. Default value is 0.
+ * @property {Number} rows - Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.
  */
 
 /**
  * @callback ArrayObjectStringObjectCallback
- * @param {array<object<string, object>>} value
+ * @param {Array<Object.<String,Object>>} value
  */
 
 /**

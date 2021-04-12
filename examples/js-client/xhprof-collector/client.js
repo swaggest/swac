@@ -6,11 +6,12 @@
  * XHPROF Exporter
  * @constructor
  * @param {string} baseURL - Base URL.
- * @property {PrepareRequest} prepareRequest - Callback to prepare request before sending.
  */
 function Backend(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
+    /** @type {?PrepareRequest} - Callback to prepare request before sending. */
+    this.prepareRequest = null;
 }
 
 /**
@@ -19,7 +20,7 @@ function Backend(baseURL) {
  */
 
 /**
- * @param {object} req - request parameters.
+ * @param {Object} req - request parameters.
  * @param {XhUsecaseProfilesCallback} onOK
  */
 Backend.prototype.getProfile = function (req, onOK) {

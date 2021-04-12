@@ -8,11 +8,12 @@
  * This app showcases a variety of features.
  * @constructor
  * @param {string} baseURL - Base URL.
- * @property {PrepareRequest} prepareRequest - Callback to prepare request before sending.
  */
 function APIClient(baseURL) {
     // Trim trailing backslash.
     this.baseURL = (baseURL.charAt(baseURL.length - 1) === '/') ? baseURL.slice(0, -1) : baseURL;
+    /** @type {?PrepareRequest} - Callback to prepare request before sending. */
+    this.prepareRequest = null;
 }
 
 /**
@@ -336,7 +337,7 @@ APIClient.prototype.postJsonSliceBody = function (req, onOK) {
 /**
  * Output With Stream Writer
  * Output with stream writer.
- * @param {object} req - request parameters.
+ * @param {Object} req - request parameters.
  * @param {RawCallback} onOK
  * @param {RestErrResponseCallback} onInternalServerError
  */
@@ -377,7 +378,7 @@ APIClient.prototype.getOutputCsvWriter = function (req, onOK, onInternalServerEr
 /**
  * Output With Headers
  * Output with headers.
- * @param {object} req - request parameters.
+ * @param {Object} req - request parameters.
  * @param {AdvancedHeaderOutputCallback} onOK
  */
 APIClient.prototype.getOutputHeaders = function (req, onOK) {
@@ -412,7 +413,7 @@ APIClient.prototype.getOutputHeaders = function (req, onOK) {
 /**
  * Output With Headers
  * Output with headers.
- * @param {object} req - request parameters.
+ * @param {Object} req - request parameters.
  * @param {RawCallback} onOK
  */
 APIClient.prototype.headOutputHeaders = function (req, onOK) {
