@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dea29f0295c0a621d0a6ed6db593c39",
+    "content-hash": "23d28e22c325132abd0f1e98521d81af",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -385,16 +385,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.19",
+            "version": "v2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "446fc9faa5c2a9ddf65eb7121c0af7e857295241"
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/446fc9faa5c2a9ddf65eb7121c0af7e857295241",
-                "reference": "446fc9faa5c2a9ddf65eb7121c0af7e857295241",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
                 "shasum": ""
             },
             "require": {
@@ -435,7 +435,7 @@
                 "issues": "https://github.com/paragonie/random_compat/issues",
                 "source": "https://github.com/paragonie/random_compat"
             },
-            "time": "2020-10-15T10:06:57+00:00"
+            "time": "2021-04-17T09:33:01+00:00"
         },
         {
             "name": "php-yaoi/php-yaoi",
@@ -795,16 +795,16 @@
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.42",
+            "version": "v0.4.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "0eb5c3b0f544e7a06a657acd8be5079d9a86ce69"
+                "reference": "b6026637ff43ca58577646ad63ff9e3deb9b468a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/0eb5c3b0f544e7a06a657acd8be5079d9a86ce69",
-                "reference": "0eb5c3b0f544e7a06a657acd8be5079d9a86ce69",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/b6026637ff43ca58577646ad63ff9e3deb9b468a",
+                "reference": "b6026637ff43ca58577646ad63ff9e3deb9b468a",
                 "shasum": ""
             },
             "require": {
@@ -843,22 +843,22 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/go-code-builder/issues",
-                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.42"
+                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.43"
             },
-            "time": "2020-12-13T10:52:17+00:00"
+            "time": "2021-04-20T20:34:03+00:00"
         },
         {
             "name": "swaggest/json-cli",
-            "version": "v1.8.4",
+            "version": "v1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-cli.git",
-                "reference": "0cbe58c2f6dd6de99e85751c3083bae38e8256b3"
+                "reference": "1dd0f1ed58065eb97e58db6e276d1369eae8a6c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/0cbe58c2f6dd6de99e85751c3083bae38e8256b3",
-                "reference": "0cbe58c2f6dd6de99e85751c3083bae38e8256b3",
+                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/1dd0f1ed58065eb97e58db6e276d1369eae8a6c7",
+                "reference": "1dd0f1ed58065eb97e58db6e276d1369eae8a6c7",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +866,7 @@
                 "php-yaoi/php-yaoi": "^1",
                 "salsify/json-streaming-parser": "^7.0",
                 "swaggest/code-builder": "^0.3.2",
-                "swaggest/go-code-builder": "^0.4.42",
+                "swaggest/go-code-builder": "^0.4.43",
                 "swaggest/json-diff": "^3.8.1",
                 "swaggest/json-schema": "^0.12.21",
                 "swaggest/json-schema-maker": "^0.3.4",
@@ -898,9 +898,9 @@
             "description": "JSON CLI tool (diff, rearrange, pretty print, minify, yaml convert, etc...)",
             "support": {
                 "issues": "https://github.com/swaggest/json-cli/issues",
-                "source": "https://github.com/swaggest/json-cli/tree/v1.8.4"
+                "source": "https://github.com/swaggest/json-cli/tree/v1.8.5"
             },
-            "time": "2021-04-06T23:15:19+00:00"
+            "time": "2021-04-20T20:51:27+00:00"
         },
         {
             "name": "swaggest/json-diff",
