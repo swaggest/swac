@@ -118,7 +118,7 @@ class Reader
                 $config->baseUrl = $baseUrl;
             }
 
-            if ($this->schema->components->securitySchemes) {
+            if (isset($this->schema->components->securitySchemes)) {
                 foreach ($this->schema->components->securitySchemes as $name => $securityScheme) {
                     if ($securityScheme instanceof APIKeySecurityScheme) {
                         $apiKey = new ApiKeySecurity($name, $securityScheme->name, $securityScheme->in);

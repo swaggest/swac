@@ -10,6 +10,8 @@ class Markdown extends Base
 {
     public $out = 'API.md';
 
+    public $addSchemaUrl = '';
+
     public $typesPrefix = '';
 
 
@@ -24,8 +26,11 @@ class Markdown extends Base
         $options->clientName = Command\Option::create()->setType()
             ->setDescription('Name of generated client class, default APIClient');
 
+        $options->addSchemaUrl = Command\Option::create()->setType()
+            ->setDescription('Add schema link to the document');
+
         $options->typesPrefix = Command\Option::create()->setType()
-            ->setDescription('Prefix generated jsdoc class names');
+            ->setDescription('Prefix generated type names');
 
         $options->out = Command\Option::create()->setType()
             ->setDescription('Path to output files, default ./client');
@@ -37,6 +42,7 @@ class Markdown extends Base
     {
         $client = new APIDoc();
         $client->markdownTypes->addNamePrefix = $this->typesPrefix;
+        $client->addSchemaUrl = $this->addSchemaUrl;
 
         $this->process($client);
         $client->store($this->out);

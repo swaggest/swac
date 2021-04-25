@@ -23,6 +23,9 @@ class APIDoc extends AbstractTemplate implements Renderer
     /** @var string[] */
     private $operationNames;
 
+    /** @var string */
+    public $addSchemaUrl = '';
+
     /** @var Code */
     private $document;
 
@@ -64,6 +67,9 @@ MD
         }
         if (!empty(trim($config->baseUrl))) {
             $headComment .= 'Base URL:' . trim(wordwrap($config->baseUrl)) . "\n\n";
+        }
+        if (!empty($this->addSchemaUrl)) {
+            $headComment .= '[Schema](' . $this->addSchemaUrl . ').' . "\n\n";
         }
 
         $title = empty($config->title) ? 'API Documentation' : $config->title;

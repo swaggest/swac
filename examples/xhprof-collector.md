@@ -2,6 +2,8 @@
 
 # XHPROF Exporter
 
+[Schema](./openapi.json).
+
 ## Table Of Contents
 
 * [Operations](#operations)

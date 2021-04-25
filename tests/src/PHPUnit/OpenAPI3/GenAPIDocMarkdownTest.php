@@ -6,6 +6,7 @@ use Swac\Command\App;
 use Swac\Command\GoClient;
 use Swac\Command\JavaScriptClient;
 use Swac\Command\Markdown;
+use Swac\ExitCode;
 use Swac\Markdown\APIDoc;
 
 class GenAPIDocMarkdownTest extends \PHPUnit_Framework_TestCase
@@ -60,7 +61,7 @@ class GenAPIDocMarkdownTest extends \PHPUnit_Framework_TestCase
         $cmd->schema = __DIR__ . '/../../../resources/xhprof-collector.json';
         $cmd->out = __DIR__ . '/../../../../examples/xhprof-collector.md';
         $cmd->typesPrefix = 'xh';
-        $cmd->clientName = 'Backend';
+        $cmd->addSchemaUrl = './openapi.json';
 
         $cmd->performAction();
 
@@ -75,6 +76,20 @@ class GenAPIDocMarkdownTest extends \PHPUnit_Framework_TestCase
         $cmd = new Markdown();
         $cmd->schema = __DIR__ . '/../../../resources/foobar.json';
         $cmd->out = __DIR__ . '/../../../../examples/foobar-oas3.md';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
+    public function testEmpty()
+    {
+        App::$ver = '<version>';
+        $cmd = new Markdown();
+        $cmd->schema = __DIR__ . '/../../../resources/empty.json';
+        $cmd->out = __DIR__ . '/../../../../examples/empty.md';
 
         $cmd->performAction();
 

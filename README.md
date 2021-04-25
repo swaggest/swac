@@ -152,12 +152,13 @@ Usage:
    schema   Path/URL to OpenAPI/Swagger schema
    
 Options: 
-   --operations <operations>      Operations filter in form of comma-separated list of method/path, default empty         
-   --ignore-operation-id          Ignore operationId and always name operations using method and path                     
-   --client-name <clientName>     Name of generated client class, default APIClient                                       
-   --types-prefix <typesPrefix>   Prefix generated jsdoc class names                                                      
-   --out <out>                    Path to output files, default ./client                                                  
-   --patches <patches...>         JSON patches to apply to schema file before processing, merge patches are also supported
+   --operations <operations>         Operations filter in form of comma-separated list of method/path, default empty         
+   --ignore-operation-id             Ignore operationId and always name operations using method and path                     
+   --client-name <clientName>        Name of generated client class, default APIClient                                       
+   --add-schema-url <addSchemaUrl>   Add schema link to the document                                                         
+   --types-prefix <typesPrefix>      Prefix generated type names                                                             
+   --out <out>                       Path to output files, default ./client                                                  
+   --patches <patches...>            JSON patches to apply to schema file before processing, merge patches are also supported
  
 ```
 
