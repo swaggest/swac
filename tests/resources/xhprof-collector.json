@@ -1,653 +1,380 @@
 {
- "openapi": "3.0.3",
- "info": {
-  "title": "XHPROF Exporter",
-  "version": ""
- },
- "paths": {
-  "/profile": {
-   "get": {
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/UsecaseProfiles"
-        }
-       }
+ "openapi":"3.0.3","info":{"title":"XHPROF Exporter","version":""},
+ "paths":{
+  "/profile":{
+   "get":{
+    "summary":"List Profiles","description":"","operationId":"ListProfiles",
+    "responses":{
+     "200":{
+      "description":"OK",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/UsecaseProfiles"}}
       }
      }
     }
    },
-   "post": {
-    "tags": [
-     "Collect"
-    ],
-    "summary": "Collect Profile",
-    "description": "Collects XHPROF-compatible PHP profile.",
-    "operationId": "collectProfile",
-    "parameters": [
+   "post":{
+    "tags":["Collect"],"summary":"Collect Profile",
+    "description":"Collects XHPROF-compatible PHP profile.",
+    "operationId":"CollectProfile",
+    "parameters":[
      {
-      "name": "probability",
-      "in": "query",
-      "description": "Probability that was asserted to collect this profile, used to estimate total multiplication.",
-      "schema": {
-       "maximum": 1,
-       "minimum": 0,
-       "type": "number",
-       "description": "Probability that was asserted to collect this profile, used to estimate total multiplication.",
-       "default": 1
+      "name":"probability","in":"query",
+      "description":"Probability that was asserted to collect this profile, used to estimate total multiplication.",
+      "schema":{
+       "maximum":1,"minimum":0,"type":"number",
+       "description":"Probability that was asserted to collect this profile, used to estimate total multiplication.",
+       "default":1
       }
      },
      {
-      "name": "tz",
-      "in": "query",
-      "description": "Timezone location for daily aggregations, default: UTC.",
-      "schema": {
-       "type": "string",
-       "description": "Timezone location for daily aggregations, default: UTC."
+      "name":"tz","in":"query",
+      "description":"Timezone location for daily aggregations, default: UTC.",
+      "schema":{
+       "type":"string",
+       "description":"Timezone location for daily aggregations, default: UTC."
       }
      }
     ],
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/UsecaseCollectProfileInput"
-       }
-      }
+    "requestBody":{
+     "content":{
+      "application/json":{"schema":{"$ref":"#/components/schemas/UsecaseCollectProfileInput"}}
      }
     },
-    "responses": {
-     "202": {
-      "description": "Accepted"
-     }
-    }
+    "responses":{"202":{"description":"Accepted"}}
    }
   },
-  "/profile.dot": {
-   "get": {
-    "summary": "",
-    "description": "",
-    "operationId": "dotGraph",
-    "parameters": [
+  "/profile.dot":{
+   "get":{
+    "summary":"Dot Graph","description":"","operationId":"DotGraph",
+    "parameters":[
      {
-      "name": "rootSymbol",
-      "in": "query",
-      "schema": {
-       "$ref": "#/components/schemas/ProfileSymbol"
+      "name":"rootSymbol","in":"query",
+      "schema":{"$ref":"#/components/schemas/ProfileSymbol"}
+     },
+     {
+      "name":"graphLimit","in":"query",
+      "description":"Maximum number of nodes (symbols) in graph.",
+      "schema":{
+       "type":"integer",
+       "description":"Maximum number of nodes (symbols) in graph.",
+       "default":100
       }
      },
      {
-      "name": "graphLimit",
-      "in": "query",
-      "description": "Maximum number of nodes (symbols) in graph.",
-      "schema": {
-       "type": "integer",
-       "description": "Maximum number of nodes (symbols) in graph.",
-       "default": 100
-      }
+      "name":"graphPriority","in":"query",
+      "schema":{"$ref":"#/components/schemas/GraphResource"}
      },
      {
-      "name": "graphPriority",
-      "in": "query",
-      "schema": {
-       "$ref": "#/components/schemas/GraphResource"
-      }
-     },
-     {
-      "name": "aggregate",
-      "in": "query",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/AggregatorAddress"
-        }
-       }
+      "name":"aggregate","in":"query",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/AggregatorAddress"}}
       }
      }
     ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "text/vnd.graphviz": {
-        "schema": {}
-       }
-      }
+    "responses":{
+     "200":{
+      "description":"OK",
+      "content":{"text/vnd.graphviz":{"schema":{"type":"string","format":"binary"}}}
      },
-     "404": {
-      "description": "Not Found",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/RestErrResponse"
-        }
-       }
+     "404":{
+      "description":"Not Found",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/RestErrResponse"}}
       }
      }
     }
    }
   },
-  "/profile/find-symbol": {
-   "get": {
-    "summary": "",
-    "description": "",
-    "operationId": "",
-    "parameters": [
+  "/profile/find-symbol":{
+   "get":{
+    "summary":"Find Symbol","description":"","operationId":"FindSymbol",
+    "parameters":[
      {
-      "name": "aggregate",
-      "in": "query",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/AggregatorAddress"
-        }
-       }
+      "name":"aggregate","in":"query",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/AggregatorAddress"}}
       }
      },
      {
-      "name": "match",
-      "in": "query",
-      "description": "Substring to match in symbol.",
-      "schema": {
-       "type": "string",
-       "description": "Substring to match in symbol."
-      }
+      "name":"match","in":"query","description":"Substring to match in symbol.",
+      "schema":{"type":"string","description":"Substring to match in symbol."}
      },
      {
-      "name": "limit",
-      "in": "query",
-      "description": "Limit number of results.",
-      "schema": {
-       "type": "integer",
-       "description": "Limit number of results.",
-       "default": 20
-      }
+      "name":"limit","in":"query","description":"Limit number of results.",
+      "schema":{"type":"integer","description":"Limit number of results.","default":20}
      }
     ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/UsecaseSearchOutput"
-        }
-       }
+    "responses":{
+     "200":{
+      "description":"OK",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/UsecaseSearchOutput"}}
       }
      },
-     "404": {
-      "description": "Not Found",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/RestErrResponse"
-        }
-       }
+     "404":{
+      "description":"Not Found",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/RestErrResponse"}}
       }
      }
     }
    }
   },
-  "/profile/symbol": {
-   "get": {
-    "summary": "",
-    "description": "",
-    "operationId": "symbolStat",
-    "parameters": [
+  "/profile/symbol":{
+   "get":{
+    "summary":"Symbol Stat","description":"","operationId":"SymbolStat",
+    "parameters":[
      {
-      "name": "aggregate",
-      "in": "query",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/AggregatorAddress"
-        }
-       }
+      "name":"aggregate","in":"query",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/AggregatorAddress"}}
       }
      },
      {
-      "name": "symbol",
-      "in": "query",
-      "required": true,
-      "schema": {
-       "$ref": "#/components/schemas/ProfileSymbol"
-      }
+      "name":"symbol","in":"query","required":true,
+      "schema":{"$ref":"#/components/schemas/ProfileSymbol"}
      }
     ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/UsecaseSymbolStatOutput"
-        }
-       }
+    "responses":{
+     "200":{
+      "description":"OK",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/UsecaseSymbolStatOutput"}}
       }
      },
-     "404": {
-      "description": "Not Found",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/RestErrResponse"
-        }
-       }
+     "404":{
+      "description":"Not Found",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/RestErrResponse"}}
       }
      }
     }
    }
   },
-  "/top-traces": {
-   "get": {
-    "summary": "Top Traces",
-    "description": "Get traces that occupy most of resource.",
-    "operationId": "",
-    "parameters": [
+  "/top-traces":{
+   "get":{
+    "summary":"Top Traces",
+    "description":"Get traces that occupy most of resource.",
+    "operationId":"TopTraces",
+    "parameters":[
      {
-      "name": "rootSymbol",
-      "in": "query",
-      "schema": {
-       "$ref": "#/components/schemas/ProfileSymbol"
+      "name":"rootSymbol","in":"query",
+      "schema":{"$ref":"#/components/schemas/ProfileSymbol"}
+     },
+     {
+      "name":"aggregate","in":"query",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/AggregatorAddress"}}
       }
      },
      {
-      "name": "aggregate",
-      "in": "query",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/AggregatorAddress"
-        }
-       }
-      }
+      "name":"resource","in":"query",
+      "schema":{"$ref":"#/components/schemas/GraphResource"}
      },
      {
-      "name": "resource",
-      "in": "query",
-      "schema": {
-       "$ref": "#/components/schemas/GraphResource"
-      }
-     },
-     {
-      "name": "limit",
-      "in": "query",
-      "schema": {
-       "type": "integer",
-       "default": 20
-      }
+      "name":"limit","in":"query",
+      "schema":{"type":"integer","default":20,"example":50}
      }
     ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "array",
-         "items": {
-          "$ref": "#/components/schemas/UsecaseTraceInfo"
-         }
+    "responses":{
+     "200":{
+      "description":"OK",
+      "content":{
+       "application/json":{
+        "schema":{
+         "type":"array",
+         "items":{"$ref":"#/components/schemas/UsecaseTraceInfo"}
         }
        }
       }
      },
-     "404": {
-      "description": "Not Found",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/RestErrResponse"
-        }
-       }
+     "404":{
+      "description":"Not Found",
+      "content":{
+       "application/json":{"schema":{"$ref":"#/components/schemas/RestErrResponse"}}
       }
      }
     }
    }
   },
-  "/upload/profile": {
-   "post": {
-    "tags": [
-     "Collect"
-    ],
-    "summary": "Upload Profile",
-    "description": "Collects XHPROF-compatible PHP profile from uploaded JSON file.",
-    "operationId": "uploadProfile",
-    "parameters": [
+  "/upload/profile":{
+   "post":{
+    "tags":["Collect"],"summary":"Upload Profile",
+    "description":"Collects XHPROF-compatible PHP profile from uploaded JSON file.",
+    "operationId":"uploadProfile",
+    "parameters":[
      {
-      "name": "prob",
-      "in": "query",
-      "description": "Probability that was asserted to collect this profile, used to estimate total multiplication.",
-      "schema": {
-       "maximum": 1,
-       "minimum": 0,
-       "type": "number",
-       "description": "Probability that was asserted to collect this profile, used to estimate total multiplication.",
-       "default": 1
+      "name":"prob","in":"query",
+      "description":"Probability that was asserted to collect this profile, used to estimate total multiplication.",
+      "schema":{
+       "maximum":1,"minimum":0,"type":"number",
+       "description":"Probability that was asserted to collect this profile, used to estimate total multiplication.",
+       "default":1
       }
      }
     ],
-    "requestBody": {
-     "content": {
-      "multipart/form-data": {
-       "schema": {
-        "$ref": "#/components/schemas/FormDataUsecaseUploadReq"
-       }
-      }
+    "requestBody":{
+     "content":{
+      "multipart/form-data":{"schema":{"$ref":"#/components/schemas/FormDataUsecaseUploadReq"}}
      }
     },
-    "responses": {
-     "202": {
-      "description": "Accepted"
-     }
-    }
+    "responses":{"202":{"description":"Accepted"}}
    }
   }
  },
- "components": {
-  "schemas": {
-   "AggregatorAddress": {
-    "type": "object",
-    "properties": {
-     "end": {
-      "type": "integer",
-      "description": "Interval end UTC unix timestamp. "
-     },
-     "id": {
-      "type": "string",
-      "description": "Profile ID"
-     },
-     "labels": {
-      "$ref": "#/components/schemas/AggregatorLabels"
-     },
-     "start": {
-      "type": "integer",
-      "description": "Interval start UTC unix timestamp."
+ "components":{
+  "schemas":{
+   "AggregatorAddress":{
+    "type":"object",
+    "properties":{
+     "end":{"type":"integer","description":"Interval end UTC unix timestamp. "},
+     "id":{"type":"string","description":"Profile ID"},
+     "labels":{"$ref":"#/components/schemas/AggregatorLabels"},
+     "start":{"type":"integer","description":"Interval start UTC unix timestamp."}
+    }
+   },
+   "AggregatorLabels":{"type":"object","additionalProperties":{"type":"string"},"nullable":true},
+   "FormDataMultipartFileHeader":{"type":"string","format":"binary"},
+   "FormDataUsecaseUploadReq":{
+    "type":"object",
+    "properties":{
+     "profile":{
+      "type":"array",
+      "items":{"$ref":"#/components/schemas/FormDataMultipartFileHeader"},
+      "description":"File with profile JSON data.","nullable":true
      }
     }
    },
-   "AggregatorLabels": {
-    "type": "object",
-    "additionalProperties": {
-     "type": "string"
-    },
-    "nullable": true
+   "GraphResource":{
+    "enum":["wt","cpu","io"],"type":"string",
+    "description":"Graph resource determines nodes selection to expose strongest contributors.",
+    "default":"wt"
    },
-   "FormDataMultipartFileHeader": {
-    "type": "string",
-    "format": "binary"
+   "ProfileResult":{
+    "type":"object",
+    "additionalProperties":{"$ref":"#/components/schemas/ProfileValue"},
+    "nullable":true
    },
-   "FormDataUsecaseUploadReq": {
-    "type": "object",
-    "properties": {
-     "profile": {
-      "type": "array",
-      "items": {
-       "$ref": "#/components/schemas/FormDataMultipartFileHeader"
-      },
-      "description": "File with profile JSON data.",
-      "nullable": true
+   "ProfileSymbol":{"type":"string","default":"main()","example":"MyNamespace\\MyClass::do"},
+   "ProfileValue":{
+    "type":"object",
+    "properties":{
+     "as":{
+      "type":"integer",
+      "description":"Aggregation size, count of parent profiles."
+     },
+     "cpu":{"type":"integer","description":"CPU time in microseconds."},
+     "ct":{"type":"integer","description":"Count of calls."},
+     "io":{"type":"integer","description":"IO time in microseconds."},
+     "mem.aa":{"type":"integer","description":"The amount of allocated memory."},
+     "mem.na":{
+      "type":"integer",
+      "description":"The sum of the number of all allocations in this function."
+     },
+     "mem.nf":{
+      "type":"integer",
+      "description":"The sum of the number of all frees in this function."
+     },
+     "mu":{"type":"integer","description":"Memory usage in bytes."},
+     "pmu":{"type":"integer","description":"Peak memory usage in bytes."},
+     "wt":{"type":"integer","description":"Wall time in microseconds."}
+    }
+   },
+   "RenderValueStat":{
+    "type":"object",
+    "properties":{
+     "as":{"type":"string"},"cpu":{"type":"string"},"cpuf":{"type":"string"},
+     "ct":{"type":"string"},"ctf":{"type":"string"},"io":{"type":"string"},
+     "iof":{"type":"string"},"ma":{"type":"string"},"mac":{"type":"string"},
+     "mf":{"type":"string"},"mu":{"type":"string"},"pmu":{"type":"string"},
+     "wt":{"type":"string"},"wtf":{"type":"string"}
+    }
+   },
+   "RestErrResponse":{
+    "type":"object",
+    "properties":{
+     "code":{"type":"integer","description":"Application-specific error code."},
+     "context":{
+      "type":"object","additionalProperties":{},
+      "description":"Application context."
+     },
+     "error":{"type":"string","description":"Error message."},
+     "status":{"type":"string","description":"Status text."}
+    }
+   },
+   "UsecaseCollectProfileInput":{
+    "type":"object",
+    "properties":{
+     "id":{
+      "type":"string",
+      "description":"Random string created by client to identify profile."
+     },
+     "labels":{"$ref":"#/components/schemas/AggregatorLabels"},
+     "meta":{
+      "type":"object","additionalProperties":{},
+      "description":"Additional context.","nullable":true
+     },
+     "profile":{"$ref":"#/components/schemas/ProfileResult"}
+    }
+   },
+   "UsecaseProfileInfo":{
+    "type":"object",
+    "properties":{
+     "addr":{"$ref":"#/components/schemas/AggregatorAddress"},
+     "cpu":{"type":"string"},"edges":{"type":"integer"},"io":{"type":"string"},
+     "peakMem":{"type":"string"},"profiles":{"type":"integer"},
+     "wt":{"type":"string"}
+    }
+   },
+   "UsecaseProfiles":{
+    "type":"object",
+    "properties":{
+     "activeAggregates":{
+      "type":"array","items":{"$ref":"#/components/schemas/UsecaseProfileInfo"},
+      "nullable":true
+     },
+     "recent":{
+      "type":"array","items":{"$ref":"#/components/schemas/UsecaseProfileInfo"},
+      "nullable":true
      }
     }
    },
-   "GraphResource": {
-    "enum": [
-     "wt",
-     "cpu",
-     "io"
-    ],
-    "type": "string",
-    "description": "Graph resource determines nodes selection to expose strongest contributors.",
-    "default": "wt"
-   },
-   "ProfileResult": {
-    "type": "object",
-    "additionalProperties": {
-     "$ref": "#/components/schemas/ProfileValue"
-    },
-    "nullable": true
-   },
-   "ProfileSymbol": {
-    "type": "string"
-   },
-   "ProfileValue": {
-    "type": "object",
-    "properties": {
-     "as": {
-      "type": "integer",
-      "description": "Aggregation size, count of parent profiles."
-     },
-     "cpu": {
-      "type": "integer",
-      "description": "CPU time in microseconds."
-     },
-     "ct": {
-      "type": "integer",
-      "description": "Count of calls."
-     },
-     "io": {
-      "type": "integer",
-      "description": "IO time in microseconds."
-     },
-     "mem.aa": {
-      "type": "integer",
-      "description": "The amount of allocated memory."
-     },
-     "mem.na": {
-      "type": "integer",
-      "description": "The sum of the number of all allocations in this function."
-     },
-     "mem.nf": {
-      "type": "integer",
-      "description": "The sum of the number of all frees in this function."
-     },
-     "mu": {
-      "type": "integer",
-      "description": "Memory usage in bytes."
-     },
-     "pmu": {
-      "type": "integer",
-      "description": "Peak memory usage in bytes."
-     },
-     "wt": {
-      "type": "integer",
-      "description": "Wall time in microseconds."
+   "UsecaseSearchOutput":{
+    "type":"object",
+    "properties":{
+     "symbols":{
+      "type":"array","items":{"$ref":"#/components/schemas/ProfileSymbol"},
+      "nullable":true
      }
     }
    },
-   "RenderValueStat": {
-    "type": "object",
-    "properties": {
-     "as": {
-      "type": "string"
+   "UsecaseSymbolStatOutput":{
+    "type":"object",
+    "properties":{
+     "callees":{
+      "type":"object",
+      "additionalProperties":{"$ref":"#/components/schemas/RenderValueStat"},
+      "description":"Callees stat."
      },
-     "cpu": {
-      "type": "string"
+     "callers":{
+      "type":"object",
+      "additionalProperties":{"$ref":"#/components/schemas/RenderValueStat"},
+      "description":"Callers stat."
      },
-     "cpuf": {
-      "type": "string"
-     },
-     "ct": {
-      "type": "string"
-     },
-     "ctf": {
-      "type": "string"
-     },
-     "io": {
-      "type": "string"
-     },
-     "iof": {
-      "type": "string"
-     },
-     "ma": {
-      "type": "string"
-     },
-     "mac": {
-      "type": "string"
-     },
-     "mf": {
-      "type": "string"
-     },
-     "mu": {
-      "type": "string"
-     },
-     "pmu": {
-      "type": "string"
-     },
-     "wt": {
-      "type": "string"
-     },
-     "wtf": {
-      "type": "string"
-     }
+     "exclusive":{"$ref":"#/components/schemas/RenderValueStat"},
+     "inclusive":{"$ref":"#/components/schemas/RenderValueStat"}
     }
    },
-   "RestErrResponse": {
-    "type": "object",
-    "properties": {
-     "code": {
-      "type": "integer",
-      "description": "Application-specific error code."
-     },
-     "context": {
-      "type": "object",
-      "additionalProperties": {},
-      "description": "Application context."
-     },
-     "error": {
-      "type": "string",
-      "description": "Error message."
-     },
-     "status": {
-      "type": "string",
-      "description": "Status text."
-     }
-    }
-   },
-   "UsecaseCollectProfileInput": {
-    "type": "object",
-    "properties": {
-     "id": {
-      "type": "string",
-      "description": "Random string created by client to identify profile."
-     },
-     "labels": {
-      "$ref": "#/components/schemas/AggregatorLabels"
-     },
-     "meta": {
-      "type": "object",
-      "additionalProperties": {},
-      "description": "Additional context.",
-      "nullable": true
-     },
-     "profile": {
-      "$ref": "#/components/schemas/ProfileResult"
-     }
-    }
-   },
-   "UsecaseProfileInfo": {
-    "type": "object",
-    "properties": {
-     "addr": {
-      "$ref": "#/components/schemas/AggregatorAddress"
-     },
-     "cpu": {
-      "type": "string"
-     },
-     "edges": {
-      "type": "integer"
-     },
-     "io": {
-      "type": "string"
-     },
-     "peakMem": {
-      "type": "string"
-     },
-     "profiles": {
-      "type": "integer"
-     },
-     "wt": {
-      "type": "string"
-     }
-    }
-   },
-   "UsecaseProfiles": {
-    "type": "object",
-    "properties": {
-     "activeAggregates": {
-      "type": "array",
-      "items": {
-       "$ref": "#/components/schemas/UsecaseProfileInfo"
-      },
-      "nullable": true
-     },
-     "recent": {
-      "type": "array",
-      "items": {
-       "$ref": "#/components/schemas/UsecaseProfileInfo"
-      },
-      "nullable": true
-     }
-    }
-   },
-   "UsecaseSearchOutput": {
-    "type": "object",
-    "properties": {
-     "symbols": {
-      "type": "array",
-      "items": {
-       "$ref": "#/components/schemas/ProfileSymbol"
-      },
-      "nullable": true
-     }
-    }
-   },
-   "UsecaseSymbolStatOutput": {
-    "type": "object",
-    "properties": {
-     "callees": {
-      "type": "object",
-      "additionalProperties": {
-       "$ref": "#/components/schemas/RenderValueStat"
-      },
-      "description": "Callees stat."
-     },
-     "callers": {
-      "type": "object",
-      "additionalProperties": {
-       "$ref": "#/components/schemas/RenderValueStat"
-      },
-      "description": "Callers stat."
-     },
-     "exclusive": {
-      "$ref": "#/components/schemas/RenderValueStat"
-     },
-     "inclusive": {
-      "$ref": "#/components/schemas/RenderValueStat"
-     }
-    }
-   },
-   "UsecaseTraceInfo": {
-    "type": "object",
-    "properties": {
-     "hash": {
-      "type": "string"
-     },
-     "stat": {
-      "$ref": "#/components/schemas/RenderValueStat"
-     },
-     "symbol": {
-      "$ref": "#/components/schemas/ProfileSymbol"
-     },
-     "trace": {
-      "type": "array",
-      "items": {
-       "$ref": "#/components/schemas/ProfileSymbol"
-      },
-      "nullable": true
+   "UsecaseTraceInfo":{
+    "type":"object",
+    "properties":{
+     "hash":{"type":"string"},
+     "stat":{"$ref":"#/components/schemas/RenderValueStat"},
+     "symbol":{"$ref":"#/components/schemas/ProfileSymbol"},
+     "trace":{
+      "type":"array","items":{"$ref":"#/components/schemas/ProfileSymbol"},
+      "nullable":true
      }
     }
    }

@@ -40,6 +40,9 @@ class Parameter
     /** @var Schema */
     public $schema;
 
+    /** @var mixed[] */
+    public $examples;
+
     /** @var bool */
     public $isFile;
 

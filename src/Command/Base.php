@@ -64,7 +64,7 @@ abstract class Base extends Command
         $reader->process();
 
         if ($rest->totalOperations === 0) {
-            throw new ExitCode('No operations to store.', 1);
+            Log::getInstance()->warn('No operations to store.');
         }
     }
 }

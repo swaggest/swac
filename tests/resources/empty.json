@@ -1,0 +1,9 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ACME Service",
+    "description": "ACME service estimates success greatness.",
+    "version": "master"
+  },
+  "paths": {}
+}

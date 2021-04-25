@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23d28e22c325132abd0f1e98521d81af",
+    "content-hash": "55d64a893c88bb0d303008d7f3b3a0e6",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -744,16 +744,16 @@
         },
         {
             "name": "swaggest/code-builder",
-            "version": "v0.3.3",
+            "version": "v0.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/code-builder.git",
-                "reference": "14a5d5f202c47890529a68f6ff16263ff66e8bf1"
+                "reference": "bf5d8c2866ae1b3079d7899244eab070ebbe9fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/code-builder/zipball/14a5d5f202c47890529a68f6ff16263ff66e8bf1",
-                "reference": "14a5d5f202c47890529a68f6ff16263ff66e8bf1",
+                "url": "https://api.github.com/repos/swaggest/code-builder/zipball/bf5d8c2866ae1b3079d7899244eab070ebbe9fb8",
+                "reference": "bf5d8c2866ae1b3079d7899244eab070ebbe9fb8",
                 "shasum": ""
             },
             "require": {
@@ -782,29 +782,29 @@
                     "homepage": "https://github.com/vearutop"
                 }
             ],
-            "description": "GO code generation library",
+            "description": "Code generation library",
             "homepage": "https://github.com/swaggest/code-builder",
             "keywords": [
                 "library"
             ],
             "support": {
                 "issues": "https://github.com/swaggest/code-builder/issues",
-                "source": "https://github.com/swaggest/code-builder/tree/master"
+                "source": "https://github.com/swaggest/code-builder/tree/v0.3.4"
             },
-            "time": "2020-09-08T20:06:31+00:00"
+            "time": "2021-04-23T07:27:29+00:00"
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.43",
+            "version": "v0.4.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "b6026637ff43ca58577646ad63ff9e3deb9b468a"
+                "reference": "c88c0a15d5af7cf0c1a9305458241a6d287e80c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/b6026637ff43ca58577646ad63ff9e3deb9b468a",
-                "reference": "b6026637ff43ca58577646ad63ff9e3deb9b468a",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/c88c0a15d5af7cf0c1a9305458241a6d287e80c6",
+                "reference": "c88c0a15d5af7cf0c1a9305458241a6d287e80c6",
                 "shasum": ""
             },
             "require": {
@@ -843,9 +843,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/go-code-builder/issues",
-                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.43"
+                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.44"
             },
-            "time": "2021-04-20T20:34:03+00:00"
+            "time": "2021-04-20T21:34:48+00:00"
         },
         {
             "name": "swaggest/json-cli",
@@ -1046,22 +1046,22 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.31",
+            "version": "v0.2.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "8ccd3390c8ff40e2a6c26b0c468ee4f2c2643d24"
+                "reference": "ec0b9e8dd837ff572458b5d9c7cb4d2039e78d5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/8ccd3390c8ff40e2a6c26b0c468ee4f2c2643d24",
-                "reference": "8ccd3390c8ff40e2a6c26b0c468ee4f2c2643d24",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/ec0b9e8dd837ff572458b5d9c7cb4d2039e78d5d",
+                "reference": "ec0b9e8dd837ff572458b5d9c7cb4d2039e78d5d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6.0",
-                "swaggest/code-builder": "^0.3.3",
+                "swaggest/code-builder": "^0.3.4",
                 "swaggest/json-schema": "^0.12.31"
             },
             "require-dev": {
@@ -1091,9 +1091,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.31"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.32"
             },
-            "time": "2021-04-12T19:47:58+00:00"
+            "time": "2021-04-25T12:22:54+00:00"
         },
         {
             "name": "swaggest/rest-client",

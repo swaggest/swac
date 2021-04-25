@@ -15,6 +15,9 @@ class Response
     /** @var Schema */
     public $schema;
 
+    /** @var string */
+    public $contentType;
+
     /** @var Schema[] map of headers with key being a header name */
     public $headers;
 

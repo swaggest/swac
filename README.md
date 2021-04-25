@@ -138,3 +138,33 @@ swac js-client openapi.json --out ./ --client-name Backend --types-prefix xh
 
 The generated client is a ES5 class using `XMLHttpRequest` and `jsdoc` type definitions without external dependencies
 suitable for direct usage in browsers.
+
+### Markdown
+
+```
+swac markdown --help
+```
+```
+v0.1.24 swac markdown
+OpenAPI/Swagger compiler, https://github.com/swaggest/swac
+Usage: 
+   swac markdown <schema>
+   schema   Path/URL to OpenAPI/Swagger schema
+   
+Options: 
+   --operations <operations>         Operations filter in form of comma-separated list of method/path, default empty         
+   --ignore-operation-id             Ignore operationId and always name operations using method and path                     
+   --client-name <clientName>        Name of generated client class, default APIClient                                       
+   --add-schema-url <addSchemaUrl>   Add schema link to the document                                                         
+   --types-prefix <typesPrefix>      Prefix generated type names                                                             
+   --out <out>                       Path to output files, default ./client                                                  
+   --patches <patches...>            JSON patches to apply to schema file before processing, merge patches are also supported
+ 
+```
+
+[Examples](/examples/).
+
+```
+swac markdown openapi.json --out ./API-Docs.md --types-prefix xh
+```
+
