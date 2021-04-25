@@ -7,11 +7,12 @@ use Yaoi\Command\Definition;
 
 class App extends Command\Application
 {
-    static $ver = 'v0.1.23';
+    static $ver = 'v0.1.24';
 
     public $phpGuzzleClient;
     public $goClient;
     public $jsClient;
+    public $markdown;
 
     /**
      * @param Definition $definition
@@ -22,6 +23,7 @@ class App extends Command\Application
         $commandDefinitions->phpGuzzleClient = PhpGuzzleClient::definition();
         $commandDefinitions->goClient = GoClient::definition();
         $commandDefinitions->jsClient = JavaScriptClient::definition();
+        $commandDefinitions->markdown = Markdown::definition();
 
         $definition->name = 'swac';
         $definition->description = 'OpenAPI/Swagger compiler, https://github.com/swaggest/swac';

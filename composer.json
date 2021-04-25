@@ -11,7 +11,7 @@
   ],
   "require": {
     "swaggest/json-schema": "^0.12.19",
-    "swaggest/php-code-builder": "^0.2.31",
+    "swaggest/php-code-builder": "^0.2.32",
     "swaggest/go-code-builder": "^0.4.34",
     "swaggest/json-cli": "v1.8.5",
     "php-yaoi/php-yaoi": "^1",

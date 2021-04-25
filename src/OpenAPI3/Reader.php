@@ -30,6 +30,7 @@ class Reader
 {
     const APPLICATION_JSON = 'application/json';
     const APPLICATION_X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    const MULTIPART_FORM_DATA = 'multipart/form-data';
 
     /** @var string[] */
     private $schemas; // Array of json_decoded schemas
@@ -175,23 +176,6 @@ class Reader
                             $response->statusCode = (int)$status;
                         }
 
-                        if ($openApiResponse->content) {
-                            foreach ($openApiResponse->content as $contentType => $media) {
-                                if ($contentType === self::APPLICATION_JSON || (false !== strpos($contentType, '+json'))) {
-                                    $handler->accept = $contentType;
-                                    if ($media->schema !== null) {
-                                        $response->schema = $media->schema->exportSchema();
-                                    }
-                                } else {
-                                    Log::getInstance()->addWarning(
-                                        'Unsupported response content type',
-                                        ['Content-Type' => $contentType]
-                                    );
-                                }
-                            }
-                        }
-
-
                         if ($openApiResponse->schema !== null) {
                             $response->schema = $openApiResponse->schema->exportSchema();
                         }
@@ -209,7 +193,20 @@ class Reader
                         }
                         $response->description = $openApiResponse->description;
 
-                        $responses[] = $response;
+                        if ($openApiResponse->content) {
+                            foreach ($openApiResponse->content as $contentType => $media) {
+                                $resp = clone $response;
+                                $handler->accept = $contentType;
+                                $resp->contentType = $contentType;
+                                if ($media->schema !== null) {
+                                    $resp->schema = $media->schema->exportSchema();
+                                }
+                                $responses[] = $resp;
+                            }
+                        } else {
+                            $responses[] = $response;
+                        }
+
                     }
                     $handler->responses = $responses;
 
@@ -246,7 +243,7 @@ class Reader
             foreach ($operation->requestBody->content as $contentType => $body) {
                 if ($contentType === self::APPLICATION_JSON) {
                     $handler->parameters[Parameter::BODY . ':' . Parameter::BODY] = self::makeBodyParameter($body);
-                } elseif ($contentType === self::APPLICATION_X_WWW_FORM_URLENCODED) {
+                } elseif ($contentType === self::APPLICATION_X_WWW_FORM_URLENCODED || $contentType === self::MULTIPART_FORM_DATA) {
                     if (null !== $body->encoding) {
                         throw new Skip('Request body skipped, encoding not supported: ' . $contentType);
                     }
@@ -290,6 +287,9 @@ class Reader
 
         if ($param->schema !== null) {
             $p->schema = $param->schema->exportSchema();
+            if ($param->schema->example !== null) {
+                $p->examples = [$param->schema->example];
+            }
         } elseif (isset($param->content['application/json']->schema)) {
             $p->schema = $param->content['application/json']->schema->exportSchema();
             $p->isJson = true;
