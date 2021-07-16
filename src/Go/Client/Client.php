@@ -34,6 +34,7 @@ use Swaggest\GoCodeBuilder\Templates\Type\Map;
 use Swaggest\GoCodeBuilder\Templates\Type\Pointer;
 use Swaggest\GoCodeBuilder\Templates\Type\Slice;
 use Swaggest\GoCodeBuilder\Templates\Type\TypeUtil;
+use Swaggest\JsonSchema\Schema;
 use Swaggest\PhpCodeBuilder\PhpCode;
 use Swaggest\SwaggerHttp\StatusCode;
 use Swaggest\SwaggerHttp\StatusCodes;
@@ -245,8 +246,8 @@ GO
             $funcName = $this->codeBuilder->exportableName($operation->operationId);
             $underScoredName = strtolower(PhpCode::makePhpConstantName($operation->operationId));
         } else {
-            $funcName = $this->codeBuilder->exportableName($operation->method . '_' . $operation->path);
-            $underScoredName = strtolower(PhpCode::makePhpConstantName($operation->method . '_' . $operation->path));
+            $funcName = $this->codeBuilder->exportableName(strtolower($operation->method) . '_' . $operation->path);
+            $underScoredName = strtolower(PhpCode::makePhpConstantName(strtolower($operation->method) . '_' . $operation->path));
         }
 
         $operationCode = new Code();
@@ -285,7 +286,7 @@ GO
             ->add(null, TypeUtil::fromString('error'))
         );
 
-        $requestEncode->setBody($this->makeReq($operation->method, $operation->path, $operation->parameters, $acceptJson,
+        $requestEncode->setBody($this->makeReq($requestStruct, $operation->method, $operation->path, $operation->parameters, $acceptJson,
             $operation->accept, $operation->contentType));
         $requestStruct->addFunc($requestEncode);
 
@@ -422,6 +423,10 @@ GO
             return $requestStruct;
         }
         foreach ($parameters as $parameter) {
+            if ($parameter->isFile) {
+                throw new Skip("File uploads not supported.");
+            }
+
             $propName = $this->codeBuilder->exportableName($parameter->name);
             if (isset($requestStruct->getProperties()[$propName])) {
                 $propName = $this->codeBuilder->exportableName($parameter->name . '/' . $parameter->in);
@@ -567,6 +572,18 @@ GO;
         switch ($type->getTypeString()) {
 //            case '*string':
 //                return '*' . $var;
+            case 'time.Time':
+            case '*time.Time':
+                switch ($parameter->schema->format) {
+                    case 'date':
+                        return "($var).Format(\"2006-01-02\")";
+                    case 'date-time':
+                        return "($var).Format(time.RFC3339)";
+                    case 'time':
+                        return "($var).Format(\"15:04:05Z07:00\")";
+                    default:
+                        return false;
+                }
             case 'string':
                 return $var;
             case 'bool':
@@ -604,6 +621,11 @@ strings.Join(strings.Fields(strings.Trim(fmt.Sprint($var), "[]")),$separator)
 GO;
                 }
             default:
+
+                if ($parameter->schema->type === Schema::STRING) {
+                    return "string($var)";
+                }
+
                 return false;
         }
     }
@@ -671,6 +693,7 @@ GO;
     }
 
     /**
+     * @param StructDef $requestStruct
      * @param Parameter[] $parameters
      * @param Imports $imports
      * @param string $valuesVar
@@ -680,7 +703,7 @@ GO;
      * @throws \Swaggest\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\InvalidValue
      */
-    private function buildUrlValues($parameters, Imports $imports, $valuesVar)
+    private function buildUrlValues($requestStruct, $parameters, Imports $imports, $valuesVar)
     {
         $body = '';
 
@@ -695,7 +718,7 @@ GO;
 
             foreach ($parameters as $name => $parameter) {
                 $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                $type = $this->getParamType($parameter->schema);
+                $type = $this->getParamType($parameter->schema, $requestStruct->getName() . "/" . $name);
 
                 $isPointer = false;
                 $var = "request.$fieldName";
@@ -753,6 +776,7 @@ GO;
     }
 
     /**
+     * @param StructDef $requestStruct
      * @param string $method
      * @param string $path
      * @param Parameter[] $parameters
@@ -766,7 +790,7 @@ GO;
      * @throws \Swaggest\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\InvalidValue
      */
-    protected function makeReq($method, $path, $parameters, $acceptJson, $accept, $contentType)
+    protected function makeReq($requestStruct, $method, $path, $parameters, $acceptJson, $accept, $contentType)
     {
         $result = new Code();
 
@@ -803,7 +827,7 @@ GO;
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
             $var = "request.$fieldName";
 
-            $type = $this->getParamType($parameter->schema);
+            $type = $this->getParamType($parameter->schema, $requestStruct->getName() . '/' . $fieldName);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
             if ($value === false) {
                 throw new Exception('Could not stringify path parameter with type: ' . $type->getTypeString());
@@ -820,7 +844,7 @@ requestURI := baseURL + $path
 GO;
 
         if ($queryParameters) {
-            $body .= $this->buildUrlValues($queryParameters, $result->imports(), 'query');
+            $body .= $this->buildUrlValues($requestStruct, $queryParameters, $result->imports(), 'query');
             $body .= <<<'GO'
 if len(query) > 0 {
 	requestURI += "?" + query.Encode()
@@ -851,7 +875,7 @@ GO;
         }
 
         if (count($formDataParameters)) {
-            $body .= $this->buildUrlValues($formDataParameters, $result->imports(), 'formData');
+            $body .= $this->buildUrlValues($requestStruct, $formDataParameters, $result->imports(), 'formData');
             $body .= <<<'GO'
 var body io.Reader
 
@@ -1109,7 +1133,7 @@ GO
      */
     private function getParamType($schema, $path = '#')
     {
-        $type = $this->schemaBuilder->getType($schema);
+        $type = $this->schemaBuilder->getType($schema, $path);
         if ($type instanceof Pointer) {
             if ($type->getType() instanceof Slice || $type->getType() instanceof Map) {
                 $type = $type->getType();
