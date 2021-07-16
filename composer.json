@@ -10,9 +10,9 @@
     }
   ],
   "require": {
-    "swaggest/json-schema": "^0.12.19",
-    "swaggest/php-code-builder": "^0.2.32",
-    "swaggest/go-code-builder": "^0.4.34",
+    "swaggest/json-schema": "^0.12.36",
+    "swaggest/php-code-builder": "^0.2.33",
+    "swaggest/go-code-builder": "^0.4.45",
     "swaggest/json-cli": "v1.8.5",
     "php-yaoi/php-yaoi": "^1",
     "monolog/monolog": "^1.23",

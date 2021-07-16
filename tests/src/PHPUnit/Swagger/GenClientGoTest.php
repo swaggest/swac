@@ -57,4 +57,21 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+    public function testIwoca()
+    {
+        App::$ver = '<version>';
+
+        $cmd = new GoClient();
+        $cmd->schema = __DIR__ . '/../../../resources/iwoca.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/iwoca/';
+        $cmd->pkgName = 'acme';
+        $cmd->ignoreOperationId = true;
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
 }
