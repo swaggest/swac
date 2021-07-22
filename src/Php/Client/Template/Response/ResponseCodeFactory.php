@@ -5,8 +5,8 @@ namespace Swac\Php\Client\Template\Response;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
-use Swac\Log;
 use Swac\Rest\Response;
+use Swac\Skip;
 use Swaggest\CodeBuilder\PlaceholderString;
 use Swaggest\JsonSchema\InvalidValue;
 use Swaggest\JsonSchema\Schema;
@@ -143,7 +143,7 @@ PHP
                         $binds[':statusCode'] = new TypeOf(PhpClass::byFQN(StatusCode::class));
                         $codeName = $statusCode->phrase;
                     } catch (Exception $e) {
-
+                        throw new Skip($e->getMessage());
                     }
                 }
 
@@ -162,7 +162,7 @@ PHP
                             $case . ': $result = :type::import($this->getJsonResponse());break;' . "\n", $binds
                         ));
                     } catch (Exception $e) {
-                        Log::getInstance()->error($e->getMessage());
+                        throw new Skip($e->getMessage());
                     }
                 } else {
                     $body->addSnippet(new PlaceholderString(
