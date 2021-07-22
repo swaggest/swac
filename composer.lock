@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d4660d019fbc0e6a99f7049aa6f3388",
+    "content-hash": "afe3093dda0f9b64d9856a85fd8f869b",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -1046,16 +1046,16 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.33",
+            "version": "v0.2.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "7f924e4d202a33e7bd4e80eedab94664955666c7"
+                "reference": "e172e5e48d0d716adadd2fdbf9657eb1ea23c60e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/7f924e4d202a33e7bd4e80eedab94664955666c7",
-                "reference": "7f924e4d202a33e7bd4e80eedab94664955666c7",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/e172e5e48d0d716adadd2fdbf9657eb1ea23c60e",
+                "reference": "e172e5e48d0d716adadd2fdbf9657eb1ea23c60e",
                 "shasum": ""
             },
             "require": {
@@ -1091,9 +1091,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.33"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.34"
             },
-            "time": "2021-05-27T14:56:22+00:00"
+            "time": "2021-07-22T13:40:04+00:00"
         },
         {
             "name": "swaggest/rest-client",
@@ -2941,6 +2941,7 @@
                 "issues": "https://github.com/sebastianbergmann/resource-operations/issues",
                 "source": "https://github.com/sebastianbergmann/resource-operations/tree/master"
             },
+            "abandoned": true,
             "time": "2015-07-28T20:34:47+00:00"
         },
         {
