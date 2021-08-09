@@ -36,7 +36,6 @@ func (request *PutStateStateKeyRequest) encode(ctx context.Context, baseURL stri
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
 
@@ -61,7 +60,7 @@ func (result *PutStateStateKeyResponse) decode(resp *http.Response) error {
 
 	switch resp.StatusCode {
 	case http.StatusAccepted:
-		err = json.NewDecoder(body).Decode(&result.ValueAccepted)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

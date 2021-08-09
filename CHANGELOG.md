@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.27] - 2021-08-09
+
+### Fixed
+- Error during decoding of a response with no content in Go client.
+
 ## [0.1.26] - 2021-07-22
 
 ### Fixed
@@ -173,6 +178,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Keep path parameters in operation name of PHP client.
 
+[0.1.27]: https://github.com/swaggest/swac/compare/v0.1.26...v0.1.27
 [0.1.26]: https://github.com/swaggest/swac/compare/v0.1.25...v0.1.26
 [0.1.25]: https://github.com/swaggest/swac/compare/v0.1.24...v0.1.25
 [0.1.24]: https://github.com/swaggest/swac/compare/v0.1.23...v0.1.24

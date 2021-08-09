@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -61,12 +62,24 @@ func (result *PostLieAreasResponse) decode(resp *http.Response) error {
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /lie-areas' OK response: %w", err)
+		}
 	case http.StatusBadRequest:
 		err = json.NewDecoder(body).Decode(&result.ValueBadRequest)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /lie-areas' BadRequest response: %w", err)
+		}
 	case http.StatusConflict:
 		err = json.NewDecoder(body).Decode(&result.ValueConflict)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /lie-areas' Conflict response: %w", err)
+		}
 	case http.StatusInternalServerError:
 		err = json.NewDecoder(body).Decode(&result.ValueInternalServerError)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /lie-areas' InternalServerError response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

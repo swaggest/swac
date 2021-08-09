@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -60,6 +61,9 @@ func (result *PostPaymentMethodStateKeyResponse) decode(resp *http.Response) err
 	switch resp.StatusCode {
 	case http.StatusCreated:
 		err = json.NewDecoder(body).Decode(&result.ValueCreated)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /payment_method/{state_key}/' Created response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

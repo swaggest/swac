@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -62,8 +63,14 @@ func (result *PostChallengeResponseStateKeyPersonUIDResponse) decode(resp *http.
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /challenge_response/{state_key}/{person_uid}/' OK response: %w", err)
+		}
 	case http.StatusServiceUnavailable:
 		err = json.NewDecoder(body).Decode(&result.ValueServiceUnavailable)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /challenge_response/{state_key}/{person_uid}/' ServiceUnavailable response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {
