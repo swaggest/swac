@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -61,6 +62,9 @@ func (result *PutDocumentUploadStateKeyDocumentIDResponse) decode(resp *http.Res
 	switch resp.StatusCode {
 	case http.StatusAccepted:
 		err = json.NewDecoder(body).Decode(&result.ValueAccepted)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'put /document_upload/{state_key}/{document_id}/' Accepted response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

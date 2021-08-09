@@ -266,7 +266,7 @@ GO
         $requestStruct = $this->makeRequestStruct($funcName, $operation->parameters);
 
 
-        $responseDecodeBody = $this->makeResp($operation->responses);
+        $responseDecodeBody = $this->makeResp($operation->responses, $operation);
         $acceptJson = false;
         if (isset($responseDecodeBody->imports()->imports['encoding/json'])) {
             $acceptJson = true;
@@ -941,10 +941,11 @@ GO;
 
     /**
      * @param Response[] $responses
+     * @param Operation $operation
      * @return Code
      * @throws \Exception
      */
-    public function makeResp($responses)
+    public function makeResp($responses, Operation $operation)
     {
         $code = new Code();
 
@@ -974,7 +975,7 @@ GO;
             $status = $this->codeBuilder->exportableName($statusCode->phrase);
             $propName = $this->responseStatusPropName($statusCode);
 
-            if ($response->schema === null && $response->statusCode === StatusCodes::NO_CONTENT) {
+            if ($response->schema === null) {
                 $body .= <<<GO
 case http.Status$status:
     // No body to decode.
@@ -986,9 +987,12 @@ GO;
             $body .= <<<GO
 case http.Status$status:
     err = json.NewDecoder(body).Decode(&result.$propName)
+    if err != nil {
+        err = fmt.Errorf("failed to decode '{$operation->method} {$operation->path}' {$status} response: %w", err)
+    }
 
 GO;
-            $code->imports()->addByName('encoding/json');
+            $code->imports()->addByName('encoding/json')->addByName('fmt');
         }
 
         if ($hasDefault) {

@@ -41,7 +41,6 @@ func (request *PostPartnerWebhookURLRequest) encode(ctx context.Context, baseURL
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req.Header.Set("X-IW-Event-Type", string(request.XIWEventType))
 
@@ -72,7 +71,7 @@ func (result *PostPartnerWebhookURLResponse) decode(resp *http.Response) error {
 
 	switch resp.StatusCode {
 	case http.StatusOK:
-		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

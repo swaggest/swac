@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -80,12 +81,24 @@ func (result *GetPlacesResponse) decode(resp *http.Response) error {
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'get /places' OK response: %w", err)
+		}
 	case http.StatusBadRequest:
 		err = json.NewDecoder(body).Decode(&result.ValueBadRequest)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'get /places' BadRequest response: %w", err)
+		}
 	case http.StatusNotFound:
 		err = json.NewDecoder(body).Decode(&result.ValueNotFound)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'get /places' NotFound response: %w", err)
+		}
 	case http.StatusInternalServerError:
 		err = json.NewDecoder(body).Decode(&result.ValueInternalServerError)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'get /places' InternalServerError response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -70,10 +71,19 @@ func (result *PutLieAreasMilleLieAreaSyncResponse) decode(resp *http.Response) e
 		// No body to decode.
 	case http.StatusBadRequest:
 		err = json.NewDecoder(body).Decode(&result.ValueBadRequest)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'put /lie-areas/{mille}/{LieArea}/sync' BadRequest response: %w", err)
+		}
 	case http.StatusNotFound:
 		err = json.NewDecoder(body).Decode(&result.ValueNotFound)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'put /lie-areas/{mille}/{LieArea}/sync' NotFound response: %w", err)
+		}
 	case http.StatusInternalServerError:
 		err = json.NewDecoder(body).Decode(&result.ValueInternalServerError)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'put /lie-areas/{mille}/{LieArea}/sync' InternalServerError response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

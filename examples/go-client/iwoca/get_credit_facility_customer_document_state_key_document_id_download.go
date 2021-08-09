@@ -5,7 +5,6 @@ package acme
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"io"
 	"io/ioutil"
@@ -43,7 +42,6 @@ func (request *GetCreditFacilityCustomerDocumentStateKeyDocumentIDDownloadReques
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
 
@@ -68,7 +66,7 @@ func (result *GetCreditFacilityCustomerDocumentStateKeyDocumentIDDownloadRespons
 
 	switch resp.StatusCode {
 	case http.StatusOK:
-		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

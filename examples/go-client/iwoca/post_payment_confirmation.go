@@ -32,7 +32,6 @@ func (request *PostPaymentConfirmationRequest) encode(ctx context.Context, baseU
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
 
@@ -57,7 +56,7 @@ func (result *PostPaymentConfirmationResponse) decode(resp *http.Response) error
 
 	switch resp.StatusCode {
 	case http.StatusCreated:
-		err = json.NewDecoder(body).Decode(&result.ValueCreated)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

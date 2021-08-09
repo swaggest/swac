@@ -34,7 +34,6 @@ func (request *PostCreditFacilityFundingRequestStateKeyRequest) encode(ctx conte
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
 
@@ -59,7 +58,7 @@ func (result *PostCreditFacilityFundingRequestStateKeyResponse) decode(resp *htt
 
 	switch resp.StatusCode {
 	case http.StatusCreated:
-		err = json.NewDecoder(body).Decode(&result.ValueCreated)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

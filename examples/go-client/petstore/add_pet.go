@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -59,6 +60,9 @@ func (result *AddPetResponse) decode(resp *http.Response) error {
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /pets' OK response: %w", err)
+		}
 	default:
 		err = json.NewDecoder(body).Decode(&result.Default)
 	}

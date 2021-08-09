@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -65,6 +66,9 @@ func (result *GetAccountStatementStateKeyResponse) decode(resp *http.Response) e
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'get /account_statement/{state_key}/' OK response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

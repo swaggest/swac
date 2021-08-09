@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -63,10 +64,19 @@ func (result *PostInternalFindAvailableCarrotsMilleLookResponse) decode(resp *ht
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /internal/find-available-carrots/{mille}/{look}' OK response: %w", err)
+		}
 	case http.StatusBadRequest:
 		err = json.NewDecoder(body).Decode(&result.ValueBadRequest)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /internal/find-available-carrots/{mille}/{look}' BadRequest response: %w", err)
+		}
 	case http.StatusInternalServerError:
 		err = json.NewDecoder(body).Decode(&result.ValueInternalServerError)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /internal/find-available-carrots/{mille}/{look}' InternalServerError response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

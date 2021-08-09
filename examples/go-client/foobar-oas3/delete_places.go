@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -65,10 +66,19 @@ func (result *DeletePlacesResponse) decode(resp *http.Response) error {
 		// No body to decode.
 	case http.StatusBadRequest:
 		err = json.NewDecoder(body).Decode(&result.ValueBadRequest)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'delete /places' BadRequest response: %w", err)
+		}
 	case http.StatusNotFound:
 		err = json.NewDecoder(body).Decode(&result.ValueNotFound)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'delete /places' NotFound response: %w", err)
+		}
 	case http.StatusInternalServerError:
 		err = json.NewDecoder(body).Decode(&result.ValueInternalServerError)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'delete /places' InternalServerError response: %w", err)
+		}
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

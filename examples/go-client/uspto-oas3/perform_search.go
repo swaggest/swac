@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -82,8 +83,11 @@ func (result *PerformSearchResponse) decode(resp *http.Response) error {
 	switch resp.StatusCode {
 	case http.StatusOK:
 		err = json.NewDecoder(body).Decode(&result.ValueOK)
+		if err != nil {
+			err = fmt.Errorf("failed to decode 'post /{dataset}/{version}/records' OK response: %w", err)
+		}
 	case http.StatusNotFound:
-		err = json.NewDecoder(body).Decode(&result.ValueNotFound)
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {
