@@ -34,7 +34,7 @@ Example
 
 ```bash
 mkdir petstore && cd petstore
-docker run -v $(pwd):/code swaggest/swac swac php-guzzle-client https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore.json --namespace MyApp\\Petstore
+docker run -v $(pwd):/code -u 1000:1000 swaggest/swac swac php-guzzle-client https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore.json --namespace MyApp\\Petstore
 ```
 
 ### Composer
