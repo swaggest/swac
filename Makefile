@@ -9,8 +9,8 @@ phar:
 	@composer install --no-dev --prefer-dist;rm -rf tests/;rm -rf examples/;rm ./swac;rm ./swac.tar.gz;php -d phar.readonly=off $$HOME/.cache/composer/phar-composer.phar build;mv ./swac.phar ./swac;tar -zcvf ./swac.tar.gz ./swac;git reset --hard;composer install
 
 docker-build:
-	@docker build . -t swaggest/swac:latest
-	@docker build . -t swaggest/swac:$(shell git describe --abbrev=0 --tags)
+	@docker buildx build --platform linux/amd64,linux/arm64 . -t swaggest/swac:latest
+	@docker buildx build --platform linux/amd64,linux/arm64 . -t swaggest/swac:$(shell git describe --abbrev=0 --tags)
 
 docker-push:
 	@docker push swaggest/swac:latest
