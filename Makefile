@@ -1,5 +1,9 @@
 PHPSTAN_VERSION ?= 0.12.60
 
+docker-phar:
+	@test -f $$HOME/.cache/composer/phar-composer.phar || (mkdir -p $$HOME/.cache/composer/ && wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O $$HOME/.cache/composer/phar-composer.phar)
+	@composer install --no-dev --prefer-dist;rm -rf tests/;rm -rf examples/;rm ./swac;rm ./swac.tar.gz;docker run -v $(shell pwd):/code -v $$HOME/.cache/composer/phar-composer.phar:/phar-composer.phar -w /code --rm composer:1.10 php -d phar.readonly=off /phar-composer.phar build;mv ./swac.phar ./swac;tar -zcvf ./swac.tar.gz ./swac;git reset --hard;composer install
+
 phar:
 	@test -f $$HOME/.cache/composer/phar-composer.phar || (mkdir -p $$HOME/.cache/composer/ && wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O $$HOME/.cache/composer/phar-composer.phar)
 	@composer install --no-dev --prefer-dist;rm -rf tests/;rm -rf examples/;rm ./swac;rm ./swac.tar.gz;php -d phar.readonly=off $$HOME/.cache/composer/phar-composer.phar build;mv ./swac.phar ./swac;tar -zcvf ./swac.tar.gz ./swac;git reset --hard;composer install
