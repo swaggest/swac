@@ -9,6 +9,7 @@ use Swac\Rest\Operation;
 use Swac\Rest\Parameter;
 use Swac\Rest\Renderer;
 use Swac\Rest\Response;
+use Swac\Util;
 use Swaggest\CodeBuilder\AbstractTemplate;
 use Swaggest\GoCodeBuilder\Templates\Code;
 use Swaggest\JsonSchema\Schema;
@@ -64,13 +65,13 @@ JS;
     public function setConfig(Config $config)
     {
         $headComment = '';
-        if (!empty(trim($config->title))) {
+        if (!empty($config->title) && !empty(trim($config->title))) {
             $headComment .= trim($config->title) . "\n";
         }
-        if (!empty(trim($config->version))) {
+        if (!empty($config->version) && !empty(trim($config->version))) {
             $headComment .= 'Version: ' . trim($config->version) . "\n";
         }
-        if (!empty(trim($config->description))) {
+        if (!empty($config->description) && !empty(trim($config->description))) {
             $headComment .= trim(wordwrap($config->description)) . "\n";
         }
 
@@ -205,23 +206,6 @@ JS;
     }
 
     /**
-     * @param Schema $schema
-     * @param string $type
-     */
-    private function hasType($schema, $type)
-    {
-        if ($schema === null || $schema->type === null) {
-            return false;
-        }
-
-        if (is_array($schema->type)) {
-            return in_array($type, $schema->type);
-        }
-
-        return $schema->type === $type;
-    }
-
-    /**
      * @param Parameter[] $parameters
      * @param string $contentType
      * @param string $body
@@ -265,7 +249,7 @@ JS;
                 if ($parameter->in === Parameter::FORM_DATA) {
                     $field = $parameter->meta[self::PARAM_FIELD_NAME_META];
 
-                    if ($this->hasType($parameter->schema, Schema::_ARRAY)) {
+                    if (Util::hasType($parameter->schema, Schema::_ARRAY)) {
                         $res .= <<<JS
 if (typeof req.{$field} !== 'undefined') {
     for (var i = 0; i < req.{$field}.length; i++) {
@@ -313,7 +297,10 @@ JS;
         $hasDefault = false;
         foreach ($o->responses as $response) {
             $cbType = $this->makeResponseType($response);
-            $responseArg = 'JSON.parse(x.responseText)';
+            $responseArg = 'x';
+            if (!empty($response->contentType) && strpos($response->contentType, 'json') !== false) {
+                $responseArg = 'JSON.parse(x.responseText)';
+            }
             if ($cbType === self::RAW_CALLBACK) {
                 $responseArg = 'x';
             }
@@ -329,7 +316,7 @@ JSDOC
 
                 $responseSwitch->addSnippet(<<<CODE
             default:
-                if (typeof({$cbName}) === 'function') {
+                if (typeof ({$cbName}) === 'function') {
                     {$cbName}($responseArg);
                 }
                 break;
@@ -353,7 +340,7 @@ JSDOC
             $args[] = $cbName;
             $responseSwitch->addSnippet(<<<CODE
             case {$response->statusCode}:
-                if (typeof({$cbName}) === 'function') {
+                if (typeof ({$cbName}) === 'function') {
                     {$cbName}($responseArg);
                 }
                 break;
@@ -401,7 +388,7 @@ CODE
     
     {$this->padLines('    ', $this->makeURL($o->parameters, $o->path))}
     x.open("{$method}", url, true);
-    if (typeof(this.prepareRequest) === 'function') {
+    if (typeof (this.prepareRequest) === 'function') {
         this.prepareRequest(x);
     }
     {$this->padLines('    ',
@@ -504,7 +491,7 @@ JSDOC;
     public function store($path)
     {
         $this->clientFile->addSnippet(<<<JS
-(function(){
+(function () {
     "use strict";
     
     {$this->padLines('    ', $this->clientCode->render())}
@@ -515,7 +502,9 @@ JS
 );
 
         $this->jsDocTypes->file = preg_replace("/[\r\n]{2,}/", "\n\n", $this->jsDocTypes->file);
-        $clientFile = preg_replace("/[\r\n]{2,}/", "\n\n", $this->clientFile->render());
+        $clientFile = $this->clientFile->render();
+        $clientFile = preg_replace("/[\s]+\n/", "\n\n", $clientFile);
+        $clientFile = preg_replace("/[\r\n]{2,}/", "\n\n", $clientFile);
 
         file_put_contents($path . '/jsdoc.js', $this->jsDocTypes->file);
         file_put_contents($path . '/client.js', $clientFile);

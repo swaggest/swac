@@ -220,11 +220,6 @@
  */
 
 /**
- * @callback Callback
- * @param {*} value
- */
-
-/**
  * @typedef RestErrResponse
  * @type {Object}
  * @property {Number} code - Application-specific error code.

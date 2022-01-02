@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.28] - 2022-01-02
+
+### Added
+- Support for file uploads in Go client (streaming implementation optimized for large files).
+- STDIN support (with `-` as file name) for schema loading.
+- Dependencies updated.
+
+### Fixed
+- Formatting in JS client.
+- Non-JSON response handling in JS client.
+- Unnecessary properties (untyped/empty bodies) in Go client responses.
+- Scalar named types in header parameters in Go client.
+
 ## [0.1.27] - 2021-08-09
 
 ### Fixed
@@ -178,6 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Keep path parameters in operation name of PHP client.
 
+[0.1.28]: https://github.com/swaggest/swac/compare/v0.1.27...v0.1.28
 [0.1.27]: https://github.com/swaggest/swac/compare/v0.1.26...v0.1.27
 [0.1.26]: https://github.com/swaggest/swac/compare/v0.1.25...v0.1.26
 [0.1.25]: https://github.com/swaggest/swac/compare/v0.1.24...v0.1.25

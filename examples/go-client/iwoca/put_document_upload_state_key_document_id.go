@@ -7,7 +7,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -17,8 +16,12 @@ import (
 // PutDocumentUploadStateKeyDocumentIDRequest is operation request value.
 type PutDocumentUploadStateKeyDocumentIDRequest struct {
 	Body       *PutDocumentUploadStateKeyDocumentIDRequestBody  // Body is a JSON request body.
-	StateKey   string                                           // StateKey is a required `state_key` parameter in path.
-	DocumentID string                                           // DocumentID is a required `document_id` parameter in path.
+	// StateKey is a required `state_key` parameter in path.
+	// The state_key used to represent a customer.
+	StateKey   string
+	// DocumentID is a required `document_id` parameter in path.
+	// The hash used to lookup up a existing uploaded document.
+	DocumentID string
 }
 
 // encode creates *http.Request for request data.
@@ -36,7 +39,6 @@ func (request *PutDocumentUploadStateKeyDocumentIDRequest) encode(ctx context.Co
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
 
@@ -45,9 +47,8 @@ func (request *PutDocumentUploadStateKeyDocumentIDRequest) encode(ctx context.Co
 
 // PutDocumentUploadStateKeyDocumentIDResponse is operation response value.
 type PutDocumentUploadStateKeyDocumentIDResponse struct {
-	StatusCode    int
-	RawBody       []byte       // RawBody contains read bytes of response body.
-	ValueAccepted interface{}  // ValueAccepted is a value of 202 Accepted response.
+	StatusCode int
+	RawBody    []byte  // RawBody contains read bytes of response body.
 }
 
 // decode loads data from *http.Response.
@@ -61,10 +62,7 @@ func (result *PutDocumentUploadStateKeyDocumentIDResponse) decode(resp *http.Res
 
 	switch resp.StatusCode {
 	case http.StatusAccepted:
-		err = json.NewDecoder(body).Decode(&result.ValueAccepted)
-		if err != nil {
-			err = fmt.Errorf("failed to decode 'put /document_upload/{state_key}/{document_id}/' Accepted response: %w", err)
-		}
+		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)
 		if readErr != nil {

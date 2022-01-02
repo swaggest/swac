@@ -8,10 +8,8 @@ use Swac\Rest\Renderer;
 use Swac\Rest\Rest;
 use Swac\Swagger\Reader;
 use Swaggest\JsonCli\Json\LoadFile;
-use Symfony\Component\Yaml\Yaml;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
-use Yaoi\Io\Response;
 
 abstract class Base extends Command
 {
@@ -28,7 +26,7 @@ abstract class Base extends Command
     static function setUpDefinition(Definition $definition, $options)
     {
         $options->schema = Command\Option::create()->setType()->setIsRequired()->setIsUnnamed()
-            ->setDescription('Path/URL to OpenAPI/Swagger schema');
+            ->setDescription('Path/URL to OpenAPI/Swagger schema, use `-` for STDIN');
 
         $options->operations = Command\Option::create()->setType()
             ->setDescription('Operations filter in form of comma-separated list of method/path, default empty');
@@ -51,6 +49,10 @@ abstract class Base extends Command
             $rest->operationsFilter = explode(',', $this->operations);
         }
         $rest->addRenderer($client);
+        if ($this->schema === '-') {
+            $this->schema = 'php://stdin';
+        }
+
         $schemaJson = $this->loadFile();
 
         if (isset($schemaJson->swagger)) {

@@ -56,8 +56,7 @@ func (request *PostPartnerWebhookURLRequest) encode(ctx context.Context, baseURL
 // PostPartnerWebhookURLResponse is operation response value.
 type PostPartnerWebhookURLResponse struct {
 	StatusCode int
-	RawBody    []byte       // RawBody contains read bytes of response body.
-	ValueOK    interface{}  // ValueOK is a value of 200 OK response.
+	RawBody    []byte  // RawBody contains read bytes of response body.
 }
 
 // decode loads data from *http.Response.
@@ -70,7 +69,7 @@ func (result *PostPartnerWebhookURLResponse) decode(resp *http.Response) error {
 	result.StatusCode = resp.StatusCode
 
 	switch resp.StatusCode {
-	case http.StatusOK:
+	case http.StatusCreated:
 		// No body to decode.
 	default:
 		_, readErr := ioutil.ReadAll(body)

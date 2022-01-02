@@ -4,7 +4,6 @@ namespace Swac\OpenAPI3;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Swac\Log;
 use Swac\Rest\ApiKeySecurity;
 use Swac\Rest\Operation as RestOperation;
 use Swac\Rest\Parameter;
@@ -12,8 +11,10 @@ use Swac\Rest\Response;
 use Swac\Rest\Config;
 use Swac\Rest\Rest;
 use Swac\Skip;
+use Swac\Util;
 use Swaggest\JsonSchema\Context;
 use Swaggest\JsonSchema\Exception;
+use Swaggest\JsonSchema\Schema;
 use Swaggest\OpenAPI3Schema\APIKeySecurityScheme;
 use Swaggest\OpenAPI3Schema\HTTPSecurityScheme;
 use Swaggest\OpenAPI3Schema\HTTPSecuritySchemeBearer;
@@ -198,8 +199,10 @@ class Reader
                                 $resp = clone $response;
                                 $handler->accept = $contentType;
                                 $resp->contentType = $contentType;
-                                if ($media->schema !== null) {
+                                if ($media->schema !== null && strpos($contentType, 'json') !== false) {
                                     $resp->schema = $media->schema->exportSchema();
+                                } else {
+                                    $resp->isRaw = true;
                                 }
                                 $responses[] = $resp;
                             }
@@ -259,6 +262,28 @@ class Reader
                         $param->required = in_array($propertyName, $required);
                         $param->schema = $property;
                         $param->deprecated = $body->schema->deprecated;
+                        if ($contentType === self::MULTIPART_FORM_DATA) {
+                            if (Util::hasType($param->schema, Schema::STRING) && $param->schema->format === 'binary') {
+                                $param->isFile = true;
+                            }
+
+                            $items = $param->schema->items;
+                            if ($items instanceof Schema) {
+                                if (Util::hasType($items, Schema::STRING) && $items->format === 'binary') {
+                                    $param->isFiles = true;
+                                }
+                            }
+
+                            if ($items === null) {
+                                $items = $param->schema->additionalItems;
+                                if ($items instanceof Schema) {
+                                    if (Util::hasType($items, Schema::STRING) && $items->format === 'binary') {
+                                        $param->isFiles = true;
+                                    }
+                                }
+                            }
+                        }
+
                         $handler->parameters[Parameter::FORM_DATA . ':' . $propertyName] = $param;
                     }
                 } else {

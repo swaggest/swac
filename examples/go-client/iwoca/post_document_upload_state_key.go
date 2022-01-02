@@ -12,39 +12,37 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 // PostDocumentUploadStateKeyRequest is operation request value.
 type PostDocumentUploadStateKeyRequest struct {
-	// Document is a required `document` parameter in formData.
-	// format: file
-	Document     string
+	Document     UploadFile                                             // Document is a required `document` parameter in formData.
 	DocumentType PostDocumentUploadStateKeyRequestFormDataDocumentType  // DocumentType is a required `document_type` parameter in formData.
-	StateKey     string                                                 // StateKey is a required `state_key` parameter in path.
+	// StateKey is a required `state_key` parameter in path.
+	// The state_key used to represent a customer.
+	StateKey     string
+	pipeUpload
 }
 
 // encode creates *http.Request for request data.
 func (request *PostDocumentUploadStateKeyRequest) encode(ctx context.Context, baseURL string) (*http.Request, error) {
 	requestURI := baseURL + "/document_upload/" + url.PathEscape(request.StateKey) + "/"
 
-	formData := make(url.Values, 2)
-	formData.Set("document", request.Document)
+	request.initPipe()
+	go func() {
+		defer request.close()
 
-	formData.Set("document_type", string(request.DocumentType))
+		request.addFile(request.Document, "document")
+		request.multipartWriter.WriteField("document_type", string(request.DocumentType))
 
-	var body io.Reader
+	}()
 
-	if len(formData) > 0 {
-		body = strings.NewReader(formData.Encode())
-	}
-
-	req, err := http.NewRequest(http.MethodPost, requestURI, body)
+	req, err := http.NewRequest(http.MethodPost, requestURI, request.pipeReader)
 	if err != nil {
 		return nil, err
 	}
 
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Content-Type", request.multipartWriter.FormDataContentType())
 	req.Header.Set("Accept", "application/json")
 
 	req = req.WithContext(ctx)
@@ -118,6 +116,8 @@ func (c *Client) PostDocumentUploadStateKey(ctx context.Context, request PostDoc
 	resp, err := c.transport.RoundTrip(req)
 
 	if err != nil {
+		request.Cancel(err)
+
 		return result, err
 	}
 

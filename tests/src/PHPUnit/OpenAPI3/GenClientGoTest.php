@@ -7,7 +7,6 @@ use Swac\Command\GoClient;
 
 class GenClientGoTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testUspto()
     {
         App::$ver = '<version>';
@@ -44,6 +43,21 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         $cmd = new GoClient();
         $cmd->schema = __DIR__ . '/../../../resources/foobar.json';
         $cmd->out = __DIR__ . '/../../../../examples/go-client/foobar-oas3/';
+        $cmd->pkgName = 'foobar';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
+    public function testXhprofCollector()
+    {
+        App::$ver = '<version>';
+        $cmd = new GoClient();
+        $cmd->schema = __DIR__ . '/../../../resources/xhprof-collector.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/xhprof-collector/';
         $cmd->pkgName = 'foobar';
 
         $cmd->performAction();
