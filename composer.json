@@ -48,7 +48,7 @@
   ],
   "scripts": {
     "post-install-cmd": [
-      "patch -N -s -p0 < ./tests/phpunit.patch"
+      "test -d ./vendor/phpunit/phpunit && patch -N -s -p0 < ./tests/phpunit.patch"
     ]
   }
 }
