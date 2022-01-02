@@ -65,7 +65,11 @@ class Client implements Renderer
     /** @var Settings */
     private $settings;
 
+    /** @var bool is true if client has at least one file uploading endpoint */
+    private $hasUploads = false;
+
     const PARAM_FIELD_NAME_META = 'goParamFieldName';
+    const HAS_UPLOADS_META = 'hasUploads';
 
     public function __construct(Settings $settings = null)
     {
@@ -377,6 +381,16 @@ GO;
 
         }
 
+        $closePipeUpload = '';
+        if ($requestStruct->getMeta(self::HAS_UPLOADS_META)) {
+            $closePipeUpload = <<<'GO'
+    request.Cancel(err)
+
+
+GO;
+
+        }
+
         $funcBody->addSnippet(<<<GO
 req, err := request.encode(ctx, c.BaseURL)
 if err != nil {
@@ -385,7 +399,7 @@ if err != nil {
 
 $roundTripCall
 if err != nil {
-    return result, err
+$closePipeUpload    return result, err
 }
 
 defer func() {
@@ -422,9 +436,12 @@ GO
             Log::getInstance()->warn("No parameters for $funcName");
             return $requestStruct;
         }
+
+        $hasUploads = false;
+
         foreach ($parameters as $parameter) {
-            if ($parameter->isFile) {
-                throw new Skip("File uploads not supported.");
+            if ($parameter->isFiles || $parameter->isFile) {
+                $hasUploads = true;
             }
 
             $propName = $this->codeBuilder->exportableName($parameter->name);
@@ -439,7 +456,12 @@ GO
             }
 
             $type = TypeUtil::fromString('interface{}');
-            if ($parameter->schema !== null) {
+
+            if ($parameter->isFile) {
+                $type = TypeUtil::fromString('UploadFile');
+            } elseif ($parameter->isFiles) {
+                $type = TypeUtil::fromString('[]UploadFile');
+            } elseif ($parameter->schema !== null) {
                 if ($parameter->schema->type === null) {
                     Log::getInstance()->warn("No type in parameter schema $parameter->name in $parameter->in for $funcName");
                 }
@@ -481,6 +503,12 @@ GO
             $requestStruct->addProperty($paramProperty);
         }
 
+        if ($hasUploads) {
+            $requestStruct->addMeta(true, self::HAS_UPLOADS_META);
+            $this->hasUploads = true;
+            $requestStruct->addProperty(new StructProperty(null, TypeUtil::fromString('pipeUpload')));
+        }
+
         return $requestStruct;
     }
 
@@ -515,7 +543,9 @@ GO
             }
 
             $type = TypeUtil::fromString('interface{}');
-            if ($response->schema !== null) {
+            if ($response->isRaw) {
+                $type = TypeUtil::fromString('[]byte');
+            } elseif ($response->schema !== null) {
                 $type = $this->schemaBuilder->getType($response->schema, $funcName . '/response/' . $propName);
                 if ($response->schema->type === null) {
                     Log::getInstance()->warn("No type in schema for $propName response at $funcName");
@@ -523,9 +553,9 @@ GO
             } else {
                 if ($response->statusCode !== StatusCodes::NO_CONTENT) {
                     Log::getInstance()->warn("No response schema for $response->statusCode at $funcName");
-                } else {
-                    continue;
                 }
+
+                continue;
             }
 
             if ($type instanceof StructType) {
@@ -630,7 +660,83 @@ GO;
         }
     }
 
-    private function buildHeaderParameters($parameters, Imports $imports)
+    /**
+     * @param Parameter $parameter
+     * @param $assignTemplate
+     * @param Imports $imports
+     * @param string $path
+     * @return string|void
+     * @throws Skip
+     */
+    private function serializeParameter(Parameter $parameter, $assignTemplate, Imports $imports, $path = '#')
+    {
+        $name = $parameter->name;
+        $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
+        $type = $this->getParamType($parameter->schema, $path);
+        $isPointer = false;
+        $var = "request.$fieldName";
+        if ($type instanceof Pointer) {
+            $isPointer = true;
+            $var = '*' . $var;
+            $type = $type->getType();
+        }
+
+        if ($type instanceof Slice || $type instanceof Map) {
+            $isPointer = true;
+        }
+
+        $toString = $this->toStringExpression($parameter, $type, $var, $imports);
+        $assign = false;
+        if ($toString !== false) {
+            $assign = str_replace(['%name%', '%string_val%'], [$name, $toString], $assignTemplate);
+        }
+
+        if ($parameter->isJson) {
+            $assign = str_replace(['%name%', '%string_val%'], [$name, 'string(j)'], $assignTemplate);
+            $imports->addByName('fmt')->addByName('encoding/json');
+
+            return <<<GO
+
+if j, err := json.Marshal(request.$fieldName); err != nil {
+    return nil, fmt.Errorf("failed to marshal request parameter '$name': %w", err)
+} else {
+    $assign
+}
+
+
+GO;
+        }
+
+        if ($assign === false) {
+            throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
+        }
+
+        if ($isPointer) {
+            return <<<GO
+
+if request.$fieldName != nil {
+	$assign
+}
+
+
+GO;
+        } else {
+            return <<<GO
+$assign
+
+
+GO;
+        }
+    }
+
+    /**
+     * @param StructDef $requestStruct
+     * @param $parameters
+     * @param Imports $imports
+     * @return string
+     * @throws Skip
+     */
+    private function buildHeaderParameters(StructDef $requestStruct, $parameters, Imports $imports)
     {
         $body = '';
 
@@ -640,52 +746,8 @@ GO;
 GO;
 
             foreach ($parameters as $name => $parameter) {
-                $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
-                $type = $this->getParamType($parameter->schema);
-                $isPointer = false;
-                $var = "request.$fieldName";
-                if ($type instanceof Pointer) {
-                    $isPointer = true;
-                    $var = '*' . $var;
-                    $type = $type->getType();
-                }
-
-                if ($type instanceof Slice || $type instanceof Map) {
-                    $isPointer = true;
-                }
-
-                $toString = $this->toStringExpression($parameter, $type, $var, $imports);
-                $assign = false;
-                if ($toString !== false) {
-                    $assign = <<<GO
-req.Header.Set("$name", $toString)
-GO;
-                }
-                if ($assign === false) {
-                    throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
-                }
-
-                if ($assign !== false) {
-                    if ($isPointer) {
-                        $body .= <<<GO
-
-if request.$fieldName != nil {
-	$assign
-}
-
-
-GO;
-                    } else {
-                        $body .= <<<GO
-$assign
-
-
-GO;
-                    }
-                    continue;
-                }
-
-                throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
+                $body .= $this->serializeParameter($parameter, 'req.Header.Set("%name%", %string_val%)', $imports,
+                    $requestStruct->getName() . "/" . $name);
             }
         }
 
@@ -702,6 +764,7 @@ GO;
      * @throws \Swaggest\GoCodeBuilder\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\Exception
      * @throws \Swaggest\JsonSchema\InvalidValue
+     * @todo use serializeParameter
      */
     private function buildUrlValues($requestStruct, $parameters, Imports $imports, $valuesVar)
     {
@@ -768,6 +831,22 @@ GO;
                     continue;
                 }
 
+                if ($parameter->isJson) {
+                    $body .= <<<GO
+
+if j, err := json.Marshal(request.$fieldName); err != nil {
+    return nil, fmt.Errorf("failed to marshal request parameter '$name': %w", err)
+} else {
+    $valuesVar.Set("$name", string(j))
+}
+
+
+GO;
+                    $imports->addByName('fmt')->addByName('encoding/json');
+                    continue;
+
+                }
+
                 throw new Skip("Could not stringify {$type->getTypeString()} of parameter `$parameter->name` in $parameter->in");
             }
         }
@@ -804,8 +883,15 @@ GO;
         $formDataParameters = [];
         /** @var Parameter[] $bodyParameters */
         $bodyParameters = [];
+
+        $isMultipartFormData = false;
+
         if (is_array($parameters)) {
             foreach ($parameters as $parameter) {
+                if ($parameter->isFiles || $parameter->isFile) {
+                    $isMultipartFormData = true;
+                }
+
                 if ($parameter->in === Parameter::QUERY) {
                     $queryParameters[$parameter->name] = $parameter;
                 } elseif ($parameter->in === Parameter::PATH) {
@@ -822,6 +908,10 @@ GO;
             }
         }
 
+        if (!empty($contentType)) {
+            $contentType = '"' . $contentType . '"';
+        }
+
         $path = '"' . $path . '"';
         foreach ($pathParameters as $name => $parameter) {
             $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
@@ -830,7 +920,7 @@ GO;
             $type = $this->getParamType($parameter->schema, $requestStruct->getName() . '/' . $fieldName);
             $value = $this->toStringExpression($parameter, $type, $var, $result->imports());
             if ($value === false) {
-                throw new Exception('Could not stringify path parameter with type: ' . $type->getTypeString());
+                throw new Skip('Could not stringify path parameter with type: ' . $type->getTypeString());
             }
             $path = str_replace('{' . $name . '}', "\" + url.PathEscape($value) + \"", $path);
             $result->imports()->addByName('net/url');
@@ -862,7 +952,7 @@ GO;
 
             $reqBody = 'bytes.NewBuffer(body)';
             if (empty($contentType)) {
-                $contentType = 'application/json; charset=utf-8';
+                $contentType = '"application/json; charset=utf-8"';
             }
             $body .= <<<GO
 body, err := json.Marshal(request.$fieldName)
@@ -874,7 +964,7 @@ GO;
 
         }
 
-        if (count($formDataParameters)) {
+        if (count($formDataParameters) && !$isMultipartFormData) {
             $body .= $this->buildUrlValues($requestStruct, $formDataParameters, $result->imports(), 'formData');
             $body .= <<<'GO'
 var body io.Reader
@@ -889,14 +979,20 @@ GO;
                 ->addByName('strings')
                 ->addByName('io');
             $reqBody = 'body';
-            $contentType = 'application/x-www-form-urlencoded';
+            $contentType = '"application/x-www-form-urlencoded"';
+        }
+
+        if (count($formDataParameters) && $isMultipartFormData) {
+            $body .= $this->renderMultipartFormDataRequest($requestStruct, $result->imports(), $formDataParameters);
+            $contentType = 'request.multipartWriter.FormDataContentType()';
+            $reqBody = 'request.pipeReader';
         }
 
         $method = ucfirst($method);
 
         if (!empty($contentType)) {
             $contentType = <<<GO
-req.Header.Set("Content-Type", "$contentType")
+req.Header.Set("Content-Type", $contentType)
 
 GO;
         }
@@ -920,7 +1016,7 @@ if err != nil {
     return nil, err
 }
 
-{$contentType}{$reqAccept}{$this->buildHeaderParameters($headerParameters, $result->imports())}
+{$contentType}{$reqAccept}{$this->buildHeaderParameters($requestStruct, $headerParameters, $result->imports())}
 req = req.WithContext(ctx)
 
 return req, err
@@ -938,6 +1034,56 @@ GO;
         return $result;
 
     }
+
+    /**
+     * @param StructDef $requestStruct
+     * @param Imports $imports
+     * @param Parameter[] $parameters
+     * @return string
+     * @throws Skip
+     */
+    private function renderMultipartFormDataRequest(StructDef $requestStruct, Imports $imports, array $parameters)
+    {
+        $loop = '';
+        foreach ($parameters as $name => $parameter) {
+            $fieldName = $parameter->meta[self::PARAM_FIELD_NAME_META];
+
+            if ($parameter->isFile) {
+                $loop .= <<<GO
+    request.addFile(request.$fieldName, "$name")
+
+GO;
+            } elseif ($parameter->isFiles) {
+                $loop .= <<<GO
+    for _, uf := range request.$fieldName {
+        request.addFile(uf, "$name")
+    }
+
+GO;
+            } else {
+                $assign = $this->serializeParameter($parameter, 'request.multipartWriter.WriteField("%name%", %string_val%)',
+                    $imports, $requestStruct->getName() . "/" . $name);
+
+                $loop .= <<<GO
+    $assign
+
+GO;
+
+            }
+        }
+
+        return <<<GO
+request.initPipe()
+go func() {
+    defer request.close()
+
+$loop}()
+
+
+GO;
+
+    }
+
 
     /**
      * @param Response[] $responses
@@ -974,6 +1120,23 @@ GO;
             $statusCode = StatusCodes::getInfoByCode($response->statusCode);
             $status = $this->codeBuilder->exportableName($statusCode->phrase);
             $propName = $this->responseStatusPropName($statusCode);
+
+            if ($response->isRaw) {
+                $body .= <<<GO
+case http.Status$status:
+    _, readErr := ioutil.ReadAll(body)
+    if readErr != nil {
+        err = fmt.Errorf("could not read response body: %w", readErr)
+    }
+    
+    result.$propName = dump.Bytes()
+
+GO;
+                $code->imports()->addByName('fmt');
+
+                continue;
+
+            }
 
             if ($response->schema === null) {
                 $body .= <<<GO
@@ -1098,7 +1261,6 @@ GO
             file_put_contents($path . "/$funcName.go", $file->render());
         }
 
-
         $file = new GoFile($packageName);
         $file->fileComment = $fileComment;
 
@@ -1121,6 +1283,15 @@ GO
 
         if ($this->settings->withTests) {
             file_put_contents($path . '/models_test.go', $goTestFile->render());
+        }
+
+        if ($this->hasUploads) {
+            $file = new GoFile($packageName);
+            $file->fileComment = $fileComment;
+
+            $file->getCode()->addSnippet(self::PIPE_UPLOAD);
+
+            file_put_contents($path . '/pipe_upload.go', $file->render());
         }
     }
 
@@ -1145,5 +1316,125 @@ GO
         }
         return $type;
     }
+
+
+    const PIPE_UPLOAD = <<<'GO'
+import (
+	"fmt"
+	"io"
+	"log"
+	"mime/multipart"
+	"net/textproto"
+	"strings"
+	"sync/atomic"
+)
+
+// UploadFile describes file to upload.
+type UploadFile struct {
+	Name        string
+	ContentType string
+	Content     io.ReadCloser
+}
+
+var quoteEscaper = strings.NewReplacer("\\", "\\\\", `"`, "\\\"")
+
+func escapeQuotes(s string) string {
+	return quoteEscaper.Replace(s)
+}
+
+// pipeUpload implements content piping for upload.
+type pipeUpload struct {
+	OnError         func(err error)
+	pipeReader      *io.PipeReader
+	pipeWriter      *io.PipeWriter
+	multipartWriter *multipart.Writer
+	closed          int32
+}
+
+func (pr *pipeUpload) Cancel(err error) {
+	if !atomic.CompareAndSwapInt32(&pr.closed, 0, 1) {
+		return
+	}
+
+	_ = pr.multipartWriter.Close()
+	_ = pr.pipeWriter.CloseWithError(err)
+	_ = pr.pipeReader.CloseWithError(err)
+}
+
+func (pr *pipeUpload) onError(err error) {
+	if pr.OnError != nil {
+		pr.OnError(err)
+	} else {
+		log.Println(err)
+	}
+}
+
+func (pr *pipeUpload) close() {
+	if r := recover(); r != nil {
+		pr.onError(fmt.Errorf("%v", r))
+	}
+
+	if !atomic.CompareAndSwapInt32(&pr.closed, 0, 1) {
+		return
+	}
+
+	if err := pr.multipartWriter.Close(); err != nil {
+		pr.onError(err)
+	}
+
+	if err := pr.pipeWriter.Close(); err != nil {
+		pr.onError(err)
+	}
+}
+
+func (pr *pipeUpload) addFile(uf UploadFile, fieldName string) {
+	if atomic.LoadInt32(&pr.closed) == 1 {
+		return
+	}
+
+	contentType := uf.ContentType
+	if contentType == "" {
+		contentType = "application/octet-stream"
+	}
+
+	h := make(textproto.MIMEHeader)
+	h.Set("Content-Disposition",
+		fmt.Sprintf(`form-data; name="%s"; filename="%s"`,
+			escapeQuotes(fieldName), escapeQuotes(uf.Name)))
+	h.Set("Content-Type", contentType)
+	part, err := pr.multipartWriter.CreatePart(h)
+
+	if err != nil {
+		if atomic.LoadInt32(&pr.closed) == 1 && err == io.ErrClosedPipe {
+			return
+		}
+
+		pr.onError(err)
+		return
+	}
+
+	if _, err = io.Copy(part, uf.Content); err != nil {
+		pr.onError(err)
+
+		err = uf.Content.Close()
+		if err != nil {
+			pr.onError(err)
+		}
+
+		return
+	}
+
+	err = uf.Content.Close()
+	if err != nil {
+		pr.onError(err)
+	}
+}
+
+func (pr *pipeUpload) initPipe() {
+	pr.pipeReader, pr.pipeWriter = io.Pipe()
+	pr.multipartWriter = multipart.NewWriter(pr.pipeWriter)
+}
+
+GO;
 
 }

@@ -21,12 +21,12 @@ docker run --rm swaggest/swac swac --help
 ```
 
 ```
-v0.1.21 swac
+v0.1.28 swac
 OpenAPI/Swagger compiler, https://github.com/swaggest/swac
 Usage: 
    swac <action>
-   action   Action name                                            
-            Allowed values: php-guzzle-client, go-client, js-client
+   action   Action name                                                      
+            Allowed values: php-guzzle-client, go-client, js-client, markdown
 ...
 ```
 
@@ -35,6 +35,12 @@ Example
 ```bash
 mkdir petstore && cd petstore
 docker run -v $(pwd):/code -u 1000:1000 swaggest/swac swac php-guzzle-client https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore.json --namespace MyApp\\Petstore
+```
+
+Schema can be passed by STDIN using `-` as file path.
+
+```bash
+cat ./openapi.json | docker run -i --rm swaggest/swac swac markdown -
 ```
 
 ### Composer

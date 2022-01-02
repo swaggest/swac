@@ -65,10 +65,9 @@ func (request *PerformSearchRequest) encode(ctx context.Context, baseURL string)
 
 // PerformSearchResponse is operation response value.
 type PerformSearchResponse struct {
-	StatusCode    int
-	RawBody       []byte                               // RawBody contains read bytes of response body.
-	ValueOK       []map[string]map[string]interface{}  // ValueOK is a value of 200 OK response.
-	ValueNotFound interface{}                          // ValueNotFound is a value of 404 Not Found response.
+	StatusCode int
+	RawBody    []byte                               // RawBody contains read bytes of response body.
+	ValueOK    []map[string]map[string]interface{}  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

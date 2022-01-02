@@ -43,8 +43,11 @@ class Parameter
     /** @var mixed[] */
     public $examples;
 
-    /** @var bool */
+    /** @var bool indicates that parameter is a file to upload */
     public $isFile;
+
+    /** @var bool indicates that parameter is an array of files to upload */
+    public $isFiles;
 
     /** @var string */
     public $collectionFormat;

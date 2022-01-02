@@ -16,7 +16,9 @@ import (
 
 // GetReportReportTypeRequest is operation request value.
 type GetReportReportTypeRequest struct {
-	ReportType string  // ReportType is a required `report_type` parameter in path.
+	// ReportType is a required `report_type` parameter in path.
+	// The type of report to generate
+	ReportType string
 }
 
 // encode creates *http.Request for request data.
@@ -39,8 +41,8 @@ func (request *GetReportReportTypeRequest) encode(ctx context.Context, baseURL s
 // GetReportReportTypeResponse is operation response value.
 type GetReportReportTypeResponse struct {
 	StatusCode int
-	RawBody    []byte   // RawBody contains read bytes of response body.
-	ValueOK    *Report  // ValueOK is a value of 200 OK response.
+	RawBody    []byte                  // RawBody contains read bytes of response body.
+	ValueOK    map[string]interface{}  // ValueOK is a value of 200 OK response.
 }
 
 // decode loads data from *http.Response.

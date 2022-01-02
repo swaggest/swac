@@ -192,7 +192,7 @@ Output with stream writer.
 
 |Status|Content Type      |Body Type                            |Headers             |Description          |
 |------|------------------|-------------------------------------|--------------------|---------------------|
-|200   |`text/csv`        |`*`                                  |`X-Header`: `String`|OK                   |
+|200   |`text/csv`        |                                     |`X-Header`: `String`|OK                   |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|                    |Internal Server Error|
 ### <a id="getoutputheaders"></a>GET `/output-headers`
 Output With Headers

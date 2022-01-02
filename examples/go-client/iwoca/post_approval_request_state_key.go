@@ -37,9 +37,8 @@ func (request *PostApprovalRequestStateKeyRequest) encode(ctx context.Context, b
 
 // PostApprovalRequestStateKeyResponse is operation response value.
 type PostApprovalRequestStateKeyResponse struct {
-	StatusCode   int
-	RawBody      []byte       // RawBody contains read bytes of response body.
-	ValueCreated interface{}  // ValueCreated is a value of 201 Created response.
+	StatusCode int
+	RawBody    []byte  // RawBody contains read bytes of response body.
 }
 
 // decode loads data from *http.Response.

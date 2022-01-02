@@ -26,4 +26,7 @@ class Response
 
     /** @var mixed[] Examples of response */
     public $examples = [];
+
+    /** @var bool indicates response that does not need to be decoded from JSON */
+    public $isRaw = false;
 }
