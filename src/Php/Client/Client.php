@@ -187,7 +187,7 @@ class Client implements Renderer
         $operationClass->setNamespace($this->namespace . $operationNamespace
             . ($this->groupByPathItems ? '' : '\\Operation'));
 
-        $operationDesc = trim($operation->description);
+        $operationDesc = isset($operation->description) ? trim($operation->description) : '';
         $operationDesc .= "\nHTTP: " . strtoupper($operation->method) . ' ' . $operation->path;
 
         $requestClass = RequestClassFactory::make($operation, $this->builder, $this->namespace . $operationNamespace);

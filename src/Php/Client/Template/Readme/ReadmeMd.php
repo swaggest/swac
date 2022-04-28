@@ -113,7 +113,7 @@ class ReadmeMd extends AbstractTemplate
                     'Name' => '`' . $property->getNamedVar()->getName() . '`',
                     'Type' => $this->renderType($type),
                     'In' => '`' . $in . '`',
-                    'Description' => str_replace("\n", '<br>', trim($param->description))
+                    'Description' => str_replace("\n", '<br>', isset($param->description) ? trim($param->description) : '')
                 ];
                 if ($in === Parameter::BODY) {
                     if ($type instanceof PhpClass) {
@@ -163,7 +163,9 @@ MARKDOWN;
 
     private function renderOperationClass(OperationClass $handlerClass)
     {
-        $handlerDesc = wordwrap($handlerClass->getOperation()->description);
+        $desc = $handlerClass->getOperation()->description;
+        $desc = isset($desc) ? $desc : '';
+        $handlerDesc = wordwrap($desc);
         $request = $handlerClass->getRequestType();
         $resultMap = $handlerClass->getResponseCodeFactory()->getResultInfo();
 

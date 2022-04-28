@@ -12,7 +12,8 @@
   "require": {
     "swaggest/json-schema": "^0.12.36",
     "swaggest/php-code-builder": "^0.2.34",
-    "swaggest/go-code-builder": "^0.4.45",
+    "swaggest/go-code-builder": "^0.4.50",
+    "swaggest/code-builder": "^0.3.5",
     "swaggest/json-cli": "v1.8.5",
     "php-yaoi/php-yaoi": "^1",
     "monolog/monolog": "^1.23",
@@ -35,8 +36,8 @@
   },
   "require-dev": {
     "php": "^5.6|^7",
-    "phpunit/phpunit": "^4.8.23",
-    "guzzlehttp/guzzle": "^6.3"
+    "phperf/phpunit": "^4.8.38",
+    "guzzlehttp/guzzle": "^6.5.5"
   },
   "config": {
     "platform": {
@@ -45,10 +46,5 @@
   },
   "bin": [
     "bin/swac"
-  ],
-  "scripts": {
-    "post-install-cmd": [
-      "patch -N -s -p0 < ./tests/phpunit.patch"
-    ]
-  }
+  ]
 }

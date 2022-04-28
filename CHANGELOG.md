@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.29] - 2022-04-28
+
+### Added
+- Support for PHP 8.1.
+- Dependencies update.
+
+### Fixed
+- Handling of slices of named types in Go.
+- Gateway Time Out status name in Go.
+
 ## [0.1.28] - 2022-01-02
 
 ### Added
@@ -191,6 +201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Keep path parameters in operation name of PHP client.
 
+[0.1.29]: https://github.com/swaggest/swac/compare/v0.1.28...v0.1.29
 [0.1.28]: https://github.com/swaggest/swac/compare/v0.1.27...v0.1.28
 [0.1.27]: https://github.com/swaggest/swac/compare/v0.1.26...v0.1.27
 [0.1.26]: https://github.com/swaggest/swac/compare/v0.1.25...v0.1.26

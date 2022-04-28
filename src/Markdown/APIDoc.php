@@ -59,16 +59,16 @@ MD
     public function setConfig(Config $config)
     {
         $headComment = '';
-        if (!empty(trim($config->version))) {
+        if (isset($config->version) && !empty(trim($config->version))) {
             $headComment .= 'Version: ' . trim($config->version) . "\n\n";
         }
-        if (!empty(trim($config->description))) {
+        if (isset($config->description) && !empty(trim($config->description))) {
             $headComment .= trim(wordwrap($config->description)) . "\n\n";
         }
-        if (!empty(trim($config->baseUrl))) {
+        if (isset($config->baseUrl) && !empty(trim($config->baseUrl))) {
             $headComment .= 'Base URL:' . trim(wordwrap($config->baseUrl)) . "\n\n";
         }
-        if (!empty($this->addSchemaUrl)) {
+        if (isset($this->addSchemaUrl) && !empty($this->addSchemaUrl)) {
             $headComment .= '[Schema](' . $this->addSchemaUrl . ').' . "\n\n";
         }
 

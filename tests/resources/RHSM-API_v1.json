@@ -1,0 +1,1551 @@
+{
+ "basePath":"/management/v1","consumes":["application/json"],
+ "definitions":{
+  "APIPageParam":{
+   "description":"APIPageParam details the pagination parameters in APIResponse",
+   "properties":{"count":{"type":"integer"},"limit":{"type":"integer"},"offset":{"type":"integer"}},
+   "type":"object"
+  },
+  "AddProviderAccount":{
+   "description":"An account to be added",
+   "properties":{"id":{"type":"string"},"nickname":{"type":"string"}},"type":"object"
+  },
+  "Allocation":{
+   "properties":{
+    "entitlementQuantity":{"type":"integer"},"name":{"type":"string"},
+    "simpleContentAccess":{"type":"string"},"type":{"type":"string"},"url":{"type":"string"},
+    "uuid":{"type":"string"},"version":{"type":"string"}
+   },
+   "title":"Allocation is an entity that consumes entitlements. Also referred as a Distributor.",
+   "type":"object"
+  },
+  "AllocationDetails":{
+   "description":"details of a subscription allocation",
+   "properties":{
+    "createdBy":{"type":"string"},"createdDate":{"$ref":"#/definitions/Date"},
+    "entitlementsAttached":{"$ref":"#/definitions/EntitlementsAttachedResponse"},
+    "entitlementsAttachedQuantity":{"type":"integer"},"lastModified":{"$ref":"#/definitions/Date"},
+    "name":{"type":"string"},"simpleContentAccess":{"type":"string"},"type":{"type":"string"},
+    "uuid":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "AllocationSummary":{
+   "description":"details of a subscription allocation",
+   "properties":{
+    "contentAccessMode":{"type":"string"},"createdBy":{"type":"string"},
+    "createdDate":{"$ref":"#/definitions/Date"},"entitlementsAttachedQuantity":{"type":"integer"},
+    "lastModified":{"$ref":"#/definitions/Date"},"name":{"type":"string"},"type":{"type":"string"},
+    "uuid":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "AllocationVersion":{
+   "description":"List of satellite version",
+   "properties":{"description":{"type":"string"},"value":{"type":"string"}},"type":"object"
+  },
+  "AttachEntitlement":{
+   "properties":{
+    "autoAttachSetting":{"type":"boolean"},"complianceStatus":{"type":"string"},
+    "createdBy":{"type":"string"},"createdDate":{"$ref":"#/definitions/Date"},
+    "entitlementStatus":{"type":"string"},
+    "entitlementsAttached":{"$ref":"#/definitions/EntitlementsAttachedResponse"},
+    "entitlementsAttachedCount":{"type":"integer"},
+    "errataApplicabilityCounts":{"$ref":"#/definitions/ErrataApplicabilityCounts"},
+    "factsCount":{"type":"integer"},"hostname":{"type":"string"},
+    "installedProductsCount":{"type":"integer"},"lastCheckin":{"$ref":"#/definitions/Date"},
+    "name":{"type":"string"},"serviceLevelPreference":{"type":"string"},"type":{"type":"string"},
+    "uuid":{"type":"string"}
+   },
+   "title":"System is an entity that consumes entitlements. Also referred as a Consumer.",
+   "type":"object"
+  },
+  "ContentSet":{
+   "properties":{
+    "arch":{"type":"string"},"enabled":{"type":"boolean"},"label":{"type":"string"},
+    "name":{"type":"string"},"type":{"type":"string"}
+   },
+   "title":"ContentSet represent a contentset for the listContentSets API Response.",
+   "type":"object"
+  },
+  "Date":{
+   "description":"Date represents the date format used for API returns",
+   "example":"2006-01-02T15:04:05.000Z","type":"string"
+  },
+  "DetailResponse":{
+   "properties":{
+    "contractNumber":{"type":"string"},"endDate":{"$ref":"#/definitions/Date"},
+    "pools":{"items":{"$ref":"#/definitions/Pool"},"type":"array"},"quantity":{"type":"string"},
+    "sku":{"type":"string"},"startDate":{"$ref":"#/definitions/Date"},"status":{"type":"string"},
+    "subscriptionName":{"type":"string"},"subscriptionNumber":{"type":"string"}
+   },
+   "title":"DetailResponse is the user-friendly response from the service.","type":"object"
+  },
+  "DownloadLink":{
+   "properties":{
+    "expiration":{
+     "description":"time at which the download link expires (in UTC)",
+     "example":"2006-01-02T15:04:05.000Z","type":"string"
+    },
+    "filename":{
+     "description":"filename of the file on the download link",
+     "example":"filename-1.2.3-1.x86_64.rpm","type":"string"
+    },
+    "href":{
+     "description":"URL to obtain the image",
+     "example":"https://access.cdn.redhat.com/content/origin/files/sha256/64/643e706cf7db9e93e706637af92d80eb58377dd0c64ac1e9ce6a72700aa04c2a/rhel-8.1-x86_64-boot.iso?_auth_=1582920605_7e8153e1bdc2f46636653e2efb17bc65",
+     "type":"string"
+    }
+   },
+   "type":"object"
+  },
+  "EnabledCloudAccessProvider":{
+   "description":"Enabled Cloud Access Provider details including products and accounts.",
+   "properties":{
+    "accounts":{"items":{"$ref":"#/definitions/EnabledProviderAccount"},"type":"array"},
+    "name":{"type":"string"},
+    "products":{"items":{"$ref":"#/definitions/EnabledProduct"},"type":"array"},
+    "shortName":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "EnabledProduct":{
+   "description":"Enabled Product represents a cloud access provider product",
+   "properties":{
+    "enabledQuantity":{"type":"integer"},"imageGroups":{"items":{"type":"string"},"type":"array"},
+    "name":{"type":"string"},"nextRenewal":{"$ref":"#/definitions/ShortDate"},
+    "sku":{"type":"string"},"totalQuantity":{"type":"integer"}
+   },
+   "type":"object"
+  },
+  "EnabledProviderAccount":{
+   "description":"Enabled Provider Account represents a cloud access provider account",
+   "properties":{
+    "dateAdded":{"$ref":"#/definitions/Date"},
+    "goldImageStatus":{"items":{"$ref":"#/definitions/GoldImageStatus"},"type":"array"},
+    "id":{"type":"string"},"nickname":{"type":"string"},
+    "sourceId":{
+     "description":"Source ID of linked account (only for accounts created via Sources on cloud.redhat.com)",
+     "type":"string"
+    },
+    "verified":{
+     "description":"verification status for RHSM Auto Registration (only displayed for supported cloud providers)",
+     "type":"boolean"
+    }
+   },
+   "required":["id","nickname","dateAdded"],"type":"object"
+  },
+  "EntitlementsAttachedResponse":{
+   "description":"EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached and sends metadata about it using helpers.OptionalResult",
+   "properties":{
+    "reason":{"type":"string"},"valid":{"type":"boolean"},
+    "value":{"items":{"$ref":"#/definitions/EntitlementsAttachedResponseValue"},"type":"array"}
+   },
+   "type":"object"
+  },
+  "EntitlementsAttachedResponseValue":{
+   "description":"EntitlementsAttachedResponseValue represents the Value field in the EntitlementsAttachedResponse",
+   "properties":{
+    "contractNumber":{"type":"string"},"endDate":{"$ref":"#/definitions/Date"},
+    "entitlementQuantity":{"type":"integer"},"id":{"type":"string"},"sku":{"type":"string"},
+    "startDate":{"$ref":"#/definitions/Date"},"subscriptionName":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ErrataApplicabilityCounts":{
+   "description":"Applicable errata details",
+   "properties":{
+    "reason":{"type":"string"},"valid":{"type":"boolean"},
+    "value":{"$ref":"#/definitions/ErrataCount"}
+   },
+   "type":"object"
+  },
+  "ErrataCount":{
+   "description":"ErrataCount is the errata information for a System",
+   "properties":{
+    "bugfixCount":{"type":"integer"},"enhancementCount":{"type":"integer"},
+    "securityCount":{"type":"integer"}
+   },
+   "type":"object"
+  },
+  "ErratumDetails":{
+   "properties":{
+    "affectedProducts":{"items":{"type":"string"},"type":"array"},
+    "bugzillas":{"items":{"$ref":"#/definitions/Reference"},"type":"array"},
+    "copyrightYear":{"type":"string"},"cves":{"type":"string"},"description":{"type":"string"},
+    "id":{"type":"string"},"issued":{"$ref":"#/definitions/Date"},
+    "lastUpdated":{"$ref":"#/definitions/Date"},
+    "references":{"items":{"$ref":"#/definitions/Reference"},"type":"array"},
+    "severity":{"type":"string"},"solution":{"type":"string"},"summary":{"type":"string"},
+    "synopsis":{"type":"string"},"type":{"type":"string"},"typeSeverity":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ErratumForSystem":{
+   "description":"an erratum listed for a system",
+   "properties":{
+    "href":{"type":"string"},"id":{"type":"string"},"published":{"$ref":"#/definitions/Date"},
+    "severity":{"type":"string"},"synopsis":{"type":"string"},"type":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ErratumInContentSet":{
+   "description":"ErratumInContentSet contains information on an erratum listed in a content set",
+   "properties":{
+    "advisoryId":{"type":"string"},"href":{"type":"string"},
+    "publishDate":{"$ref":"#/definitions/Date"},"severity":{"type":"string"},
+    "synopsis":{"type":"string"},"type":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ErrorDetails":{
+   "description":"ErrorDetails details the Error in ErrorResponse",
+   "properties":{"code":{"type":"integer"},"message":{"type":"string"}},"type":"object"
+  },
+  "Facts":{
+   "description":"facts give additional details about the system",
+   "properties":{"key":{"type":"string"},"value":{"type":"string"}},"type":"object"
+  },
+  "GoldImageStatus":{
+   "description":"Gold Image Status Details of a cloud access provider account for an image provider.",
+   "properties":{
+    "description":{
+     "description":"Description of the provider image group","example":"Red Hat Enterprise Linux",
+     "type":"string"
+    },
+    "name":{"description":"Name of the requested provider image group","example":"RHEL","type":"string"},
+    "status":{"description":"Status of Gold Image Request","example":"Requested","type":"string"}
+   },
+   "type":"object"
+  },
+  "ImageForVersionArch":{
+   "description":"Image Details for provided version and architecture.",
+   "properties":{
+    "arch":{"type":"string"},"checksum":{"type":"string"},
+    "datePublished":{"$ref":"#/definitions/Date"},"downloadHref":{"type":"string"},
+    "filename":{"type":"string"},"imageName":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ImageInContentSet":{
+   "description":"Image Details in a content set image listing.",
+   "properties":{
+    "arch":{"type":"string"},"checksum":{"type":"string"},
+    "datePublished":{"$ref":"#/definitions/Date"},"downloadHref":{"type":"string"},
+    "filename":{"type":"string"},"imageName":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "InstalledProducts":{
+   "description":"details of installed products on the system",
+   "properties":{
+    "arch":{"type":"string"},"productID":{"type":"string"},"productName":{"type":"string"},
+    "status":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ListResponse":{
+   "description":"ListResponse is the actual collection of subscription details that gets\nrendered",
+   "items":{"$ref":"#/definitions/DetailResponse"},"type":"array"
+  },
+  "MyErratum":{
+   "description":"MyErratum contains erratum information that affects at least one system",
+   "properties":{
+    "advisoryId":{"type":"string"},"affectedSystemCount":{"type":"integer"},
+    "details":{"type":"string"},"publishDate":{"$ref":"#/definitions/Date"},
+    "synopsis":{"type":"string"},"systems":{"type":"string"},"type":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "OrgSimpleContentAccess":{
+   "properties":{
+    "id":{"type":"string"},"simpleContentAccess":{"type":"string"},
+    "simpleContentAccessCapable":{"type":"boolean"},
+    "systemPurposeAttributes":{"$ref":"#/definitions/SystemPurposeAttributes"}
+   },
+   "title":"Organization Simple Content Access details.","type":"object"
+  },
+  "PackageDetail":{
+   "description":"PackageDetail wraps an errata package and adds a RefURL",
+   "properties":{
+    "arch":{"type":"string"},"checksum":{"type":"string"},
+    "contentSets":{"items":{"type":"string"},"type":"array"},"details_url":{"type":"string"},
+    "epoch":{"type":"integer"},"filename":{"type":"string"},"name":{"type":"string"},
+    "release":{"type":"string"},"repoTags":{"items":{"type":"string"},"type":"array"},
+    "summary":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "PackageForSystem":{
+   "description":"package installed on a system",
+   "properties":{
+    "advisories":{
+     "items":{"properties":{"advisory":{"type":"string"},"url":{"type":"string"}},"type":"object"},
+     "type":"array"
+    },
+    "arch":{"type":"string"},"epoch":{"type":"integer"},"errataCount":{"type":"integer"},
+    "name":{"type":"string"},"release":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "Pool":{
+   "description":"Pool represents pool information that matter for the detail list",
+   "properties":{
+    "consumed":{"type":"integer"},"id":{"type":"string"},"quantity":{"type":"integer"},
+    "type":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "PoolDetail":{
+   "description":"PoolDetail is an entry in the system/allocation pools listing",
+   "properties":{
+    "contractNumber":{"type":"string"},"endDate":{"$ref":"#/definitions/Date"},
+    "entitlementsAvailable":{"type":"integer"},"id":{"type":"string"},
+    "serviceLevel":{"type":"string"},"sku":{"type":"string"},
+    "startDate":{"$ref":"#/definitions/Date"},"subscriptionName":{"type":"string"},
+    "subscriptionNumber":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "Reference":{
+   "description":"Reference contains a reference to an external item",
+   "properties":{
+    "href":{"type":"string"},"id":{"type":"string"},"title":{"type":"string"},
+    "type":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "ShortDate":{
+   "description":"ShortDate represents the short date format used for API returns where time precision is not needed",
+   "example":"2006-01-02","type":"string"
+  },
+  "ShowSystem":{
+   "properties":{
+    "autoAttachSetting":{"type":"boolean"},"complianceStatus":{"type":"string"},
+    "createdBy":{"type":"string"},"createdDate":{"$ref":"#/definitions/Date"},
+    "entitlementStatus":{"type":"string"},
+    "entitlementsAttached":{"$ref":"#/definitions/EntitlementsAttachedResponse"},
+    "entitlementsAttachedCount":{"type":"integer"},
+    "errataApplicabilityCounts":{"$ref":"#/definitions/ErrataApplicabilityCounts"},
+    "facts":{"$ref":"#/definitions/Facts"},"factsCount":{"type":"integer"},
+    "hostname":{"type":"string"},"installedProducts":{"$ref":"#/definitions/InstalledProducts"},
+    "installedProductsCount":{"type":"integer"},"lastCheckin":{"$ref":"#/definitions/Date"},
+    "name":{"type":"string"},"serviceLevelPreference":{"type":"string"},"type":{"type":"string"},
+    "uuid":{"type":"string"}
+   },
+   "title":"System is an entity that consumes entitlements. Also referred as a Consumer.",
+   "type":"object"
+  },
+  "System":{
+   "properties":{
+    "entitlementCount":{"type":"integer"},"entitlementStatus":{"type":"string"},
+    "errataCounts":{"$ref":"#/definitions/ErrataCount"},"hostname":{"type":"string"},
+    "href":{"type":"string"},"lastCheckin":{"$ref":"#/definitions/Date"},"name":{"type":"string"},
+    "type":{"type":"string"},"username":{"type":"string"},"uuid":{"type":"string"}
+   },
+   "title":"System is an entity that consumes entitlements. Also referred as a Consumer.",
+   "type":"object"
+  },
+  "SystemList":{
+   "description":"SystemList is the result of the get system list API",
+   "properties":{
+    "complianceStatus":{"type":"string"},"details":{"type":"string"},
+    "entitlementQuantity":{"type":"integer"},"lastCheckin":{"$ref":"#/definitions/Date"},
+    "systemName":{"type":"string"},"totalEntitlementQuantity":{"type":"integer"},
+    "type":{"type":"string"},"uuid":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "SystemPurposeAttributes":{
+   "description":"System purpose settings available to an organization",
+   "properties":{
+    "roles":{"items":{"type":"string"},"type":"array"},
+    "serviceLevel":{"items":{"type":"string"},"type":"array"},
+    "usage":{"items":{"type":"string"},"type":"array"}
+   },
+   "type":"object"
+  },
+  "contentSetArchMock":{
+   "properties":{
+    "body":{"items":{"$ref":"#/definitions/ErratumInContentSet"},"type":"array"},
+    "pagination":{"$ref":"#/definitions/APIPageParam"}
+   },
+   "type":"object"
+  },
+  "exportJobResponse":{"properties":{"exportID":{"type":"string"},"href":{"type":"string"}},"type":"object"},
+  "exportResponse":{"properties":{"exportJobID":{"type":"string"},"href":{"type":"string"}},"type":"object"},
+  "myErrataListMock":{
+   "properties":{
+    "body":{"items":{"$ref":"#/definitions/MyErratum"},"type":"array"},
+    "pagination":{"$ref":"#/definitions/APIPageParam"}
+   },
+   "type":"object"
+  },
+  "ongoingExportJobResponse":{"properties":{"message":{"type":"string"}},"type":"object"},
+  "pkgContentSetArch":{
+   "properties":{
+    "arch":{"type":"string"},"buildDate":{"$ref":"#/definitions/Date"},
+    "buildHost":{"type":"string"},"checksum":{"type":"string"},
+    "contentSets":{"items":{"type":"string"},"type":"array"},"description":{"type":"string"},
+    "downloadHref":{"type":"string"},"epoch":{"type":"string"},"group":{"type":"string"},
+    "href":{"type":"string"},"license":{"type":"string"},"name":{"type":"string"},
+    "release":{"type":"string"},"size":{"type":"integer"},"summary":{"type":"string"},
+    "version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "pkgDetails":{
+   "properties":{
+    "arch":{"type":"string"},"buildDate":{"$ref":"#/definitions/Date"},
+    "buildHost":{"type":"string"},"checksum":{"type":"string"},
+    "contentSets":{"items":{"type":"string"},"type":"array"},"description":{"type":"string"},
+    "epoch":{"type":"string"},"group":{"type":"string"},"href":{"type":"string"},
+    "license":{"type":"string"},"name":{"type":"string"},"release":{"type":"string"},
+    "size":{"type":"integer"},"summary":{"type":"string"},"version":{"type":"string"}
+   },
+   "type":"object"
+  },
+  "pkgListMock":{
+   "properties":{
+    "body":{"items":{"$ref":"#/definitions/PackageDetail"},"type":"array"},
+    "pagination":{"$ref":"#/definitions/APIPageParam"}
+   },
+   "type":"object"
+  },
+  "poolsListMock":{
+   "properties":{
+    "body":{"items":{"$ref":"#/definitions/PoolDetail"},"type":"array"},
+    "pagination":{"$ref":"#/definitions/APIPageParam"}
+   },
+   "type":"object"
+  },
+  "systemList":{
+   "description":"systemList is a System Slice","items":{"$ref":"#/definitions/System"},
+   "type":"array"
+  },
+  "systemListMock":{
+   "properties":{
+    "body":{"items":{"$ref":"#/definitions/System"},"type":"array"},
+    "pagination":{"$ref":"#/definitions/APIPageParam"}
+   },
+   "type":"object"
+  }
+ },
+ "host":"api.access.redhat.com",
+ "info":{
+  "contact":{"url":"https://access.redhat.com/support/cases/"},
+  "description":"API for Red Hat Subscription Management","title":"RHSM-API","version":"1.264.0"
+ },
+ "paths":{
+  "/allocations":{
+   "get":{
+    "description":"The default and max number of results in a response are 100.",
+    "operationId":"listAllocations",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {"enum":["SAM","Satellite"],"in":"query","name":"type","type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"list of allocations",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/Allocation"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all allocations for a user","tags":["allocation"]
+   },
+   "post":{
+    "description":"Create Satellite by name and version(optional).\nCustomers can use any version listed in the `/v1/allocations/versions` endpoint (use attribute `value`).\nIf no version is specified, it will take the latest available version for Satellite.",
+    "operationId":"createSatellite",
+    "parameters":[
+     {
+      "description":"must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods",
+      "in":"query","name":"Name","required":true,"type":"string"
+     },
+     {"in":"query","name":"version","type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"Success",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/AllocationSummary"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Create Satellite","tags":["allocation"]
+   }
+  },
+  "/allocations/versions":{
+   "get":{
+    "description":"Returns list of Satellite version 6.0 and above",
+    "operationId":"listVersionsAllocation",
+    "responses":{
+     "200":{
+      "description":"list of Satellite version",
+      "schema":{
+       "properties":{"body":{"items":{"$ref":"#/definitions/AllocationVersion"},"type":"array"}},
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List Satellite versions","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}":{
+   "delete":{
+    "description":"The default success response will be 204\n\nSystem, RHUI, Hypervisor are unsupported allocation types",
+    "operationId":"removeAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {
+      "description":"Deleting a subscription allocation can have significant impacts on your hosts and activation keys.\nWe require a force parameter to make sure the delete operation is intentional.",
+      "enum":[true],"in":"query","name":"force","required":true,"type":"boolean"
+     }
+    ],
+    "responses":{
+     "204":{"description":"Successfully removed"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"},
+     "504":{"$ref":"#/responses/GatewayTimeout"}
+    },
+    "summary":"Remove allocation profile","tags":["allocation"]
+   },
+   "get":{
+    "description":"System, RHUI, Hypervisor are unsupported allocation types",
+    "operationId":"showAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {
+      "description":"Show more details about a allocation","enum":["entitlements"],"in":"query",
+      "maxItems":1,"name":"include","type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ShowAllocation200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/AllocationDetails"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get an allocation by UUID","tags":["allocation"]
+   },
+   "put":{
+    "description":"Allows to update simpleContentAccess for Satellite of version 6.3 and above\nPossible value for simpleContentAccess are:\n\n- enabled\n- disabled",
+    "operationId":"updateAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {
+      "in":"body","name":"allocation",
+      "schema":{
+       "properties":{"simpleContentAccess":{"type":"string"}},"required":["simpleContentAccess"],
+       "type":"object"
+      }
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Update an allocation","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/entitlements":{
+   "post":{
+    "description":"The default success response will be 200.\n\nSystem, RHUI, Hypervisor are unsupported allocation types.\nSAM 1.3 or higher, and Satellite 5.6 versions are supported.",
+    "operationId":"attachEntitlementAllocation",
+    "parameters":[
+     {"in":"query","maxItems":1,"minItems":1,"name":"pool","required":true,"type":"string"},
+     {"description":"quantity you want to attach","in":"query","name":"quantity","type":"integer"},
+     {"in":"path","name":"uuid","required":true,"type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"AttachEntitlement200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/AllocationDetails"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Attach entitlement to allocation","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/entitlements/{EntitlementID}":{
+   "delete":{
+    "description":"The default success response will be 204.",
+    "operationId":"removeAllocationEntitlement",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {
+      "description":"Remove an entitlement from an allocation","in":"path","name":"EntitlementID",
+      "required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "204":{"description":"Successfully removed"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Remove entitlement from the allocation","tags":["allocation"]
+   },
+   "put":{
+    "description":"The default success response will be 200.\nSystem, RHUI, Hypervisor are unsupported allocation types",
+    "operationId":"updateEntitlementAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {"in":"path","name":"EntitlementID","required":true,"type":"string"},
+     {
+      "description":"maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool\nminItem: 1",
+      "in":"query","name":"quantity","type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"Success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/AllocationDetails"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Update attached entitlement to allocation","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/export":{
+   "get":{
+    "description":"Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.\n\nSystem, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower and Satellite 5.9 or lower versions are unsupported.",
+    "operationId":"exportAllocation",
+    "parameters":[{"in":"path","name":"uuid","required":true,"type":"string"}],
+    "responses":{
+     "200":{
+      "description":"ExportAllocation200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/exportResponse"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Trigger allocation manifest export","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/export/{ExportID}":{
+   "get":{
+    "description":"Success response contains a zip file. The link is one-time download and expires after one try. Trigger export job to get another download link.\n\nContent-Type: application/zip",
+    "operationId":"getExportAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {"in":"path","name":"ExportID","required":true,"type":"string"}
+    ],
+    "produces":["application/zip"],
+    "responses":{
+     "200":{
+      "description":"GetExportAllocation200 is the success response",
+      "schema":{"items":{"type":"integer"},"type":"array"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Download allocation manifest","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/exportJob/{ExportJobID}":{
+   "get":{
+    "description":"Returns export download link in response.","operationId":"exportJobAllocation",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {"in":"path","name":"ExportJobID","required":true,"type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"ExportJobAllocation200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/exportJobResponse"}},"type":"object"}
+     },
+     "202":{
+      "description":"AcceptedExportJob202 is a response for accepted and in progress job",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/ongoingExportJobResponse"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "406":{"$ref":"#/responses/NotAcceptable"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Check status of allocation manifest export","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/pools":{
+   "get":{
+    "description":"System, RHUI, Hypervisor are unsupported allocation types. SAM 1.3 or higher, and Satellite 5.6 versions are supported.",
+    "operationId":"listAllocationPools",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "description":"include future dated pools for satellite 6.3 or higher","enum":[true],
+      "in":"query","name":"future","type":"boolean"
+     },
+     {"in":"path","name":"uuid","required":true,"type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"ListAllocationPools200 is the success response",
+      "schema":{"$ref":"#/definitions/poolsListMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all pools for an allocation","tags":["allocation"]
+   }
+  },
+  "/allocations/{uuid}/{EntitlementID}":{
+   "delete":{
+    "deprecated":true,"description":"The default success response will be 204.",
+    "operationId":"removeAllocationEntitlementDeprecated",
+    "parameters":[
+     {"in":"path","name":"uuid","required":true,"type":"string"},
+     {
+      "description":"Remove an entitlement from an allocation","in":"path","maxItems":1,
+      "minItems":1,"name":"EntitlementID","required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "204":{"description":"Successfully removed"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Remove entitlement from the allocation","tags":["allocation"]
+   }
+  },
+  "/cloud_access_providers/enabled":{
+   "get":{
+    "description":"Returns the full list of all enabled Red Hat products and Cloud Access provider accounts/subscriptions associated with the user’s Red Hat account.\n- For Products that are expired `nextRenewal` field would be omitted and `totalQuantity` would be `0`.\n- Product objects can have `totalQuantity` field as `-1` indicating `Unlimited` quantity available.\n- The `nextRenewalDate` field of a Product has the format `YYYY-MM-DD`.\n- The `goldImageStatus` details are available for an account when the Provider is a certified Gold Image Provider and the account has been requested for gold image access. The `status` field of a goldImageStatus object could be `\"Requested\"`, `\"Granted\"` or `\"Failed\"`.\n- The `imageGroups` field is available for a product when the Provider is a certified Gold Image Provider, and the product has a gold image group available for it.\n",
+    "operationId":"listEnabledCloudAccessProviders",
+    "responses":{
+     "200":{
+      "description":"A JSON response object listing cloud access providers and their accounts and products.",
+      "schema":{
+       "properties":{"body":{"items":{"$ref":"#/definitions/EnabledCloudAccessProvider"},"type":"array"}},
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all enabled cloud access providers for a user","tags":["cloudaccess"]
+   }
+  },
+  "/cloud_access_providers/{ProviderShortName}/account":{
+   "put":{
+    "consumes":["application/json"],"deprecated":true,
+    "description":"Updates the account nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.\n",
+    "operationId":"UpdateProviderAccountDeprecated",
+    "parameters":[
+     {"in":"path","name":"ProviderShortName","required":true,"type":"string"},
+     {
+      "in":"body","name":"account",
+      "schema":{
+       "properties":{"id":{"type":"string"},"newNickname":{"type":"string"}},"required":["id"],
+       "type":"object"
+      }
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Update provider account","tags":["cloudaccess"]
+   }
+  },
+  "/cloud_access_providers/{ProviderShortName}/accounts":{
+   "delete":{
+    "consumes":["application/json"],
+    "description":"Removes a currently-enabled provider account, including removing access to Gold Images, where applicable. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.\n",
+    "operationId":"RemoveProviderAccount",
+    "parameters":[
+     {"in":"path","name":"ProviderShortName","required":true,"type":"string"},
+     {
+      "in":"body","name":"account",
+      "schema":{"properties":{"id":{"type":"string"}},"required":["id"],"type":"object"}
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Remove a provider account","tags":["cloudaccess"]
+   },
+   "post":{
+    "consumes":["application/json"],
+    "description":"Add up to `100` new provider accounts, with optional nicknames, to a currently-enabled provider for Red Hat Cloud Access. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.\n",
+    "operationId":"AddProviderAccounts",
+    "parameters":[
+     {"in":"path","name":"ProviderShortName","required":true,"type":"string"},
+     {
+      "in":"body","name":"account",
+      "schema":{"items":{"$ref":"#/definitions/AddProviderAccount"},"type":"array"}
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Add accounts for a provider","tags":["cloudaccess"]
+   }
+  },
+  "/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}":{
+   "put":{
+    "consumes":["application/json"],
+    "description":"Updates the nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.\n",
+    "operationId":"UpdateProviderAccount",
+    "parameters":[
+     {"in":"path","name":"ProviderShortName","required":true,"type":"string"},
+     {"in":"path","name":"AccountID","required":true,"type":"string"},
+     {
+      "in":"body","name":"account",
+      "schema":{"properties":{"nickname":{"type":"string"}},"required":["nickname"],"type":"object"}
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Update provider account","tags":["cloudaccess"]
+   }
+  },
+  "/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification":{
+   "put":{
+    "consumes":["application/json"],
+    "description":"Verifies a cloud provider account for use with RHSM Auto Registration, which allows for cloud instances to automatically register with RHSM upon provisioning.\n\nAuto Registration is currently only available for the following cloud providers:\n  - AWS\n  - AWS GovCloud\n  - ACS China\n  - Microsoft Azure\n  - Google Cloud Provider\n\n\nThis endpoint accepts a cloud instance \"identity\" document and \"signature\" from the cloud provider's metadata service. Use the following links for more info on how to obtain these:\n - For AWS: [EC2 Instance Identity Document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html) and [Signature](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/verify-rsa2048.html)\n - For Azure: [Azure Instance Metadata](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service) and [Signature](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/instance-metadata-service?tabs=linux#attested-data)\n - For GCP: [Compute Engine Instance Identity JWT token](https://cloud.google.com/compute/docs/instances/verifying-instance-identity#request_signature). Note: Please use \"https://subscription.rhsm.redhat.com:443/subscription\" as value for \"audience\" query parameter and \"full\" as value for \"format\" query parameter while generating the token\n\n\nAn HTTP 400 response will be returned if the cloud provider does not support automatic registration, the signature of the document cannot be verified, the cloud provider account has already been verified for a different Red Hat account, or if the account in the instance metadata does not match the provided account ID.\n\nAn HTTP 204 response will be returned if the account has been successfully verified. Attempts to verify an account that is already verified will return an HTTP 204 response with no changes being made.\n",
+    "operationId":"VerifyProviderAccount",
+    "parameters":[
+     {
+      "enum":["AWS","AGOV","ACN","MSAZ","GCE"],"in":"path","name":"ProviderShortName",
+      "required":true,"type":"string"
+     },
+     {"in":"path","name":"AccountID","required":true,"type":"string"},
+     {
+      "in":"body","name":"account",
+      "schema":{
+       "properties":{
+        "identity":{
+         "description":"base64-encoded cloud instance metadata. For GCE, please use the instance identity token (JWT) as it is.",
+         "type":"string"
+        },
+        "signature":{
+         "description":"base64-encoded cloud instance metadata signature. For GCE, please omit this field.",
+         "type":"string"
+        }
+       },
+       "required":["identity","signature"],"type":"object"
+      }
+     }
+    ],
+    "responses":{
+     "204":{"$ref":"#/responses/NoContent"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Verify a provider account","tags":["cloudaccess"]
+   }
+  },
+  "/cloud_access_providers/{ProviderShortName}/goldimage":{
+   "post":{
+    "consumes":["application/json"],
+    "description":"Requests access to Red Hat Gold Images, where available, for currently-enabled products and provider accounts. Customers can request Red Hat Gold Images for account IDs and product image groups listed in the `/v1/cloud_access_providers/enabled` endpoint using the provider short name listed in the same response. After the request has been accepted for processing, gold image status for accounts can be checked in the `/v1/cloud_access_providers/enabled` endpoint response.\n",
+    "operationId":"EnableGoldImages",
+    "parameters":[
+     {"in":"path","name":"ProviderShortName","required":true,"type":"string"},
+     {
+      "in":"body","name":"goldImages",
+      "schema":{
+       "properties":{
+        "accounts":{"items":{"type":"string"},"type":"array"},
+        "images":{"items":{"type":"string"},"type":"array"}
+       },
+       "required":["images","accounts"],"type":"object"
+      }
+     }
+    ],
+    "responses":{
+     "202":{"$ref":"#/responses/Accepted"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Enable Gold image access","tags":["cloudaccess"]
+   }
+  },
+  "/errata":{
+   "get":{
+    "description":"The default and max results in a response are 1000.","operationId":"listErrata",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListErrata200 is the success response",
+      "schema":{"$ref":"#/definitions/myErrataListMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all errata for a user's systems","tags":["errata"]
+   }
+  },
+  "/errata/cset/{ContentSet}/arch/{Arch}":{
+   "get":{
+    "description":"Limit is the number of results in a response. The default limit is 50 and max limit is 100.",
+    "operationId":"listErrataByContentSetArch",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"ContentSet","required":true,"type":"string"},
+     {"in":"path","maxItems":1,"minItems":1,"name":"Arch","required":true,"type":"string"},
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListErrataByContentSetArch200 is the success response",
+      "schema":{"$ref":"#/definitions/contentSetArchMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get all the errata for the specified content set and arch","tags":["errata"]
+   }
+  },
+  "/errata/{AdvisoryID}":{
+   "get":{
+    "description":"This will get the details of an advisory specified by its advisoryID.",
+    "operationId":"showErratum",
+    "parameters":[
+     {
+      "description":"unique identifier for a Red Hat advisory","in":"path","maxItems":1,
+      "minItems":1,"name":"AdvisoryID","required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ShowErratum200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/ErratumDetails"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get the details of an advisory","tags":["errata"]
+   }
+  },
+  "/errata/{AdvisoryID}/packages":{
+   "get":{
+    "description":"The default and max results in a response are 50.",
+    "operationId":"listErratumPackages",
+    "parameters":[
+     {
+      "description":"unique identifier for a Red Hat advisory","in":"path","maxItems":1,
+      "minItems":1,"name":"AdvisoryID","required":true,"type":"string"
+     },
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListErratumPackages200 is the success response",
+      "schema":{"$ref":"#/definitions/pkgListMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all packages for an advisory","tags":["errata"]
+   }
+  },
+  "/errata/{AdvisoryID}/systems":{
+   "get":{
+    "description":"The default and max results in a response are 1000.",
+    "operationId":"listErratumSystems",
+    "parameters":[
+     {
+      "description":"unique identifier for a Red Hat advisory","in":"path","maxItems":1,
+      "minItems":1,"name":"AdvisoryID","required":true,"type":"string"
+     },
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListErratumSystems200 is the success response",
+      "schema":{"$ref":"#/definitions/systemListMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all systems for an advisory","tags":["errata"]
+   }
+  },
+  "/images/cset/{ContentSet}":{
+   "get":{
+    "description":"List all the available images in a given content set. The content set parameter is expected to be\n properly formatted (for example rhel-8-for-x86_64-baseos-isos). And the user requesting the endpoint\nis expected to have Download permission (UGC). If the user is entitled to an image, a \"downloadHref\" attribute is added in the image response object which links to image download API. The list is paginated by default to 25 results in a response and goes to maximum 100 results in a response. Use pagination by setting offset and limit url parameters (valid integer values).\n",
+    "operationId":"listImagesByContentSet",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"ContentSet","required":true,"type":"string"},
+     {
+      "description":"maximum number of list items in a page","in":"query","name":"limit",
+      "type":"integer"
+     },
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"A JSON response object containing image listing.",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/ImageInContentSet"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List available images in a content set","tags":["images"]
+   }
+  },
+  "/images/rhel/{Version}/{Arch}":{
+   "get":{
+    "description":"List all the available images for the given version and architecture. The Version parameter is expected to be a valid RHEL version. Example: 8.1, 8.2 etc.\nThe Arch parameter should be one of the valid RHEL architectures. Example: x86_64, aarch64 etc.\nThe user requesting the endpoint is expected to have Download permission (UGC).\nIf the user is entitled to an image, a \"downloadHref\" attribute is added in the image response object which links to image download API.\n",
+    "operationId":"listImageDownloadsByVersionArch",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"Version","required":true,"type":"string"},
+     {"in":"path","maxItems":1,"minItems":1,"name":"Arch","required":true,"type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"A JSON response object containing image downloads list.",
+      "schema":{
+       "properties":{"body":{"items":{"$ref":"#/definitions/ImageInContentSet"},"type":"array"}},
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List RHEL image downloads by version and architecture.","tags":["images"]
+   }
+  },
+  "/images/{checksum}/download":{
+   "get":{
+    "description":"Find an image by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time an image is downloaded and to not store the link for more than several minutes. If the user has \"Download Software and Updates\" permissions and a valid subscription for the image, they will receive a HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body.\n",
+    "operationId":"downloadImage",
+    "parameters":[
+     {
+      "in":"path","maxItems":1,"minItems":1,"name":"checksum","pattern":"^[a-f0-9]{64}$",
+      "required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "307":{
+      "description":"redirect to download image on the Red Hat CDN",
+      "headers":{"Location":{"description":"URL to obtain the image","type":"string"}},
+      "schema":{"properties":{"body":{"$ref":"#/definitions/DownloadLink"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Download an image by its SHA256 checksum","tags":["images"]
+   }
+  },
+  "/organization":{
+   "get":{
+    "description":"Show Simple Content Access details of user's organization",
+    "operationId":"checkOrgSCACapability",
+    "parameters":[
+     {
+      "description":"Request for system purpose attributes in response",
+      "x-example":"system_purpose_attributes","in":"query","name":"include","type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"Organization details",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/OrgSimpleContentAccess"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get details of the user's organization","tags":["organization"]
+   }
+  },
+  "/packages/cset/{ContentSet}/arch/{Arch}":{
+   "get":{
+    "description":"The default and max results in a response are 50 and 100 respectively.",
+    "operationId":"listPackagesByContentSetArch",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"ContentSet","required":true,"type":"string"},
+     {"in":"path","maxItems":1,"minItems":1,"name":"Arch","required":true,"type":"string"},
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "collectionFormat":"csv","in":"query","items":{"enum":["latest"],"type":"string"},
+      "minItems":1,"name":"filter","type":"array"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListPackagesByContentSetArch200 is the success response",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/pkgContentSetArch"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get all the packages for the specified content set and arch.","tags":["packages"]
+   }
+  },
+  "/packages/{Checksum}":{
+   "get":{
+    "description":"This will get the details of a package specified by its checksum.",
+    "operationId":"showPackage",
+    "parameters":[{"in":"path","maxItems":1,"minItems":1,"name":"Checksum","required":true,"type":"string"}],
+    "responses":{
+     "200":{
+      "description":"ShowPackage200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/pkgDetails"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get the details of a package","tags":["packages"]
+   }
+  },
+  "/packages/{checksum}/download":{
+   "get":{
+    "description":"Find a package by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time a package is downloaded and to not store the link for more than several minutes. If the user has \"Download Software and Updates\" permissions and a valid subscription for the package, they will receive an HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body.\n",
+    "operationId":"downloadPackage",
+    "parameters":[
+     {
+      "in":"path","maxItems":1,"minItems":1,"name":"checksum","pattern":"^[a-f0-9]{64}$",
+      "required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "307":{
+      "description":"redirect to download package on the Red Hat CDN",
+      "headers":{"Location":{"description":"URL to obtain the package","type":"string"}},
+      "schema":{"properties":{"body":{"$ref":"#/definitions/DownloadLink"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Download a package by its SHA256 checksum","tags":["packages"]
+   }
+  },
+  "/subscriptions":{
+   "get":{
+    "description":"The default and max results in a response are 50.",
+    "operationId":"listSubscriptions",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListSubscriptions200 is the success response",
+      "schema":{
+       "properties":{
+        "body":{"$ref":"#/definitions/ListResponse"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all subscriptions for a user","tags":["subscription"]
+   }
+  },
+  "/subscriptions/{SubscriptionNumber}/contentSets":{
+   "get":{
+    "description":"The default and max results in a response are 1000.",
+    "operationId":"listSubContentSets",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "in":"path","maxItems":1,"minItems":1,"name":"SubscriptionNumber","required":true,
+      "type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListSubContentSets200 is the success response",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/ContentSet"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all content sets for a subscription","tags":["subscription"]
+   }
+  },
+  "/subscriptions/{SubscriptionNumber}/systems":{
+   "get":{
+    "description":"The default and max results in a response are 100.",
+    "operationId":"listSubSystems",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "in":"path","maxItems":1,"minItems":1,"name":"SubscriptionNumber","required":true,
+      "type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListSubSystems200 is the success response",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/SystemList"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all systems consuming a subscription","tags":["subscription"]
+   }
+  },
+  "/systems":{
+   "get":{
+    "description":"The default and max number of results in a response are 100.",
+    "operationId":"listSystems",
+    "parameters":[
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "description":"Filter Systems by System Name","in":"query","maxItems":1,"minItems":1,
+      "name":"filter","type":"string"
+     },
+     {
+      "description":"Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed",
+      "in":"query","name":"username","type":"string"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListSystems200 is the success response",
+      "schema":{
+       "properties":{
+        "body":{"$ref":"#/definitions/systemList"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all systems for a user","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}":{
+   "delete":{
+    "description":"The default success response will be 204","operationId":"removeSystem",
+    "parameters":[{"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"}],
+    "responses":{
+     "204":{"description":"Successfully removed"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"},
+     "504":{"$ref":"#/responses/GatewayTimeout"}
+    },
+    "summary":"Remove system profile","tags":["system"]
+   },
+   "get":{
+    "description":"Sam & Satellite systems are unsupported system types.",
+    "operationId":"showSystem",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {
+      "collectionFormat":"csv","description":"Show more details about a system","in":"query",
+      "items":{"enum":["facts","entitlements","installedProducts"],"type":"string"},"maxItems":3,
+      "minItems":1,"name":"include","type":"array"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ShowSystem200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/ShowSystem"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Get a system specified by UUID.","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}/entitlements":{
+   "post":{
+    "description":"The default success response will be 200.\n\nSam & Satellite systems are unsupported system types.",
+    "operationId":"attachEntitlement",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {"in":"query","maxItems":1,"minItems":1,"name":"pool","required":true,"type":"string"},
+     {"description":"quantity you want to attach","in":"query","name":"quantity","type":"integer"}
+    ],
+    "responses":{
+     "200":{
+      "description":"AttachedEntitlement200 is the success response",
+      "schema":{"properties":{"body":{"$ref":"#/definitions/AttachEntitlement"}},"type":"object"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Attach entitlement to system","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}/errata":{
+   "get":{
+    "description":"The default and max number of results in a response are 100.",
+    "operationId":"listSystemErrata",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"list of advisories",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/ErratumForSystem"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all applicable errata for a system","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}/packages":{
+   "get":{
+    "description":"The default and max number of results in a response are 1000.",
+    "operationId":"listSystemPackages",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     },
+     {
+      "description":"Show errata details for packages","enum":[true,false],"in":"query",
+      "name":"errata_detail","type":"boolean"
+     },
+     {
+      "description":"Show upgradable packages only. Also accepts 'upgradable' as valid query.",
+      "enum":[true,false],"in":"query","name":"upgradeable","type":"boolean"
+     },
+     {"description":"Filter packages","in":"query","name":"filter","type":"string"}
+    ],
+    "responses":{
+     "200":{
+      "description":"list of packages",
+      "schema":{
+       "properties":{
+        "body":{"items":{"$ref":"#/definitions/PackageForSystem"},"type":"array"},
+        "pagination":{"$ref":"#/definitions/APIPageParam"}
+       },
+       "type":"object"
+      }
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all packages for a system","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}/pools":{
+   "get":{
+    "description":"The default and max number of results in a response are 50.",
+    "operationId":"listSystemPools",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {"description":"max number of results you want","in":"query","name":"limit","type":"integer"},
+     {
+      "description":"index from which you want next items","in":"query","name":"offset",
+      "type":"integer"
+     }
+    ],
+    "responses":{
+     "200":{
+      "description":"ListSystemPools200 is the success response",
+      "schema":{"$ref":"#/definitions/poolsListMock"}
+     },
+     "400":{"$ref":"#/responses/BadRequest"},"401":{"$ref":"#/responses/Unauthorized"},
+     "403":{"$ref":"#/responses/Forbidden"},"404":{"$ref":"#/responses/NotFound"},
+     "500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"List all pools for a system","tags":["system"]
+   }
+  },
+  "/systems/{SystemUUID}/{EntitlementID}":{
+   "delete":{
+    "description":"The default success response will be 204.",
+    "operationId":"removeSystemEntitlement",
+    "parameters":[
+     {"in":"path","maxItems":1,"minItems":1,"name":"SystemUUID","required":true,"type":"string"},
+     {
+      "description":"Remove an entitlement from a system","in":"path","maxItems":1,"minItems":1,
+      "name":"EntitlementID","required":true,"type":"string"
+     }
+    ],
+    "responses":{
+     "204":{"description":"Successfully removed"},"400":{"$ref":"#/responses/BadRequest"},
+     "401":{"$ref":"#/responses/Unauthorized"},"403":{"$ref":"#/responses/Forbidden"},
+     "404":{"$ref":"#/responses/NotFound"},"500":{"$ref":"#/responses/InternalServerError"}
+    },
+    "summary":"Remove entitlement from the system","tags":["system"]
+   }
+  }
+ },
+ "produces":["application/json"],
+ "responses":{
+  "Accepted":{
+   "description":"Accepted: The request has been accepted for processing, but the processing has not been completed."
+  },
+  "BadRequest":{
+   "description":"BadRequest error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "Forbidden":{
+   "description":"Forbidden error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "GatewayTimeout":{
+   "description":"GatewayTimeout error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "InternalServerError":{
+   "description":"InternalServerError error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "NoContent":{"description":"No Content"},
+  "NotAcceptable":{
+   "description":"NotAcceptable error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "NotFound":{
+   "description":"NotFound error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  },
+  "Unauthorized":{
+   "description":"Unauthorized error",
+   "schema":{"properties":{"error":{"$ref":"#/definitions/ErrorDetails"}},"type":"object"}
+  }
+ },
+ "schemes":["https"],"security":[{"Bearer":[]}],
+ "securityDefinitions":{
+  "Bearer":{
+   "description":"Bearer token for authorized user","in":"header","name":"Authorization",
+   "type":"apiKey"
+  }
+ },
+ "swagger":"2.0",
+ "tags":[
+  {"name":"allocation"},{"name":"cloudaccess"},{"name":"errata"},{"name":"images"},
+  {"name":"packages"},{"name":"subscription"},{"name":"system"}
+ ]
+}
