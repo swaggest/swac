@@ -84,6 +84,21 @@ class GenAPIDocMarkdownTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+    public function testRhsm()
+    {
+        App::$ver = '<version>';
+        $cmd = new Markdown();
+        $cmd->schema = __DIR__ . '/../../../resources/RHSM-API_v1.json';
+        $cmd->out = __DIR__ . '/../../../../examples/rhsm.md';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
+
     public function testEmpty()
     {
         App::$ver = '<version>';

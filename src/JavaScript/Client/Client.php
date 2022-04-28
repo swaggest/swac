@@ -362,10 +362,10 @@ CODE
         $method = strtoupper($o->method);
 
         $headComment = '';
-        if (!empty(trim($o->summary))) {
+        if (isset($o->summary) && !empty(trim($o->summary))) {
             $headComment .= trim($o->summary) . "\n";
         }
-        if (!empty(trim($o->description))) {
+        if (isset($o->description) && !empty(trim($o->description))) {
             $headComment .= trim(wordwrap($o->description)) . "\n";
         }
 

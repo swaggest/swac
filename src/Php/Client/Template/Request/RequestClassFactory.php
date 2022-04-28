@@ -82,6 +82,9 @@ class RequestClassFactory
                 }
 
                 $desc = "In: $parameter->in, Name: $parameter->name";
+                if (!isset($parameter->schema->description)) {
+                    $parameter->schema->description = '';
+                }
                 if (strpos($parameter->schema->description, $desc) === false) {
                     $parameter->schema->description .= ($parameter->schema->description ? "\n" : '') . $desc;
                 }

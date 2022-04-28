@@ -74,4 +74,22 @@ class GenClientGoTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+
+    public function testRHSM()
+    {
+        App::$ver = '<version>';
+
+        $cmd = new GoClient();
+        $cmd->schema = __DIR__ . '/../../../resources/RHSM-API_v1.json';
+        $cmd->out = __DIR__ . '/../../../../examples/go-client/rhsm/';
+        $cmd->pkgName = 'rhsm';
+        $cmd->ignoreOperationId = true;
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
 }

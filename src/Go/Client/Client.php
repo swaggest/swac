@@ -652,12 +652,35 @@ GO;
                 }
             default:
 
+                if ($parameter->schema->type === Schema::BOOLEAN) {
+                    $imports->addByName('strconv');
+                    return "strconv.FormatBool(bool($var))";
+                }
+
+                if ($parameter->schema->type === Schema::INTEGER) {
+                    $imports->addByName('strconv');
+                    return "strconv.Itoa(int($var))";
+                }
+
+                if ($parameter->schema->type === Schema::NUMBER) {
+                    $imports->addByName('strconv');
+                    return "strconv.FormatFloat(float64($var), 'g', -1, 64)";
+                }
+
                 if ($parameter->schema->type === Schema::STRING) {
                     return "string($var)";
                 }
 
-                return false;
+                if ($parameter->schema->items !== null && $parameter->collectionFormat !== Parameter::MULTI) {
+                    $separator = self::$arraySeparators[$parameter->collectionFormat];
+                    $imports->addByName('strings');
+                    return <<<GO
+strings.Join(strings.Fields(strings.Trim(fmt.Sprint($var), "[]")),$separator)
+GO;
+                }
         }
+
+        return false;
     }
 
     /**
@@ -1119,6 +1142,8 @@ GO;
             }
             $statusCode = StatusCodes::getInfoByCode($response->statusCode);
             $status = $this->codeBuilder->exportableName($statusCode->phrase);
+            $status = str_replace('TimeOut', 'Timeout', $status);
+
             $propName = $this->responseStatusPropName($statusCode);
 
             if ($response->isRaw) {
