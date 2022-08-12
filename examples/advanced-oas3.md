@@ -33,12 +33,12 @@ Files Uploads With 'multipart/form-data'
 
 #### Parameters
 
-|Name      |In      |Type                                                                                    |Description                  |
-|----------|--------|----------------------------------------------------------------------------------------|-----------------------------|
-|`in_query`|query   |`Number`                                                                                |Simple scalar value in query.|
-|`simple`  |formData|`String`                                                                                |                             |
-|`uploads1`|formData|`Array<`[`FormDataMultipartFileHeader`](#formdatamultipartfileheader), `String>`, `null`|                             |
-|`uploads2`|formData|`Array<`[`FormDataMultipartFile`](#formdatamultipartfile), `null`, `String>`, `null`    |                             |
+|Name      |In      |Type                                             |Description                        |
+|----------|--------|-------------------------------------------------|-----------------------------------|
+|`in_query`|query   |`Number`                                         |Simple scalar value in query.      |
+|`simple`  |formData|`String`                                         |Simple scalar value in body.       |
+|`uploads1`|formData|`Array<String`, Format: `binary>`, `null`        |Uploads with *multipart.FileHeader.|
+|`uploads2`|formData|`Array<null`, `String`, Format: `binary>`, `null`|Uploads with multipart.File.       |
 
 #### Response
 
@@ -50,12 +50,12 @@ File Upload With 'multipart/form-data'
 
 #### Parameters
 
-|Name      |In      |Type                                                                   |Description                  |
-|----------|--------|-----------------------------------------------------------------------|-----------------------------|
-|`in_query`|query   |`Number`                                                               |Simple scalar value in query.|
-|`simple`  |formData|`String`                                                               |                             |
-|`upload1` |formData|[`FormDataMultipartFileHeader`](#formdatamultipartfileheader), `String`|                             |
-|`upload2` |formData|[`FormDataMultipartFile`](#formdatamultipartfile), `null`, `String`    |                             |
+|Name      |In      |Type                              |Description                  |
+|----------|--------|----------------------------------|-----------------------------|
+|`in_query`|query   |`Number`                          |Simple scalar value in query.|
+|`simple`  |formData|`String`                          |Simple scalar value in body. |
+|`upload1` |formData|`String`, Format: `binary`        |                             |
+|`upload2` |formData|`null`, `String`, Format: `binary`|                             |
 
 #### Response
 
@@ -120,7 +120,7 @@ Request with JSON body and query/header/path params, response with JSON body and
 
 |Name      |In    |Type                                                       |Description                   |
 |----------|------|-----------------------------------------------------------|------------------------------|
-|`in_query`|query |[`InQuery3`](#inquery3), `String`                          |Simple scalar value in query. |
+|`in_query`|query |`String`, Format: `date`                                   |Simple scalar value in query. |
 |`in-path` |path  |`String`                                                   |Simple scalar value in path   |
 |`X-Header`|header|`String`                                                   |Simple scalar value in header.|
 |`body`    |body  |[`AdvancedInputWithJSONType2`](#advancedinputwithjsontype2)|                              |
@@ -238,7 +238,7 @@ This use case has transport concerns fully decoupled with external req/resp mapp
 |Name      |In      |Type    |Description         |
 |----------|--------|--------|--------------------|
 |`X-Header`|header  |`String`|Simple scalar value.|
-|`val2`    |formData|`Number`|                    |
+|`val2`    |formData|`Number`|Simple scalar value.|
 
 #### Response
 
@@ -265,18 +265,6 @@ Input/Output with validation. Custom annotation.
 |200   |`application/json`|[`AdvancedOutputPortType2`](#advancedoutputporttype2)|`X-Output`: [`XOutput`](#xoutput), `Number`<br>`X-Query`: `Boolean`|OK         |
 
 ## <a id="types"></a> Types
-
-### <a id="formdatamultipartfileheader"></a>FormDataMultipartFileHeader
-
-|Constraint|Value |
-|----------|------|
-|format    |binary|
-
-### <a id="formdatamultipartfile"></a>FormDataMultipartFile
-
-|Constraint|Value |
-|----------|------|
-|format    |binary|
 
 ### <a id="advancedinfotype2"></a>AdvancedInfoType2
 
@@ -389,13 +377,6 @@ Simple scalar value in header.
 |`inQuery` |[`AdvancedOutputWithJSONType3InQuery`](#advancedoutputwithjsontype3inquery), `Number`  |
 |`name`    |[`AdvancedOutputWithJSONType3Name`](#advancedoutputwithjsontype3name), `String`        |
 
-### <a id="inquery3"></a>InQuery3
-Simple scalar value in query.
-
-|Constraint|Value|
-|----------|-----|
-|format    |date |
-
 ### <a id="advancedinputwithjsontype2"></a>AdvancedInputWithJSONType2
 
 |Property|Type    |
@@ -403,21 +384,15 @@ Simple scalar value in query.
 |`id`    |`Number`|
 |`name`  |`String`|
 
-### <a id="advancedoutputwithjsontype2inquery"></a>AdvancedOutputWithJSONType2InQuery
-
-|Constraint|Value|
-|----------|-----|
-|format    |date |
-
 ### <a id="advancedoutputwithjsontype2"></a>AdvancedOutputWithJSONType2
 
-|Property  |Type                                                                                 |
-|----------|-------------------------------------------------------------------------------------|
-|`id`      |`Number`                                                                             |
-|`inHeader`|`String`                                                                             |
-|`inPath`  |`String`                                                                             |
-|`inQuery` |[`AdvancedOutputWithJSONType2InQuery`](#advancedoutputwithjsontype2inquery), `String`|
-|`name`    |`String`                                                                             |
+|Property  |Type                    |
+|----------|------------------------|
+|`id`      |`Number`                |
+|`inHeader`|`String`                |
+|`inPath`  |`String`                |
+|`inQuery` |`String`, Format: `date`|
+|`name`    |`String`                |
 
 ### <a id="advancedjsonoutputtype2"></a>AdvancedJsonOutputType2
 

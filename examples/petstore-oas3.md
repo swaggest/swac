@@ -29,10 +29,10 @@ Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condime
 
 #### Parameters
 
-|Name   |In   |Type                       |Description                        |
-|-------|-----|---------------------------|-----------------------------------|
-|`tags` |query|`Array<String>`            |tags to filter by                  |
-|`limit`|query|[`Limit`](#limit), `Number`|maximum number of results to return|
+|Name   |In   |Type                     |Description                        |
+|-------|-----|-------------------------|-----------------------------------|
+|`tags` |query|`Array<String>`          |tags to filter by                  |
+|`limit`|query|`Number`, Format: `int32`|maximum number of results to return|
 
 #### Response
 
@@ -60,9 +60,9 @@ Returns a user based on a single ID, if the user does not have access to the pet
 
 #### Parameters
 
-|Name|In  |Type                 |Description       |
-|----|----|---------------------|------------------|
-|`id`|path|[`Id`](#id), `Number`|ID of pet to fetch|
+|Name|In  |Type                     |Description       |
+|----|----|-------------------------|------------------|
+|`id`|path|`Number`, Format: `int64`|ID of pet to fetch|
 
 #### Response
 
@@ -75,9 +75,9 @@ deletes a single pet based on the ID supplied
 
 #### Parameters
 
-|Name|In  |Type                 |Description        |
-|----|----|---------------------|-------------------|
-|`id`|path|[`Id`](#id), `Number`|ID of pet to delete|
+|Name|In  |Type                     |Description        |
+|----|----|-------------------------|-------------------|
+|`id`|path|`Number`, Format: `int64`|ID of pet to delete|
 
 #### Response
 
@@ -87,12 +87,6 @@ deletes a single pet based on the ID supplied
 
 ## <a id="types"></a> Types
 
-### <a id="limit"></a>Limit
-
-|Constraint|Value|
-|----------|-----|
-|format    |int32|
-
 ### <a id="newpet"></a>NewPet
 
 |Property         |Type    |
@@ -100,27 +94,8 @@ deletes a single pet based on the ID supplied
 |`name` (required)|`String`|
 |`tag`            |`String`|
 
-### <a id="petallof1id"></a>PetAllOf1Id
-
-|Constraint|Value|
-|----------|-----|
-|format    |int64|
-
 ### <a id="petallof1"></a>PetAllOf1
 
-|Property       |Type                                   |
-|---------------|---------------------------------------|
-|`id` (required)|[`PetAllOf1Id`](#petallof1id), `Number`|
-
-### <a id="id"></a>Id
-
-|Constraint|Value|
-|----------|-----|
-|format    |int64|
-
-### <a id="id"></a>Id
-
-|Constraint|Value|
-|----------|-----|
-|format    |int64|
-
+|Property       |Type                     |
+|---------------|-------------------------|
+|`id` (required)|`Number`, Format: `int64`|

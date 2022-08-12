@@ -71,10 +71,10 @@ Type: `Swac\Example\FooBarOAS3\Place\Request\GetPlacesRequest`
 
 |Name          |Type    |In     |Description|
 |--------------|--------|-------|-----------|
-|`mille`       |`string`|`query`|           |
+|`mille`       |`string`|`query`|Acme Mille |
 |`foxUuid`     |`string`|`query`|           |
 |`foxId`       |`int`   |`query`|           |
-|`look`        |`string`|`query`|           |
+|`look`        |`string`|`query`|Acme Look  |
 |`potatoFamily`|`string`|`query`|           |
 
 
@@ -169,9 +169,9 @@ Type: `Swac\Example\FooBarOAS3\Foo\Request\GetFoosRequest`
 
 |Name          |Type    |In     |Description|
 |--------------|--------|-------|-----------|
-|`look`        |`string`|`query`|           |
+|`look`        |`string`|`query`|Acme Look  |
 |`potatoFamily`|`string`|`query`|           |
-|`mille`       |`string`|`query`|           |
+|`mille`       |`string`|`query`|Acme Mille |
 
 
 
@@ -284,8 +284,8 @@ Type: `Swac\Example\FooBarOAS3\Lie\Request\PostInternalFindAvailableCarrotsMille
 
 |Name   |Type                                                                                                      |In     |Description|
 |-------|----------------------------------------------------------------------------------------------------------|-------|-----------|
-|`mille`|`string`                                                                                                  |`query`|           |
-|`look` |`string`                                                                                                  |`query`|           |
+|`mille`|`string`                                                                                                  |`query`|Acme Mille |
+|`look` |`string`                                                                                                  |`query`|Acme Look  |
 |`body` |[`UsecaseFindAvailableCarrotsInput`](#swacexamplefoobaroas3liedefinitionsusecasefindavailablecarrotsinput)|`body` |           |
 
 
@@ -318,7 +318,7 @@ Type: `Swac\Example\FooBarOAS3\LieAreas\Request\GetLieAreasRequest`
 
 |Name   |Type    |In     |Description|
 |-------|--------|-------|-----------|
-|`mille`|`string`|`query`|           |
+|`mille`|`string`|`query`|Acme Mille |
 
 
 
@@ -380,8 +380,8 @@ Type: `Swac\Example\FooBarOAS3\LieAreas\Request\PutLieAreasMilleLieAreaSyncReque
 
 |Name     |Type    |In     |Description      |
 |---------|--------|-------|-----------------|
-|`look`   |`string`|`query`|                 |
-|`mille`  |`string`|`query`|                 |
+|`look`   |`string`|`query`|Acme Look        |
+|`mille`  |`string`|`query`|Acme Mille       |
 |`lieArea`|`string`|`path` |Name of lie area.|
 
 
@@ -411,14 +411,14 @@ Type: `Swac\Example\FooBarOAS3\Lie\Request\GetLiesRequest`
 
 |Name               |Type                   |In     |Description|
 |-------------------|-----------------------|-------|-----------|
-|`mille`            |`string`               |`query`|           |
+|`mille`            |`string`               |`query`|Acme Mille |
 |`exclude`          |`string`               |`query`|           |
 |`locale`           |`string`               |`query`|           |
 |`potato`           |`string`               |`query`|           |
 |`hole`             |`int`                  |`query`|           |
 |`potatoSku`        |`string`               |`query`|           |
 |`soup`             |`string`               |`query`|           |
-|`look`             |`string`               |`query`|           |
+|`look`             |`string`               |`query`|Acme Look  |
 |`looks`            |`string`[]&#124;`array`|`query`|           |
 |`isActive`         |`bool`                 |`query`|           |
 |`potatoSku2`       |`string`               |`query`|           |

@@ -19,7 +19,9 @@ import (
 type TopTracesRequest struct {
 	RootSymbol *string           // RootSymbol is an optional `rootSymbol` parameter in query.
 	Aggregate  *AggregatorGroup  // Aggregate is an optional `aggregate` parameter in query.
-	Resource   *GraphResource    // Resource is an optional `resource` parameter in query.
+	// Resource is an optional `resource` parameter in query.
+	// Graph resource determines nodes selection to expose strongest contributors.
+	Resource   *GraphResource
 	Limit      *int64            // Limit is an optional `limit` parameter in query.
 }
 

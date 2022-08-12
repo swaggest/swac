@@ -79,11 +79,11 @@ Security: [`Bearer`](#bearer).
 Request content type: `application/json`.
 #### Parameters
 
-|Name    |In   |Type                  |Description                         |
-|--------|-----|----------------------|------------------------------------|
-|`limit` |query|`Number`              |max number of results you want      |
-|`offset`|query|`Number`              |index from which you want next items|
-|`type`  |query|`'SAM'`, `'Satellite'`|                                    |
+|Name    |In   |Type                      |Description                         |
+|--------|-----|--------------------------|------------------------------------|
+|`limit` |query|`Number`                  |max number of results you want      |
+|`offset`|query|`Number`                  |index from which you want next items|
+|`type`  |query|`'SAM'`, <br>`'Satellite'`|                                    |
 
 #### Response
 
@@ -589,11 +589,11 @@ Security: [`Bearer`](#bearer).
 Request content type: `application/json`.
 #### Parameters
 
-|Name               |In  |Type                                         |
-|-------------------|----|---------------------------------------------|
-|`ProviderShortName`|path|`'AWS'`, `'AGOV'`, `'ACN'`, `'MSAZ'`, `'GCE'`|
-|`AccountID`        |path|`String`                                     |
-|`account`          |body|[`Account5`](#account5)                      |
+|Name               |In  |Type                                                         |
+|-------------------|----|-------------------------------------------------------------|
+|`ProviderShortName`|path|`'AWS'`, <br>`'AGOV'`, <br>`'ACN'`, <br>`'MSAZ'`, <br>`'GCE'`|
+|`AccountID`        |path|`String`                                                     |
+|`account`          |body|[`Account5`](#account5)                                      |
 
 #### Response
 
@@ -1052,10 +1052,10 @@ Security: [`Bearer`](#bearer).
 Request content type: `application/json`.
 #### Parameters
 
-|Name        |In   |Type                                                                              |Description                     |
-|------------|-----|----------------------------------------------------------------------------------|--------------------------------|
-|`SystemUUID`|path |[`SystemUUID`](#systemuuid), `String`                                             |                                |
-|`include`   |query|[`Include3`](#include3), `Array<'facts'`, `'entitlements'`, `'installedProducts'>`|Show more details about a system|
+|Name        |In   |Type                                                                                      |Description                     |
+|------------|-----|------------------------------------------------------------------------------------------|--------------------------------|
+|`SystemUUID`|path |[`SystemUUID`](#systemuuid), `String`                                                     |                                |
+|`include`   |query|[`Include3`](#include3), `Array<'facts'`, <br>`'entitlements'`, <br>`'installedProducts'>`|Show more details about a system|
 
 #### Response
 
@@ -1161,8 +1161,8 @@ Request content type: `application/json`.
 |`SystemUUID`   |path |[`SystemUUID`](#systemuuid), `String`|                                                                        |
 |`limit`        |query|`Number`                             |max number of results you want                                          |
 |`offset`       |query|`Number`                             |index from which you want next items                                    |
-|`errata_detail`|query|`true`, `false`                      |Show errata details for packages                                        |
-|`upgradeable`  |query|`true`, `false`                      |Show upgradable packages only. Also accepts 'upgradable' as valid query.|
+|`errata_detail`|query|`true`, <br>`false`                  |Show errata details for packages                                        |
+|`upgradeable`  |query|`true`, <br>`false`                  |Show upgradable packages only. Also accepts 'upgradable' as valid query.|
 |`filter`       |query|`String`                             |Filter packages                                                         |
 
 #### Response

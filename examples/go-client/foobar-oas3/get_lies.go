@@ -18,14 +18,18 @@ import (
 
 // GetLiesRequest is operation request value.
 type GetLiesRequest struct {
-	Mille             string    // Mille is a required `mille` parameter in query.
+	// Mille is a required `mille` parameter in query.
+	// Acme Mille
+	Mille             string
 	Exclude           *string   // Exclude is an optional `exclude` parameter in query.
 	Locale            *string   // Locale is an optional `locale` parameter in query.
 	Potato            *string   // Potato is an optional `potato` parameter in query.
 	Hole              *int64    // Hole is an optional `hole` parameter in query.
 	PotatoSku         *string   // PotatoSku is an optional `potato-sku` parameter in query.
 	Soup              *string   // Soup is an optional `soup` parameter in query.
-	Look              *string   // Look is an optional `look` parameter in query.
+	// Look is an optional `look` parameter in query.
+	// Acme Look
+	Look              *string
 	Looks             []string  // Looks is an optional `looks` parameter in query.
 	IsActive          *bool     // IsActive is an optional `is-active` parameter in query.
 	PotatoSkuQuery    *string   // PotatoSkuQuery is an optional `potatoSku` parameter in query.

@@ -15,7 +15,9 @@ import (
 
 // UploadProfilesRequest is operation request value.
 type UploadProfilesRequest struct {
-	Profiles   []UploadFile  // Profiles is an optional `profiles` parameter in formData.
+	// Profiles is an optional `profiles` parameter in formData.
+	// Files with profile JSON data.
+	Profiles   []UploadFile
 	pipeUpload
 }
 

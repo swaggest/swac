@@ -19,7 +19,9 @@ type PutLieAreasMilleLieAreaSyncRequest struct {
 	// Look is a required `look` parameter in query.
 	// Look of operation.
 	Look    string
-	Mille   string  // Mille is a required `mille` parameter in path.
+	// Mille is a required `mille` parameter in path.
+	// Acme Mille
+	Mille   string
 	// LieArea is a required `LieArea` parameter in path.
 	// Name of lie area.
 	LieArea string
