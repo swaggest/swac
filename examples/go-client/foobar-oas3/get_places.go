@@ -17,10 +17,14 @@ import (
 
 // GetPlacesRequest is operation request value.
 type GetPlacesRequest struct {
-	Mille        string   // Mille is a required `mille` parameter in query.
+	// Mille is a required `mille` parameter in query.
+	// Acme Mille
+	Mille        string
 	FoxUuid      *string  // FoxUuid is an optional `foxUuid` parameter in query.
 	FoxID        *int64   // FoxID is an optional `foxId` parameter in query.
-	Look         string   // Look is a required `look` parameter in query.
+	// Look is a required `look` parameter in query.
+	// Acme Look
+	Look         string
 	PotatoFamily string   // PotatoFamily is a required `potatoFamily` parameter in query.
 }
 

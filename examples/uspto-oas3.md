@@ -59,13 +59,13 @@ This API is based on Solr/Lucense Search. The data is indexed using SOLR. This G
 
 #### Parameters
 
-|Name      |In      |Type    |Description                                                         |
-|----------|--------|--------|--------------------------------------------------------------------|
-|`version` |path    |`String`|Version of the dataset.                                             |
-|`dataset` |path    |`String`|Name of the dataset. In this case, the default value is oa_citations|
-|`criteria`|formData|`String`|                                                                    |
-|`start`   |formData|`Number`|                                                                    |
-|`rows`    |formData|`Number`|                                                                    |
+|Name      |In      |Type    |Description                                                                                                                                                                                                                                                                                                                    |
+|----------|--------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`version` |path    |`String`|Version of the dataset.                                                                                                                                                                                                                                                                                                        |
+|`dataset` |path    |`String`|Name of the dataset. In this case, the default value is oa_citations                                                                                                                                                                                                                                                           |
+|`criteria`|formData|`String`|Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.|
+|`start`   |formData|`Number`|Starting record number. Default value is 0.                                                                                                                                                                                                                                                                                    |
+|`rows`    |formData|`Number`|Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.                                                                                                                            |
 
 #### Response
 
@@ -76,28 +76,14 @@ This API is based on Solr/Lucense Search. The data is indexed using SOLR. This G
 
 ## <a id="types"></a> Types
 
-### <a id="datasetlistapisitemsapiurl"></a>DataSetListApisItemsApiUrl
-The URL describing the dataset's fields
-
-|Constraint|Value |
-|----------|------|
-|format    |uriref|
-
-### <a id="datasetlistapisitemsapidocumentationurl"></a>DataSetListApisItemsApiDocumentationUrl
-A URL to the API console for each API
-
-|Constraint|Value |
-|----------|------|
-|format    |uriref|
-
 ### <a id="datasetlistapisitems"></a>DataSetListApisItems
 
-|Property             |Type                                                                                           |Description                             |
-|---------------------|-----------------------------------------------------------------------------------------------|----------------------------------------|
-|`apiKey`             |`String`                                                                                       |To be used as a dataset parameter value.|
-|`apiVersionNumber`   |`String`                                                                                       |To be used as a version parameter value.|
-|`apiUrl`             |[`DataSetListApisItemsApiUrl`](#datasetlistapisitemsapiurl), `String`                          |The URL describing the dataset's fields.|
-|`apiDocumentationUrl`|[`DataSetListApisItemsApiDocumentationUrl`](#datasetlistapisitemsapidocumentationurl), `String`|A URL to the API console for each API.  |
+|Property             |Type                      |Description                             |
+|---------------------|--------------------------|----------------------------------------|
+|`apiKey`             |`String`                  |To be used as a dataset parameter value.|
+|`apiVersionNumber`   |`String`                  |To be used as a version parameter value.|
+|`apiUrl`             |`String`, Format: `uriref`|The URL describing the dataset's fields.|
+|`apiDocumentationUrl`|`String`, Format: `uriref`|A URL to the API console for each API.  |
 
 ### <a id="datasetlist"></a>DataSetList
 

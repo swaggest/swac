@@ -83,13 +83,13 @@ _Namespace_: `Swac\Example\UsptoOAS3\Search\Operation`
 #### Request
 Type: `Swac\Example\UsptoOAS3\Search\Request\PerformSearchRequest`
 
-|Name      |Type    |In        |Description                                                         |
-|----------|--------|----------|--------------------------------------------------------------------|
-|`version` |`string`|`path`    |Version of the dataset.                                             |
-|`dataset` |`string`|`path`    |Name of the dataset. In this case, the default value is oa_citations|
-|`criteria`|`string`|`formData`|                                                                    |
-|`start`   |`int`   |`formData`|                                                                    |
-|`rows`    |`int`   |`formData`|                                                                    |
+|Name      |Type    |In        |Description                                                                                                                                                                                                                                                                                                                    |
+|----------|--------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`version` |`string`|`path`    |Version of the dataset.                                                                                                                                                                                                                                                                                                        |
+|`dataset` |`string`|`path`    |Name of the dataset. In this case, the default value is oa_citations                                                                                                                                                                                                                                                           |
+|`criteria`|`string`|`formData`|Uses Lucene Query Syntax in the format of propertyName:value, propertyName:[num1 TO num2] and date range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the response please see the 'docs' element which has the list of record objects. Each record structure would consist of all the fields and their corresponding values.|
+|`start`   |`int`   |`formData`|Starting record number. Default value is 0.                                                                                                                                                                                                                                                                                    |
+|`rows`    |`int`   |`formData`|Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.                                                                                                                            |
 
 
 

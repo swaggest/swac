@@ -62,13 +62,13 @@ Find existing place.
 
 #### Parameters
 
-|Name          |In   |Type                             |Examples                              |
-|--------------|-----|---------------------------------|--------------------------------------|
-|`mille`       |query|[`BazMille`](#bazmille), `String`|`US`                                  |
-|`foxUuid`     |query|[`UuidUUID`](#uuiduuid), `String`|`248df4b7-aa70-47b8-a036-33ac447e668d`|
-|`foxId`       |query|[`FoxId`](#foxid), `Number`      |                                      |
-|`look`        |query|[`BazLook`](#bazlook), `String`  |`2018-W43`                            |
-|`potatoFamily`|query|`String`                         |                                      |
+|Name          |In   |Type                             |Description|Examples                              |
+|--------------|-----|---------------------------------|-----------|--------------------------------------|
+|`mille`       |query|[`BazMille`](#bazmille), `String`|Acme Mille |`US`                                  |
+|`foxUuid`     |query|`String`, Format: `uuid`         |           |`248df4b7-aa70-47b8-a036-33ac447e668d`|
+|`foxId`       |query|[`FoxId`](#foxid), `Number`      |           |                                      |
+|`look`        |query|[`BazLook`](#bazlook), `String`  |Acme Look  |`2018-W43`                            |
+|`potatoFamily`|query|`String`                         |           |                                      |
 
 #### Response
 
@@ -123,11 +123,11 @@ Find existing foo.
 
 #### Parameters
 
-|Name          |In   |Type                             |Examples  |
-|--------------|-----|---------------------------------|----------|
-|`look`        |query|[`BazLook`](#bazlook), `String`  |`2018-W43`|
-|`potatoFamily`|query|`String`                         |          |
-|`mille`       |query|[`BazMille`](#bazmille), `String`|`US`      |
+|Name          |In   |Type                             |Description|Examples  |
+|--------------|-----|---------------------------------|-----------|----------|
+|`look`        |query|[`BazLook`](#bazlook), `String`  |Acme Look  |`2018-W43`|
+|`potatoFamily`|query|`String`                         |           |          |
+|`mille`       |query|[`BazMille`](#bazmille), `String`|Acme Mille |`US`      |
 
 #### Response
 
@@ -184,11 +184,11 @@ Find carrots available to holes.
 
 #### Parameters
 
-|Name   |In  |Type                                                                   |Examples  |
-|-------|----|-----------------------------------------------------------------------|----------|
-|`mille`|path|[`BazMille`](#bazmille), `String`                                      |`US`      |
-|`look` |path|[`BazLook`](#bazlook), `String`                                        |`2018-W43`|
-|`body` |body|[`UsecaseFindAvailableCarrotsInput`](#usecasefindavailablecarrotsinput)|          |
+|Name   |In  |Type                                                                   |Description|Examples  |
+|-------|----|-----------------------------------------------------------------------|-----------|----------|
+|`mille`|path|[`BazMille`](#bazmille), `String`                                      |Acme Mille |`US`      |
+|`look` |path|[`BazLook`](#bazlook), `String`                                        |Acme Look  |`2018-W43`|
+|`body` |body|[`UsecaseFindAvailableCarrotsInput`](#usecasefindavailablecarrotsinput)|           |          |
 
 #### Response
 
@@ -204,9 +204,9 @@ List lie areas name by mille name
 
 #### Parameters
 
-|Name   |In   |Type                             |Examples|
-|-------|-----|---------------------------------|--------|
-|`mille`|query|[`BazMille`](#bazmille), `String`|`US`    |
+|Name   |In   |Type                             |Description|Examples|
+|-------|-----|---------------------------------|-----------|--------|
+|`mille`|query|[`BazMille`](#bazmille), `String`|Acme Mille |`US`    |
 
 #### Response
 
@@ -243,7 +243,7 @@ Synchronize list of lie area postcodes with delivery-area-service.
 |Name     |In   |Type                             |Description       |Examples  |
 |---------|-----|---------------------------------|------------------|----------|
 |`look`   |query|[`BazLook`](#bazlook), `String`  |Look of operation.|`2018-W43`|
-|`mille`  |path |[`BazMille`](#bazmille), `String`|                  |`US`      |
+|`mille`  |path |[`BazMille`](#bazmille), `String`|Acme Mille        |`US`      |
 |`LieArea`|path |`String`                         |Name of lie area. |          |
 
 #### Response
@@ -263,23 +263,23 @@ Security: [`JWT`](#jwt).
 
 #### Parameters
 
-|Name                 |In   |Type                                    |Examples  |
-|---------------------|-----|----------------------------------------|----------|
-|`mille`              |query|[`BazMille`](#bazmille), `String`       |`US`      |
-|`exclude`            |query|`String`                                |          |
-|`locale`             |query|`String`                                |          |
-|`potato`             |query|`String`                                |          |
-|`hole`               |query|`Number`                                |          |
-|`potato-sku`         |query|`String`                                |          |
-|`soup`               |query|`String`                                |          |
-|`look`               |query|[`BazLook`](#bazlook), `String`         |`2018-W43`|
-|`looks`              |query|`Array<`[`BazLook`](#bazlook), `String>`|          |
-|`is-active`          |query|`Boolean`                               |          |
-|`potatoSku`          |query|`String`                                |          |
-|`with-complete-soups`|query|`Boolean`                               |          |
-|`sort`               |query|`String`                                |          |
-|`take`               |query|`Number`                                |          |
-|`skip`               |query|`Number`                                |          |
+|Name                 |In   |Type                                    |Description|Examples  |
+|---------------------|-----|----------------------------------------|-----------|----------|
+|`mille`              |query|[`BazMille`](#bazmille), `String`       |Acme Mille |`US`      |
+|`exclude`            |query|`String`                                |           |          |
+|`locale`             |query|`String`                                |           |          |
+|`potato`             |query|`String`                                |           |          |
+|`hole`               |query|`Number`                                |           |          |
+|`potato-sku`         |query|`String`                                |           |          |
+|`soup`               |query|`String`                                |           |          |
+|`look`               |query|[`BazLook`](#bazlook), `String`         |Acme Look  |`2018-W43`|
+|`looks`              |query|`Array<`[`BazLook`](#bazlook), `String>`|           |          |
+|`is-active`          |query|`Boolean`                               |           |          |
+|`potatoSku`          |query|`String`                                |           |          |
+|`with-complete-soups`|query|`Boolean`                               |           |          |
+|`sort`               |query|`String`                                |           |          |
+|`take`               |query|`Number`                                |           |          |
+|`skip`               |query|`Number`                                |           |          |
 
 #### Response
 
@@ -333,12 +333,6 @@ Acme Mille
 |minLength |2            |
 |pattern   |^[a-zA-Z]{2}$|
 
-### <a id="uuiduuid"></a>UuidUUID
-
-|Constraint|Value|
-|----------|-----|
-|format    |uuid |
-
 ### <a id="foxid"></a>FoxId
 
 |Constraint|Value|
@@ -352,12 +346,6 @@ Acme Look
 |----------|--------------------------------------|
 |pattern   |^[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])$|
 
-### <a id="placeentitycreatedat"></a>PlaceEntityCreatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
 ### <a id="placeentityfoxid"></a>PlaceEntityFoxId
 
 |Constraint|Value|
@@ -366,14 +354,14 @@ Acme Look
 
 ### <a id="placeentity"></a>PlaceEntity
 
-|Property            |Type                                                     |
-|--------------------|---------------------------------------------------------|
-|`placeId`           |`Number`                                                 |
-|`createdAt`         |[`PlaceEntityCreatedAt`](#placeentitycreatedat), `String`|
-|`foxId`             |[`PlaceEntityFoxId`](#placeentityfoxid), `Number`        |
-|`foxUuid` (required)|[`UuidUUID`](#uuiduuid), `String`                        |
-|`fooId` (required)  |`Number`                                                 |
-|`barName` (required)|`String`                                                 |
+|Property            |Type                                             |
+|--------------------|-------------------------------------------------|
+|`placeId`           |`Number`                                         |
+|`createdAt`         |`String`, Format: `date-time`                    |
+|`foxId`             |[`PlaceEntityFoxId`](#placeentityfoxid), `Number`|
+|`foxUuid` (required)|`String`, Format: `uuid`                         |
+|`fooId` (required)  |`Number`                                         |
+|`barName` (required)|`String`                                         |
 
 ### <a id="usecasecreateplaceinputfoxid"></a>UsecaseCreatePlaceInputFoxId
 
@@ -386,33 +374,9 @@ Acme Look
 |Property            |Type                                                                     |
 |--------------------|-------------------------------------------------------------------------|
 |`foxId`             |[`UsecaseCreatePlaceInputFoxId`](#usecasecreateplaceinputfoxid), `Number`|
-|`foxUuid` (required)|[`UuidUUID`](#uuiduuid), `String`                                        |
+|`foxUuid` (required)|`String`, Format: `uuid`                                                 |
 |`fooId` (required)  |`Number`                                                                 |
 |`barName` (required)|`String`                                                                 |
-
-### <a id="usecasefooinfoactivatesince"></a>UsecaseFooInfoActivateSince
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="usecasefooinfoactivatetill"></a>UsecaseFooInfoActivateTill
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="usecasefooinfocreatedat"></a>UsecaseFooInfoCreatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="usecasefooinfodeletedat"></a>UsecaseFooInfoDeletedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
 
 ### <a id="foolocalactivation"></a>FooLocalActivation
 
@@ -427,30 +391,6 @@ Acme Look
 |----------|-----|
 |minLength |1    |
 
-### <a id="fooentityactivatesince"></a>FooEntityActivateSince
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="fooentityactivatetill"></a>FooEntityActivateTill
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="fooentitycreatedat"></a>FooEntityCreatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="fooentitydeletedat"></a>FooEntityDeletedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
 ### <a id="fooentityuselykey"></a>FooEntityUselyKey
 
 |Constraint|Value|
@@ -462,12 +402,6 @@ Acme Look
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
-
-### <a id="fooentityupdatedat"></a>FooEntityUpdatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
 
 ### <a id="liespreference"></a>LiesPreference
 
@@ -516,22 +450,22 @@ Acme Look
 
 ### <a id="fooentity"></a>FooEntity
 
-|Property                 |Type                                                                 |Description|
-|-------------------------|---------------------------------------------------------------------|-----------|
-|`activateSince`          |[`FooEntityActivateSince`](#fooentityactivatesince), `null`, `String`|           |
-|`activateTill`           |[`FooEntityActivateTill`](#fooentityactivatetill), `null`, `String`  |           |
-|`mille` (required)       |[`BazMille`](#bazmille), `String`                                    |Acme Mille.|
-|`createdAt`              |[`FooEntityCreatedAt`](#fooentitycreatedat), `String`                |           |
-|`deletedAt`              |[`FooEntityDeletedAt`](#fooentitydeletedat), `null`, `String`        |           |
-|`fooId`                  |`Number`                                                             |           |
-|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`          |           |
-|`uselyKey` (required)    |[`FooEntityUselyKey`](#fooentityuselykey), `String`                  |           |
-|`overlap`                |`Array<`[`FooEntity`](#fooentity)`>`                                 |           |
-|`potatoFamily` (required)|[`FooEntityPotatoFamily`](#fooentitypotatofamily), `String`          |           |
-|`updatedAt`              |[`FooEntityUpdatedAt`](#fooentityupdatedat), `null`, `String`        |           |
-|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                  |           |
-|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
-|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
+|Property                 |Type                                                       |Description|
+|-------------------------|-----------------------------------------------------------|-----------|
+|`activateSince`          |`null`, `String`, Format: `date-time`                      |           |
+|`activateTill`           |`null`, `String`, Format: `date-time`                      |           |
+|`mille` (required)       |[`BazMille`](#bazmille), `String`                          |Acme Mille.|
+|`createdAt`              |`String`, Format: `date-time`                              |           |
+|`deletedAt`              |`null`, `String`, Format: `date-time`                      |           |
+|`fooId`                  |`Number`                                                   |           |
+|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`|           |
+|`uselyKey` (required)    |[`FooEntityUselyKey`](#fooentityuselykey), `String`        |           |
+|`overlap`                |`Array<`[`FooEntity`](#fooentity)`>`                       |           |
+|`potatoFamily` (required)|[`FooEntityPotatoFamily`](#fooentitypotatofamily), `String`|           |
+|`updatedAt`              |`null`, `String`, Format: `date-time`                      |           |
+|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`        |           |
+|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                            |Acme Look. |
+|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 
 ### <a id="usecasefooinfopotatofamily"></a>UsecaseFooInfoPotatoFamily
 
@@ -539,43 +473,25 @@ Acme Look
 |----------|-----|
 |minLength |1    |
 
-### <a id="usecasefooinfoupdatedat"></a>UsecaseFooInfoUpdatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
 ### <a id="usecasefooinfo"></a>UsecaseFooInfo
 
-|Property                 |Type                                                                           |Description|
-|-------------------------|-------------------------------------------------------------------------------|-----------|
-|`activateSince`          |[`UsecaseFooInfoActivateSince`](#usecasefooinfoactivatesince), `null`, `String`|           |
-|`activateTill`           |[`UsecaseFooInfoActivateTill`](#usecasefooinfoactivatetill), `null`, `String`  |           |
-|`availableForActivation` |`Boolean`                                                                      |           |
-|`mille` (required)       |[`BazMille`](#bazmille), `String`                                              |Acme Mille.|
-|`createdAt`              |[`UsecaseFooInfoCreatedAt`](#usecasefooinfocreatedat), `String`                |           |
-|`deletedAt`              |[`UsecaseFooInfoDeletedAt`](#usecasefooinfodeletedat), `null`, `String`        |           |
-|`fooId`                  |`Number`                                                                       |           |
-|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`                    |           |
-|`uselyKey` (required)    |[`UsecaseFooInfoUselyKey`](#usecasefooinfouselykey), `String`                  |           |
-|`overlap`                |`Array<`[`FooEntity`](#fooentity)`>`                                           |           |
-|`potatoFamily` (required)|[`UsecaseFooInfoPotatoFamily`](#usecasefooinfopotatofamily), `String`          |           |
-|`updatedAt`              |[`UsecaseFooInfoUpdatedAt`](#usecasefooinfoupdatedat), `null`, `String`        |           |
-|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                            |           |
-|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                                |Acme Look. |
-|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                                |Acme Look. |
-
-### <a id="foovalueactivatesince"></a>FooValueActivateSince
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="foovalueactivatetill"></a>FooValueActivateTill
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
+|Property                 |Type                                                                 |Description|
+|-------------------------|---------------------------------------------------------------------|-----------|
+|`activateSince`          |`null`, `String`, Format: `date-time`                                |           |
+|`activateTill`           |`null`, `String`, Format: `date-time`                                |           |
+|`availableForActivation` |`Boolean`                                                            |           |
+|`mille` (required)       |[`BazMille`](#bazmille), `String`                                    |Acme Mille.|
+|`createdAt`              |`String`, Format: `date-time`                                        |           |
+|`deletedAt`              |`null`, `String`, Format: `date-time`                                |           |
+|`fooId`                  |`Number`                                                             |           |
+|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`          |           |
+|`uselyKey` (required)    |[`UsecaseFooInfoUselyKey`](#usecasefooinfouselykey), `String`        |           |
+|`overlap`                |`Array<`[`FooEntity`](#fooentity)`>`                                 |           |
+|`potatoFamily` (required)|[`UsecaseFooInfoPotatoFamily`](#usecasefooinfopotatofamily), `String`|           |
+|`updatedAt`              |`null`, `String`, Format: `date-time`                                |           |
+|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                  |           |
+|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
+|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
 
 ### <a id="foovalueuselykey"></a>FooValueUselyKey
 
@@ -591,29 +507,17 @@ Acme Look
 
 ### <a id="foovalue"></a>FooValue
 
-|Property                 |Type                                                               |Description|
-|-------------------------|-------------------------------------------------------------------|-----------|
-|`activateSince`          |[`FooValueActivateSince`](#foovalueactivatesince), `null`, `String`|           |
-|`activateTill`           |[`FooValueActivateTill`](#foovalueactivatetill), `null`, `String`  |           |
-|`mille` (required)       |[`BazMille`](#bazmille), `String`                                  |Acme Mille.|
-|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`        |           |
-|`uselyKey` (required)    |[`FooValueUselyKey`](#foovalueuselykey), `String`                  |           |
-|`potatoFamily` (required)|[`FooValuePotatoFamily`](#foovaluepotatofamily), `String`          |           |
-|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                |           |
-|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                    |Acme Look. |
-|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                    |Acme Look. |
-
-### <a id="usecaseupdatefooinputactivatesince"></a>UsecaseUpdateFooInputActivateSince
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="usecaseupdatefooinputactivatetill"></a>UsecaseUpdateFooInputActivateTill
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
+|Property                 |Type                                                       |Description|
+|-------------------------|-----------------------------------------------------------|-----------|
+|`activateSince`          |`null`, `String`, Format: `date-time`                      |           |
+|`activateTill`           |`null`, `String`, Format: `date-time`                      |           |
+|`mille` (required)       |[`BazMille`](#bazmille), `String`                          |Acme Mille.|
+|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`|           |
+|`uselyKey` (required)    |[`FooValueUselyKey`](#foovalueuselykey), `String`          |           |
+|`potatoFamily` (required)|[`FooValuePotatoFamily`](#foovaluepotatofamily), `String`  |           |
+|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`        |           |
+|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                            |Acme Look. |
+|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 
 ### <a id="usecaseupdatefooinputuselykey"></a>UsecaseUpdateFooInputUselyKey
 
@@ -629,26 +533,26 @@ Acme Look
 
 ### <a id="usecaseupdatefooinput"></a>UsecaseUpdateFooInput
 
-|Property                 |Type                                                                                         |Description|
-|-------------------------|---------------------------------------------------------------------------------------------|-----------|
-|`activateSince`          |[`UsecaseUpdateFooInputActivateSince`](#usecaseupdatefooinputactivatesince), `null`, `String`|           |
-|`activateTill`           |[`UsecaseUpdateFooInputActivateTill`](#usecaseupdatefooinputactivatetill), `null`, `String`  |           |
-|`mille` (required)       |[`BazMille`](#bazmille), `String`                                                            |Acme Mille.|
-|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`                                  |           |
-|`uselyKey` (required)    |[`UsecaseUpdateFooInputUselyKey`](#usecaseupdatefooinputuselykey), `String`                  |           |
-|`potatoFamily` (required)|[`UsecaseUpdateFooInputPotatoFamily`](#usecaseupdatefooinputpotatofamily), `String`          |           |
-|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                                          |           |
-|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                                              |Acme Look. |
-|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                                              |Acme Look. |
+|Property                 |Type                                                                               |Description|
+|-------------------------|-----------------------------------------------------------------------------------|-----------|
+|`activateSince`          |`null`, `String`, Format: `date-time`                                              |           |
+|`activateTill`           |`null`, `String`, Format: `date-time`                                              |           |
+|`mille` (required)       |[`BazMille`](#bazmille), `String`                                                  |Acme Mille.|
+|`localActivation`        |`Map<String,`[`FooLocalActivation`](#foolocalactivation)`>`                        |           |
+|`uselyKey` (required)    |[`UsecaseUpdateFooInputUselyKey`](#usecaseupdatefooinputuselykey), `String`        |           |
+|`potatoFamily` (required)|[`UsecaseUpdateFooInputPotatoFamily`](#usecaseupdatefooinputpotatofamily), `String`|           |
+|`barRules` (required)    |`Map<String,`[`FooBarRule`](#foobarrule)`>`, `null`                                |           |
+|`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                                    |Acme Look. |
+|`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                                    |Acme Look. |
 
 ### <a id="usecasefindavailablecarrotsinputitem"></a>UsecaseFindAvailableCarrotsInputItem
 
-|Property           |Type                             |
-|-------------------|---------------------------------|
-|`foxId`            |`Number`                         |
-|`foxUuid`          |[`UuidUUID`](#uuiduuid), `String`|
-|`potatoFamily`     |`String`                         |
-|`holeId` (required)|`Number`                         |
+|Property           |Type                    |
+|-------------------|------------------------|
+|`foxId`            |`Number`                |
+|`foxUuid`          |`String`, Format: `uuid`|
+|`potatoFamily`     |`String`                |
+|`holeId` (required)|`Number`                |
 
 ### <a id="usecasefindavailablecarrotsinput"></a>UsecaseFindAvailableCarrotsInput
 
@@ -677,28 +581,16 @@ Acme Look
 |`name` (required) |`String`                         |           |
 |`areas` (required)|`Array<String>`, `null`          |           |
 
-### <a id="lieareaentitycreatedat"></a>LieAreaEntityCreatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
-### <a id="lieareaentityupdatedat"></a>LieAreaEntityUpdatedAt
-
-|Constraint|Value    |
-|----------|---------|
-|format    |date-time|
-
 ### <a id="lieareaentity"></a>LieAreaEntity
 
-|Property          |Type                                                                 |Description|
-|------------------|---------------------------------------------------------------------|-----------|
-|`mille` (required)|[`BazMille`](#bazmille), `String`                                    |Acme Mille.|
-|`createdAt`       |[`LieAreaEntityCreatedAt`](#lieareaentitycreatedat), `String`        |           |
-|`id`              |`Number`                                                             |           |
-|`name` (required) |`String`                                                             |           |
-|`areas` (required)|`Array<String>`, `null`                                              |           |
-|`updatedAt`       |[`LieAreaEntityUpdatedAt`](#lieareaentityupdatedat), `null`, `String`|           |
+|Property          |Type                                 |Description|
+|------------------|-------------------------------------|-----------|
+|`mille` (required)|[`BazMille`](#bazmille), `String`    |Acme Mille.|
+|`createdAt`       |`String`, Format: `date-time`        |           |
+|`id`              |`Number`                             |           |
+|`name` (required) |`String`                             |           |
+|`areas` (required)|`Array<String>`, `null`              |           |
+|`updatedAt`       |`null`, `String`, Format: `date-time`|           |
 
 ### <a id="liesrigidamount"></a>LiesRigidAmount
 

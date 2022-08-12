@@ -16,7 +16,9 @@ import (
 
 // GetLieAreasRequest is operation request value.
 type GetLieAreasRequest struct {
-	Mille *string  // Mille is an optional `mille` parameter in query.
+	// Mille is an optional `mille` parameter in query.
+	// Acme Mille
+	Mille *string
 }
 
 // encode creates *http.Request for request data.

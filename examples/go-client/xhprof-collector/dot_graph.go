@@ -21,7 +21,9 @@ type DotGraphRequest struct {
 	// GraphLimit is an optional `graphLimit` parameter in query.
 	// Maximum number of nodes (symbols) in graph.
 	GraphLimit    *int64
-	GraphPriority *GraphResource    // GraphPriority is an optional `graphPriority` parameter in query.
+	// GraphPriority is an optional `graphPriority` parameter in query.
+	// Graph resource determines nodes selection to expose strongest contributors.
+	GraphPriority *GraphResource
 	Aggregate     *AggregatorGroup  // Aggregate is an optional `aggregate` parameter in query.
 }
 

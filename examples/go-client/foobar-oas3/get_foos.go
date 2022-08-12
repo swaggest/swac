@@ -16,9 +16,13 @@ import (
 
 // GetFoosRequest is operation request value.
 type GetFoosRequest struct {
-	Look         string  // Look is a required `look` parameter in query.
+	// Look is a required `look` parameter in query.
+	// Acme Look
+	Look         string
 	PotatoFamily string  // PotatoFamily is a required `potatoFamily` parameter in query.
-	Mille        string  // Mille is a required `mille` parameter in query.
+	// Mille is a required `mille` parameter in query.
+	// Acme Mille
+	Mille        string
 }
 
 // encode creates *http.Request for request data.

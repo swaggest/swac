@@ -262,6 +262,7 @@ class Reader
                         $param->required = in_array($propertyName, $required);
                         $param->schema = $property;
                         $param->deprecated = $body->schema->deprecated;
+                        $param->description = $property->description;
                         if ($contentType === self::MULTIPART_FORM_DATA) {
                             if (Util::hasType($param->schema, Schema::STRING) && $param->schema->format === 'binary') {
                                 $param->isFile = true;
@@ -314,6 +315,9 @@ class Reader
             $p->schema = $param->schema->exportSchema();
             if ($param->schema->example !== null) {
                 $p->examples = [$param->schema->example];
+            }
+            if (empty($p->description) && !empty($param->schema->description)) {
+                $p->description = $param->schema->description;
             }
         } elseif (isset($param->content['application/json']->schema)) {
             $p->schema = $param->content['application/json']->schema->exportSchema();

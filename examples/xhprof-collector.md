@@ -51,12 +51,12 @@ Dot Graph
 
 #### Parameters
 
-|Name           |In   |Type                                     |Description                                |Examples                 |
-|---------------|-----|-----------------------------------------|-------------------------------------------|-------------------------|
-|`rootSymbol`   |query|`String`                                 |                                           |`MyNamespace\MyClass::do`|
-|`graphLimit`   |query|`Number`                                 |Maximum number of nodes (symbols) in graph.|                         |
-|`graphPriority`|query|`'wt'`, `'cpu'`, `'io'`                  |                                           |                         |
-|`aggregate`    |query|[`XhAggregatorGroup`](#xhaggregatorgroup)|                                           |                         |
+|Name           |In   |Type                                     |Description                                                                |Examples                 |
+|---------------|-----|-----------------------------------------|---------------------------------------------------------------------------|-------------------------|
+|`rootSymbol`   |query|`String`                                 |                                                                           |`MyNamespace\MyClass::do`|
+|`graphLimit`   |query|`Number`                                 |Maximum number of nodes (symbols) in graph.                                |                         |
+|`graphPriority`|query|`'wt'`, <br>`'cpu'`, <br>`'io'`          |Graph resource determines nodes selection to expose strongest contributors.|                         |
+|`aggregate`    |query|[`XhAggregatorGroup`](#xhaggregatorgroup)|                                                                           |                         |
 
 #### Response
 
@@ -104,12 +104,12 @@ Get traces that occupy most of resource.
 
 #### Parameters
 
-|Name        |In   |Type                                     |Examples                 |
-|------------|-----|-----------------------------------------|-------------------------|
-|`rootSymbol`|query|`String`                                 |`MyNamespace\MyClass::do`|
-|`aggregate` |query|[`XhAggregatorGroup`](#xhaggregatorgroup)|                         |
-|`resource`  |query|`'wt'`, `'cpu'`, `'io'`                  |                         |
-|`limit`     |query|`Number`                                 |                         |
+|Name        |In   |Type                                     |Description                                                                |Examples                 |
+|------------|-----|-----------------------------------------|---------------------------------------------------------------------------|-------------------------|
+|`rootSymbol`|query|`String`                                 |                                                                           |`MyNamespace\MyClass::do`|
+|`aggregate` |query|[`XhAggregatorGroup`](#xhaggregatorgroup)|                                                                           |                         |
+|`resource`  |query|`'wt'`, <br>`'cpu'`, <br>`'io'`          |Graph resource determines nodes selection to expose strongest contributors.|                         |
+|`limit`     |query|`Number`                                 |                                                                           |                         |
 
 #### Response
 
@@ -124,10 +124,10 @@ Collects XHPROF-compatible PHP profile from uploaded JSON/PHP-Serialized file.
 
 #### Parameters
 
-|Name     |In      |Type                                                                               |
-|---------|--------|-----------------------------------------------------------------------------------|
-|`profile`|formData|[`XhFormDataMultipartFileHeader`](#xhformdatamultipartfileheader), `null`, `String`|
-|`sample` |formData|`Number`                                                                           |
+|Name     |In      |Type                              |
+|---------|--------|----------------------------------|
+|`profile`|formData|`null`, `String`, Format: `binary`|
+|`sample` |formData|`Number`                          |
 
 #### Response
 
@@ -142,9 +142,9 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 
 #### Parameters
 
-|Name      |In      |Type                                                                                                |
-|----------|--------|----------------------------------------------------------------------------------------------------|
-|`profiles`|formData|`Array<`[`XhFormDataMultipartFileHeader`](#xhformdatamultipartfileheader), `null`, `String>`, `null`|
+|Name      |In      |Type                                             |Description                  |
+|----------|--------|-------------------------------------------------|-----------------------------|
+|`profiles`|formData|`Array<null`, `String`, Format: `binary>`, `null`|Files with profile JSON data.|
 
 #### Response
 
@@ -258,10 +258,3 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`stat`  |[`XhRenderValueStat`](#xhrendervaluestat)|
 |`symbol`|`String`                                 |
 |`trace` |`Array<String>`, `null`                  |
-
-### <a id="xhformdatamultipartfileheader"></a>XhFormDataMultipartFileHeader
-
-|Constraint|Value |
-|----------|------|
-|format    |binary|
-

@@ -16,8 +16,12 @@ import (
 
 // PostInternalFindAvailableCarrotsMilleLookRequest is operation request value.
 type PostInternalFindAvailableCarrotsMilleLookRequest struct {
-	Mille string                             // Mille is a required `mille` parameter in path.
-	Look  string                             // Look is a required `look` parameter in path.
+	// Mille is a required `mille` parameter in path.
+	// Acme Mille
+	Mille string
+	// Look is a required `look` parameter in path.
+	// Acme Look
+	Look  string
 	Body  *UsecaseFindAvailableCarrotsInput  // Body is a JSON request body.
 }
 
