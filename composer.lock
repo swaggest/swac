@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cd0303ec630ed055050d70555f830ce",
+    "content-hash": "680f0f1cdf6f91c2232e36d76d610635",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -213,16 +213,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da"
+                "reference": "b94b2807d85443f9719887892882d0329d1e2598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
-                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
+                "reference": "b94b2807d85443f9719887892882d0329d1e2598",
                 "shasum": ""
             },
             "require": {
@@ -277,7 +277,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.1"
+                "source": "https://github.com/guzzle/promises/tree/1.5.2"
             },
             "funding": [
                 {
@@ -293,7 +293,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-22T20:56:57+00:00"
+            "time": "2022-08-28T14:55:35+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -903,16 +903,16 @@
         },
         {
             "name": "swaggest/go-code-builder",
-            "version": "v0.4.50",
+            "version": "v0.4.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/go-code-builder.git",
-                "reference": "318e2724b3a6bd6010ac59c847d4c9e042b61d03"
+                "reference": "6c65decec29528d81f886eb59593a67d4f7c4ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/318e2724b3a6bd6010ac59c847d4c9e042b61d03",
-                "reference": "318e2724b3a6bd6010ac59c847d4c9e042b61d03",
+                "url": "https://api.github.com/repos/swaggest/go-code-builder/zipball/6c65decec29528d81f886eb59593a67d4f7c4ddf",
+                "reference": "6c65decec29528d81f886eb59593a67d4f7c4ddf",
                 "shasum": ""
             },
             "require": {
@@ -951,38 +951,38 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/go-code-builder/issues",
-                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.50"
+                "source": "https://github.com/swaggest/go-code-builder/tree/v0.4.51"
             },
-            "time": "2022-04-28T20:21:23+00:00"
+            "time": "2022-09-15T08:12:33+00:00"
         },
         {
             "name": "swaggest/json-cli",
-            "version": "v1.8.5",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-cli.git",
-                "reference": "1dd0f1ed58065eb97e58db6e276d1369eae8a6c7"
+                "reference": "9336e31caed7a74b76705bcf243593902e1ff9c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/1dd0f1ed58065eb97e58db6e276d1369eae8a6c7",
-                "reference": "1dd0f1ed58065eb97e58db6e276d1369eae8a6c7",
+                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/9336e31caed7a74b76705bcf243593902e1ff9c2",
+                "reference": "9336e31caed7a74b76705bcf243593902e1ff9c2",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php-yaoi/php-yaoi": "^1",
                 "salsify/json-streaming-parser": "^7.0",
-                "swaggest/code-builder": "^0.3.2",
-                "swaggest/go-code-builder": "^0.4.43",
-                "swaggest/json-diff": "^3.8.1",
-                "swaggest/json-schema": "^0.12.21",
-                "swaggest/json-schema-maker": "^0.3.4",
-                "swaggest/php-code-builder": "^0.2.29",
+                "swaggest/code-builder": "^0.3.5",
+                "swaggest/go-code-builder": "0.4.51",
+                "swaggest/json-diff": "^3.8.3",
+                "swaggest/json-schema": "^0.12.41",
+                "swaggest/json-schema-maker": "^0.3.7",
+                "swaggest/php-code-builder": "^0.2.37",
                 "symfony/yaml": "^3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5"
+                "phperf/phpunit": "4.8.37"
             },
             "bin": [
                 "bin/json-cli"
@@ -1006,29 +1006,29 @@
             "description": "JSON CLI tool (diff, rearrange, pretty print, minify, yaml convert, etc...)",
             "support": {
                 "issues": "https://github.com/swaggest/json-cli/issues",
-                "source": "https://github.com/swaggest/json-cli/tree/v1.8.5"
+                "source": "https://github.com/swaggest/json-cli/tree/v1.11.0"
             },
-            "time": "2021-04-20T20:51:27+00:00"
+            "time": "2022-09-18T22:21:52+00:00"
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.8.3",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "bb3e3b4e9d842bb2e48f31ea568d0459968d1d42"
+                "reference": "ff3a7921e9f1aa096067eb541fcfd0e7611c558c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/bb3e3b4e9d842bb2e48f31ea568d0459968d1d42",
-                "reference": "bb3e3b4e9d842bb2e48f31ea568d0459968d1d42",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/ff3a7921e9f1aa096067eb541fcfd0e7611c558c",
+                "reference": "ff3a7921e9f1aa096067eb541fcfd0e7611c558c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.23"
+                "phperf/phpunit": "4.8.37"
             },
             "type": "library",
             "autoload": {
@@ -1049,22 +1049,22 @@
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
             "support": {
                 "issues": "https://github.com/swaggest/json-diff/issues",
-                "source": "https://github.com/swaggest/json-diff/tree/v3.8.3"
+                "source": "https://github.com/swaggest/json-diff/tree/v3.9.0"
             },
-            "time": "2021-09-25T22:09:03+00:00"
+            "time": "2022-08-29T15:04:08+00:00"
         },
         {
             "name": "swaggest/json-schema",
-            "version": "v0.12.39",
+            "version": "v0.12.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-json-schema.git",
-                "reference": "193ba39cce1ffa2d55ddd5445315e945a63298a2"
+                "reference": "1bb97901314f828774dd8c5b21bff889ce0b34bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/193ba39cce1ffa2d55ddd5445315e945a63298a2",
-                "reference": "193ba39cce1ffa2d55ddd5445315e945a63298a2",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/1bb97901314f828774dd8c5b21bff889ce0b34bb",
+                "reference": "1bb97901314f828774dd8c5b21bff889ce0b34bb",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1075,7 @@
                 "symfony/polyfill-mbstring": "^1.19"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.23"
+                "phperf/phpunit": "4.8.37"
             },
             "suggest": {
                 "ext-mbstring": "For better performance"
@@ -1100,9 +1100,9 @@
             "support": {
                 "email": "vearutop@gmail.com",
                 "issues": "https://github.com/swaggest/php-json-schema/issues",
-                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.39"
+                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.41"
             },
-            "time": "2021-10-15T18:12:27+00:00"
+            "time": "2022-08-17T11:21:43+00:00"
         },
         {
             "name": "swaggest/json-schema-maker",
@@ -1156,16 +1156,16 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.36",
+            "version": "v0.2.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "6239d4f66d35ace844e631bc0061162a1c15a750"
+                "reference": "fc0f412529d0cbc969487628a9023154ca2f74f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/6239d4f66d35ace844e631bc0061162a1c15a750",
-                "reference": "6239d4f66d35ace844e631bc0061162a1c15a750",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/fc0f412529d0cbc969487628a9023154ca2f74f0",
+                "reference": "fc0f412529d0cbc969487628a9023154ca2f74f0",
                 "shasum": ""
             },
             "require": {
@@ -1201,9 +1201,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.36"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.37"
             },
-            "time": "2022-08-12T15:55:46+00:00"
+            "time": "2022-09-15T23:10:34+00:00"
         },
         {
             "name": "swaggest/rest-client",
