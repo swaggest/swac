@@ -49,8 +49,9 @@
      * Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
      * @param {FindPetsRequest} req - request parameters.
      * @param {ArrayNewPetPetAllOf1Callback} onOK
+     * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.findPets = function (req, onOK) {
+    APIClient.prototype.findPets = function (req, onOK, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -64,7 +65,10 @@
                     }
                     break;
                 default:
-                    throw {err: 'unexpected response', data: x};
+                    if (typeof (onDefault) === 'function') {
+                        onDefault(JSON.parse(x.responseText));
+                    }
+                    break;
             }
         };
 
@@ -89,8 +93,9 @@
      * Creates a new pet in the store.  Duplicates are allowed
      * @param {PostPetsRequest} req - request parameters.
      * @param {NewPetPetAllOf1Callback} onOK
+     * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.postPets = function (req, onOK) {
+    APIClient.prototype.postPets = function (req, onOK, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -104,7 +109,10 @@
                     }
                     break;
                 default:
-                    throw {err: 'unexpected response', data: x};
+                    if (typeof (onDefault) === 'function') {
+                        onDefault(JSON.parse(x.responseText));
+                    }
+                    break;
             }
         };
 
@@ -129,8 +137,9 @@
      * the pet
      * @param {GetPetsIdRequest} req - request parameters.
      * @param {NewPetPetAllOf1Callback} onOK
+     * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.getPetsId = function (req, onOK) {
+    APIClient.prototype.getPetsId = function (req, onOK, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -144,7 +153,10 @@
                     }
                     break;
                 default:
-                    throw {err: 'unexpected response', data: x};
+                    if (typeof (onDefault) === 'function') {
+                        onDefault(JSON.parse(x.responseText));
+                    }
+                    break;
             }
         };
 
@@ -164,8 +176,9 @@
      * deletes a single pet based on the ID supplied
      * @param {DeletePetsIdRequest} req - request parameters.
      * @param {RawCallback} onNoContent
+     * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.deletePetsId = function (req, onNoContent) {
+    APIClient.prototype.deletePetsId = function (req, onNoContent, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -179,7 +192,10 @@
                     }
                     break;
                 default:
-                    throw {err: 'unexpected response', data: x};
+                    if (typeof (onDefault) === 'function') {
+                        onDefault(JSON.parse(x.responseText));
+                    }
+                    break;
             }
         };
 

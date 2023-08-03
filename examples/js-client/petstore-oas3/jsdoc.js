@@ -26,6 +26,18 @@
  */
 
 /**
+ * @typedef Error
+ * @type {Object}
+ * @property {Number} code
+ * @property {String} message
+ */
+
+/**
+ * @callback ErrorCallback
+ * @param {Error} value
+ */
+
+/**
  * @typedef PostPetsRequest
  * @type {Object}
  * @property {NewPet} body

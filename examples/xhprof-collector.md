@@ -9,14 +9,18 @@ Version: cli-mode
 ## Table Of Contents
 
 * [Operations](#operations)
-  - [GET `/profile`](#listprofiles) 
-  - [POST `/profile`](#postprofile) 
-  - [GET `/profile.dot`](#getprofiledot) 
-  - [GET `/profile/find-symbol`](#getprofilefindsymbol) 
-  - [GET `/profile/symbol`](#getprofilesymbol) 
-  - [GET `/top-traces`](#gettoptraces) 
-  - [POST `/upload/profile`](#postuploadprofile) 
-  - [POST `/upload/profiles`](#postuploadprofiles) 
+    * Analyze
+      - [GET `/profile`](#listprofiles) 
+      - [GET `/profile.dot`](#getprofiledot) 
+      - [GET `/profile/find-symbol`](#getprofilefindsymbol) 
+      - [GET `/profile/symbol`](#getprofilesymbol) 
+      - [GET `/top-traces`](#gettoptraces) 
+
+    * Collect
+      - [POST `/profile`](#postprofile) 
+      - [POST `/upload/profile`](#postuploadprofile) 
+      - [POST `/upload/profiles`](#postuploadprofiles) 
+
 * [Types](#types)
 
 ## <a id="operations"></a>Operations

@@ -10,6 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\PetstoreOAS3\Config;
+use Swac\Example\PetstoreOAS3\Definitions\Error;
 use Swac\Example\PetstoreOAS3\Definitions\NewPet;
 use Swac\Example\PetstoreOAS3\Definitions\Pet;
 use Swac\Example\PetstoreOAS3\Request\FindPetByIdRequest;
@@ -49,7 +50,7 @@ class FindPetById extends AbstractOperation
     }
 
     /**
-     * @return NewPet|GetPetsOKResponseItemsAllOf1
+     * @return NewPet|GetPetsOKResponseItemsAllOf1|Error
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -61,7 +62,7 @@ class FindPetById extends AbstractOperation
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
             case StatusCode::OK: $result = Pet::import($this->getJsonResponse());break;
-            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
+            default: $result = Error::import($this->getJsonResponse());break;
         }
         return $result;
     }

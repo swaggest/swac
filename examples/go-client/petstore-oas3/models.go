@@ -144,6 +144,73 @@ func (p PetAllOf1) MarshalJSON() ([]byte, error) {
 	return marshalUnion(marshalPetAllOf1(p), p.AdditionalProperties)
 }
 
+// Error structure is generated from "#/components/schemas/Error".
+type Error struct {
+	// Format: int32.
+	// Required.
+	Code                 int64                  `json:"code"`
+	Message              string                 `json:"message"` // Required.
+	AdditionalProperties map[string]interface{} `json:"-"`       // All unmatched properties.
+}
+
+type marshalError Error
+
+var knownKeysError = []string{
+	"code",
+	"message",
+}
+
+// UnmarshalJSON decodes JSON.
+func (e *Error) UnmarshalJSON(data []byte) error {
+	var err error
+
+	me := marshalError(*e)
+
+	err = json.Unmarshal(data, &me)
+	if err != nil {
+		return err
+	}
+
+	var rawMap map[string]json.RawMessage
+
+	err = json.Unmarshal(data, &rawMap)
+	if err != nil {
+		rawMap = nil
+	}
+
+	for _, key := range knownKeysError {
+		delete(rawMap, key)
+	}
+
+	for key, rawValue := range rawMap {
+		if me.AdditionalProperties == nil {
+			me.AdditionalProperties = make(map[string]interface{}, 1)
+		}
+
+		var val interface{}
+
+		err = json.Unmarshal(rawValue, &val)
+		if err != nil {
+			return err
+		}
+
+		me.AdditionalProperties[key] = val
+	}
+
+	*e = Error(me)
+
+	return nil
+}
+
+// MarshalJSON encodes JSON.
+func (e Error) MarshalJSON() ([]byte, error) {
+	if len(e.AdditionalProperties) == 0 {
+		return json.Marshal(marshalError(e))
+	}
+
+	return marshalUnion(marshalError(e), e.AdditionalProperties)
+}
+
 func marshalUnion(maps ...interface{}) ([]byte, error) {
 	result := []byte("{")
 	isObject := true

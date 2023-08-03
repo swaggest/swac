@@ -4,17 +4,23 @@
  * Please consider to NOT put any emotional human-generated modifications as the splendid AI will throw them away with no mercy.
  */
 
-namespace Swac\Example\PetstoreOAS3\Request;
+namespace Swac\Example\PetstoreOAS3\Definitions;
 
 use Swaggest\JsonSchema\Constraint\Properties;
 use Swaggest\JsonSchema\Schema;
 use Swaggest\JsonSchema\Structure\ClassStructure;
 
 
-class DeletePetRequest extends ClassStructure
+/**
+ * Built from #/components/schemas/Error
+ */
+class Error extends ClassStructure
 {
-    /** @var int In: path, Name: id */
-    public $id;
+    /** @var int */
+    public $code;
+
+    /** @var string */
+    public $message;
 
     /**
      * @param Properties|static $properties
@@ -22,29 +28,14 @@ class DeletePetRequest extends ClassStructure
      */
     public static function setUpProperties($properties, Schema $ownerSchema)
     {
-        $properties->id = Schema::integer();
-        $properties->id->format = "int64";
+        $properties->code = Schema::integer();
+        $properties->code->format = "int32";
+        $properties->message = Schema::string();
         $ownerSchema->type = Schema::OBJECT;
         $ownerSchema->required = array(
-            self::names()->id,
+            self::names()->code,
+            self::names()->message,
         );
-    }
-
-    public function makeUrl()
-    {
-        $url = '/pets/' . urlencode($this->id);
-        return $url;
-    }
-
-    public function makeHeaders()
-    {
-        $headers = array();
-        $headers['Accept'] = 'application/json';
-        return $headers;
-    }
-
-    public function makeBody()
-    {
-        return null;
+        $ownerSchema->setFromRef('#/components/schemas/Error');
     }
 }

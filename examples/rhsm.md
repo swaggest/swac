@@ -14,50 +14,66 @@ Base URL:https://api.access.redhat.com/management/v1
 
 * [Security](#security)
 * [Operations](#operations)
-  - [GET `/allocations`](#listallocations) 
-  - [POST `/allocations`](#postallocations) 
-  - [GET `/allocations/versions`](#getallocationsversions) 
-  - [GET `/allocations/{uuid}`](#getallocationsuuid) 
-  - [PUT `/allocations/{uuid}`](#putallocationsuuid) 
-  - [DELETE `/allocations/{uuid}`](#deleteallocationsuuid) 
-  - [POST `/allocations/{uuid}/entitlements`](#postallocationsuuidentitlements) 
-  - [PUT `/allocations/{uuid}/entitlements/{EntitlementID}`](#putallocationsuuidentitlementsentitlementid) 
-  - [DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`](#deleteallocationsuuidentitlementsentitlementid) 
-  - [GET `/allocations/{uuid}/export`](#getallocationsuuidexport) 
-  - [GET `/allocations/{uuid}/export/{ExportID}`](#getallocationsuuidexportexportid) 
-  - [GET `/allocations/{uuid}/exportJob/{ExportJobID}`](#getallocationsuuidexportjobexportjobid) 
-  - [GET `/allocations/{uuid}/pools`](#getallocationsuuidpools) 
-  - [DELETE `/allocations/{uuid}/{EntitlementID}`](#deleteallocationsuuidentitlementid) 
-  - [GET `/cloud_access_providers/enabled`](#getcloudaccessprovidersenabled) 
-  - [PUT `/cloud_access_providers/{ProviderShortName}/account`](#putcloudaccessprovidersprovidershortnameaccount) 
-  - [POST `/cloud_access_providers/{ProviderShortName}/accounts`](#postcloudaccessprovidersprovidershortnameaccounts) 
-  - [DELETE `/cloud_access_providers/{ProviderShortName}/accounts`](#deletecloudaccessprovidersprovidershortnameaccounts) 
-  - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`](#putcloudaccessprovidersprovidershortnameaccountsaccountid) 
-  - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`](#putcloudaccessprovidersprovidershortnameaccountsaccountidverification) 
-  - [POST `/cloud_access_providers/{ProviderShortName}/goldimage`](#postcloudaccessprovidersprovidershortnamegoldimage) 
-  - [GET `/errata`](#geterrata) 
-  - [GET `/errata/cset/{ContentSet}/arch/{Arch}`](#geterratacsetcontentsetarcharch) 
-  - [GET `/errata/{AdvisoryID}`](#geterrataadvisoryid) 
-  - [GET `/errata/{AdvisoryID}/packages`](#geterrataadvisoryidpackages) 
-  - [GET `/errata/{AdvisoryID}/systems`](#geterrataadvisoryidsystems) 
-  - [GET `/images/cset/{ContentSet}`](#getimagescsetcontentset) 
-  - [GET `/images/rhel/{Version}/{Arch}`](#getimagesrhelversionarch) 
-  - [GET `/images/{checksum}/download`](#getimageschecksumdownload) 
-  - [GET `/organization`](#getorganization) 
-  - [GET `/packages/cset/{ContentSet}/arch/{Arch}`](#getpackagescsetcontentsetarcharch) 
-  - [GET `/packages/{Checksum}`](#getpackageschecksum) 
-  - [GET `/packages/{checksum}/download`](#getpackageschecksumdownload) 
-  - [GET `/subscriptions`](#getsubscriptions) 
-  - [GET `/subscriptions/{SubscriptionNumber}/contentSets`](#getsubscriptionssubscriptionnumbercontentsets) 
-  - [GET `/subscriptions/{SubscriptionNumber}/systems`](#getsubscriptionssubscriptionnumbersystems) 
-  - [GET `/systems`](#getsystems) 
-  - [GET `/systems/{SystemUUID}`](#getsystemssystemuuid) 
-  - [DELETE `/systems/{SystemUUID}`](#deletesystemssystemuuid) 
-  - [POST `/systems/{SystemUUID}/entitlements`](#postsystemssystemuuidentitlements) 
-  - [GET `/systems/{SystemUUID}/errata`](#getsystemssystemuuiderrata) 
-  - [GET `/systems/{SystemUUID}/packages`](#getsystemssystemuuidpackages) 
-  - [GET `/systems/{SystemUUID}/pools`](#getsystemssystemuuidpools) 
-  - [DELETE `/systems/{SystemUUID}/{EntitlementID}`](#deletesystemssystemuuidentitlementid) 
+    * allocation
+      - [GET `/allocations`](#listallocations) 
+      - [POST `/allocations`](#postallocations) 
+      - [GET `/allocations/versions`](#getallocationsversions) 
+      - [GET `/allocations/{uuid}`](#getallocationsuuid) 
+      - [PUT `/allocations/{uuid}`](#putallocationsuuid) 
+      - [DELETE `/allocations/{uuid}`](#deleteallocationsuuid) 
+      - [POST `/allocations/{uuid}/entitlements`](#postallocationsuuidentitlements) 
+      - [PUT `/allocations/{uuid}/entitlements/{EntitlementID}`](#putallocationsuuidentitlementsentitlementid) 
+      - [DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`](#deleteallocationsuuidentitlementsentitlementid) 
+      - [GET `/allocations/{uuid}/export`](#getallocationsuuidexport) 
+      - [GET `/allocations/{uuid}/export/{ExportID}`](#getallocationsuuidexportexportid) 
+      - [GET `/allocations/{uuid}/exportJob/{ExportJobID}`](#getallocationsuuidexportjobexportjobid) 
+      - [GET `/allocations/{uuid}/pools`](#getallocationsuuidpools) 
+      - [DELETE `/allocations/{uuid}/{EntitlementID}`](#deleteallocationsuuidentitlementid) 
+
+    * cloudaccess
+      - [GET `/cloud_access_providers/enabled`](#getcloudaccessprovidersenabled) 
+      - [PUT `/cloud_access_providers/{ProviderShortName}/account`](#putcloudaccessprovidersprovidershortnameaccount) 
+      - [POST `/cloud_access_providers/{ProviderShortName}/accounts`](#postcloudaccessprovidersprovidershortnameaccounts) 
+      - [DELETE `/cloud_access_providers/{ProviderShortName}/accounts`](#deletecloudaccessprovidersprovidershortnameaccounts) 
+      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`](#putcloudaccessprovidersprovidershortnameaccountsaccountid) 
+      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`](#putcloudaccessprovidersprovidershortnameaccountsaccountidverification) 
+      - [POST `/cloud_access_providers/{ProviderShortName}/goldimage`](#postcloudaccessprovidersprovidershortnamegoldimage) 
+
+    * errata
+      - [GET `/errata`](#geterrata) 
+      - [GET `/errata/cset/{ContentSet}/arch/{Arch}`](#geterratacsetcontentsetarcharch) 
+      - [GET `/errata/{AdvisoryID}`](#geterrataadvisoryid) 
+      - [GET `/errata/{AdvisoryID}/packages`](#geterrataadvisoryidpackages) 
+      - [GET `/errata/{AdvisoryID}/systems`](#geterrataadvisoryidsystems) 
+
+    * images
+      - [GET `/images/cset/{ContentSet}`](#getimagescsetcontentset) 
+      - [GET `/images/rhel/{Version}/{Arch}`](#getimagesrhelversionarch) 
+      - [GET `/images/{checksum}/download`](#getimageschecksumdownload) 
+
+    * organization
+      - [GET `/organization`](#getorganization) 
+
+    * packages
+      - [GET `/packages/cset/{ContentSet}/arch/{Arch}`](#getpackagescsetcontentsetarcharch) 
+      - [GET `/packages/{Checksum}`](#getpackageschecksum) 
+      - [GET `/packages/{checksum}/download`](#getpackageschecksumdownload) 
+
+    * subscription
+      - [GET `/subscriptions`](#getsubscriptions) 
+      - [GET `/subscriptions/{SubscriptionNumber}/contentSets`](#getsubscriptionssubscriptionnumbercontentsets) 
+      - [GET `/subscriptions/{SubscriptionNumber}/systems`](#getsubscriptionssubscriptionnumbersystems) 
+
+    * system
+      - [GET `/systems`](#getsystems) 
+      - [GET `/systems/{SystemUUID}`](#getsystemssystemuuid) 
+      - [DELETE `/systems/{SystemUUID}`](#deletesystemssystemuuid) 
+      - [POST `/systems/{SystemUUID}/entitlements`](#postsystemssystemuuidentitlements) 
+      - [GET `/systems/{SystemUUID}/errata`](#getsystemssystemuuiderrata) 
+      - [GET `/systems/{SystemUUID}/packages`](#getsystemssystemuuidpackages) 
+      - [GET `/systems/{SystemUUID}/pools`](#getsystemssystemuuidpools) 
+      - [DELETE `/systems/{SystemUUID}/{EntitlementID}`](#deletesystemssystemuuidentitlementid) 
+
 * [Types](#types)
 
 ## <a id="security"></a>Security
@@ -207,11 +223,10 @@ Security: [`Bearer`](#bearer).
 Request content type: `application/json`.
 #### Parameters
 
-|Name   |In   |Type    |Description                                                                                       |
-|-------|-----|--------|--------------------------------------------------------------------------------------------------|
-|`uuid` |path |`String`|                                                                                                  |
-|`force`|query|`true`  |Deleting a subscription allocation can have significant impacts on your hosts and activation keys.|
-|       |     |        |We require a force parameter to make sure the delete operation is intentional.                    |
+|Name   |In   |Type    |Description                                                                                                                                                                         |
+|-------|-----|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`uuid` |path |`String`|                                                                                                                                                                                    |
+|`force`|query|`true`  |Deleting a subscription allocation can have significant impacts on your hosts and activation keys.<br>We require a force parameter to make sure the delete operation is intentional.|
 
 #### Response
 
@@ -264,12 +279,11 @@ Security: [`Bearer`](#bearer).
 Request content type: `application/json`.
 #### Parameters
 
-|Name           |In   |Type    |Description                                                                                                       |
-|---------------|-----|--------|------------------------------------------------------------------------------------------------------------------|
-|`uuid`         |path |`String`|                                                                                                                  |
-|`EntitlementID`|path |`String`|                                                                                                                  |
-|`quantity`     |query|`Number`|maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool|
-|               |     |        |minItem: 1                                                                                                        |
+|Name           |In   |Type    |Description                                                                                                                     |
+|---------------|-----|--------|--------------------------------------------------------------------------------------------------------------------------------|
+|`uuid`         |path |`String`|                                                                                                                                |
+|`EntitlementID`|path |`String`|                                                                                                                                |
+|`quantity`     |query|`Number`|maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool<br>minItem: 1|
 
 #### Response
 
@@ -1667,14 +1681,6 @@ Reference contains a reference to an external item
 |--------|-----------------------------------|
 |`body`  |[`ErratumDetails`](#erratumdetails)|
 
-### <a id="advisoryid"></a>AdvisoryID
-unique identifier for a Red Hat advisory
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
 ### <a id="packagedetail"></a>PackageDetail
 PackageDetail wraps an errata package and adds a RefURL
 
@@ -1698,14 +1704,6 @@ PackageDetail wraps an errata package and adds a RefURL
 |------------|--------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PackageDetail`](#packagedetail)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)             |APIPageParam details the pagination parameters in APIResponse.|
-
-### <a id="advisoryid"></a>AdvisoryID
-unique identifier for a Red Hat advisory
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
 
 ### <a id="erratacount"></a>ErrataCount
 ErrataCount is the errata information for a System
@@ -1739,13 +1737,6 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |`body`      |`Array<`[`System`](#system)`>` |                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)|APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="contentset"></a>ContentSet
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
 ### <a id="imageincontentset"></a>ImageInContentSet
 Image Details in a content set image listing.
 
@@ -1766,13 +1757,6 @@ Image Details in a content set image listing.
 |`pagination`|[`APIPageParam`](#apipageparam)                     |APIPageParam details the pagination parameters in APIResponse.|
 
 ### <a id="version"></a>Version
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
-### <a id="arch"></a>Arch
 
 |Constraint|Value|
 |----------|-----|
@@ -1831,20 +1815,6 @@ Organization Simple Content Access details.
 |Property|Type                                               |Description                                |
 |--------|---------------------------------------------------|-------------------------------------------|
 |`body`  |[`OrgSimpleContentAccess`](#orgsimplecontentaccess)|Organization Simple Content Access details.|
-
-### <a id="contentset"></a>ContentSet
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
-### <a id="arch"></a>Arch
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
 
 ### <a id="filter"></a>Filter
 
@@ -1913,14 +1883,6 @@ Organization Simple Content Access details.
 |--------|---------------------------|
 |`body`  |[`PkgDetails`](#pkgdetails)|
 
-### <a id="checksum"></a>Checksum
-
-|Constraint|Value         |
-|----------|--------------|
-|pattern   |^[a-f0-9]{64}$|
-|maxItems  |1             |
-|minItems  |1             |
-
 ### <a id="getpackageschecksumdownloadresponse307"></a>GetPackagesChecksumDownloadResponse307
 
 |Property|Type                           |
@@ -1983,13 +1945,6 @@ ContentSet represent a contentset for the listContentSets API Response.
 |------------|--------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ContentSet`](#contentset)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)       |APIPageParam details the pagination parameters in APIResponse.|
-
-### <a id="subscriptionnumber"></a>SubscriptionNumber
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
 
 ### <a id="systemlist"></a>SystemList
 SystemList is the result of the get system list API
@@ -2100,27 +2055,6 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |--------|---------------------------|----------------------------------------------------------------------------|
 |`body`  |[`ShowSystem`](#showsystem)|System is an entity that consumes entitlements. Also referred as a Consumer.|
 
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
-### <a id="pool"></a>Pool
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
 ### <a id="attachentitlement"></a>AttachEntitlement
 System is an entity that consumes entitlements. Also referred as a Consumer.
 
@@ -2149,13 +2083,6 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |--------|-----------------------------------------|----------------------------------------------------------------------------|
 |`body`  |[`AttachEntitlement`](#attachentitlement)|System is an entity that consumes entitlements. Also referred as a Consumer.|
 
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
 ### <a id="erratumforsystem"></a>ErratumForSystem
 an erratum listed for a system
 
@@ -2174,13 +2101,6 @@ an erratum listed for a system
 |------------|--------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ErratumForSystem`](#erratumforsystem)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                   |APIPageParam details the pagination parameters in APIResponse.|
-
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
 
 ### <a id="packageforsystemadvisoriesitems"></a>PackageForSystemAdvisoriesItems
 
@@ -2208,20 +2128,6 @@ package installed on a system
 |------------|--------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PackageForSystem`](#packageforsystem)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                   |APIPageParam details the pagination parameters in APIResponse.|
-
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
-
-### <a id="systemuuid"></a>SystemUUID
-
-|Constraint|Value|
-|----------|-----|
-|maxItems  |1    |
-|minItems  |1    |
 
 ### <a id="entitlementid4"></a>EntitlementID4
 Remove an entitlement from a system

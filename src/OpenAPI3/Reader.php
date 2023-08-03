@@ -168,7 +168,18 @@ class Reader
                     }
 
                     $responses = [];
+                    $iterable = [];
+
                     foreach ($op->responses as $status => $openApiResponse) {
+                        $iterable[$status] = $openApiResponse;
+                    }
+
+                    if (isset($op->responses->default)) {
+                        $iterable['default'] = $op->responses->default;
+                    }
+
+
+                    foreach ($iterable as $status => $openApiResponse) {
                         $response = new Response();
 
                         if ($status === 'default') {

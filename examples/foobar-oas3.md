@@ -11,19 +11,27 @@ configurations.
 
 * [Security](#security)
 * [Operations](#operations)
-  - [DELETE `/places`](#deleteplaces) 
-  - [GET `/places`](#getplaces) 
-  - [POST `/places`](#postplaces) 
-  - [DELETE `/foos`](#deletefoos) 
-  - [GET `/foos`](#getfoos) 
-  - [POST `/foos`](#postfoos) 
-  - [PUT `/foos`](#putfoos) 
-  - [POST `/internal/find-available-carrots/{mille}/{look}`](#postinternalfindavailablecarrotsmillelook) 
-  - [GET `/lie-areas`](#getlieareas) 
-  - [POST `/lie-areas`](#postlieareas) 
-  - [PUT `/lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) 
-  - [GET `/lies`](#getlies) 
-  - [GET `/lies/{id}`](#getliesid) 
+    * Place
+      - [DELETE `/places`](#deleteplaces) 
+      - [GET `/places`](#getplaces) 
+      - [POST `/places`](#postplaces) 
+
+    * Foo
+      - [DELETE `/foos`](#deletefoos) 
+      - [GET `/foos`](#getfoos) 
+      - [POST `/foos`](#postfoos) 
+      - [PUT `/foos`](#putfoos) 
+
+    * Lie
+      - [POST `/internal/find-available-carrots/{mille}/{look}`](#postinternalfindavailablecarrotsmillelook) 
+      - [GET `/lies`](#getlies) 
+      - [GET `/lies/{id}`](#getliesid) 
+
+    * LieAreas
+      - [GET `/lie-areas`](#getlieareas) 
+      - [POST `/lie-areas`](#postlieareas) 
+      - [PUT `/lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) 
+
 * [Types](#types)
 
 ## <a id="security"></a>Security

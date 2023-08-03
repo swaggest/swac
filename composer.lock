@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "680f0f1cdf6f91c2232e36d76d610635",
+    "content-hash": "ec76f296a96d82983ab20eb262a4ed28",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -213,16 +213,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598"
+                "reference": "67ab6e18aaa14d753cc148911d273f6e6cb6721e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/67ab6e18aaa14d753cc148911d273f6e6cb6721e",
+                "reference": "67ab6e18aaa14d753cc148911d273f6e6cb6721e",
                 "shasum": ""
             },
             "require": {
@@ -232,11 +232,6 @@
                 "symfony/phpunit-bridge": "^4.4 || ^5.1"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "src/functions_include.php"
@@ -277,7 +272,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.2"
+                "source": "https://github.com/guzzle/promises/tree/1.5.3"
             },
             "funding": [
                 {
@@ -293,20 +288,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-28T14:55:35+00:00"
+            "time": "2023-05-21T12:31:43+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
+                "reference": "e4490cabc77465aaee90b20cfc9a770f8c04be6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
-                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e4490cabc77465aaee90b20cfc9a770f8c04be6b",
+                "reference": "e4490cabc77465aaee90b20cfc9a770f8c04be6b",
                 "shasum": ""
             },
             "require": {
@@ -325,11 +320,6 @@
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "src/functions_include.php"
@@ -387,7 +377,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.9.0"
+                "source": "https://github.com/guzzle/psr7/tree/1.9.1"
             },
             "funding": [
                 {
@@ -403,7 +393,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-20T21:43:03+00:00"
+            "time": "2023-04-17T16:00:37+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -852,26 +842,24 @@
         },
         {
             "name": "swaggest/code-builder",
-            "version": "v0.3.5",
+            "version": "v0.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/code-builder.git",
-                "reference": "0d6d8cb57f1774c4ea4a55829faac50b7b1d310a"
+                "reference": "ffc1f70ab80cafbe39cd48ed9502ea8d365804ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/code-builder/zipball/0d6d8cb57f1774c4ea4a55829faac50b7b1d310a",
-                "reference": "0d6d8cb57f1774c4ea4a55829faac50b7b1d310a",
+                "url": "https://api.github.com/repos/swaggest/code-builder/zipball/ffc1f70ab80cafbe39cd48ed9502ea8d365804ff",
+                "reference": "ffc1f70ab80cafbe39cd48ed9502ea8d365804ff",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "php-yaoi/php-yaoi": "*",
-                "psr/log": "^1.0.1"
+                "php-yaoi/php-yaoi": "*"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "0.1.2",
-                "phpunit/phpunit": "4.8.23"
+                "phperf/phpunit": "4.8.37"
             },
             "type": "library",
             "autoload": {
@@ -897,9 +885,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/code-builder/issues",
-                "source": "https://github.com/swaggest/code-builder/tree/v0.3.5"
+                "source": "https://github.com/swaggest/code-builder/tree/v0.3.8"
             },
-            "time": "2022-04-28T20:38:04+00:00"
+            "time": "2023-08-03T16:30:39+00:00"
         },
         {
             "name": "swaggest/go-code-builder",
@@ -957,16 +945,16 @@
         },
         {
             "name": "swaggest/json-cli",
-            "version": "v1.11.0",
+            "version": "v1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-cli.git",
-                "reference": "9336e31caed7a74b76705bcf243593902e1ff9c2"
+                "reference": "a71376fe2fccefaf7b3fc44d8d22f198ee3c4909"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/9336e31caed7a74b76705bcf243593902e1ff9c2",
-                "reference": "9336e31caed7a74b76705bcf243593902e1ff9c2",
+                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/a71376fe2fccefaf7b3fc44d8d22f198ee3c4909",
+                "reference": "a71376fe2fccefaf7b3fc44d8d22f198ee3c4909",
                 "shasum": ""
             },
             "require": {
@@ -978,11 +966,11 @@
                 "swaggest/json-diff": "^3.8.3",
                 "swaggest/json-schema": "^0.12.41",
                 "swaggest/json-schema-maker": "^0.3.7",
-                "swaggest/php-code-builder": "^0.2.37",
+                "swaggest/php-code-builder": "^0.2.38",
                 "symfony/yaml": "^3"
             },
             "require-dev": {
-                "phperf/phpunit": "4.8.37"
+                "phperf/phpunit": "4.8.38"
             },
             "bin": [
                 "bin/json-cli"
@@ -1006,22 +994,22 @@
             "description": "JSON CLI tool (diff, rearrange, pretty print, minify, yaml convert, etc...)",
             "support": {
                 "issues": "https://github.com/swaggest/json-cli/issues",
-                "source": "https://github.com/swaggest/json-cli/tree/v1.11.0"
+                "source": "https://github.com/swaggest/json-cli/tree/v1.11.1"
             },
-            "time": "2022-09-18T22:21:52+00:00"
+            "time": "2022-11-14T22:06:21+00:00"
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.9.0",
+            "version": "v3.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "ff3a7921e9f1aa096067eb541fcfd0e7611c558c"
+                "reference": "f4e511708060ff7511a3743fab4aa484a062bcfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/ff3a7921e9f1aa096067eb541fcfd0e7611c558c",
-                "reference": "ff3a7921e9f1aa096067eb541fcfd0e7611c558c",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/f4e511708060ff7511a3743fab4aa484a062bcfb",
+                "reference": "f4e511708060ff7511a3743fab4aa484a062bcfb",
                 "shasum": ""
             },
             "require": {
@@ -1049,9 +1037,9 @@
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
             "support": {
                 "issues": "https://github.com/swaggest/json-diff/issues",
-                "source": "https://github.com/swaggest/json-diff/tree/v3.9.0"
+                "source": "https://github.com/swaggest/json-diff/tree/v3.10.4"
             },
-            "time": "2022-08-29T15:04:08+00:00"
+            "time": "2022-11-09T13:21:05+00:00"
         },
         {
             "name": "swaggest/json-schema",
@@ -1156,26 +1144,26 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.37",
+            "version": "v0.2.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "fc0f412529d0cbc969487628a9023154ca2f74f0"
+                "reference": "57f9213891a12707bc137bed91a88f996e11bd68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/fc0f412529d0cbc969487628a9023154ca2f74f0",
-                "reference": "fc0f412529d0cbc969487628a9023154ca2f74f0",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/57f9213891a12707bc137bed91a88f996e11bd68",
+                "reference": "57f9213891a12707bc137bed91a88f996e11bd68",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6.0",
-                "swaggest/code-builder": "^0.3.4",
+                "swaggest/code-builder": "^0.3.8",
                 "swaggest/json-schema": "^0.12.33"
             },
             "require-dev": {
-                "phperf/phpunit": "4.8.37"
+                "phperf/phpunit": "4.8.38"
             },
             "type": "library",
             "autoload": {
@@ -1201,9 +1189,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.37"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.39"
             },
-            "time": "2022-09-15T23:10:34+00:00"
+            "time": "2023-08-03T22:33:56+00:00"
         },
         {
             "name": "swaggest/rest-client",
@@ -1920,8 +1908,22 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/master"
+                "source": "https://github.com/doctrine/instantiator/tree/1.0.5"
             },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finstantiator",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2015-06-14T21:17:01+00:00"
         },
         {

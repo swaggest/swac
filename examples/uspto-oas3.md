@@ -19,9 +19,13 @@ Base URL:{scheme}://developer.uspto.gov/ds-api
 ## Table Of Contents
 
 * [Operations](#operations)
-  - [GET `/`](#listdatasets) 
-  - [GET `/{dataset}/{version}/fields`](#getdatasetversionfields) 
-  - [POST `/{dataset}/{version}/records`](#postdatasetversionrecords) 
+    * metadata
+      - [GET `/`](#listdatasets) 
+      - [GET `/{dataset}/{version}/fields`](#getdatasetversionfields) 
+
+    * search
+      - [POST `/{dataset}/{version}/records`](#postdatasetversionrecords) 
+
 * [Types](#types)
 
 ## <a id="operations"></a>Operations
