@@ -32,6 +32,9 @@ class APIDoc extends AbstractTemplate implements Renderer
     /** @var Code */
     private $tableOfContents;
 
+    /** @var Code[] */
+    private $taggedContents = [];
+
     public function __construct()
     {
         $ver = App::$ver;
@@ -147,7 +150,12 @@ MD
             return '';
         }
 
-        return md5(json_encode(Schema::export($schema)));
+        $markdownTypes = new TypeBuilder();
+        $markdownTypes->trimNamePrefix[] = '#/components/schemas';
+
+        $res = $markdownTypes->renderTypeDef($schema, 'any', '#');
+
+        return md5($res);
     }
 
     private $hashByPath = [];
@@ -200,11 +208,26 @@ MD
             }
         }
 
-        $this->tableOfContents->addSnippet(<<<MD
+        if (!empty($operation->tags)) {
+            foreach ($operation->tags as $tag) {
+                if (!isset($this->taggedContents[$tag])) {
+                    $this->taggedContents[$tag] = new Code();
+                }
+
+                $this->taggedContents[$tag]->addSnippet(<<<MD
+      - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) 
+
+MD
+                );
+            }
+        } else{
+            $this->tableOfContents->addSnippet(<<<MD
   - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) 
 
 MD
-        );
+            );
+        }
+
 
         $this->document->addSnippet(<<<MD
 ### <a id="{$this->lowercase($funcName)}"></a>{$this->uppercase($operation->method)} `{$operation->path}`
@@ -245,7 +268,7 @@ MD
                     'Name' => '`' . $parameter->name . '`',
                     'In' => $parameter->in,
                     'Type' => $this->typeName($parameter->schema, $parameter->name),
-                    'Description' => $parameter->description,
+                    'Description' => str_replace(["\r\n", "\n"], '<br>', $parameter->description),
                     'Examples' => $examples
                 ];
             }
@@ -269,6 +292,7 @@ MD
             );
 
             $rows = [];
+
             foreach ($operation->responses as $response) {
                 $headers = '';
                 if (!empty($response->headers)) {
@@ -307,6 +331,15 @@ MD
 
     public function store($path)
     {
+        foreach ($this->taggedContents as $tag => $content) {
+            $this->tableOfContents->addSnippet(<<<MD
+    * $tag
+{$content}
+
+MD
+            );
+        }
+
         $this->tableOfContents->addSnippet(<<<MD
 * [Types](#types)
 

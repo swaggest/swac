@@ -6,10 +6,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -43,6 +41,7 @@ type FindPetByIDResponse struct {
 	StatusCode int
 	RawBody    []byte  // RawBody contains read bytes of response body.
 	ValueOK    *Pet    // ValueOK is a value of 200 OK response.
+	Default    *Error  // Default is a default value of response.
 }
 
 // decode loads data from *http.Response.
@@ -61,13 +60,7 @@ func (result *FindPetByIDResponse) decode(resp *http.Response) error {
 			err = fmt.Errorf("failed to decode 'get /pets/{id}' OK response: %w", err)
 		}
 	default:
-		_, readErr := ioutil.ReadAll(body)
-		if readErr != nil {
-			err = errors.New("unexpected response status: " + resp.Status +
-				", could not read response body: " + readErr.Error())
-		} else {
-			err = errors.New("unexpected response status: " + resp.Status)
-		}
+		err = json.NewDecoder(body).Decode(&result.Default)
 	}
 
 	result.RawBody = dump.Bytes()

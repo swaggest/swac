@@ -57,9 +57,10 @@ Type: `Swac\Example\PetstoreOAS3\Request\FindPetsRequest`
 #### Response
 
 
-|Status|Type                                                                    |Description |
-|------|------------------------------------------------------------------------|------------|
-|200 OK|[`GetPetsOKResponse`](#swacexamplepetstoreoas3responsegetpetsokresponse)|pet response|
+|Status|Type                                                                    |Description     |
+|------|------------------------------------------------------------------------|----------------|
+|200 OK|[`GetPetsOKResponse`](#swacexamplepetstoreoas3responsegetpetsokresponse)|pet response    |
+|      |[`Error`](#swacexamplepetstoreoas3definitionserror)                     |unexpected error|
 
 ### `AddPet`
 
@@ -88,9 +89,10 @@ Type: `Swac\Example\PetstoreOAS3\Request\AddPetRequest`
 #### Response
 
 
-|Status|Type                                           |Description |
-|------|-----------------------------------------------|------------|
-|200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)|pet response|
+|Status|Type                                               |Description     |
+|------|---------------------------------------------------|----------------|
+|200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)    |pet response    |
+|      |[`Error`](#swacexamplepetstoreoas3definitionserror)|unexpected error|
 
 ### `FindPetById`
 
@@ -115,9 +117,10 @@ Type: `Swac\Example\PetstoreOAS3\Request\FindPetByIdRequest`
 #### Response
 
 
-|Status|Type                                           |Description |
-|------|-----------------------------------------------|------------|
-|200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)|pet response|
+|Status|Type                                               |Description     |
+|------|---------------------------------------------------|----------------|
+|200 OK|[`Pet`](#swacexamplepetstoreoas3definitionspet)    |pet response    |
+|      |[`Error`](#swacexamplepetstoreoas3definitionserror)|unexpected error|
 
 ### `DeletePet`
 
@@ -141,13 +144,20 @@ Type: `Swac\Example\PetstoreOAS3\Request\DeletePetRequest`
 #### Response
 
 
-|Status        |Type|Description|
-|--------------|----|-----------|
-|204 No Content|    |pet deleted|
+|Status        |Type                                               |Description     |
+|--------------|---------------------------------------------------|----------------|
+|204 No Content|                                                   |pet deleted     |
+|              |[`Error`](#swacexamplepetstoreoas3definitionserror)|unexpected error|
 
 
 
 ## Structures
+
+#### Swac\Example\PetstoreOAS3\Definitions\Error
+|Name     |Type    |
+|---------|--------|
+|`code`   |`int`   |
+|`message`|`string`|
 
 #### Swac\Example\PetstoreOAS3\Definitions\NewPet
 |Name  |Type    |

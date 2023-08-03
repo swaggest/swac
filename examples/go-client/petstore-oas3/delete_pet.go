@@ -5,9 +5,8 @@ package petstore
 import (
 	"bytes"
 	"context"
-	"errors"
+	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -29,6 +28,8 @@ func (request *DeletePetRequest) encode(ctx context.Context, baseURL string) (*h
 		return nil, err
 	}
 
+	req.Header.Set("Accept", "application/json")
+
 	req = req.WithContext(ctx)
 
 	return req, err
@@ -38,6 +39,7 @@ func (request *DeletePetRequest) encode(ctx context.Context, baseURL string) (*h
 type DeletePetResponse struct {
 	StatusCode int
 	RawBody    []byte  // RawBody contains read bytes of response body.
+	Default    *Error  // Default is a default value of response.
 }
 
 // decode loads data from *http.Response.
@@ -53,13 +55,7 @@ func (result *DeletePetResponse) decode(resp *http.Response) error {
 	case http.StatusNoContent:
 		// No body to decode.
 	default:
-		_, readErr := ioutil.ReadAll(body)
-		if readErr != nil {
-			err = errors.New("unexpected response status: " + resp.Status +
-				", could not read response body: " + readErr.Error())
-		} else {
-			err = errors.New("unexpected response status: " + resp.Status)
-		}
+		err = json.NewDecoder(body).Decode(&result.Default)
 	}
 
 	result.RawBody = dump.Bytes()

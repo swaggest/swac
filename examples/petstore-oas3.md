@@ -36,9 +36,10 @@ Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condime
 
 #### Response
 
-|Status|Content Type      |Body Type                                                |Description |
-|------|------------------|---------------------------------------------------------|------------|
-|200   |`application/json`|`Array<`[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)`>`|pet response|
+|Status |Content Type      |Body Type                                                |Description     |
+|-------|------------------|---------------------------------------------------------|----------------|
+|200    |`application/json`|`Array<`[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)`>`|pet response    |
+|default|`application/json`|[`Error`](#error)                                        |unexpected error|
 ### <a id="postpets"></a>POST `/pets`
 
 Creates a new pet in the store.  Duplicates are allowed
@@ -51,9 +52,10 @@ Creates a new pet in the store.  Duplicates are allowed
 
 #### Response
 
-|Status|Content Type      |Body Type                                     |Description |
-|------|------------------|----------------------------------------------|------------|
-|200   |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response|
+|Status |Content Type      |Body Type                                     |Description     |
+|-------|------------------|----------------------------------------------|----------------|
+|200    |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response    |
+|default|`application/json`|[`Error`](#error)                             |unexpected error|
 ### <a id="getpetsid"></a>GET `/pets/{id}`
 
 Returns a user based on a single ID, if the user does not have access to the pet
@@ -66,9 +68,10 @@ Returns a user based on a single ID, if the user does not have access to the pet
 
 #### Response
 
-|Status|Content Type      |Body Type                                     |Description |
-|------|------------------|----------------------------------------------|------------|
-|200   |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response|
+|Status |Content Type      |Body Type                                     |Description     |
+|-------|------------------|----------------------------------------------|----------------|
+|200    |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response    |
+|default|`application/json`|[`Error`](#error)                             |unexpected error|
 ### <a id="deletepetsid"></a>DELETE `/pets/{id}`
 
 deletes a single pet based on the ID supplied
@@ -81,9 +84,10 @@ deletes a single pet based on the ID supplied
 
 #### Response
 
-|Status|Description|
-|------|-----------|
-|204   |pet deleted|
+|Status |Content Type      |Body Type        |Description     |
+|-------|------------------|-----------------|----------------|
+|204    |                  |                 |pet deleted     |
+|default|`application/json`|[`Error`](#error)|unexpected error|
 
 ## <a id="types"></a> Types
 
@@ -99,3 +103,10 @@ deletes a single pet based on the ID supplied
 |Property       |Type                     |
 |---------------|-------------------------|
 |`id` (required)|`Number`, Format: `int64`|
+
+### <a id="error"></a>Error
+
+|Property            |Type                     |
+|--------------------|-------------------------|
+|`code` (required)   |`Number`, Format: `int32`|
+|`message` (required)|`String`                 |

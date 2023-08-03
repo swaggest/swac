@@ -10,6 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Swac\Example\PetstoreOAS3\Config;
+use Swac\Example\PetstoreOAS3\Definitions\Error;
 use Swac\Example\PetstoreOAS3\Request\DeletePetRequest;
 use Swaggest\JsonSchema\Exception;
 use Swaggest\JsonSchema\InvalidValue;
@@ -45,7 +46,7 @@ class DeletePet extends AbstractOperation
     }
 
     /**
-     * @return mixed
+     * @return Error
      * @throws RestException
      * @throws InvalidValue
      * @throws Exception
@@ -57,7 +58,7 @@ class DeletePet extends AbstractOperation
         $statusCode = $raw->getStatusCode();
         switch ($statusCode) {
             case StatusCode::NO_CONTENT: $result = null;break;
-            default: throw new RestException('Unsupported response status code: ' . $statusCode, RestException::UNSUPPORTED_RESPONSE_CODE);
+            default: $result = Error::import($this->getJsonResponse());break;
         }
         return $result;
     }
