@@ -12,25 +12,25 @@ configurations.
 * [Security](#security)
 * [Operations](#operations)
     * Place
-      - [DELETE `/places`](#deleteplaces) 
-      - [GET `/places`](#getplaces) 
-      - [POST `/places`](#postplaces) 
+      - [DELETE `/places`](#deleteplaces) Delete Place
+      - [GET `/places`](#getplaces) Find Place
+      - [POST `/places`](#postplaces) Create Place
 
     * Foo
-      - [DELETE `/foos`](#deletefoos) 
-      - [GET `/foos`](#getfoos) 
-      - [POST `/foos`](#postfoos) 
-      - [PUT `/foos`](#putfoos) 
+      - [DELETE `/foos`](#deletefoos) Delete Foo
+      - [GET `/foos`](#getfoos) Find Foo
+      - [POST `/foos`](#postfoos) Create Foo
+      - [PUT `/foos`](#putfoos) Update Foo
 
     * Lie
-      - [POST `/internal/find-available-carrots/{mille}/{look}`](#postinternalfindavailablecarrotsmillelook) 
-      - [GET `/lies`](#getlies) 
-      - [GET `/lies/{id}`](#getliesid) 
+      - [POST `/internal/find-available-carrots/{mille}/{look}`](#postinternalfindavailablecarrotsmillelook) Find Available Carrots
+      - [GET `/lies`](#getlies) Get Lies
+      - [GET `/lies/{id}`](#getliesid) Get Lie By ID
 
     * LieAreas
-      - [GET `/lie-areas`](#getlieareas) 
-      - [POST `/lie-areas`](#postlieareas) 
-      - [PUT `/lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) 
+      - [GET `/lie-areas`](#getlieareas) List Lie areas name
+      - [POST `/lie-areas`](#postlieareas) Create Lie Areas
+      - [PUT `/lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) Sync Lie Area
 
 * [Types](#types)
 

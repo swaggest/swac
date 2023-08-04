@@ -15,64 +15,64 @@ Base URL:https://api.access.redhat.com/management/v1
 * [Security](#security)
 * [Operations](#operations)
     * allocation
-      - [GET `/allocations`](#listallocations) 
-      - [POST `/allocations`](#postallocations) 
-      - [GET `/allocations/versions`](#getallocationsversions) 
-      - [GET `/allocations/{uuid}`](#getallocationsuuid) 
-      - [PUT `/allocations/{uuid}`](#putallocationsuuid) 
-      - [DELETE `/allocations/{uuid}`](#deleteallocationsuuid) 
-      - [POST `/allocations/{uuid}/entitlements`](#postallocationsuuidentitlements) 
-      - [PUT `/allocations/{uuid}/entitlements/{EntitlementID}`](#putallocationsuuidentitlementsentitlementid) 
-      - [DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`](#deleteallocationsuuidentitlementsentitlementid) 
-      - [GET `/allocations/{uuid}/export`](#getallocationsuuidexport) 
-      - [GET `/allocations/{uuid}/export/{ExportID}`](#getallocationsuuidexportexportid) 
-      - [GET `/allocations/{uuid}/exportJob/{ExportJobID}`](#getallocationsuuidexportjobexportjobid) 
-      - [GET `/allocations/{uuid}/pools`](#getallocationsuuidpools) 
-      - [DELETE `/allocations/{uuid}/{EntitlementID}`](#deleteallocationsuuidentitlementid) 
+      - [GET `/allocations`](#listallocations) List all allocations for a user
+      - [POST `/allocations`](#postallocations) Create Satellite
+      - [GET `/allocations/versions`](#getallocationsversions) List Satellite versions
+      - [GET `/allocations/{uuid}`](#getallocationsuuid) Get an allocation by UUID
+      - [PUT `/allocations/{uuid}`](#putallocationsuuid) Update an allocation
+      - [DELETE `/allocations/{uuid}`](#deleteallocationsuuid) Remove allocation profile
+      - [POST `/allocations/{uuid}/entitlements`](#postallocationsuuidentitlements) Attach entitlement to allocation
+      - [PUT `/allocations/{uuid}/entitlements/{EntitlementID}`](#putallocationsuuidentitlementsentitlementid) Update attached entitlement to allocation
+      - [DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`](#deleteallocationsuuidentitlementsentitlementid) Remove entitlement from the allocation
+      - [GET `/allocations/{uuid}/export`](#getallocationsuuidexport) Trigger allocation manifest export
+      - [GET `/allocations/{uuid}/export/{ExportID}`](#getallocationsuuidexportexportid) Download allocation manifest
+      - [GET `/allocations/{uuid}/exportJob/{ExportJobID}`](#getallocationsuuidexportjobexportjobid) Check status of allocation manifest export
+      - [GET `/allocations/{uuid}/pools`](#getallocationsuuidpools) List all pools for an allocation
+      - [DELETE `/allocations/{uuid}/{EntitlementID}`](#deleteallocationsuuidentitlementid) Remove entitlement from the allocation
 
     * cloudaccess
-      - [GET `/cloud_access_providers/enabled`](#getcloudaccessprovidersenabled) 
-      - [PUT `/cloud_access_providers/{ProviderShortName}/account`](#putcloudaccessprovidersprovidershortnameaccount) 
-      - [POST `/cloud_access_providers/{ProviderShortName}/accounts`](#postcloudaccessprovidersprovidershortnameaccounts) 
-      - [DELETE `/cloud_access_providers/{ProviderShortName}/accounts`](#deletecloudaccessprovidersprovidershortnameaccounts) 
-      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`](#putcloudaccessprovidersprovidershortnameaccountsaccountid) 
-      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`](#putcloudaccessprovidersprovidershortnameaccountsaccountidverification) 
-      - [POST `/cloud_access_providers/{ProviderShortName}/goldimage`](#postcloudaccessprovidersprovidershortnamegoldimage) 
+      - [GET `/cloud_access_providers/enabled`](#getcloudaccessprovidersenabled) List all enabled cloud access providers for a user
+      - [PUT `/cloud_access_providers/{ProviderShortName}/account`](#putcloudaccessprovidersprovidershortnameaccount) Update provider account
+      - [POST `/cloud_access_providers/{ProviderShortName}/accounts`](#postcloudaccessprovidersprovidershortnameaccounts) Add accounts for a provider
+      - [DELETE `/cloud_access_providers/{ProviderShortName}/accounts`](#deletecloudaccessprovidersprovidershortnameaccounts) Remove a provider account
+      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`](#putcloudaccessprovidersprovidershortnameaccountsaccountid) Update provider account
+      - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`](#putcloudaccessprovidersprovidershortnameaccountsaccountidverification) Verify a provider account
+      - [POST `/cloud_access_providers/{ProviderShortName}/goldimage`](#postcloudaccessprovidersprovidershortnamegoldimage) Enable Gold image access
 
     * errata
-      - [GET `/errata`](#geterrata) 
-      - [GET `/errata/cset/{ContentSet}/arch/{Arch}`](#geterratacsetcontentsetarcharch) 
-      - [GET `/errata/{AdvisoryID}`](#geterrataadvisoryid) 
-      - [GET `/errata/{AdvisoryID}/packages`](#geterrataadvisoryidpackages) 
-      - [GET `/errata/{AdvisoryID}/systems`](#geterrataadvisoryidsystems) 
+      - [GET `/errata`](#geterrata) List all errata for a user's systems
+      - [GET `/errata/cset/{ContentSet}/arch/{Arch}`](#geterratacsetcontentsetarcharch) Get all the errata for the specified content set and arch
+      - [GET `/errata/{AdvisoryID}`](#geterrataadvisoryid) Get the details of an advisory
+      - [GET `/errata/{AdvisoryID}/packages`](#geterrataadvisoryidpackages) List all packages for an advisory
+      - [GET `/errata/{AdvisoryID}/systems`](#geterrataadvisoryidsystems) List all systems for an advisory
 
     * images
-      - [GET `/images/cset/{ContentSet}`](#getimagescsetcontentset) 
-      - [GET `/images/rhel/{Version}/{Arch}`](#getimagesrhelversionarch) 
-      - [GET `/images/{checksum}/download`](#getimageschecksumdownload) 
+      - [GET `/images/cset/{ContentSet}`](#getimagescsetcontentset) List available images in a content set
+      - [GET `/images/rhel/{Version}/{Arch}`](#getimagesrhelversionarch) List RHEL image downloads by version and architecture.
+      - [GET `/images/{checksum}/download`](#getimageschecksumdownload) Download an image by its SHA256 checksum
 
     * organization
-      - [GET `/organization`](#getorganization) 
+      - [GET `/organization`](#getorganization) Get details of the user's organization
 
     * packages
-      - [GET `/packages/cset/{ContentSet}/arch/{Arch}`](#getpackagescsetcontentsetarcharch) 
-      - [GET `/packages/{Checksum}`](#getpackageschecksum) 
-      - [GET `/packages/{checksum}/download`](#getpackageschecksumdownload) 
+      - [GET `/packages/cset/{ContentSet}/arch/{Arch}`](#getpackagescsetcontentsetarcharch) Get all the packages for the specified content set and arch.
+      - [GET `/packages/{Checksum}`](#getpackageschecksum) Get the details of a package
+      - [GET `/packages/{checksum}/download`](#getpackageschecksumdownload) Download a package by its SHA256 checksum
 
     * subscription
-      - [GET `/subscriptions`](#getsubscriptions) 
-      - [GET `/subscriptions/{SubscriptionNumber}/contentSets`](#getsubscriptionssubscriptionnumbercontentsets) 
-      - [GET `/subscriptions/{SubscriptionNumber}/systems`](#getsubscriptionssubscriptionnumbersystems) 
+      - [GET `/subscriptions`](#getsubscriptions) List all subscriptions for a user
+      - [GET `/subscriptions/{SubscriptionNumber}/contentSets`](#getsubscriptionssubscriptionnumbercontentsets) List all content sets for a subscription
+      - [GET `/subscriptions/{SubscriptionNumber}/systems`](#getsubscriptionssubscriptionnumbersystems) List all systems consuming a subscription
 
     * system
-      - [GET `/systems`](#getsystems) 
-      - [GET `/systems/{SystemUUID}`](#getsystemssystemuuid) 
-      - [DELETE `/systems/{SystemUUID}`](#deletesystemssystemuuid) 
-      - [POST `/systems/{SystemUUID}/entitlements`](#postsystemssystemuuidentitlements) 
-      - [GET `/systems/{SystemUUID}/errata`](#getsystemssystemuuiderrata) 
-      - [GET `/systems/{SystemUUID}/packages`](#getsystemssystemuuidpackages) 
-      - [GET `/systems/{SystemUUID}/pools`](#getsystemssystemuuidpools) 
-      - [DELETE `/systems/{SystemUUID}/{EntitlementID}`](#deletesystemssystemuuidentitlementid) 
+      - [GET `/systems`](#getsystems) List all systems for a user
+      - [GET `/systems/{SystemUUID}`](#getsystemssystemuuid) Get a system specified by UUID.
+      - [DELETE `/systems/{SystemUUID}`](#deletesystemssystemuuid) Remove system profile
+      - [POST `/systems/{SystemUUID}/entitlements`](#postsystemssystemuuidentitlements) Attach entitlement to system
+      - [GET `/systems/{SystemUUID}/errata`](#getsystemssystemuuiderrata) List all applicable errata for a system
+      - [GET `/systems/{SystemUUID}/packages`](#getsystemssystemuuidpackages) List all packages for a system
+      - [GET `/systems/{SystemUUID}/pools`](#getsystemssystemuuidpools) List all pools for a system
+      - [DELETE `/systems/{SystemUUID}/{EntitlementID}`](#deletesystemssystemuuidentitlementid) Remove entitlement from the system
 
 * [Types](#types)
 

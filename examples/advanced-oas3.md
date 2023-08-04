@@ -9,21 +9,21 @@ This app showcases a variety of features.
 ## Table Of Contents
 
 * [Operations](#operations)
-  - [POST `/file-multi-upload`](#examplesadvancedfilemultiuploader) 
-  - [POST `/file-upload`](#postfileupload) 
-  - [GET `/gzip-pass-through`](#getgzippassthrough) 
-  - [HEAD `/gzip-pass-through`](#headgzippassthrough) 
-  - [POST `/json-body-validation/{in-path}`](#postjsonbodyvalidationinpath) 
-  - [POST `/json-body/{in-path}`](#postjsonbodyinpath) 
-  - [POST `/json-map-body`](#postjsonmapbody) 
-  - [GET `/json-param/{in-path}`](#getjsonparaminpath) 
-  - [POST `/json-slice-body`](#postjsonslicebody) 
-  - [GET `/output-csv-writer`](#getoutputcsvwriter) 
-  - [GET `/output-headers`](#getoutputheaders) 
-  - [HEAD `/output-headers`](#headoutputheaders) 
-  - [GET `/query-object`](#getqueryobject) 
-  - [POST `/req-resp-mapping`](#postreqrespmapping) 
-  - [POST `/validation`](#postvalidation) 
+  - [POST `/file-multi-upload`](#examplesadvancedfilemultiuploader) Files Uploads With 'multipart/form-data'
+  - [POST `/file-upload`](#postfileupload) File Upload With 'multipart/form-data'
+  - [GET `/gzip-pass-through`](#getgzippassthrough) direct Gzip
+  - [HEAD `/gzip-pass-through`](#headgzippassthrough) direct Gzip
+  - [POST `/json-body-validation/{in-path}`](#postjsonbodyvalidationinpath) Request With JSON Body and non-trivial validation
+  - [POST `/json-body/{in-path}`](#postjsonbodyinpath) Request With JSON Body
+  - [POST `/json-map-body`](#postjsonmapbody) Request With JSON Map In Body
+  - [GET `/json-param/{in-path}`](#getjsonparaminpath) Request With JSON Query Parameter
+  - [POST `/json-slice-body`](#postjsonslicebody) Request With JSON Array In Body
+  - [GET `/output-csv-writer`](#getoutputcsvwriter) Output With Stream Writer
+  - [GET `/output-headers`](#getoutputheaders) Output With Headers
+  - [HEAD `/output-headers`](#headoutputheaders) Output With Headers
+  - [GET `/query-object`](#getqueryobject) Request With Object As Query Parameter
+  - [POST `/req-resp-mapping`](#postreqrespmapping) Request Response Mapping
+  - [POST `/validation`](#postvalidation) Validation
 * [Types](#types)
 
 ## <a id="operations"></a>Operations

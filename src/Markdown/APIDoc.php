@@ -215,14 +215,14 @@ MD
                 }
 
                 $this->taggedContents[$tag]->addSnippet(<<<MD
-      - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) 
+      - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) {$operation->summary}
 
 MD
                 );
             }
         } else{
             $this->tableOfContents->addSnippet(<<<MD
-  - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) 
+  - [{$this->uppercase($operation->method)} `{$operation->path}`](#{$this->lowercase($funcName)}) {$operation->summary}
 
 MD
             );

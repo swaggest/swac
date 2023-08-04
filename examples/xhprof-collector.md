@@ -10,16 +10,16 @@ Version: cli-mode
 
 * [Operations](#operations)
     * Analyze
-      - [GET `/profile`](#listprofiles) 
-      - [GET `/profile.dot`](#getprofiledot) 
-      - [GET `/profile/find-symbol`](#getprofilefindsymbol) 
-      - [GET `/profile/symbol`](#getprofilesymbol) 
-      - [GET `/top-traces`](#gettoptraces) 
+      - [GET `/profile`](#listprofiles) List Profiles
+      - [GET `/profile.dot`](#getprofiledot) Dot Graph
+      - [GET `/profile/find-symbol`](#getprofilefindsymbol) Find Symbol
+      - [GET `/profile/symbol`](#getprofilesymbol) Symbol Stat
+      - [GET `/top-traces`](#gettoptraces) Top Traces
 
     * Collect
-      - [POST `/profile`](#postprofile) 
-      - [POST `/upload/profile`](#postuploadprofile) 
-      - [POST `/upload/profiles`](#postuploadprofiles) 
+      - [POST `/profile`](#postprofile) Collect Profile
+      - [POST `/upload/profile`](#postuploadprofile) Upload Profile
+      - [POST `/upload/profiles`](#postuploadprofiles) Upload Profiles
 
 * [Types](#types)
 

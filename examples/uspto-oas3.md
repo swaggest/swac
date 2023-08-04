@@ -20,11 +20,11 @@ Base URL:{scheme}://developer.uspto.gov/ds-api
 
 * [Operations](#operations)
     * metadata
-      - [GET `/`](#listdatasets) 
-      - [GET `/{dataset}/{version}/fields`](#getdatasetversionfields) 
+      - [GET `/`](#listdatasets) List available data sets
+      - [GET `/{dataset}/{version}/fields`](#getdatasetversionfields) Provides the general information about the API and the list of fields that can be used to query the dataset.
 
     * search
-      - [POST `/{dataset}/{version}/records`](#postdatasetversionrecords) 
+      - [POST `/{dataset}/{version}/records`](#postdatasetversionrecords) Provides search capability for the data set with the given search criteria.
 
 * [Types](#types)
 
