@@ -7,7 +7,7 @@ Version: 1.0.0
 A sample API that uses a petstore as an example to demonstrate features in
 the OpenAPI 3.0 specification
 
-Base URL:http://petstore.swagger.io/api
+Base URL: http://petstore.swagger.io/api
 
 ## Table Of Contents
 

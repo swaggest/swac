@@ -22,7 +22,7 @@
  */
 
 /**
- * @typedef GetDatasetVersionFieldsRequest
+ * @typedef ListSearchableFieldsRequest
  * @type {Object}
  * @property {String} dataset - Name of the dataset.
  * @property {String} version - Version of the dataset.
@@ -34,7 +34,7 @@
  */
 
 /**
- * @typedef PostDatasetVersionRecordsRequest
+ * @typedef PerformSearchRequest
  * @type {Object}
  * @property {String} version - Version of the dataset.
  * @property {String} dataset - Name of the dataset. In this case, the default value is oa_citations.

@@ -58,11 +58,11 @@
     /**
      * Collect Profile
      * Collects XHPROF-compatible PHP profile.
-     * @param {XhPostProfileRequest} req - request parameters.
+     * @param {XhCollectProfileRequest} req - request parameters.
      * @param {RawCallback} onAccepted
      * @param {XhRestErrResponseCallback} onConflict
      */
-    Backend.prototype.postProfile = function (req, onAccepted, onConflict) {
+    Backend.prototype.collectProfile = function (req, onAccepted, onConflict) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -103,11 +103,11 @@
 
     /**
      * Dot Graph
-     * @param {XhGetProfileDotRequest} req - request parameters.
+     * @param {XhDotGraphRequest} req - request parameters.
      * @param {RawCallback} onOK
      * @param {XhRestErrResponseCallback} onNotFound
      */
-    Backend.prototype.getProfileDot = function (req, onOK, onNotFound) {
+    Backend.prototype.dotGraph = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -155,11 +155,11 @@
 
     /**
      * Find Symbol
-     * @param {XhGetProfileFindSymbolRequest} req - request parameters.
+     * @param {XhFindSymbolRequest} req - request parameters.
      * @param {XhSearchOutputCallback} onOK
      * @param {XhRestErrResponseCallback} onNotFound
      */
-    Backend.prototype.getProfileFindSymbol = function (req, onOK, onNotFound) {
+    Backend.prototype.findSymbol = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -204,11 +204,11 @@
 
     /**
      * Symbol Stat
-     * @param {XhGetProfileSymbolRequest} req - request parameters.
+     * @param {XhSymbolStatRequest} req - request parameters.
      * @param {XhSymbolStatOutputCallback} onOK
      * @param {XhRestErrResponseCallback} onNotFound
      */
-    Backend.prototype.getProfileSymbol = function (req, onOK, onNotFound) {
+    Backend.prototype.symbolStat = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -251,11 +251,11 @@
     /**
      * Top Traces
      * Get traces that occupy most of resource.
-     * @param {XhGetTopTracesRequest} req - request parameters.
+     * @param {XhTopTracesRequest} req - request parameters.
      * @param {ArrayXhTraceInfoCallback} onOK
      * @param {XhRestErrResponseCallback} onNotFound
      */
-    Backend.prototype.getTopTraces = function (req, onOK, onNotFound) {
+    Backend.prototype.topTraces = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -305,11 +305,11 @@
      * Upload Profile
      * Collects XHPROF-compatible PHP profile from uploaded JSON/PHP-Serialized
      * file.
-     * @param {XhPostUploadProfileRequest} req - request parameters.
+     * @param {XhUploadProfileRequest} req - request parameters.
      * @param {RawCallback} onAccepted
      * @param {XhRestErrResponseCallback} onConflict
      */
-    Backend.prototype.postUploadProfile = function (req, onAccepted, onConflict) {
+    Backend.prototype.uploadProfile = function (req, onAccepted, onConflict) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -354,11 +354,11 @@
      * Upload Profiles
      * Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized
      * files.
-     * @param {XhPostUploadProfilesRequest} req - request parameters.
+     * @param {XhUploadProfilesRequest} req - request parameters.
      * @param {RawCallback} onAccepted
      * @param {XhRestErrResponseCallback} onConflict
      */
-    Backend.prototype.postUploadProfiles = function (req, onAccepted, onConflict) {
+    Backend.prototype.uploadProfiles = function (req, onAccepted, onConflict) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {

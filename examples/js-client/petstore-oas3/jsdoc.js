@@ -38,7 +38,7 @@
  */
 
 /**
- * @typedef PostPetsRequest
+ * @typedef AddPetRequest
  * @type {Object}
  * @property {NewPet} body
  */
@@ -49,13 +49,13 @@
  */
 
 /**
- * @typedef GetPetsIdRequest
+ * @typedef FindPetByIdRequest
  * @type {Object}
  * @property {Number} id - ID of pet to fetch.
  */
 
 /**
- * @typedef DeletePetsIdRequest
+ * @typedef DeletePetRequest
  * @type {Object}
  * @property {Number} id - ID of pet to delete.
  */

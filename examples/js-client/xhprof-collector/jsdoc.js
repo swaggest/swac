@@ -3,7 +3,7 @@
 /**
  * @typedef XhAggregatorGroup
  * @type {Object}
- * @property {Number} end - Interval end UTC unix timestamp. .
+ * @property {Number} end - Interval end UTC unix timestamp.
  * @property {String} id - Profile ID.
  * @property {?Object.<String,String>} labels
  * @property {Number} start - Interval start UTC unix timestamp.
@@ -58,7 +58,7 @@
  */
 
 /**
- * @typedef XhPostProfileRequest
+ * @typedef XhCollectProfileRequest
  * @type {Object}
  * @property {XhCollectProfileInput} body
  */
@@ -83,7 +83,7 @@
  */
 
 /**
- * @typedef XhGetProfileDotRequest
+ * @typedef XhDotGraphRequest
  * @type {Object}
  * @property {String} rootSymbol
  * @property {Number} graphLimit - Maximum number of nodes (symbols) in graph.
@@ -92,7 +92,7 @@
  */
 
 /**
- * @typedef XhGetProfileFindSymbolRequest
+ * @typedef XhFindSymbolRequest
  * @type {Object}
  * @property {XhAggregatorGroup} aggregate
  * @property {String} match - Substring to match in symbol.
@@ -111,7 +111,7 @@
  */
 
 /**
- * @typedef XhGetProfileSymbolRequest
+ * @typedef XhSymbolStatRequest
  * @type {Object}
  * @property {XhAggregatorGroup} aggregate
  * @property {String} symbol
@@ -151,7 +151,7 @@
  */
 
 /**
- * @typedef XhGetTopTracesRequest
+ * @typedef XhTopTracesRequest
  * @type {Object}
  * @property {String} rootSymbol
  * @property {XhAggregatorGroup} aggregate
@@ -174,14 +174,14 @@
  */
 
 /**
- * @typedef XhPostUploadProfileRequest
+ * @typedef XhUploadProfileRequest
  * @type {Object}
  * @property {?File|?Blob} profile
  * @property {Number} sample
  */
 
 /**
- * @typedef XhPostUploadProfilesRequest
+ * @typedef XhUploadProfilesRequest
  * @type {Object}
  * @property {?Array<?File|?Blob>} profiles - Files with profile JSON data.
  */

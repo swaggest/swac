@@ -8,13 +8,13 @@ Version: 1.264.0.
 
 Contact:   https://access.redhat.com/support/cases/.
 
-Base URL:https://api.access.redhat.com/management/v1
+Base URL: https://api.access.redhat.com/management/v1
 
 ## Table Of Contents
 
 * [Security](#security)
 * [Operations](#operations)
-    * allocation
+    * ### allocation
       - [GET `/allocations`](#listallocations) List all allocations for a user
       - [POST `/allocations`](#postallocations) Create Satellite
       - [GET `/allocations/versions`](#getallocationsversions) List Satellite versions
@@ -30,7 +30,7 @@ Base URL:https://api.access.redhat.com/management/v1
       - [GET `/allocations/{uuid}/pools`](#getallocationsuuidpools) List all pools for an allocation
       - [DELETE `/allocations/{uuid}/{EntitlementID}`](#deleteallocationsuuidentitlementid) Remove entitlement from the allocation
 
-    * cloudaccess
+    * ### cloudaccess
       - [GET `/cloud_access_providers/enabled`](#getcloudaccessprovidersenabled) List all enabled cloud access providers for a user
       - [PUT `/cloud_access_providers/{ProviderShortName}/account`](#putcloudaccessprovidersprovidershortnameaccount) Update provider account
       - [POST `/cloud_access_providers/{ProviderShortName}/accounts`](#postcloudaccessprovidersprovidershortnameaccounts) Add accounts for a provider
@@ -39,32 +39,32 @@ Base URL:https://api.access.redhat.com/management/v1
       - [PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`](#putcloudaccessprovidersprovidershortnameaccountsaccountidverification) Verify a provider account
       - [POST `/cloud_access_providers/{ProviderShortName}/goldimage`](#postcloudaccessprovidersprovidershortnamegoldimage) Enable Gold image access
 
-    * errata
+    * ### errata
       - [GET `/errata`](#geterrata) List all errata for a user's systems
       - [GET `/errata/cset/{ContentSet}/arch/{Arch}`](#geterratacsetcontentsetarcharch) Get all the errata for the specified content set and arch
       - [GET `/errata/{AdvisoryID}`](#geterrataadvisoryid) Get the details of an advisory
       - [GET `/errata/{AdvisoryID}/packages`](#geterrataadvisoryidpackages) List all packages for an advisory
       - [GET `/errata/{AdvisoryID}/systems`](#geterrataadvisoryidsystems) List all systems for an advisory
 
-    * images
+    * ### images
       - [GET `/images/cset/{ContentSet}`](#getimagescsetcontentset) List available images in a content set
       - [GET `/images/rhel/{Version}/{Arch}`](#getimagesrhelversionarch) List RHEL image downloads by version and architecture.
       - [GET `/images/{checksum}/download`](#getimageschecksumdownload) Download an image by its SHA256 checksum
 
-    * organization
+    * ### organization
       - [GET `/organization`](#getorganization) Get details of the user's organization
 
-    * packages
+    * ### packages
       - [GET `/packages/cset/{ContentSet}/arch/{Arch}`](#getpackagescsetcontentsetarcharch) Get all the packages for the specified content set and arch.
       - [GET `/packages/{Checksum}`](#getpackageschecksum) Get the details of a package
       - [GET `/packages/{checksum}/download`](#getpackageschecksumdownload) Download a package by its SHA256 checksum
 
-    * subscription
+    * ### subscription
       - [GET `/subscriptions`](#getsubscriptions) List all subscriptions for a user
       - [GET `/subscriptions/{SubscriptionNumber}/contentSets`](#getsubscriptionssubscriptionnumbercontentsets) List all content sets for a subscription
       - [GET `/subscriptions/{SubscriptionNumber}/systems`](#getsubscriptionssubscriptionnumbersystems) List all systems consuming a subscription
 
-    * system
+    * ### system
       - [GET `/systems`](#getsystems) List all systems for a user
       - [GET `/systems/{SystemUUID}`](#getsystemssystemuuid) Get a system specified by UUID.
       - [DELETE `/systems/{SystemUUID}`](#deletesystemssystemuuid) Remove system profile

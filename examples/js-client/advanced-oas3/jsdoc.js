@@ -27,7 +27,7 @@
  */
 
 /**
- * @typedef PostFileUploadRequest
+ * @typedef ExamplesAdvancedFileUploaderRequest
  * @type {Object}
  * @property {Number} inQuery - Simple scalar value in query.
  * @property {String} simple - Simple scalar value in body.
@@ -53,7 +53,7 @@
  */
 
 /**
- * @typedef GetGzipPassThroughRequest
+ * @typedef ExamplesAdvancedDirectGzipRequest
  * @type {Object}
  * @property {Boolean} plainStruct - Output plain structure instead of gzip container.
  * @property {Boolean} countItems - Invokes internal decoding of compressed data.
@@ -91,7 +91,7 @@
  */
 
 /**
- * @typedef PostJsonBodyValidationInPathRequest
+ * @typedef Propertyd41d8cRequest
  * @type {Object}
  * @property {Number} inQuery - Simple scalar value in query.
  * @property {String} inPath - Simple scalar value in path.
@@ -122,7 +122,7 @@
  */
 
 /**
- * @typedef PostJsonBodyInPathRequest
+ * @typedef ExamplesAdvancedJsonBodyRequest
  * @type {Object}
  * @property {String} inQuery - Simple scalar value in query.
  * @property {String} inPath - Simple scalar value in path.
@@ -146,7 +146,7 @@
  */
 
 /**
- * @typedef PostJsonMapBodyRequest
+ * @typedef ExamplesAdvancedJsonMapBodyRequest
  * @type {Object}
  * @property {Number} inQuery - Simple scalar value in query.
  * @property {String} xHeader - Simple scalar value in header.
@@ -175,7 +175,7 @@
  */
 
 /**
- * @typedef GetJsonParamInPathRequest
+ * @typedef ExamplesAdvancedJsonParamRequest
  * @type {Object}
  * @property {Number} inQuery - Simple scalar value in query.
  * @property {AdvancedJSONPayload} identity - JSON value in query.
@@ -199,7 +199,7 @@
  */
 
 /**
- * @typedef PostJsonSliceBodyRequest
+ * @typedef ExamplesAdvancedJsonSliceBodyRequest
  * @type {Object}
  * @property {Number} inQuery - Simple scalar value in query.
  * @property {String} xHeader - Simple scalar value in header.
@@ -245,7 +245,7 @@
  */
 
 /**
- * @typedef GetQueryObjectRequest
+ * @typedef ExamplesAdvancedQueryObjectRequest
  * @type {Object}
  * @property {Object.<String,Number>} inQuery - Object value in query.
  */
@@ -262,7 +262,7 @@
  */
 
 /**
- * @typedef PostReqRespMappingRequest
+ * @typedef ReqRespMappingRequest
  * @type {Object}
  * @property {String} xHeader - Simple scalar value.
  * @property {Number} val2 - Simple scalar value.
@@ -281,7 +281,7 @@
  */
 
 /**
- * @typedef PostValidationRequest
+ * @typedef ExamplesAdvancedValidationRequest
  * @type {Object}
  * @property {Boolean} q - This parameter will bypass explicit validation as it does not have constraints.
  * @property {Number} xInput - Request minimum: 10, response maximum: 20.
