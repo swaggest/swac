@@ -14,16 +14,16 @@ for the POST call is that it allows users to specify any complex search
 criteria without worry about the GET size limitations as well as encoding
 of the input parameters.
 
-Base URL:{scheme}://developer.uspto.gov/ds-api
+Base URL: {scheme}://developer.uspto.gov/ds-api
 
 ## Table Of Contents
 
 * [Operations](#operations)
-    * metadata
+    * ### metadata
       - [GET `/`](#listdatasets) List available data sets
       - [GET `/{dataset}/{version}/fields`](#getdatasetversionfields) Provides the general information about the API and the list of fields that can be used to query the dataset.
 
-    * search
+    * ### search
       - [POST `/{dataset}/{version}/records`](#postdatasetversionrecords) Provides search capability for the data set with the given search criteria.
 
 * [Types](#types)

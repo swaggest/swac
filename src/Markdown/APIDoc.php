@@ -69,7 +69,7 @@ MD
             $headComment .= trim(wordwrap($config->description)) . "\n\n";
         }
         if (isset($config->baseUrl) && !empty(trim($config->baseUrl))) {
-            $headComment .= 'Base URL:' . trim(wordwrap($config->baseUrl)) . "\n\n";
+            $headComment .= 'Base URL: ' . trim(wordwrap($config->baseUrl)) . "\n\n";
         }
         if (isset($this->addSchemaUrl) && !empty($this->addSchemaUrl)) {
             $headComment .= '[Schema](' . $this->addSchemaUrl . ').' . "\n\n";
@@ -333,7 +333,7 @@ MD
     {
         foreach ($this->taggedContents as $tag => $content) {
             $this->tableOfContents->addSnippet(<<<MD
-    * $tag
+    * ### $tag
 {$content}
 
 MD

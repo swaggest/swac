@@ -105,7 +105,7 @@ JS
             $funcName = $this->makeName($operation->operationId);
         }
 
-        if (empty($funcName) || isset($this->operationNames)) {
+        if (empty($funcName) || isset($this->operationNames[$funcName])) {
             $funcName = $this->makeName($operation->method . '_' . $operation->path);
         }
 

@@ -11,23 +11,23 @@ configurations.
 
 * [Security](#security)
 * [Operations](#operations)
-    * Place
+    * ### Place
       - [DELETE `/places`](#deleteplaces) Delete Place
       - [GET `/places`](#getplaces) Find Place
       - [POST `/places`](#postplaces) Create Place
 
-    * Foo
+    * ### Foo
       - [DELETE `/foos`](#deletefoos) Delete Foo
       - [GET `/foos`](#getfoos) Find Foo
       - [POST `/foos`](#postfoos) Create Foo
       - [PUT `/foos`](#putfoos) Update Foo
 
-    * Lie
+    * ### Lie
       - [POST `/internal/find-available-carrots/{mille}/{look}`](#postinternalfindavailablecarrotsmillelook) Find Available Carrots
       - [GET `/lies`](#getlies) Get Lies
       - [GET `/lies/{id}`](#getliesid) Get Lie By ID
 
-    * LieAreas
+    * ### LieAreas
       - [GET `/lie-areas`](#getlieareas) List Lie areas name
       - [POST `/lie-areas`](#postlieareas) Create Lie Areas
       - [PUT `/lie-areas/{mille}/{LieArea}/sync`](#putlieareasmillelieareasync) Sync Lie Area

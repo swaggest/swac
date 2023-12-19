@@ -9,14 +9,14 @@ Version: cli-mode
 ## Table Of Contents
 
 * [Operations](#operations)
-    * Analyze
+    * ### Analyze
       - [GET `/profile`](#listprofiles) List Profiles
       - [GET `/profile.dot`](#getprofiledot) Dot Graph
       - [GET `/profile/find-symbol`](#getprofilefindsymbol) Find Symbol
       - [GET `/profile/symbol`](#getprofilesymbol) Symbol Stat
       - [GET `/top-traces`](#gettoptraces) Top Traces
 
-    * Collect
+    * ### Collect
       - [POST `/profile`](#postprofile) Collect Profile
       - [POST `/upload/profile`](#postuploadprofile) Upload Profile
       - [POST `/upload/profiles`](#postuploadprofiles) Upload Profiles
@@ -163,7 +163,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 
 |Property|Type                        |Description                       |
 |--------|----------------------------|----------------------------------|
-|`end`   |`Number`                    |Interval end UTC unix timestamp. .|
+|`end`   |`Number`                    |Interval end UTC unix timestamp.  |
 |`id`    |`String`                    |Profile ID.                       |
 |`labels`|`Map<String,String>`, `null`|                                  |
 |`start` |`Number`                    |Interval start UTC unix timestamp.|

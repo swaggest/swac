@@ -75,10 +75,10 @@
 
     /**
      * File Upload With 'multipart/form-data'
-     * @param {PostFileUploadRequest} req - request parameters.
+     * @param {ExamplesAdvancedFileUploaderRequest} req - request parameters.
      * @param {AdvancedInfoCallback} onOK
      */
-    APIClient.prototype.postFileUpload = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedFileUploader = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -122,10 +122,10 @@
 
     /**
      * direct Gzip
-     * @param {GetGzipPassThroughRequest} req - request parameters.
+     * @param {ExamplesAdvancedDirectGzipRequest} req - request parameters.
      * @param {AdvancedGzipPassThroughStructCallback} onOK
      */
-    APIClient.prototype.getGzipPassThrough = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedDirectGzip = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -204,10 +204,10 @@
      * Request With JSON Body and non-trivial validation
      * Request with JSON body and query/header/path params, response with JSON
      * body and data from request.
-     * @param {PostJsonBodyValidationInPathRequest} req - request parameters.
+     * @param {Propertyd41d8cRequest} req - request parameters.
      * @param {AdvancedOutputWithJSONType3Callback} onOK
      */
-    APIClient.prototype.postJsonBodyValidationInPath = function (req, onOK) {
+    APIClient.prototype.propertyd41d8c = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -252,10 +252,10 @@
      * Request With JSON Body
      * Request with JSON body and query/header/path params, response with JSON
      * body and data from request.
-     * @param {PostJsonBodyInPathRequest} req - request parameters.
+     * @param {ExamplesAdvancedJsonBodyRequest} req - request parameters.
      * @param {AdvancedOutputWithJSONType2Callback} onCreated
      */
-    APIClient.prototype.postJsonBodyInPath = function (req, onCreated) {
+    APIClient.prototype.examplesAdvancedJsonBody = function (req, onCreated) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -299,10 +299,10 @@
     /**
      * Request With JSON Map In Body
      * Request with JSON object (map) body.
-     * @param {PostJsonMapBodyRequest} req - request parameters.
+     * @param {ExamplesAdvancedJsonMapBodyRequest} req - request parameters.
      * @param {AdvancedJsonOutputType2Callback} onOK
      */
-    APIClient.prototype.postJsonMapBody = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedJsonMapBody = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -346,10 +346,10 @@
      * Request With JSON Query Parameter
      * Request with JSON body and query/header/path params, response with JSON
      * body and data from request.
-     * @param {GetJsonParamInPathRequest} req - request parameters.
+     * @param {ExamplesAdvancedJsonParamRequest} req - request parameters.
      * @param {AdvancedOutputWithJSONCallback} onOK
      */
-    APIClient.prototype.getJsonParamInPath = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedJsonParam = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -390,10 +390,10 @@
 
     /**
      * Request With JSON Array In Body
-     * @param {PostJsonSliceBodyRequest} req - request parameters.
+     * @param {ExamplesAdvancedJsonSliceBodyRequest} req - request parameters.
      * @param {AdvancedJsonOutputCallback} onOK
      */
-    APIClient.prototype.postJsonSliceBody = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedJsonSliceBody = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -546,10 +546,10 @@
 
     /**
      * Request With Object As Query Parameter
-     * @param {GetQueryObjectRequest} req - request parameters.
+     * @param {ExamplesAdvancedQueryObjectRequest} req - request parameters.
      * @param {AdvancedOutputQueryObjectCallback} onOK
      */
-    APIClient.prototype.getQueryObject = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedQueryObject = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -585,10 +585,10 @@
      * Request Response Mapping
      * This use case has transport concerns fully decoupled with external req/resp
      * mapping.
-     * @param {PostReqRespMappingRequest} req - request parameters.
+     * @param {ReqRespMappingRequest} req - request parameters.
      * @param {RawCallback} onNoContent
      */
-    APIClient.prototype.postReqRespMapping = function (req, onNoContent) {
+    APIClient.prototype.reqRespMapping = function (req, onNoContent) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -627,10 +627,10 @@
     /**
      * Validation
      * Input/Output with validation. Custom annotation.
-     * @param {PostValidationRequest} req - request parameters.
+     * @param {ExamplesAdvancedValidationRequest} req - request parameters.
      * @param {AdvancedOutputPortType2Callback} onOK
      */
-    APIClient.prototype.postValidation = function (req, onOK) {
+    APIClient.prototype.examplesAdvancedValidation = function (req, onOK) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {

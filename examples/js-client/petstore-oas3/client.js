@@ -91,11 +91,11 @@
 
     /**
      * Creates a new pet in the store.  Duplicates are allowed
-     * @param {PostPetsRequest} req - request parameters.
+     * @param {AddPetRequest} req - request parameters.
      * @param {NewPetPetAllOf1Callback} onOK
      * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.postPets = function (req, onOK, onDefault) {
+    APIClient.prototype.addPet = function (req, onOK, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -135,11 +135,11 @@
     /**
      * Returns a user based on a single ID, if the user does not have access to
      * the pet
-     * @param {GetPetsIdRequest} req - request parameters.
+     * @param {FindPetByIdRequest} req - request parameters.
      * @param {NewPetPetAllOf1Callback} onOK
      * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.getPetsId = function (req, onOK, onDefault) {
+    APIClient.prototype.findPetById = function (req, onOK, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -174,11 +174,11 @@
 
     /**
      * deletes a single pet based on the ID supplied
-     * @param {DeletePetsIdRequest} req - request parameters.
+     * @param {DeletePetRequest} req - request parameters.
      * @param {RawCallback} onNoContent
      * @param {ErrorCallback} onDefault
      */
-    APIClient.prototype.deletePetsId = function (req, onNoContent, onDefault) {
+    APIClient.prototype.deletePet = function (req, onNoContent, onDefault) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {

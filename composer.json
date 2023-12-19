@@ -14,7 +14,7 @@
     "swaggest/php-code-builder": "^0.2.39",
     "swaggest/go-code-builder": "^0.4.50",
     "swaggest/code-builder": "^0.3.8",
-    "swaggest/json-cli": "^v1.11.0",
+    "swaggest/json-cli": "^v1.11.2",
     "php-yaoi/php-yaoi": "^1",
     "monolog/monolog": "^1.23",
     "bramus/monolog-colored-line-formatter": "^2.0",

@@ -70,11 +70,11 @@
      * the oa_citations. Please see the 'fields' attribute which returns an array
      * of field names. Each field or a combination of fields can be searched using
      * the syntax options shown below.
-     * @param {GetDatasetVersionFieldsRequest} req - request parameters.
+     * @param {ListSearchableFieldsRequest} req - request parameters.
      * @param {StringCallback} onOK
      * @param {StringCallback} onNotFound
      */
-    APIClient.prototype.getDatasetVersionFields = function (req, onOK, onNotFound) {
+    APIClient.prototype.listSearchableFields = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {
@@ -120,11 +120,11 @@
      * https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for
      * the query syntax. List of field names that are searchable can be determined
      * using above GET api.
-     * @param {PostDatasetVersionRecordsRequest} req - request parameters.
+     * @param {PerformSearchRequest} req - request parameters.
      * @param {ArrayObjectStringObjectCallback} onOK
      * @param {RawCallback} onNotFound
      */
-    APIClient.prototype.postDatasetVersionRecords = function (req, onOK, onNotFound) {
+    APIClient.prototype.performSearch = function (req, onOK, onNotFound) {
         var x = new XMLHttpRequest();
         x.onreadystatechange = function () {
             if (x.readyState !== XMLHttpRequest.DONE) {

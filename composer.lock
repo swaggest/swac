@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec76f296a96d82983ab20eb262a4ed28",
+    "content-hash": "e1ca540c8492e148bbd567ff6ceefdc2",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -945,16 +945,16 @@
         },
         {
             "name": "swaggest/json-cli",
-            "version": "v1.11.1",
+            "version": "v1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-cli.git",
-                "reference": "a71376fe2fccefaf7b3fc44d8d22f198ee3c4909"
+                "reference": "147dbec6e6d75cf383fe5fe2c4ca88accefa742a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/a71376fe2fccefaf7b3fc44d8d22f198ee3c4909",
-                "reference": "a71376fe2fccefaf7b3fc44d8d22f198ee3c4909",
+                "url": "https://api.github.com/repos/swaggest/json-cli/zipball/147dbec6e6d75cf383fe5fe2c4ca88accefa742a",
+                "reference": "147dbec6e6d75cf383fe5fe2c4ca88accefa742a",
                 "shasum": ""
             },
             "require": {
@@ -966,7 +966,7 @@
                 "swaggest/json-diff": "^3.8.3",
                 "swaggest/json-schema": "^0.12.41",
                 "swaggest/json-schema-maker": "^0.3.7",
-                "swaggest/php-code-builder": "^0.2.38",
+                "swaggest/php-code-builder": "^0.2.41",
                 "symfony/yaml": "^3"
             },
             "require-dev": {
@@ -994,22 +994,22 @@
             "description": "JSON CLI tool (diff, rearrange, pretty print, minify, yaml convert, etc...)",
             "support": {
                 "issues": "https://github.com/swaggest/json-cli/issues",
-                "source": "https://github.com/swaggest/json-cli/tree/v1.11.1"
+                "source": "https://github.com/swaggest/json-cli/tree/v1.11.2"
             },
-            "time": "2022-11-14T22:06:21+00:00"
+            "time": "2023-12-19T00:50:30+00:00"
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.10.4",
+            "version": "v3.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "f4e511708060ff7511a3743fab4aa484a062bcfb"
+                "reference": "17bfc66b330f46e12a7e574133497a290cd79ba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/f4e511708060ff7511a3743fab4aa484a062bcfb",
-                "reference": "f4e511708060ff7511a3743fab4aa484a062bcfb",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/17bfc66b330f46e12a7e574133497a290cd79ba5",
+                "reference": "17bfc66b330f46e12a7e574133497a290cd79ba5",
                 "shasum": ""
             },
             "require": {
@@ -1037,22 +1037,22 @@
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
             "support": {
                 "issues": "https://github.com/swaggest/json-diff/issues",
-                "source": "https://github.com/swaggest/json-diff/tree/v3.10.4"
+                "source": "https://github.com/swaggest/json-diff/tree/v3.10.5"
             },
-            "time": "2022-11-09T13:21:05+00:00"
+            "time": "2023-11-17T11:12:46+00:00"
         },
         {
             "name": "swaggest/json-schema",
-            "version": "v0.12.41",
+            "version": "v0.12.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-json-schema.git",
-                "reference": "1bb97901314f828774dd8c5b21bff889ce0b34bb"
+                "reference": "d23adb53808b8e2da36f75bc0188546e4cbe3b45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/1bb97901314f828774dd8c5b21bff889ce0b34bb",
-                "reference": "1bb97901314f828774dd8c5b21bff889ce0b34bb",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/d23adb53808b8e2da36f75bc0188546e4cbe3b45",
+                "reference": "d23adb53808b8e2da36f75bc0188546e4cbe3b45",
                 "shasum": ""
             },
             "require": {
@@ -1088,9 +1088,9 @@
             "support": {
                 "email": "vearutop@gmail.com",
                 "issues": "https://github.com/swaggest/php-json-schema/issues",
-                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.41"
+                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.42"
             },
-            "time": "2022-08-17T11:21:43+00:00"
+            "time": "2023-09-12T14:43:42+00:00"
         },
         {
             "name": "swaggest/json-schema-maker",
@@ -1144,16 +1144,16 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.39",
+            "version": "v0.2.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "57f9213891a12707bc137bed91a88f996e11bd68"
+                "reference": "2f6ad5057c14d4842cf8b35d929a4b0813da39f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/57f9213891a12707bc137bed91a88f996e11bd68",
-                "reference": "57f9213891a12707bc137bed91a88f996e11bd68",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/2f6ad5057c14d4842cf8b35d929a4b0813da39f5",
+                "reference": "2f6ad5057c14d4842cf8b35d929a4b0813da39f5",
                 "shasum": ""
             },
             "require": {
@@ -1189,9 +1189,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.39"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.41"
             },
-            "time": "2023-08-03T22:33:56+00:00"
+            "time": "2023-12-19T00:40:11+00:00"
         },
         {
             "name": "swaggest/rest-client",
@@ -3033,5 +3033,5 @@
     "platform-overrides": {
         "php": "5.6.0"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
