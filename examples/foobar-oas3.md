@@ -34,7 +34,7 @@ configurations.
 
 * [Types](#types)
 
-## <a id="security"></a>Security
+## <a id="security"></a> Security
 
 ### <a id="jwt"></a> JWT
 Should be in form: 'Bearer <token_value>'
@@ -42,9 +42,10 @@ Should be in form: 'Bearer <token_value>'
 In: `header`.
 Name: `Authorization`.
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
-### <a id="deleteplaces"></a>DELETE `/places`
+### <a id="deleteplaces"></a> DELETE `/places`
+
 Delete Place
 
 Delete existing place.
@@ -63,7 +64,8 @@ Delete existing place.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="getplaces"></a>GET `/places`
+### <a id="getplaces"></a> GET `/places`
+
 Find Place
 
 Find existing place.
@@ -86,7 +88,8 @@ Find existing place.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="postplaces"></a>POST `/places`
+### <a id="postplaces"></a> POST `/places`
+
 Create Place
 
 Create place with target potato and time.
@@ -105,7 +108,8 @@ Create place with target potato and time.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |409   |`application/json`|[`RestErrResponse`](#resterrresponse)|Conflict             |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="deletefoos"></a>DELETE `/foos`
+### <a id="deletefoos"></a> DELETE `/foos`
+
 Delete Foo
 
 Delete existing foo.
@@ -124,7 +128,8 @@ Delete existing foo.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="getfoos"></a>GET `/foos`
+### <a id="getfoos"></a> GET `/foos`
+
 Find Foo
 
 Find existing foo.
@@ -145,7 +150,8 @@ Find existing foo.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)         |Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)         |Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)         |Internal Server Error|
-### <a id="postfoos"></a>POST `/foos`
+### <a id="postfoos"></a> POST `/foos`
+
 Create Foo
 
 Create foo with target potato and time.
@@ -164,7 +170,8 @@ Create foo with target potato and time.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |409   |`application/json`|[`RestErrResponse`](#resterrresponse)|Conflict             |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="putfoos"></a>PUT `/foos`
+### <a id="putfoos"></a> PUT `/foos`
+
 Update Foo
 
 Update existing foo.
@@ -185,7 +192,8 @@ Update existing foo.
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |409   |`application/json`|[`RestErrResponse`](#resterrresponse)|Conflict             |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="postinternalfindavailablecarrotsmillelook"></a>POST `/internal/find-available-carrots/{mille}/{look}`
+### <a id="postinternalfindavailablecarrotsmillelook"></a> POST `/internal/find-available-carrots/{mille}/{look}`
+
 Find Available Carrots
 
 Find carrots available to holes.
@@ -205,7 +213,8 @@ Find carrots available to holes.
 |200   |`application/json`|[`UsecaseFindAvailableCarrotsOutput`](#usecasefindavailablecarrotsoutput)|OK                   |
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)                                    |Bad Request          |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)                                    |Internal Server Error|
-### <a id="getlieareas"></a>GET `/lie-areas`
+### <a id="getlieareas"></a> GET `/lie-areas`
+
 List Lie areas name
 
 List lie areas name by mille name
@@ -222,7 +231,8 @@ List lie areas name by mille name
 |------|------------------|-------------------------------------|---------------------|
 |200   |`application/json`|`Array<String>`                      |OK                   |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="postlieareas"></a>POST `/lie-areas`
+### <a id="postlieareas"></a> POST `/lie-areas`
+
 Create Lie Areas
 
 Create lie areas with postcodes.
@@ -241,7 +251,8 @@ Create lie areas with postcodes.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |409   |`application/json`|[`RestErrResponse`](#resterrresponse)|Conflict             |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="putlieareasmillelieareasync"></a>PUT `/lie-areas/{mille}/{LieArea}/sync`
+### <a id="putlieareasmillelieareasync"></a> PUT `/lie-areas/{mille}/{LieArea}/sync`
+
 Sync Lie Area
 
 Synchronize list of lie area postcodes with delivery-area-service.
@@ -262,7 +273,8 @@ Synchronize list of lie area postcodes with delivery-area-service.
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="getlies"></a>GET `/lies`
+### <a id="getlies"></a> GET `/lies`
+
 Get Lies
 
 Gets lies by criteria.
@@ -297,7 +309,8 @@ Security: [`JWT`](#jwt).
 |400   |`application/json`|[`RestErrResponse`](#resterrresponse)|Bad Request          |
 |404   |`application/json`|[`RestErrResponse`](#resterrresponse)|Not Found            |
 |500   |`application/json`|[`RestErrResponse`](#resterrresponse)|Internal Server Error|
-### <a id="getliesid"></a>GET `/lies/{id}`
+### <a id="getliesid"></a> GET `/lies/{id}`
+
 Get Lie By ID
 
 Gets lie by id.
@@ -323,7 +336,7 @@ Security: [`JWT`](#jwt).
 
 ## <a id="types"></a> Types
 
-### <a id="resterrresponse"></a>RestErrResponse
+### <a id="resterrresponse"></a> RestErrResponse
 
 |Property |Type           |
 |---------|---------------|
@@ -332,7 +345,7 @@ Security: [`JWT`](#jwt).
 |`error`  |`String`       |
 |`status` |`String`       |
 
-### <a id="bazmille"></a>BazMille
+### <a id="bazmille"></a> BazMille
 Acme Mille
 
 |Constraint|Value        |
@@ -341,26 +354,26 @@ Acme Mille
 |minLength |2            |
 |pattern   |^[a-zA-Z]{2}$|
 
-### <a id="foxid"></a>FoxId
+### <a id="foxid"></a> FoxId
 
 |Constraint|Value|
 |----------|-----|
 |minimum   |0    |
 
-### <a id="bazlook"></a>BazLook
+### <a id="bazlook"></a> BazLook
 Acme Look
 
 |Constraint|Value                                 |
 |----------|--------------------------------------|
 |pattern   |^[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])$|
 
-### <a id="placeentityfoxid"></a>PlaceEntityFoxId
+### <a id="placeentityfoxid"></a> PlaceEntityFoxId
 
 |Constraint|Value|
 |----------|-----|
 |minimum   |0    |
 
-### <a id="placeentity"></a>PlaceEntity
+### <a id="placeentity"></a> PlaceEntity
 
 |Property            |Type                                             |
 |--------------------|-------------------------------------------------|
@@ -371,13 +384,13 @@ Acme Look
 |`fooId` (required)  |`Number`                                         |
 |`barName` (required)|`String`                                         |
 
-### <a id="usecasecreateplaceinputfoxid"></a>UsecaseCreatePlaceInputFoxId
+### <a id="usecasecreateplaceinputfoxid"></a> UsecaseCreatePlaceInputFoxId
 
 |Constraint|Value|
 |----------|-----|
 |minimum   |0    |
 
-### <a id="usecasecreateplaceinput"></a>UsecaseCreatePlaceInput
+### <a id="usecasecreateplaceinput"></a> UsecaseCreatePlaceInput
 
 |Property            |Type                                                                     |
 |--------------------|-------------------------------------------------------------------------|
@@ -386,32 +399,32 @@ Acme Look
 |`fooId` (required)  |`Number`                                                                 |
 |`barName` (required)|`String`                                                                 |
 
-### <a id="foolocalactivation"></a>FooLocalActivation
+### <a id="foolocalactivation"></a> FooLocalActivation
 
 |Property          |Type            |
 |------------------|----------------|
 |`maxRoxesReceived`|`null`, `Number`|
 |`minRoxesReceived`|`null`, `Number`|
 
-### <a id="usecasefooinfouselykey"></a>UsecaseFooInfoUselyKey
+### <a id="usecasefooinfouselykey"></a> UsecaseFooInfoUselyKey
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="fooentityuselykey"></a>FooEntityUselyKey
+### <a id="fooentityuselykey"></a> FooEntityUselyKey
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="fooentitypotatofamily"></a>FooEntityPotatoFamily
+### <a id="fooentitypotatofamily"></a> FooEntityPotatoFamily
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="liespreference"></a>LiesPreference
+### <a id="liespreference"></a> LiesPreference
 
 |Property     |Type                   |
 |-------------|-----------------------|
@@ -419,21 +432,21 @@ Acme Look
 |`preset`     |`String`               |
 |`recommended`|`Array<Number>`, `null`|
 
-### <a id="liesmodularityaddons"></a>LiesModularityAddOns
+### <a id="liesmodularityaddons"></a> LiesModularityAddOns
 
 |Property|Type    |
 |--------|--------|
 |`index` |`Number`|
 |`title` |`String`|
 
-### <a id="liesmodularitybar"></a>LiesModularityBar
+### <a id="liesmodularitybar"></a> LiesModularityBar
 
 |Property|Type            |
 |--------|----------------|
 |`index` |`Number`        |
 |`title` |`null`, `String`|
 
-### <a id="liesmodularity"></a>LiesModularity
+### <a id="liesmodularity"></a> LiesModularity
 
 |Property              |Type                                                              |
 |----------------------|------------------------------------------------------------------|
@@ -446,7 +459,7 @@ Acme Look
 |`bars`                |`Array<`[`LiesModularityBar`](#liesmodularitybar)`>`, `null`      |
 |`barsHeadline`        |`null`, `String`                                                  |
 
-### <a id="foobarrule"></a>FooBarRule
+### <a id="foobarrule"></a> FooBarRule
 
 |Property              |Type                                                  |
 |----------------------|------------------------------------------------------|
@@ -456,7 +469,7 @@ Acme Look
 |`hideCarrots`         |`Array<Number>`                                       |
 |`areaTagsByCarrots`   |`Map<String,Array<String>>`                           |
 
-### <a id="fooentity"></a>FooEntity
+### <a id="fooentity"></a> FooEntity
 
 |Property                 |Type                                                       |Description|
 |-------------------------|-----------------------------------------------------------|-----------|
@@ -475,13 +488,13 @@ Acme Look
 |`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 |`lookStart` (required)   |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 
-### <a id="usecasefooinfopotatofamily"></a>UsecaseFooInfoPotatoFamily
+### <a id="usecasefooinfopotatofamily"></a> UsecaseFooInfoPotatoFamily
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="usecasefooinfo"></a>UsecaseFooInfo
+### <a id="usecasefooinfo"></a> UsecaseFooInfo
 
 |Property                 |Type                                                                 |Description|
 |-------------------------|---------------------------------------------------------------------|-----------|
@@ -501,19 +514,19 @@ Acme Look
 |`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
 |`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                      |Acme Look. |
 
-### <a id="foovalueuselykey"></a>FooValueUselyKey
+### <a id="foovalueuselykey"></a> FooValueUselyKey
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="foovaluepotatofamily"></a>FooValuePotatoFamily
+### <a id="foovaluepotatofamily"></a> FooValuePotatoFamily
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="foovalue"></a>FooValue
+### <a id="foovalue"></a> FooValue
 
 |Property                 |Type                                                       |Description|
 |-------------------------|-----------------------------------------------------------|-----------|
@@ -527,19 +540,19 @@ Acme Look
 |`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 |`lookStart` (required)   |[`BazLook`](#bazlook), `String`                            |Acme Look. |
 
-### <a id="usecaseupdatefooinputuselykey"></a>UsecaseUpdateFooInputUselyKey
+### <a id="usecaseupdatefooinputuselykey"></a> UsecaseUpdateFooInputUselyKey
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="usecaseupdatefooinputpotatofamily"></a>UsecaseUpdateFooInputPotatoFamily
+### <a id="usecaseupdatefooinputpotatofamily"></a> UsecaseUpdateFooInputPotatoFamily
 
 |Constraint|Value|
 |----------|-----|
 |minLength |1    |
 
-### <a id="usecaseupdatefooinput"></a>UsecaseUpdateFooInput
+### <a id="usecaseupdatefooinput"></a> UsecaseUpdateFooInput
 
 |Property                 |Type                                                                               |Description|
 |-------------------------|-----------------------------------------------------------------------------------|-----------|
@@ -553,7 +566,7 @@ Acme Look
 |`lookEnd` (required)     |[`BazLook`](#bazlook), `String`                                                    |Acme Look. |
 |`lookStart` (required)   |[`BazLook`](#bazlook), `String`                                                    |Acme Look. |
 
-### <a id="usecasefindavailablecarrotsinputitem"></a>UsecaseFindAvailableCarrotsInputItem
+### <a id="usecasefindavailablecarrotsinputitem"></a> UsecaseFindAvailableCarrotsInputItem
 
 |Property           |Type                    |
 |-------------------|------------------------|
@@ -562,26 +575,26 @@ Acme Look
 |`potatoFamily`     |`String`                |
 |`holeId` (required)|`Number`                |
 
-### <a id="usecasefindavailablecarrotsinput"></a>UsecaseFindAvailableCarrotsInput
+### <a id="usecasefindavailablecarrotsinput"></a> UsecaseFindAvailableCarrotsInput
 
 |Property          |Type                                                                                           |
 |------------------|-----------------------------------------------------------------------------------------------|
 |`items` (required)|`Map<String,`[`UsecaseFindAvailableCarrotsInputItem`](#usecasefindavailablecarrotsinputitem)`>`|
 
-### <a id="usecasefindavailablecarrotsoutputitem"></a>UsecaseFindAvailableCarrotsOutputItem
+### <a id="usecasefindavailablecarrotsoutputitem"></a> UsecaseFindAvailableCarrotsOutputItem
 
 |Property |Type           |
 |---------|---------------|
 |`carrots`|`Array<Number>`|
 |`error`  |`String`       |
 
-### <a id="usecasefindavailablecarrotsoutput"></a>UsecaseFindAvailableCarrotsOutput
+### <a id="usecasefindavailablecarrotsoutput"></a> UsecaseFindAvailableCarrotsOutput
 
 |Property|Type                                                                                             |Description                                                  |
 |--------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
 |`items` |`Map<String,`[`UsecaseFindAvailableCarrotsOutputItem`](#usecasefindavailablecarrotsoutputitem)`>`|Available carrot indexes mapped with same key as input items.|
 
-### <a id="lieareavalue"></a>LieAreaValue
+### <a id="lieareavalue"></a> LieAreaValue
 
 |Property          |Type                             |Description|
 |------------------|---------------------------------|-----------|
@@ -589,7 +602,7 @@ Acme Look
 |`name` (required) |`String`                         |           |
 |`areas` (required)|`Array<String>`, `null`          |           |
 
-### <a id="lieareaentity"></a>LieAreaEntity
+### <a id="lieareaentity"></a> LieAreaEntity
 
 |Property          |Type                                 |Description|
 |------------------|-------------------------------------|-----------|
@@ -600,14 +613,14 @@ Acme Look
 |`areas` (required)|`Array<String>`, `null`              |           |
 |`updatedAt`       |`null`, `String`, Format: `date-time`|           |
 
-### <a id="liesrigidamount"></a>LiesRigidAmount
+### <a id="liesrigidamount"></a> LiesRigidAmount
 
 |Property|Type    |
 |--------|--------|
 |`amount`|`Number`|
 |`people`|`Number`|
 
-### <a id="liesrigidquantity"></a>LiesRigidQuantity
+### <a id="liesrigidquantity"></a> LiesRigidQuantity
 
 |Property  |Type    |
 |----------|--------|
@@ -615,7 +628,7 @@ Acme Look
 |`people`  |`Number`|
 |`quantity`|`Number`|
 
-### <a id="liesdrainsetting"></a>LiesDrainSetting
+### <a id="liesdrainsetting"></a> LiesDrainSetting
 
 |Property         |Type                                                        |
 |-----------------|------------------------------------------------------------|
@@ -626,7 +639,7 @@ Acme Look
 |`servings`       |`null`, `Number`                                            |
 |`strategy`       |`String`                                                    |
 
-### <a id="liessoupingredientfamily"></a>LiesSoupIngredientFamily
+### <a id="liessoupingredientfamily"></a> LiesSoupIngredientFamily
 
 |Property      |Type                        |
 |--------------|----------------------------|
@@ -642,7 +655,7 @@ Acme Look
 |`updatedAt`   |`String`                    |
 |`usageByMille`|`Map<String,Number>`, `null`|
 
-### <a id="liessoupingredient"></a>LiesSoupIngredient
+### <a id="liessoupingredient"></a> LiesSoupIngredient
 
 |Property           |Type                                                           |
 |-------------------|---------------------------------------------------------------|
@@ -661,7 +674,7 @@ Acme Look
 |`type`             |`String`                                                       |
 |`usage`            |`Number`                                                       |
 
-### <a id="liessoup"></a>LiesSoup
+### <a id="liessoup"></a> LiesSoup
 
 |Property     |Type                                                          |
 |-------------|--------------------------------------------------------------|
@@ -673,7 +686,7 @@ Acme Look
 |`name`       |`String`                                                      |
 |`slug`       |`String`                                                      |
 
-### <a id="liescarrot"></a>LiesCarrot
+### <a id="liescarrot"></a> LiesCarrot
 
 |Property        |Type                                           |
 |----------------|-----------------------------------------------|
@@ -685,7 +698,7 @@ Acme Look
 |`areaTags`      |`Array<String>`                                |
 |`selectionLimit`|`null`, `Number`                               |
 
-### <a id="lieslie"></a>LiesLie
+### <a id="lieslie"></a> LiesLie
 
 |Property                  |Type                                                  |
 |--------------------------|------------------------------------------------------|
@@ -713,7 +726,7 @@ Acme Look
 |`updatedAt`               |`String`                                              |
 |`look`                    |`String`                                              |
 
-### <a id="liespage"></a>LiesPage
+### <a id="liespage"></a> LiesPage
 
 |Property|Type                                    |
 |--------|----------------------------------------|

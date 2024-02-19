@@ -28,9 +28,10 @@ Base URL: {scheme}://developer.uspto.gov/ds-api
 
 * [Types](#types)
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
-### <a id="listdatasets"></a>GET `/`
+### <a id="listdatasets"></a> GET `/`
+
 List available data sets
 
 #### Response
@@ -38,7 +39,8 @@ List available data sets
 |Status|Content Type      |Body Type                    |Description                |
 |------|------------------|-----------------------------|---------------------------|
 |200   |`application/json`|[`DataSetList`](#datasetlist)|Returns a list of data sets|
-### <a id="getdatasetversionfields"></a>GET `/{dataset}/{version}/fields`
+### <a id="getdatasetversionfields"></a> GET `/{dataset}/{version}/fields`
+
 Provides the general information about the API and the list of fields that can be used to query the dataset.
 
 This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
@@ -56,7 +58,8 @@ This GET API returns the list of all the searchable field names that are in the 
 |------|------------------|---------|---------------------------------------------------------------------------------------------------------------------------|
 |200   |`application/json`|`String` |The dataset API for the given version is found and it is accessible to consume.                                            |
 |404   |`application/json`|`String` |The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.|
-### <a id="postdatasetversionrecords"></a>POST `/{dataset}/{version}/records`
+### <a id="postdatasetversionrecords"></a> POST `/{dataset}/{version}/records`
+
 Provides search capability for the data set with the given search criteria.
 
 This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
@@ -80,7 +83,7 @@ This API is based on Solr/Lucense Search. The data is indexed using SOLR. This G
 
 ## <a id="types"></a> Types
 
-### <a id="datasetlistapisitems"></a>DataSetListApisItems
+### <a id="datasetlistapisitems"></a> DataSetListApisItems
 
 |Property             |Type                      |Description                             |
 |---------------------|--------------------------|----------------------------------------|
@@ -89,7 +92,7 @@ This API is based on Solr/Lucense Search. The data is indexed using SOLR. This G
 |`apiUrl`             |`String`, Format: `uriref`|The URL describing the dataset's fields.|
 |`apiDocumentationUrl`|`String`, Format: `uriref`|A URL to the API console for each API.  |
 
-### <a id="datasetlist"></a>DataSetList
+### <a id="datasetlist"></a> DataSetList
 
 |Property|Type                                                      |
 |--------|----------------------------------------------------------|
