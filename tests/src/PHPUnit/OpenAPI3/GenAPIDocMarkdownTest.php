@@ -54,6 +54,21 @@ class GenAPIDocMarkdownTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $out, "Generated files changed");
     }
 
+    public function testAdvancedConfluence()
+    {
+        App::$ver = '<version>';
+        $cmd = new Markdown();
+        $cmd->confluence = true;
+        $cmd->schema = __DIR__ . '/../../../resources/advanced3.json';
+        $cmd->out = __DIR__ . '/../../../../examples/advanced-oas3-confluence.md';
+
+        $cmd->performAction();
+
+        exec('git diff ' . $cmd->out, $out);
+        $out = implode("\n", $out);
+        $this->assertSame('', $out, "Generated files changed");
+    }
+
     public function testXhprofCollector()
     {
         App::$ver = '<version>';

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1ca540c8492e148bbd567ff6ceefdc2",
+    "content-hash": "362f5182ed3e7e1a1ca3d339c23c254b",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -1144,16 +1144,16 @@
         },
         {
             "name": "swaggest/php-code-builder",
-            "version": "v0.2.41",
+            "version": "v0.2.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-code-builder.git",
-                "reference": "2f6ad5057c14d4842cf8b35d929a4b0813da39f5"
+                "reference": "f221ec5ac73c59bd54deb50239314104d3525286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/2f6ad5057c14d4842cf8b35d929a4b0813da39f5",
-                "reference": "2f6ad5057c14d4842cf8b35d929a4b0813da39f5",
+                "url": "https://api.github.com/repos/swaggest/php-code-builder/zipball/f221ec5ac73c59bd54deb50239314104d3525286",
+                "reference": "f221ec5ac73c59bd54deb50239314104d3525286",
                 "shasum": ""
             },
             "require": {
@@ -1189,9 +1189,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swaggest/php-code-builder/issues",
-                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.41"
+                "source": "https://github.com/swaggest/php-code-builder/tree/v0.2.42"
             },
-            "time": "2023-12-19T00:40:11+00:00"
+            "time": "2024-02-19T17:20:30+00:00"
         },
         {
             "name": "swaggest/rest-client",

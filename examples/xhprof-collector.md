@@ -23,9 +23,10 @@ Version: cli-mode
 
 * [Types](#types)
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
-### <a id="listprofiles"></a>GET `/profile`
+### <a id="listprofiles"></a> GET `/profile`
+
 List Profiles
 
 #### Response
@@ -33,7 +34,8 @@ List Profiles
 |Status|Content Type      |Body Type                  |Description|
 |------|------------------|---------------------------|-----------|
 |200   |`application/json`|[`XhProfiles`](#xhprofiles)|OK         |
-### <a id="postprofile"></a>POST `/profile`
+### <a id="postprofile"></a> POST `/profile`
+
 Collect Profile
 
 Collects XHPROF-compatible PHP profile.
@@ -50,7 +52,8 @@ Collects XHPROF-compatible PHP profile.
 |------|------------------|-----------------------------------------|-----------|
 |202   |                  |                                         |Accepted   |
 |409   |`application/json`|[`XhRestErrResponse`](#xhresterrresponse)|Conflict   |
-### <a id="getprofiledot"></a>GET `/profile.dot`
+### <a id="getprofiledot"></a> GET `/profile.dot`
+
 Dot Graph
 
 #### Parameters
@@ -68,7 +71,8 @@ Dot Graph
 |------|-------------------|-----------------------------------------|-----------|
 |200   |`text/vnd.graphviz`|                                         |OK         |
 |404   |`application/json` |[`XhRestErrResponse`](#xhresterrresponse)|Not Found  |
-### <a id="getprofilefindsymbol"></a>GET `/profile/find-symbol`
+### <a id="getprofilefindsymbol"></a> GET `/profile/find-symbol`
+
 Find Symbol
 
 #### Parameters
@@ -85,7 +89,8 @@ Find Symbol
 |------|------------------|-----------------------------------------|-----------|
 |200   |`application/json`|[`XhSearchOutput`](#xhsearchoutput)      |OK         |
 |404   |`application/json`|[`XhRestErrResponse`](#xhresterrresponse)|Not Found  |
-### <a id="getprofilesymbol"></a>GET `/profile/symbol`
+### <a id="getprofilesymbol"></a> GET `/profile/symbol`
+
 Symbol Stat
 
 #### Parameters
@@ -101,7 +106,8 @@ Symbol Stat
 |------|------------------|-------------------------------------------|-----------|
 |200   |`application/json`|[`XhSymbolStatOutput`](#xhsymbolstatoutput)|OK         |
 |404   |`application/json`|[`XhRestErrResponse`](#xhresterrresponse)  |Not Found  |
-### <a id="gettoptraces"></a>GET `/top-traces`
+### <a id="gettoptraces"></a> GET `/top-traces`
+
 Top Traces
 
 Get traces that occupy most of resource.
@@ -121,7 +127,8 @@ Get traces that occupy most of resource.
 |------|------------------|-----------------------------------------|-----------|
 |200   |`application/json`|`Array<`[`XhTraceInfo`](#xhtraceinfo)`>` |OK         |
 |404   |`application/json`|[`XhRestErrResponse`](#xhresterrresponse)|Not Found  |
-### <a id="postuploadprofile"></a>POST `/upload/profile`
+### <a id="postuploadprofile"></a> POST `/upload/profile`
+
 Upload Profile
 
 Collects XHPROF-compatible PHP profile from uploaded JSON/PHP-Serialized file.
@@ -139,7 +146,8 @@ Collects XHPROF-compatible PHP profile from uploaded JSON/PHP-Serialized file.
 |------|------------------|-----------------------------------------|-----------|
 |202   |                  |                                         |Accepted   |
 |409   |`application/json`|[`XhRestErrResponse`](#xhresterrresponse)|Conflict   |
-### <a id="postuploadprofiles"></a>POST `/upload/profiles`
+### <a id="postuploadprofiles"></a> POST `/upload/profiles`
+
 Upload Profiles
 
 Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
@@ -159,7 +167,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 
 ## <a id="types"></a> Types
 
-### <a id="xhaggregatorgroup"></a>XhAggregatorGroup
+### <a id="xhaggregatorgroup"></a> XhAggregatorGroup
 
 |Property|Type                        |Description                       |
 |--------|----------------------------|----------------------------------|
@@ -168,7 +176,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`labels`|`Map<String,String>`, `null`|                                  |
 |`start` |`Number`                    |Interval start UTC unix timestamp.|
 
-### <a id="xhprofileinfo"></a>XhProfileInfo
+### <a id="xhprofileinfo"></a> XhProfileInfo
 
 |Property  |Type                                     |
 |----------|-----------------------------------------|
@@ -180,14 +188,14 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`profiles`|`Number`                                 |
 |`wt`      |`String`                                 |
 
-### <a id="xhprofiles"></a>XhProfiles
+### <a id="xhprofiles"></a> XhProfiles
 
 |Property          |Type                                                |
 |------------------|----------------------------------------------------|
 |`activeAggregates`|`Array<`[`XhProfileInfo`](#xhprofileinfo)`>`, `null`|
 |`recent`          |`Array<`[`XhProfileInfo`](#xhprofileinfo)`>`, `null`|
 
-### <a id="xhprofilevalue"></a>XhProfileValue
+### <a id="xhprofilevalue"></a> XhProfileValue
 
 |Property|Type    |Description                                               |
 |--------|--------|----------------------------------------------------------|
@@ -202,7 +210,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`pmu`   |`Number`|Peak memory usage in bytes.                               |
 |`wt`    |`Number`|Wall time in microseconds.                                |
 
-### <a id="xhcollectprofileinput"></a>XhCollectProfileInput
+### <a id="xhcollectprofileinput"></a> XhCollectProfileInput
 
 |Property       |Type                                                       |Description                                         |
 |---------------|-----------------------------------------------------------|----------------------------------------------------|
@@ -211,7 +219,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`meta`         |`Map<String,*>`, `null`                                    |Additional context.                                 |
 |`profile`      |`Map<String,`[`XhProfileValue`](#xhprofilevalue)`>`, `null`|                                                    |
 
-### <a id="xhresterrresponse"></a>XhRestErrResponse
+### <a id="xhresterrresponse"></a> XhRestErrResponse
 
 |Property |Type           |Description                     |
 |---------|---------------|--------------------------------|
@@ -220,13 +228,13 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`error`  |`String`       |Error message.                  |
 |`status` |`String`       |Status text.                    |
 
-### <a id="xhsearchoutput"></a>XhSearchOutput
+### <a id="xhsearchoutput"></a> XhSearchOutput
 
 |Property |Type                   |
 |---------|-----------------------|
 |`symbols`|`Array<String>`, `null`|
 
-### <a id="xhrendervaluestat"></a>XhRenderValueStat
+### <a id="xhrendervaluestat"></a> XhRenderValueStat
 
 |Property|Type    |
 |--------|--------|
@@ -245,7 +253,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`wt`    |`String`|
 |`wtf`   |`String`|
 
-### <a id="xhsymbolstatoutput"></a>XhSymbolStatOutput
+### <a id="xhsymbolstatoutput"></a> XhSymbolStatOutput
 
 |Property   |Type                                                     |Description  |
 |-----------|---------------------------------------------------------|-------------|
@@ -254,7 +262,7 @@ Collects XHPROF-compatible PHP profiles from uploaded JSON/PHP-Serialized files.
 |`exclusive`|[`XhRenderValueStat`](#xhrendervaluestat)                |             |
 |`inclusive`|[`XhRenderValueStat`](#xhrendervaluestat)                |             |
 
-### <a id="xhtraceinfo"></a>XhTraceInfo
+### <a id="xhtraceinfo"></a> XhTraceInfo
 
 |Property|Type                                     |
 |--------|-----------------------------------------|

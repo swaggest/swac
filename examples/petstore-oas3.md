@@ -18,9 +18,9 @@ Base URL: http://petstore.swagger.io/api
   - [DELETE `/pets/{id}`](#deletepetsid) 
 * [Types](#types)
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
-### <a id="findpets"></a>GET `/pets`
+### <a id="findpets"></a> GET `/pets`
 
 Returns all pets from the system that the user has access to
 Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.
@@ -40,7 +40,7 @@ Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condime
 |-------|------------------|---------------------------------------------------------|----------------|
 |200    |`application/json`|`Array<`[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)`>`|pet response    |
 |default|`application/json`|[`Error`](#error)                                        |unexpected error|
-### <a id="postpets"></a>POST `/pets`
+### <a id="postpets"></a> POST `/pets`
 
 Creates a new pet in the store.  Duplicates are allowed
 
@@ -56,7 +56,7 @@ Creates a new pet in the store.  Duplicates are allowed
 |-------|------------------|----------------------------------------------|----------------|
 |200    |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response    |
 |default|`application/json`|[`Error`](#error)                             |unexpected error|
-### <a id="getpetsid"></a>GET `/pets/{id}`
+### <a id="getpetsid"></a> GET `/pets/{id}`
 
 Returns a user based on a single ID, if the user does not have access to the pet
 
@@ -72,7 +72,7 @@ Returns a user based on a single ID, if the user does not have access to the pet
 |-------|------------------|----------------------------------------------|----------------|
 |200    |`application/json`|[`NewPet`](#newpet), [`PetAllOf1`](#petallof1)|pet response    |
 |default|`application/json`|[`Error`](#error)                             |unexpected error|
-### <a id="deletepetsid"></a>DELETE `/pets/{id}`
+### <a id="deletepetsid"></a> DELETE `/pets/{id}`
 
 deletes a single pet based on the ID supplied
 
@@ -91,20 +91,20 @@ deletes a single pet based on the ID supplied
 
 ## <a id="types"></a> Types
 
-### <a id="newpet"></a>NewPet
+### <a id="newpet"></a> NewPet
 
 |Property         |Type    |
 |-----------------|--------|
 |`name` (required)|`String`|
 |`tag`            |`String`|
 
-### <a id="petallof1"></a>PetAllOf1
+### <a id="petallof1"></a> PetAllOf1
 
 |Property       |Type                     |
 |---------------|-------------------------|
 |`id` (required)|`Number`, Format: `int64`|
 
-### <a id="error"></a>Error
+### <a id="error"></a> Error
 
 |Property            |Type                     |
 |--------------------|-------------------------|

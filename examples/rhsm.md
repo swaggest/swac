@@ -76,16 +76,17 @@ Base URL: https://api.access.redhat.com/management/v1
 
 * [Types](#types)
 
-## <a id="security"></a>Security
+## <a id="security"></a> Security
 
 ### <a id="bearer"></a> Bearer
 
 In: `header`.
 Name: `Authorization`.
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
-### <a id="listallocations"></a>GET `/allocations`
+### <a id="listallocations"></a> GET `/allocations`
+
 List all allocations for a user
 
 The default and max number of results in a response are 100.
@@ -111,7 +112,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="postallocations"></a>POST `/allocations`
+### <a id="postallocations"></a> POST `/allocations`
+
 Create Satellite
 
 Create Satellite by name and version(optional).
@@ -138,7 +140,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="getallocationsversions"></a>GET `/allocations/versions`
+### <a id="getallocationsversions"></a> GET `/allocations/versions`
+
 List Satellite versions
 
 Returns list of Satellite version 6.0 and above
@@ -157,7 +160,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)              |Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)              |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)              |InternalServerError error|
-### <a id="getallocationsuuid"></a>GET `/allocations/{uuid}`
+### <a id="getallocationsuuid"></a> GET `/allocations/{uuid}`
+
 Get an allocation by UUID
 
 System, RHUI, Hypervisor are unsupported allocation types
@@ -182,7 +186,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)      |Forbidden error                          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)      |NotFound error                           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)      |InternalServerError error                |
-### <a id="putallocationsuuid"></a>PUT `/allocations/{uuid}`
+### <a id="putallocationsuuid"></a> PUT `/allocations/{uuid}`
+
 Update an allocation
 
 Allows to update simpleContentAccess for Satellite of version 6.3 and above
@@ -211,7 +216,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="deleteallocationsuuid"></a>DELETE `/allocations/{uuid}`
+### <a id="deleteallocationsuuid"></a> DELETE `/allocations/{uuid}`
+
 Remove allocation profile
 
 The default success response will be 204
@@ -239,7 +245,8 @@ Request content type: `application/json`.
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)            |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)            |InternalServerError error|
 |504   |[`DeleteAllocationsUuidResponse504`](#deleteallocationsuuidresponse504)|GatewayTimeout error     |
-### <a id="postallocationsuuidentitlements"></a>POST `/allocations/{uuid}/entitlements`
+### <a id="postallocationsuuidentitlements"></a> POST `/allocations/{uuid}/entitlements`
+
 Attach entitlement to allocation
 
 The default success response will be 200.
@@ -268,7 +275,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                |Forbidden error                             |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                |NotFound error                              |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                |InternalServerError error                   |
-### <a id="putallocationsuuidentitlementsentitlementid"></a>PUT `/allocations/{uuid}/entitlements/{EntitlementID}`
+### <a id="putallocationsuuidentitlementsentitlementid"></a> PUT `/allocations/{uuid}/entitlements/{EntitlementID}`
+
 Update attached entitlement to allocation
 
 The default success response will be 200.
@@ -295,7 +303,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                                        |Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                                        |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                                        |InternalServerError error|
-### <a id="deleteallocationsuuidentitlementsentitlementid"></a>DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`
+### <a id="deleteallocationsuuidentitlementsentitlementid"></a> DELETE `/allocations/{uuid}/entitlements/{EntitlementID}`
+
 Remove entitlement from the allocation
 
 The default success response will be 204.
@@ -320,7 +329,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="getallocationsuuidexport"></a>GET `/allocations/{uuid}/export`
+### <a id="getallocationsuuidexport"></a> GET `/allocations/{uuid}/export`
+
 Trigger allocation manifest export
 
 Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.
@@ -346,7 +356,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                  |Forbidden error                            |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                  |NotFound error                             |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                  |InternalServerError error                  |
-### <a id="getallocationsuuidexportexportid"></a>GET `/allocations/{uuid}/export/{ExportID}`
+### <a id="getallocationsuuidexportexportid"></a> GET `/allocations/{uuid}/export/{ExportID}`
+
 Download allocation manifest
 
 Success response contains a zip file. The link is one-time download and expires after one try. Trigger export job to get another download link.
@@ -373,7 +384,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                               |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                                |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                     |
-### <a id="getallocationsuuidexportjobexportjobid"></a>GET `/allocations/{uuid}/exportJob/{ExportJobID}`
+### <a id="getallocationsuuidexportjobexportjobid"></a> GET `/allocations/{uuid}/exportJob/{ExportJobID}`
+
 Check status of allocation manifest export
 
 Returns export download link in response.
@@ -400,7 +412,8 @@ Request content type: `application/json`.
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                              |NotFound error                                                     |
 |406   |[`GetAllocationsUuidExportJobExportJobIDResponse406`](#getallocationsuuidexportjobexportjobidresponse406)|NotAcceptable error                                                |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                              |InternalServerError error                                          |
-### <a id="getallocationsuuidpools"></a>GET `/allocations/{uuid}/pools`
+### <a id="getallocationsuuidpools"></a> GET `/allocations/{uuid}/pools`
+
 List all pools for an allocation
 
 System, RHUI, Hypervisor are unsupported allocation types. SAM 1.3 or higher, and Satellite 5.6 versions are supported.
@@ -427,7 +440,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                               |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                                |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                     |
-### <a id="deleteallocationsuuidentitlementid"></a>DELETE `/allocations/{uuid}/{EntitlementID}`
+### <a id="deleteallocationsuuidentitlementid"></a> DELETE `/allocations/{uuid}/{EntitlementID}`
+
 Remove entitlement from the allocation
 
 The default success response will be 204.
@@ -452,7 +466,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="getcloudaccessprovidersenabled"></a>GET `/cloud_access_providers/enabled`
+### <a id="getcloudaccessprovidersenabled"></a> GET `/cloud_access_providers/enabled`
+
 List all enabled cloud access providers for a user
 
 Returns the full list of all enabled Red Hat products and Cloud Access provider accounts/subscriptions associated with the user’s Red Hat account.
@@ -476,7 +491,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                              |Forbidden error                                                                       |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                              |NotFound error                                                                        |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                              |InternalServerError error                                                             |
-### <a id="putcloudaccessprovidersprovidershortnameaccount"></a>PUT `/cloud_access_providers/{ProviderShortName}/account`
+### <a id="putcloudaccessprovidersprovidershortnameaccount"></a> PUT `/cloud_access_providers/{ProviderShortName}/account`
+
 Update provider account
 
 Updates the account nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
@@ -501,7 +517,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="postcloudaccessprovidersprovidershortnameaccounts"></a>POST `/cloud_access_providers/{ProviderShortName}/accounts`
+### <a id="postcloudaccessprovidersprovidershortnameaccounts"></a> POST `/cloud_access_providers/{ProviderShortName}/accounts`
+
 Add accounts for a provider
 
 Add up to `100` new provider accounts, with optional nicknames, to a currently-enabled provider for Red Hat Cloud Access. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
@@ -526,7 +543,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="deletecloudaccessprovidersprovidershortnameaccounts"></a>DELETE `/cloud_access_providers/{ProviderShortName}/accounts`
+### <a id="deletecloudaccessprovidersprovidershortnameaccounts"></a> DELETE `/cloud_access_providers/{ProviderShortName}/accounts`
+
 Remove a provider account
 
 Removes a currently-enabled provider account, including removing access to Gold Images, where applicable. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
@@ -551,7 +569,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="putcloudaccessprovidersprovidershortnameaccountsaccountid"></a>PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`
+### <a id="putcloudaccessprovidersprovidershortnameaccountsaccountid"></a> PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}`
+
 Update provider account
 
 Updates the nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
@@ -577,7 +596,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="putcloudaccessprovidersprovidershortnameaccountsaccountidverification"></a>PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`
+### <a id="putcloudaccessprovidersprovidershortnameaccountsaccountidverification"></a> PUT `/cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification`
+
 Verify a provider account
 
 Verifies a cloud provider account for use with RHSM Auto Registration, which allows for cloud instances to automatically register with RHSM upon provisioning.
@@ -619,7 +639,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="postcloudaccessprovidersprovidershortnamegoldimage"></a>POST `/cloud_access_providers/{ProviderShortName}/goldimage`
+### <a id="postcloudaccessprovidersprovidershortnamegoldimage"></a> POST `/cloud_access_providers/{ProviderShortName}/goldimage`
+
 Enable Gold image access
 
 Requests access to Red Hat Gold Images, where available, for currently-enabled products and provider accounts. Customers can request Red Hat Gold Images for account IDs and product image groups listed in the `/v1/cloud_access_providers/enabled` endpoint using the provider short name listed in the same response. After the request has been accepted for processing, gold image status for accounts can be checked in the `/v1/cloud_access_providers/enabled` endpoint response.
@@ -644,7 +665,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                                                                                   |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                                                                                    |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                                                                         |
-### <a id="geterrata"></a>GET `/errata`
+### <a id="geterrata"></a> GET `/errata`
+
 List all errata for a user's systems
 
 The default and max results in a response are 1000.
@@ -669,7 +691,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                      |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                       |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error            |
-### <a id="geterratacsetcontentsetarcharch"></a>GET `/errata/cset/{ContentSet}/arch/{Arch}`
+### <a id="geterratacsetcontentsetarcharch"></a> GET `/errata/cset/{ContentSet}/arch/{Arch}`
+
 Get all the errata for the specified content set and arch
 
 Limit is the number of results in a response. The default limit is 50 and max limit is 100.
@@ -696,7 +719,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                                      |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                                       |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                            |
-### <a id="geterrataadvisoryid"></a>GET `/errata/{AdvisoryID}`
+### <a id="geterrataadvisoryid"></a> GET `/errata/{AdvisoryID}`
+
 Get the details of an advisory
 
 This will get the details of an advisory specified by its advisoryID.
@@ -720,7 +744,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)        |Forbidden error                       |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)        |NotFound error                        |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)        |InternalServerError error             |
-### <a id="geterrataadvisoryidpackages"></a>GET `/errata/{AdvisoryID}/packages`
+### <a id="geterrataadvisoryidpackages"></a> GET `/errata/{AdvisoryID}/packages`
+
 List all packages for an advisory
 
 The default and max results in a response are 50.
@@ -746,7 +771,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                               |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                                |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                     |
-### <a id="geterrataadvisoryidsystems"></a>GET `/errata/{AdvisoryID}/systems`
+### <a id="geterrataadvisoryidsystems"></a> GET `/errata/{AdvisoryID}/systems`
+
 List all systems for an advisory
 
 The default and max results in a response are 1000.
@@ -772,7 +798,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                              |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                               |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                    |
-### <a id="getimagescsetcontentset"></a>GET `/images/cset/{ContentSet}`
+### <a id="getimagescsetcontentset"></a> GET `/images/cset/{ContentSet}`
+
 List available images in a content set
 
 List all the available images in a given content set. The content set parameter is expected to be
@@ -800,7 +827,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                |Forbidden error                                 |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                |NotFound error                                  |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                |InternalServerError error                       |
-### <a id="getimagesrhelversionarch"></a>GET `/images/rhel/{Version}/{Arch}`
+### <a id="getimagesrhelversionarch"></a> GET `/images/rhel/{Version}/{Arch}`
+
 List RHEL image downloads by version and architecture.
 
 List all the available images for the given version and architecture. The Version parameter is expected to be a valid RHEL version. Example: 8.1, 8.2 etc.
@@ -828,7 +856,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                  |Forbidden error                                        |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                  |NotFound error                                         |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                  |InternalServerError error                              |
-### <a id="getimageschecksumdownload"></a>GET `/images/{checksum}/download`
+### <a id="getimageschecksumdownload"></a> GET `/images/{checksum}/download`
+
 Download an image by its SHA256 checksum
 
 Find an image by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time an image is downloaded and to not store the link for more than several minutes. If the user has "Download Software and Updates" permissions and a valid subscription for the image, they will receive a HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body.
@@ -852,7 +881,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                    |                    |Forbidden error                              |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                    |                    |NotFound error                               |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                    |                    |InternalServerError error                    |
-### <a id="getorganization"></a>GET `/organization`
+### <a id="getorganization"></a> GET `/organization`
+
 Get details of the user's organization
 
 Show Simple Content Access details of user's organization
@@ -876,7 +906,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error|
-### <a id="getpackagescsetcontentsetarcharch"></a>GET `/packages/cset/{ContentSet}/arch/{Arch}`
+### <a id="getpackagescsetcontentsetarcharch"></a> GET `/packages/cset/{ContentSet}/arch/{Arch}`
+
 Get all the packages for the specified content set and arch.
 
 The default and max results in a response are 50 and 100 respectively.
@@ -904,7 +935,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                    |Forbidden error                                        |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                    |NotFound error                                         |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                    |InternalServerError error                              |
-### <a id="getpackageschecksum"></a>GET `/packages/{Checksum}`
+### <a id="getpackageschecksum"></a> GET `/packages/{Checksum}`
+
 Get the details of a package
 
 This will get the details of a package specified by its checksum.
@@ -928,7 +960,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)        |Forbidden error                       |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)        |NotFound error                        |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)        |InternalServerError error             |
-### <a id="getpackageschecksumdownload"></a>GET `/packages/{checksum}/download`
+### <a id="getpackageschecksumdownload"></a> GET `/packages/{checksum}/download`
+
 Download a package by its SHA256 checksum
 
 Find a package by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time a package is downloaded and to not store the link for more than several minutes. If the user has "Download Software and Updates" permissions and a valid subscription for the package, they will receive an HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body.
@@ -952,7 +985,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                        |                    |Forbidden error                                |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                        |                    |NotFound error                                 |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                        |                    |InternalServerError error                      |
-### <a id="getsubscriptions"></a>GET `/subscriptions`
+### <a id="getsubscriptions"></a> GET `/subscriptions`
+
 List all subscriptions for a user
 
 The default and max results in a response are 50.
@@ -977,7 +1011,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)  |Forbidden error                             |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)  |NotFound error                              |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)  |InternalServerError error                   |
-### <a id="getsubscriptionssubscriptionnumbercontentsets"></a>GET `/subscriptions/{SubscriptionNumber}/contentSets`
+### <a id="getsubscriptionssubscriptionnumbercontentsets"></a> GET `/subscriptions/{SubscriptionNumber}/contentSets`
+
 List all content sets for a subscription
 
 The default and max results in a response are 1000.
@@ -1003,7 +1038,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                                            |Forbidden error                              |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                                            |NotFound error                               |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                                            |InternalServerError error                    |
-### <a id="getsubscriptionssubscriptionnumbersystems"></a>GET `/subscriptions/{SubscriptionNumber}/systems`
+### <a id="getsubscriptionssubscriptionnumbersystems"></a> GET `/subscriptions/{SubscriptionNumber}/systems`
+
 List all systems consuming a subscription
 
 The default and max results in a response are 100.
@@ -1029,7 +1065,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                                    |Forbidden error                          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                                    |NotFound error                           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                                    |InternalServerError error                |
-### <a id="getsystems"></a>GET `/systems`
+### <a id="getsystems"></a> GET `/systems`
+
 List all systems for a user
 
 The default and max number of results in a response are 100.
@@ -1056,7 +1093,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                       |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                        |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error             |
-### <a id="getsystemssystemuuid"></a>GET `/systems/{SystemUUID}`
+### <a id="getsystemssystemuuid"></a> GET `/systems/{SystemUUID}`
+
 Get a system specified by UUID.
 
 Sam & Satellite systems are unsupported system types.
@@ -1081,7 +1119,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)          |Forbidden error                      |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)          |NotFound error                       |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)          |InternalServerError error            |
-### <a id="deletesystemssystemuuid"></a>DELETE `/systems/{SystemUUID}`
+### <a id="deletesystemssystemuuid"></a> DELETE `/systems/{SystemUUID}`
+
 Remove system profile
 
 The default success response will be 204
@@ -1106,7 +1145,8 @@ Request content type: `application/json`.
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)            |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)            |InternalServerError error|
 |504   |[`DeleteAllocationsUuidResponse504`](#deleteallocationsuuidresponse504)|GatewayTimeout error     |
-### <a id="postsystemssystemuuidentitlements"></a>POST `/systems/{SystemUUID}/entitlements`
+### <a id="postsystemssystemuuidentitlements"></a> POST `/systems/{SystemUUID}/entitlements`
+
 Attach entitlement to system
 
 The default success response will be 200.
@@ -1134,7 +1174,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                                    |Forbidden error                               |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                                    |NotFound error                                |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                                    |InternalServerError error                     |
-### <a id="getsystemssystemuuiderrata"></a>GET `/systems/{SystemUUID}/errata`
+### <a id="getsystemssystemuuiderrata"></a> GET `/systems/{SystemUUID}/errata`
+
 List all applicable errata for a system
 
 The default and max number of results in a response are 100.
@@ -1160,7 +1201,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                      |Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                      |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                      |InternalServerError error|
-### <a id="getsystemssystemuuidpackages"></a>GET `/systems/{SystemUUID}/packages`
+### <a id="getsystemssystemuuidpackages"></a> GET `/systems/{SystemUUID}/packages`
+
 List all packages for a system
 
 The default and max number of results in a response are 1000.
@@ -1189,7 +1231,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)                          |Forbidden error          |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)                          |NotFound error           |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)                          |InternalServerError error|
-### <a id="getsystemssystemuuidpools"></a>GET `/systems/{SystemUUID}/pools`
+### <a id="getsystemssystemuuidpools"></a> GET `/systems/{SystemUUID}/pools`
+
 List all pools for a system
 
 The default and max number of results in a response are 50.
@@ -1215,7 +1258,8 @@ Request content type: `application/json`.
 |403   |[`ListallocationsResponse403`](#listallocationsresponse403)|Forbidden error                           |
 |404   |[`ListallocationsResponse404`](#listallocationsresponse404)|NotFound error                            |
 |500   |[`ListallocationsResponse500`](#listallocationsresponse500)|InternalServerError error                 |
-### <a id="deletesystemssystemuuidentitlementid"></a>DELETE `/systems/{SystemUUID}/{EntitlementID}`
+### <a id="deletesystemssystemuuidentitlementid"></a> DELETE `/systems/{SystemUUID}/{EntitlementID}`
+
 Remove entitlement from the system
 
 The default success response will be 204.
@@ -1243,7 +1287,7 @@ Request content type: `application/json`.
 
 ## <a id="types"></a> Types
 
-### <a id="allocation"></a>Allocation
+### <a id="allocation"></a> Allocation
 Allocation is an entity that consumes entitlements. Also referred as a Distributor.
 
 |Property             |Type    |
@@ -1256,7 +1300,7 @@ Allocation is an entity that consumes entitlements. Also referred as a Distribut
 |`uuid`               |`String`|
 |`version`            |`String`|
 
-### <a id="apipageparam"></a>APIPageParam
+### <a id="apipageparam"></a> APIPageParam
 APIPageParam details the pagination parameters in APIResponse
 
 |Property|Type    |
@@ -1265,14 +1309,14 @@ APIPageParam details the pagination parameters in APIResponse
 |`limit` |`Number`|
 |`offset`|`Number`|
 
-### <a id="listallocationsresponse200"></a>ListallocationsResponse200
+### <a id="listallocationsresponse200"></a> ListallocationsResponse200
 
 |Property    |Type                                  |Description                                                   |
 |------------|--------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`Allocation`](#allocation)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)       |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="errordetails"></a>ErrorDetails
+### <a id="errordetails"></a> ErrorDetails
 ErrorDetails details the Error in ErrorResponse
 
 |Property |Type    |
@@ -1280,37 +1324,37 @@ ErrorDetails details the Error in ErrorResponse
 |`code`   |`Number`|
 |`message`|`String`|
 
-### <a id="listallocationsresponse400"></a>ListallocationsResponse400
+### <a id="listallocationsresponse400"></a> ListallocationsResponse400
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="listallocationsresponse401"></a>ListallocationsResponse401
+### <a id="listallocationsresponse401"></a> ListallocationsResponse401
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="listallocationsresponse403"></a>ListallocationsResponse403
+### <a id="listallocationsresponse403"></a> ListallocationsResponse403
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="listallocationsresponse404"></a>ListallocationsResponse404
+### <a id="listallocationsresponse404"></a> ListallocationsResponse404
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="listallocationsresponse500"></a>ListallocationsResponse500
+### <a id="listallocationsresponse500"></a> ListallocationsResponse500
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="allocationsummary"></a>AllocationSummary
+### <a id="allocationsummary"></a> AllocationSummary
 details of a subscription allocation
 
 |Property                      |Type    |Description                                          |
@@ -1325,13 +1369,13 @@ details of a subscription allocation
 |`uuid`                        |`String`|                                                     |
 |`version`                     |`String`|                                                     |
 
-### <a id="postallocationsresponse200"></a>PostAllocationsResponse200
+### <a id="postallocationsresponse200"></a> PostAllocationsResponse200
 
 |Property|Type                                     |Description                          |
 |--------|-----------------------------------------|-------------------------------------|
 |`body`  |[`AllocationSummary`](#allocationsummary)|details of a subscription allocation.|
 
-### <a id="allocationversion"></a>AllocationVersion
+### <a id="allocationversion"></a> AllocationVersion
 List of satellite version
 
 |Property     |Type    |
@@ -1339,13 +1383,13 @@ List of satellite version
 |`description`|`String`|
 |`value`      |`String`|
 
-### <a id="getallocationsversionsresponse200"></a>GetAllocationsVersionsResponse200
+### <a id="getallocationsversionsresponse200"></a> GetAllocationsVersionsResponse200
 
 |Property|Type                                                |
 |--------|----------------------------------------------------|
 |`body`  |`Array<`[`AllocationVersion`](#allocationversion)`>`|
 
-### <a id="entitlementsattachedresponsevalue"></a>EntitlementsAttachedResponseValue
+### <a id="entitlementsattachedresponsevalue"></a> EntitlementsAttachedResponseValue
 EntitlementsAttachedResponseValue represents the Value field in the EntitlementsAttachedResponse
 
 |Property             |Type    |Description                                          |
@@ -1358,7 +1402,7 @@ EntitlementsAttachedResponseValue represents the Value field in the Entitlements
 |`startDate`          |`String`|Date represents the date format used for API returns.|
 |`subscriptionName`   |`String`|                                                     |
 
-### <a id="entitlementsattachedresponse"></a>EntitlementsAttachedResponse
+### <a id="entitlementsattachedresponse"></a> EntitlementsAttachedResponse
 EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached and sends metadata about it using helpers.OptionalResult
 
 |Property|Type                                                                                |
@@ -1367,7 +1411,7 @@ EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached and se
 |`valid` |`Boolean`                                                                           |
 |`value` |`Array<`[`EntitlementsAttachedResponseValue`](#entitlementsattachedresponsevalue)`>`|
 
-### <a id="allocationdetails"></a>AllocationDetails
+### <a id="allocationdetails"></a> AllocationDetails
 details of a subscription allocation
 
 |Property                      |Type                                                           |Description                                                                                                                        |
@@ -1383,88 +1427,88 @@ details of a subscription allocation
 |`uuid`                        |`String`                                                       |                                                                                                                                   |
 |`version`                     |`String`                                                       |                                                                                                                                   |
 
-### <a id="getallocationsuuidresponse200"></a>GetAllocationsUuidResponse200
+### <a id="getallocationsuuidresponse200"></a> GetAllocationsUuidResponse200
 
 |Property|Type                                     |Description                          |
 |--------|-----------------------------------------|-------------------------------------|
 |`body`  |[`AllocationDetails`](#allocationdetails)|details of a subscription allocation.|
 
-### <a id="allocation"></a>Allocation
+### <a id="allocation"></a> Allocation
 
 |Property                        |Type    |
 |--------------------------------|--------|
 |`simpleContentAccess` (required)|`String`|
 
-### <a id="deleteallocationsuuidresponse504"></a>DeleteAllocationsUuidResponse504
+### <a id="deleteallocationsuuidresponse504"></a> DeleteAllocationsUuidResponse504
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="pool"></a>Pool
+### <a id="pool"></a> Pool
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="postallocationsuuidentitlementsresponse200"></a>PostAllocationsUuidEntitlementsResponse200
+### <a id="postallocationsuuidentitlementsresponse200"></a> PostAllocationsUuidEntitlementsResponse200
 
 |Property|Type                                     |Description                          |
 |--------|-----------------------------------------|-------------------------------------|
 |`body`  |[`AllocationDetails`](#allocationdetails)|details of a subscription allocation.|
 
-### <a id="putallocationsuuidentitlementsentitlementidresponse200"></a>PutAllocationsUuidEntitlementsEntitlementIDResponse200
+### <a id="putallocationsuuidentitlementsentitlementidresponse200"></a> PutAllocationsUuidEntitlementsEntitlementIDResponse200
 
 |Property|Type                                     |Description                          |
 |--------|-----------------------------------------|-------------------------------------|
 |`body`  |[`AllocationDetails`](#allocationdetails)|details of a subscription allocation.|
 
-### <a id="exportresponse"></a>ExportResponse
+### <a id="exportresponse"></a> ExportResponse
 
 |Property     |Type    |
 |-------------|--------|
 |`exportJobID`|`String`|
 |`href`       |`String`|
 
-### <a id="getallocationsuuidexportresponse200"></a>GetAllocationsUuidExportResponse200
+### <a id="getallocationsuuidexportresponse200"></a> GetAllocationsUuidExportResponse200
 
 |Property|Type                               |
 |--------|-----------------------------------|
 |`body`  |[`ExportResponse`](#exportresponse)|
 
-### <a id="exportjobresponse"></a>ExportJobResponse
+### <a id="exportjobresponse"></a> ExportJobResponse
 
 |Property  |Type    |
 |----------|--------|
 |`exportID`|`String`|
 |`href`    |`String`|
 
-### <a id="getallocationsuuidexportjobexportjobidresponse200"></a>GetAllocationsUuidExportJobExportJobIDResponse200
+### <a id="getallocationsuuidexportjobexportjobidresponse200"></a> GetAllocationsUuidExportJobExportJobIDResponse200
 
 |Property|Type                                     |
 |--------|-----------------------------------------|
 |`body`  |[`ExportJobResponse`](#exportjobresponse)|
 
-### <a id="ongoingexportjobresponse"></a>OngoingExportJobResponse
+### <a id="ongoingexportjobresponse"></a> OngoingExportJobResponse
 
 |Property |Type    |
 |---------|--------|
 |`message`|`String`|
 
-### <a id="getallocationsuuidexportjobexportjobidresponse202"></a>GetAllocationsUuidExportJobExportJobIDResponse202
+### <a id="getallocationsuuidexportjobexportjobidresponse202"></a> GetAllocationsUuidExportJobExportJobIDResponse202
 
 |Property|Type                                                   |
 |--------|-------------------------------------------------------|
 |`body`  |[`OngoingExportJobResponse`](#ongoingexportjobresponse)|
 
-### <a id="getallocationsuuidexportjobexportjobidresponse406"></a>GetAllocationsUuidExportJobExportJobIDResponse406
+### <a id="getallocationsuuidexportjobexportjobidresponse406"></a> GetAllocationsUuidExportJobExportJobIDResponse406
 
 |Property|Type                           |Description                                     |
 |--------|-------------------------------|------------------------------------------------|
 |`error` |[`ErrorDetails`](#errordetails)|ErrorDetails details the Error in ErrorResponse.|
 
-### <a id="pooldetail"></a>PoolDetail
+### <a id="pooldetail"></a> PoolDetail
 PoolDetail is an entry in the system/allocation pools listing
 
 |Property               |Type    |Description                                          |
@@ -1479,14 +1523,14 @@ PoolDetail is an entry in the system/allocation pools listing
 |`subscriptionName`     |`String`|                                                     |
 |`subscriptionNumber`   |`String`|                                                     |
 
-### <a id="poolslistmock"></a>PoolsListMock
+### <a id="poolslistmock"></a> PoolsListMock
 
 |Property    |Type                                  |Description                                                   |
 |------------|--------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PoolDetail`](#pooldetail)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)       |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="entitlementid3"></a>EntitlementID3
+### <a id="entitlementid3"></a> EntitlementID3
 Remove an entitlement from an allocation
 
 |Constraint|Value|
@@ -1494,7 +1538,7 @@ Remove an entitlement from an allocation
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="goldimagestatus"></a>GoldImageStatus
+### <a id="goldimagestatus"></a> GoldImageStatus
 Gold Image Status Details of a cloud access provider account for an image provider.
 
 |Property     |Type    |Description                                |
@@ -1503,7 +1547,7 @@ Gold Image Status Details of a cloud access provider account for an image provid
 |`name`       |`String`|Name of the requested provider image group.|
 |`status`     |`String`|Status of Gold Image Request.              |
 
-### <a id="enabledprovideraccount"></a>EnabledProviderAccount
+### <a id="enabledprovideraccount"></a> EnabledProviderAccount
 Enabled Provider Account represents a cloud access provider account
 
 |Property              |Type                                            |Description                                                                                   |
@@ -1515,7 +1559,7 @@ Enabled Provider Account represents a cloud access provider account
 |`sourceId`            |`String`                                        |Source ID of linked account (only for accounts created via Sources on cloud.redhat.com).      |
 |`verified`            |`Boolean`                                       |verification status for RHSM Auto Registration (only displayed for supported cloud providers).|
 
-### <a id="enabledproduct"></a>EnabledProduct
+### <a id="enabledproduct"></a> EnabledProduct
 Enabled Product represents a cloud access provider product
 
 |Property         |Type           |Description                                                                                        |
@@ -1527,7 +1571,7 @@ Enabled Product represents a cloud access provider product
 |`sku`            |`String`       |                                                                                                   |
 |`totalQuantity`  |`Number`       |                                                                                                   |
 
-### <a id="enabledcloudaccessprovider"></a>EnabledCloudAccessProvider
+### <a id="enabledcloudaccessprovider"></a> EnabledCloudAccessProvider
 Enabled Cloud Access Provider details including products and accounts.
 
 |Property   |Type                                                          |
@@ -1537,20 +1581,20 @@ Enabled Cloud Access Provider details including products and accounts.
 |`products` |`Array<`[`EnabledProduct`](#enabledproduct)`>`                |
 |`shortName`|`String`                                                      |
 
-### <a id="getcloudaccessprovidersenabledresponse200"></a>GetCloudAccessProvidersEnabledResponse200
+### <a id="getcloudaccessprovidersenabledresponse200"></a> GetCloudAccessProvidersEnabledResponse200
 
 |Property|Type                                                                  |
 |--------|----------------------------------------------------------------------|
 |`body`  |`Array<`[`EnabledCloudAccessProvider`](#enabledcloudaccessprovider)`>`|
 
-### <a id="account"></a>Account
+### <a id="account"></a> Account
 
 |Property       |Type    |
 |---------------|--------|
 |`id` (required)|`String`|
 |`newNickname`  |`String`|
 
-### <a id="addprovideraccount"></a>AddProviderAccount
+### <a id="addprovideraccount"></a> AddProviderAccount
 An account to be added
 
 |Property  |Type    |
@@ -1558,33 +1602,33 @@ An account to be added
 |`id`      |`String`|
 |`nickname`|`String`|
 
-### <a id="account3"></a>Account3
+### <a id="account3"></a> Account3
 
 |Property       |Type    |
 |---------------|--------|
 |`id` (required)|`String`|
 
-### <a id="account4"></a>Account4
+### <a id="account4"></a> Account4
 
 |Property             |Type    |
 |---------------------|--------|
 |`nickname` (required)|`String`|
 
-### <a id="account5"></a>Account5
+### <a id="account5"></a> Account5
 
 |Property              |Type    |Description                                                                                            |
 |----------------------|--------|-------------------------------------------------------------------------------------------------------|
 |`identity` (required) |`String`|base64-encoded cloud instance metadata. For GCE, please use the instance identity token (JWT) as it is.|
 |`signature` (required)|`String`|base64-encoded cloud instance metadata signature. For GCE, please omit this field.                     |
 
-### <a id="goldimages"></a>GoldImages
+### <a id="goldimages"></a> GoldImages
 
 |Property             |Type           |
 |---------------------|---------------|
 |`accounts` (required)|`Array<String>`|
 |`images` (required)  |`Array<String>`|
 
-### <a id="myerratum"></a>MyErratum
+### <a id="myerratum"></a> MyErratum
 MyErratum contains erratum information that affects at least one system
 
 |Property             |Type    |Description                                          |
@@ -1597,28 +1641,28 @@ MyErratum contains erratum information that affects at least one system
 |`systems`            |`String`|                                                     |
 |`type`               |`String`|                                                     |
 
-### <a id="myerratalistmock"></a>MyErrataListMock
+### <a id="myerratalistmock"></a> MyErrataListMock
 
 |Property    |Type                                |Description                                                   |
 |------------|------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`MyErratum`](#myerratum)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)     |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="contentset"></a>ContentSet
+### <a id="contentset"></a> ContentSet
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="arch"></a>Arch
+### <a id="arch"></a> Arch
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="erratumincontentset"></a>ErratumInContentSet
+### <a id="erratumincontentset"></a> ErratumInContentSet
 ErratumInContentSet contains information on an erratum listed in a content set
 
 |Property     |Type    |Description                                          |
@@ -1630,14 +1674,14 @@ ErratumInContentSet contains information on an erratum listed in a content set
 |`synopsis`   |`String`|                                                     |
 |`type`       |`String`|                                                     |
 
-### <a id="contentsetarchmock"></a>ContentSetArchMock
+### <a id="contentsetarchmock"></a> ContentSetArchMock
 
 |Property    |Type                                                    |Description                                                   |
 |------------|--------------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ErratumInContentSet`](#erratumincontentset)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                         |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="advisoryid"></a>AdvisoryID
+### <a id="advisoryid"></a> AdvisoryID
 unique identifier for a Red Hat advisory
 
 |Constraint|Value|
@@ -1645,7 +1689,7 @@ unique identifier for a Red Hat advisory
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="reference"></a>Reference
+### <a id="reference"></a> Reference
 Reference contains a reference to an external item
 
 |Property|Type    |
@@ -1655,7 +1699,7 @@ Reference contains a reference to an external item
 |`title` |`String`|
 |`type`  |`String`|
 
-### <a id="erratumdetails"></a>ErratumDetails
+### <a id="erratumdetails"></a> ErratumDetails
 
 |Property          |Type                                |Description                                          |
 |------------------|------------------------------------|-----------------------------------------------------|
@@ -1675,13 +1719,13 @@ Reference contains a reference to an external item
 |`type`            |`String`                            |                                                     |
 |`typeSeverity`    |`String`                            |                                                     |
 
-### <a id="geterrataadvisoryidresponse200"></a>GetErrataAdvisoryIDResponse200
+### <a id="geterrataadvisoryidresponse200"></a> GetErrataAdvisoryIDResponse200
 
 |Property|Type                               |
 |--------|-----------------------------------|
 |`body`  |[`ErratumDetails`](#erratumdetails)|
 
-### <a id="packagedetail"></a>PackageDetail
+### <a id="packagedetail"></a> PackageDetail
 PackageDetail wraps an errata package and adds a RefURL
 
 |Property     |Type           |
@@ -1698,14 +1742,14 @@ PackageDetail wraps an errata package and adds a RefURL
 |`summary`    |`String`       |
 |`version`    |`String`       |
 
-### <a id="pkglistmock"></a>PkgListMock
+### <a id="pkglistmock"></a> PkgListMock
 
 |Property    |Type                                        |Description                                                   |
 |------------|--------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PackageDetail`](#packagedetail)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)             |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="erratacount"></a>ErrataCount
+### <a id="erratacount"></a> ErrataCount
 ErrataCount is the errata information for a System
 
 |Property          |Type    |
@@ -1714,7 +1758,7 @@ ErrataCount is the errata information for a System
 |`enhancementCount`|`Number`|
 |`securityCount`   |`Number`|
 
-### <a id="system"></a>System
+### <a id="system"></a> System
 System is an entity that consumes entitlements. Also referred as a Consumer.
 
 |Property           |Type                         |Description                                          |
@@ -1730,14 +1774,14 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |`username`         |`String`                     |                                                     |
 |`uuid`             |`String`                     |                                                     |
 
-### <a id="systemlistmock"></a>SystemListMock
+### <a id="systemlistmock"></a> SystemListMock
 
 |Property    |Type                           |Description                                                   |
 |------------|-------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`System`](#system)`>` |                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)|APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="imageincontentset"></a>ImageInContentSet
+### <a id="imageincontentset"></a> ImageInContentSet
 Image Details in a content set image listing.
 
 |Property       |Type    |Description                                          |
@@ -1749,27 +1793,27 @@ Image Details in a content set image listing.
 |`filename`     |`String`|                                                     |
 |`imageName`    |`String`|                                                     |
 
-### <a id="getimagescsetcontentsetresponse200"></a>GetImagesCsetContentSetResponse200
+### <a id="getimagescsetcontentsetresponse200"></a> GetImagesCsetContentSetResponse200
 
 |Property    |Type                                                |Description                                                   |
 |------------|----------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ImageInContentSet`](#imageincontentset)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                     |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="version"></a>Version
+### <a id="version"></a> Version
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="getimagesrhelversionarchresponse200"></a>GetImagesRhelVersionArchResponse200
+### <a id="getimagesrhelversionarchresponse200"></a> GetImagesRhelVersionArchResponse200
 
 |Property|Type                                                |
 |--------|----------------------------------------------------|
 |`body`  |`Array<`[`ImageInContentSet`](#imageincontentset)`>`|
 
-### <a id="checksum"></a>Checksum
+### <a id="checksum"></a> Checksum
 
 |Constraint|Value         |
 |----------|--------------|
@@ -1777,7 +1821,7 @@ Image Details in a content set image listing.
 |maxItems  |1             |
 |minItems  |1             |
 
-### <a id="downloadlink"></a>DownloadLink
+### <a id="downloadlink"></a> DownloadLink
 
 |Property    |Type    |Description                                      |
 |------------|--------|-------------------------------------------------|
@@ -1785,13 +1829,13 @@ Image Details in a content set image listing.
 |`filename`  |`String`|filename of the file on the download link.       |
 |`href`      |`String`|URL to obtain the image.                         |
 
-### <a id="getimageschecksumdownloadresponse307"></a>GetImagesChecksumDownloadResponse307
+### <a id="getimageschecksumdownloadresponse307"></a> GetImagesChecksumDownloadResponse307
 
 |Property|Type                           |
 |--------|-------------------------------|
 |`body`  |[`DownloadLink`](#downloadlink)|
 
-### <a id="systempurposeattributes"></a>SystemPurposeAttributes
+### <a id="systempurposeattributes"></a> SystemPurposeAttributes
 System purpose settings available to an organization
 
 |Property      |Type           |
@@ -1800,7 +1844,7 @@ System purpose settings available to an organization
 |`serviceLevel`|`Array<String>`|
 |`usage`       |`Array<String>`|
 
-### <a id="orgsimplecontentaccess"></a>OrgSimpleContentAccess
+### <a id="orgsimplecontentaccess"></a> OrgSimpleContentAccess
 Organization Simple Content Access details.
 
 |Property                    |Type                                                 |Description                                          |
@@ -1810,19 +1854,19 @@ Organization Simple Content Access details.
 |`simpleContentAccessCapable`|`Boolean`                                            |                                                     |
 |`systemPurposeAttributes`   |[`SystemPurposeAttributes`](#systempurposeattributes)|System purpose settings available to an organization.|
 
-### <a id="getorganizationresponse200"></a>GetOrganizationResponse200
+### <a id="getorganizationresponse200"></a> GetOrganizationResponse200
 
 |Property|Type                                               |Description                                |
 |--------|---------------------------------------------------|-------------------------------------------|
 |`body`  |[`OrgSimpleContentAccess`](#orgsimplecontentaccess)|Organization Simple Content Access details.|
 
-### <a id="filter"></a>Filter
+### <a id="filter"></a> Filter
 
 |Constraint|Value|
 |----------|-----|
 |minItems  |1    |
 
-### <a id="pkgcontentsetarch"></a>PkgContentSetArch
+### <a id="pkgcontentsetarch"></a> PkgContentSetArch
 
 |Property      |Type           |Description                                          |
 |--------------|---------------|-----------------------------------------------------|
@@ -1843,21 +1887,21 @@ Organization Simple Content Access details.
 |`summary`     |`String`       |                                                     |
 |`version`     |`String`       |                                                     |
 
-### <a id="getpackagescsetcontentsetarcharchresponse200"></a>GetPackagesCsetContentSetArchArchResponse200
+### <a id="getpackagescsetcontentsetarcharchresponse200"></a> GetPackagesCsetContentSetArchArchResponse200
 
 |Property    |Type                                                |Description                                                   |
 |------------|----------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PkgContentSetArch`](#pkgcontentsetarch)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                     |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="checksum"></a>Checksum
+### <a id="checksum"></a> Checksum
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="pkgdetails"></a>PkgDetails
+### <a id="pkgdetails"></a> PkgDetails
 
 |Property     |Type           |Description                                          |
 |-------------|---------------|-----------------------------------------------------|
@@ -1877,19 +1921,19 @@ Organization Simple Content Access details.
 |`summary`    |`String`       |                                                     |
 |`version`    |`String`       |                                                     |
 
-### <a id="getpackageschecksumresponse200"></a>GetPackagesChecksumResponse200
+### <a id="getpackageschecksumresponse200"></a> GetPackagesChecksumResponse200
 
 |Property|Type                       |
 |--------|---------------------------|
 |`body`  |[`PkgDetails`](#pkgdetails)|
 
-### <a id="getpackageschecksumdownloadresponse307"></a>GetPackagesChecksumDownloadResponse307
+### <a id="getpackageschecksumdownloadresponse307"></a> GetPackagesChecksumDownloadResponse307
 
 |Property|Type                           |
 |--------|-------------------------------|
 |`body`  |[`DownloadLink`](#downloadlink)|
 
-### <a id="pool"></a>Pool
+### <a id="pool"></a> Pool
 Pool represents pool information that matter for the detail list
 
 |Property  |Type    |
@@ -1899,7 +1943,7 @@ Pool represents pool information that matter for the detail list
 |`quantity`|`Number`|
 |`type`    |`String`|
 
-### <a id="detailresponse"></a>DetailResponse
+### <a id="detailresponse"></a> DetailResponse
 DetailResponse is the user-friendly response from the service.
 
 |Property            |Type                      |Description                                          |
@@ -1914,21 +1958,21 @@ DetailResponse is the user-friendly response from the service.
 |`subscriptionName`  |`String`                  |                                                     |
 |`subscriptionNumber`|`String`                  |                                                     |
 
-### <a id="getsubscriptionsresponse200"></a>GetSubscriptionsResponse200
+### <a id="getsubscriptionsresponse200"></a> GetSubscriptionsResponse200
 
 |Property    |Type                                          |Description                                                                      |
 |------------|----------------------------------------------|---------------------------------------------------------------------------------|
 |`body`      |`Array<`[`DetailResponse`](#detailresponse)`>`|ListResponse is the actual collection of subscription details that gets rendered.|
 |`pagination`|[`APIPageParam`](#apipageparam)               |APIPageParam details the pagination parameters in APIResponse.                   |
 
-### <a id="subscriptionnumber"></a>SubscriptionNumber
+### <a id="subscriptionnumber"></a> SubscriptionNumber
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="contentset"></a>ContentSet
+### <a id="contentset"></a> ContentSet
 ContentSet represent a contentset for the listContentSets API Response.
 
 |Property |Type     |
@@ -1939,14 +1983,14 @@ ContentSet represent a contentset for the listContentSets API Response.
 |`name`   |`String` |
 |`type`   |`String` |
 
-### <a id="getsubscriptionssubscriptionnumbercontentsetsresponse200"></a>GetSubscriptionsSubscriptionNumberContentSetsResponse200
+### <a id="getsubscriptionssubscriptionnumbercontentsetsresponse200"></a> GetSubscriptionsSubscriptionNumberContentSetsResponse200
 
 |Property    |Type                                  |Description                                                   |
 |------------|--------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ContentSet`](#contentset)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)       |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="systemlist"></a>SystemList
+### <a id="systemlist"></a> SystemList
 SystemList is the result of the get system list API
 
 |Property                  |Type    |Description                                          |
@@ -1960,14 +2004,14 @@ SystemList is the result of the get system list API
 |`type`                    |`String`|                                                     |
 |`uuid`                    |`String`|                                                     |
 
-### <a id="getsubscriptionssubscriptionnumbersystemsresponse200"></a>GetSubscriptionsSubscriptionNumberSystemsResponse200
+### <a id="getsubscriptionssubscriptionnumbersystemsresponse200"></a> GetSubscriptionsSubscriptionNumberSystemsResponse200
 
 |Property    |Type                                  |Description                                                   |
 |------------|--------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`SystemList`](#systemlist)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)       |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="filter2"></a>Filter2
+### <a id="filter2"></a> Filter2
 Filter Systems by System Name
 
 |Constraint|Value|
@@ -1975,21 +2019,21 @@ Filter Systems by System Name
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="getsystemsresponse200"></a>GetSystemsResponse200
+### <a id="getsystemsresponse200"></a> GetSystemsResponse200
 
 |Property    |Type                           |Description                                                   |
 |------------|-------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`System`](#system)`>` |systemList is a System Slice.                                 |
 |`pagination`|[`APIPageParam`](#apipageparam)|APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="systemuuid"></a>SystemUUID
+### <a id="systemuuid"></a> SystemUUID
 
 |Constraint|Value|
 |----------|-----|
 |maxItems  |1    |
 |minItems  |1    |
 
-### <a id="include3"></a>Include3
+### <a id="include3"></a> Include3
 Show more details about a system
 
 |Constraint|Value|
@@ -1997,7 +2041,7 @@ Show more details about a system
 |maxItems  |3    |
 |minItems  |1    |
 
-### <a id="errataapplicabilitycounts"></a>ErrataApplicabilityCounts
+### <a id="errataapplicabilitycounts"></a> ErrataApplicabilityCounts
 Applicable errata details
 
 |Property|Type                         |Description                                        |
@@ -2006,7 +2050,7 @@ Applicable errata details
 |`valid` |`Boolean`                    |                                                   |
 |`value` |[`ErrataCount`](#erratacount)|ErrataCount is the errata information for a System.|
 
-### <a id="facts"></a>Facts
+### <a id="facts"></a> Facts
 facts give additional details about the system
 
 |Property|Type    |
@@ -2014,7 +2058,7 @@ facts give additional details about the system
 |`key`   |`String`|
 |`value` |`String`|
 
-### <a id="installedproducts"></a>InstalledProducts
+### <a id="installedproducts"></a> InstalledProducts
 details of installed products on the system
 
 |Property     |Type    |
@@ -2025,7 +2069,7 @@ details of installed products on the system
 |`status`     |`String`|
 |`version`    |`String`|
 
-### <a id="showsystem"></a>ShowSystem
+### <a id="showsystem"></a> ShowSystem
 System is an entity that consumes entitlements. Also referred as a Consumer.
 
 |Property                   |Type                                                           |Description                                                                                                                        |
@@ -2049,13 +2093,13 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |`type`                     |`String`                                                       |                                                                                                                                   |
 |`uuid`                     |`String`                                                       |                                                                                                                                   |
 
-### <a id="getsystemssystemuuidresponse200"></a>GetSystemsSystemUUIDResponse200
+### <a id="getsystemssystemuuidresponse200"></a> GetSystemsSystemUUIDResponse200
 
 |Property|Type                       |Description                                                                 |
 |--------|---------------------------|----------------------------------------------------------------------------|
 |`body`  |[`ShowSystem`](#showsystem)|System is an entity that consumes entitlements. Also referred as a Consumer.|
 
-### <a id="attachentitlement"></a>AttachEntitlement
+### <a id="attachentitlement"></a> AttachEntitlement
 System is an entity that consumes entitlements. Also referred as a Consumer.
 
 |Property                   |Type                                                           |Description                                                                                                                        |
@@ -2077,13 +2121,13 @@ System is an entity that consumes entitlements. Also referred as a Consumer.
 |`type`                     |`String`                                                       |                                                                                                                                   |
 |`uuid`                     |`String`                                                       |                                                                                                                                   |
 
-### <a id="postsystemssystemuuidentitlementsresponse200"></a>PostSystemsSystemUUIDEntitlementsResponse200
+### <a id="postsystemssystemuuidentitlementsresponse200"></a> PostSystemsSystemUUIDEntitlementsResponse200
 
 |Property|Type                                     |Description                                                                 |
 |--------|-----------------------------------------|----------------------------------------------------------------------------|
 |`body`  |[`AttachEntitlement`](#attachentitlement)|System is an entity that consumes entitlements. Also referred as a Consumer.|
 
-### <a id="erratumforsystem"></a>ErratumForSystem
+### <a id="erratumforsystem"></a> ErratumForSystem
 an erratum listed for a system
 
 |Property   |Type    |Description                                          |
@@ -2095,21 +2139,21 @@ an erratum listed for a system
 |`synopsis` |`String`|                                                     |
 |`type`     |`String`|                                                     |
 
-### <a id="getsystemssystemuuiderrataresponse200"></a>GetSystemsSystemUUIDErrataResponse200
+### <a id="getsystemssystemuuiderrataresponse200"></a> GetSystemsSystemUUIDErrataResponse200
 
 |Property    |Type                                              |Description                                                   |
 |------------|--------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`ErratumForSystem`](#erratumforsystem)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                   |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="packageforsystemadvisoriesitems"></a>PackageForSystemAdvisoriesItems
+### <a id="packageforsystemadvisoriesitems"></a> PackageForSystemAdvisoriesItems
 
 |Property  |Type    |
 |----------|--------|
 |`advisory`|`String`|
 |`url`     |`String`|
 
-### <a id="packageforsystem"></a>PackageForSystem
+### <a id="packageforsystem"></a> PackageForSystem
 package installed on a system
 
 |Property     |Type                                                                            |
@@ -2122,14 +2166,14 @@ package installed on a system
 |`release`    |`String`                                                                        |
 |`version`    |`String`                                                                        |
 
-### <a id="getsystemssystemuuidpackagesresponse200"></a>GetSystemsSystemUUIDPackagesResponse200
+### <a id="getsystemssystemuuidpackagesresponse200"></a> GetSystemsSystemUUIDPackagesResponse200
 
 |Property    |Type                                              |Description                                                   |
 |------------|--------------------------------------------------|--------------------------------------------------------------|
 |`body`      |`Array<`[`PackageForSystem`](#packageforsystem)`>`|                                                              |
 |`pagination`|[`APIPageParam`](#apipageparam)                   |APIPageParam details the pagination parameters in APIResponse.|
 
-### <a id="entitlementid4"></a>EntitlementID4
+### <a id="entitlementid4"></a> EntitlementID4
 Remove an entitlement from a system
 
 |Constraint|Value|

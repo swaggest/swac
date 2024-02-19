@@ -14,6 +14,8 @@ class Markdown extends Base
 
     public $typesPrefix = '';
 
+    public $confluence = false;
+
 
     /**
      * @param Definition $definition
@@ -32,6 +34,9 @@ class Markdown extends Base
         $options->typesPrefix = Command\Option::create()->setType()
             ->setDescription('Prefix generated type names');
 
+        $options->confluence = Command\Option::create()
+            ->setDescription("Force Confluence compatibility");
+
         $options->out = Command\Option::create()->setType()
             ->setDescription('Path to output files, default ./client');
 
@@ -40,7 +45,7 @@ class Markdown extends Base
 
     public function performAction()
     {
-        $client = new APIDoc();
+        $client = new APIDoc($this->confluence);
         $client->markdownTypes->addNamePrefix = $this->typesPrefix;
         $client->addSchemaUrl = $this->addSchemaUrl;
 

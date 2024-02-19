@@ -11,7 +11,7 @@ ACME service estimates success greatness.
 * [Operations](#operations)
 * [Types](#types)
 
-## <a id="operations"></a>Operations
+## <a id="operations"></a> Operations
 
 ## <a id="types"></a> Types
 
